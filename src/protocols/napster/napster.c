@@ -540,7 +540,7 @@ static const char* nap_list_icon(GaimAccount *a, GaimBuddy *b)
 static void nap_list_emblems(GaimBuddy *b, const char **se, const char **sw,
 							 const char **nw, const char **ne)
 {
-	if (b->present == GAIM_BUDDY_OFFLINE)
+	if(!GAIM_BUDDY_IS_ONLINE(b))
 		*se = "offline";
 }
 
@@ -553,12 +553,12 @@ static GList *nap_status_types(GaimAccount *account)
 
 	type = gaim_status_type_new_full(GAIM_STATUS_OFFLINE,
 									 "offline",
-									 _("Offline"), FALSE, FALSE, FALSE);
+									 _("Offline"), TRUE, TRUE, FALSE);
 	types = g_list_append(types, type);
 
 	type = gaim_status_type_new_full(GAIM_STATUS_ONLINE,
 									 "online",
-									 _("Online"), FALSE, FALSE, FALSE);
+									 _("Online"), TRUE, TRUE, FALSE);
 	types = g_list_append(types, type);
 
 	return types;
@@ -656,7 +656,7 @@ static GaimPluginProtocolInfo prpl_info =
 static GaimPluginInfo info =
 {
 	GAIM_PLUGIN_MAGIC,
-	GAIM_MAJOR_VERSION,
+	0,
 	GAIM_MINOR_VERSION,
 	GAIM_PLUGIN_PROTOCOL,                             /**< type           */
 	NULL,                                             /**< ui_requirement */
