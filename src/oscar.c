@@ -20,6 +20,8 @@
  *
  */
 
+#ifndef DYNAMIC_OSCAR
+
 #ifdef HAVE_CONFIG_H
 #include "../config.h"
 #endif
@@ -38,6 +40,7 @@
 #include <sys/socket.h>
 #include <sys/stat.h>
 #include "multi.h"
+#include "prpl.h"
 #include "gaim.h"
 #include "aim.h"
 #include "gnome_applet_mgr.h"
@@ -1301,23 +1304,218 @@ void oscar_do_directim(struct gaim_connection *gc, char *name) {
 	aim_conn_addhandler(gc->oscar_sess, newconn, AIM_CB_FAM_OFT, AIM_CB_OFT_DIRECTIMINITIATE, gaim_directim_initiate, 0);
 }
 
-void send_keepalive(gpointer d) {
-	struct gaim_connection *gc = (struct gaim_connection *)d;
-	debug_print("sending oscar NOP\n");
-	if (gc->protocol == PROTO_OSCAR) { /* keeping it open for TOC */
-		aim_flap_nop(gc->oscar_sess, gc->oscar_conn);
-	} else if (gc->protocol == PROTO_TOC) {
-		sflap_send(gc, "", 0, TYPE_KEEPALIVE);
+static void oscar_keepalive(struct gaim_connection *gc) {
+	aim_flap_nop(gc->oscar_sess, gc->oscar_conn);
+}
+
+static char *oscar_name() {
+	return "Oscar";
+}
+
+static void oscar_send_im(struct gaim_connection *gc, char *name, char *message, int away) {
+	struct conversation *cnv = find_conversation(name);
+	if (cnv && cnv->is_direct) {
+		debug_printf("Sending DirectIM to %s\n", name);
+		aim_send_im_direct(gc->oscar_sess, cnv->conn, message);
+	} else {
+		if (away)
+			aim_send_im(gc->oscar_sess, gc->oscar_conn, name, AIM_IMFLAGS_AWAY, message);
+		else
+			aim_send_im(gc->oscar_sess, gc->oscar_conn, name, AIM_IMFLAGS_ACK, message);
 	}
 }
 
-void update_keepalive(struct gaim_connection *gc, gboolean on) {
-	if (on && gc->keepalive < 0 && blist) {
-		debug_print("allowing NOP\n");
-		gc->keepalive = gtk_timeout_add(60000, (GtkFunction)send_keepalive, gc);
-	} else if (!on && gc->keepalive > -1) {
-		debug_print("removing NOP\n");
-		gtk_timeout_remove(gc->keepalive);
-		gc->keepalive = -1;
+static void oscar_get_info(struct gaim_connection *g, char *name) {
+	aim_getinfo(g->oscar_sess, g->oscar_conn, name, AIM_GETINFO_GENERALINFO);
+}
+
+static void oscar_get_away_msg(struct gaim_connection *g, char *name) {
+	aim_getinfo(g->oscar_sess, g->oscar_conn, name, AIM_GETINFO_AWAYMESSAGE);
+}
+
+static void oscar_set_dir(struct gaim_connection *g, char *first, char *middle, char *last,
+			  char *maiden, char *city, char *state, char *country, int web) {
+	/* FIXME : some of these things are wrong, but i'm lazy */
+	aim_setdirectoryinfo(g->oscar_sess, g->oscar_conn, first, middle, last,
+				maiden, NULL, NULL, city, state, NULL, 0, web);
+}
+
+
+static void oscar_set_idle(struct gaim_connection *g, int time) {
+	aim_bos_setidle(g->oscar_sess, g->oscar_conn, time);
+}
+
+static void oscar_set_info(struct gaim_connection *g, char *info) {
+	if (awaymessage)
+		aim_bos_setprofile(g->oscar_sess, g->oscar_conn, info,
+					awaymessage->message, gaim_caps);
+	else
+		aim_bos_setprofile(g->oscar_sess, g->oscar_conn, info,
+					NULL, gaim_caps);
+}
+
+static void oscar_set_away(struct gaim_connection *g, char *message) {
+	aim_bos_setprofile(g->oscar_sess, g->oscar_conn, g->user_info, message, gaim_caps);
+}
+
+static void oscar_warn(struct gaim_connection *g, char *name, int anon) {
+	aim_send_warning(g->oscar_sess, g->oscar_conn, name, anon);
+}
+
+static void oscar_dir_search(struct gaim_connection *g, char *first, char *middle, char *last,
+			     char *maiden, char *city, char *state, char *country, char *email) {
+	if (strlen(email))
+		aim_usersearch_address(g->oscar_sess, g->oscar_conn, email);
+}
+
+static void oscar_add_buddy(struct gaim_connection *g, char *name) {
+	aim_add_buddy(g->oscar_sess, g->oscar_conn, name);
+}
+
+static void oscar_add_buddies(struct gaim_connection *g, GList *buddies) {
+	char buf[MSG_LEN];
+	int n = 0;
+	while (buddies) {
+		if (n > MSG_LEN - 18) {
+			aim_bos_setbuddylist(g->oscar_sess, g->oscar_conn, buf);
+			n = 0;
+		}
+		n += g_snprintf(buf + n, sizeof(buf) - n, "%s&", (char *)buddies->data);
+		buddies = buddies->next;
+	}
+	aim_bos_setbuddylist(g->oscar_sess, g->oscar_conn, buf);
+}
+
+static void oscar_remove_buddy(struct gaim_connection *g, char *name) {
+	aim_remove_buddy(g->oscar_sess, g->oscar_conn, name);
+}
+
+static void oscar_join_chat(struct gaim_connection *g, int exchange, char *name) {
+	struct aim_conn_t *cur = NULL;
+	sprintf(debug_buff, "Attempting to join chat room %s.\n", name);
+	debug_print(debug_buff);
+	if ((cur = aim_getconn_type(g->oscar_sess, AIM_CONN_TYPE_CHATNAV))) {
+		debug_print("chatnav exists, creating room\n");
+		aim_chatnav_createroom(g->oscar_sess, cur, name, exchange);
+	} else {
+		/* this gets tricky */
+		debug_print("chatnav does not exist, opening chatnav\n");
+		g->create_exchange = exchange;
+		g->create_name = g_strdup(name);
+		aim_bos_reqservice(g->oscar_sess, g->oscar_conn, AIM_CONN_TYPE_CHATNAV);
 	}
 }
+
+static void oscar_chat_invite(struct gaim_connection *g, int id, char *message, char *name) {
+	GSList *bcs = g->buddy_chats;
+	struct conversation *b = NULL;
+
+	while (bcs) {
+		b = (struct conversation *)bcs->data;
+		if (id == b->id)
+			break;
+		bcs = bcs->next;
+		b = NULL;
+	}
+
+	if (!b)
+		return;
+
+	aim_chat_invite(g->oscar_sess, g->oscar_conn, name,
+			message ? message : "", 0x4, b->name, 0x0);
+}
+
+static void oscar_chat_leave(struct gaim_connection *g, int id) {
+	GSList *bcs = g->buddy_chats;
+	struct conversation *b = NULL;
+	struct chat_connection *c = NULL;
+	int count = 0;
+
+	while (bcs) {
+		count++;
+		b = (struct conversation *)bcs->data;
+		if (id == b->id)
+			break;
+		bcs = bcs->next;
+		b = NULL;
+	}
+
+	if (!b)
+		return;
+
+	sprintf(debug_buff, "Attempting to leave room %s (currently in %d rooms)\n",
+				b->name, count);
+	debug_print(debug_buff);
+	
+	c = find_oscar_chat(g, b->name);
+	if (c != NULL) {
+		g->oscar_chats = g_slist_remove(g->oscar_chats, c);
+		gdk_input_remove(c->inpa);
+		if (g && g->oscar_sess)
+			aim_conn_kill(g->oscar_sess, &c->conn);
+		g_free(c->name);
+		g_free(c);
+	}
+	/* we do this because with Oscar it doesn't tell us we left */
+	serv_got_chat_left(g, b->id);
+}
+
+static void oscar_chat_whisper(struct gaim_connection *g, int id, char *who, char *message) {
+	do_error_dialog("Sorry, Oscar doesn't whisper. Send an IM. (The last message was not received.)",
+			"Gaim - Chat");
+}
+
+static void oscar_chat_send(struct gaim_connection *g, int id, char *message) {
+	struct aim_conn_t *cn; 
+	GSList *bcs = g->buddy_chats;
+	struct conversation *b = NULL;
+
+	while (bcs) {
+		b = (struct conversation *)bcs->data;
+		if (id == b->id)
+			break;
+		bcs = bcs->next;
+		b = NULL;
+	}
+	if (!b)
+		return;
+
+	cn = aim_chat_getconn(g->oscar_sess, b->name);
+	aim_chat_send_im(g->oscar_sess, cn, message);
+}
+
+struct prpl *oscar_init() {
+	struct prpl *ret = g_new0(struct prpl, 1);
+
+	ret->protocol = PROTO_OSCAR;
+	ret->name = oscar_name;
+	ret->login = oscar_login;
+	ret->close = oscar_close;
+	ret->send_im = oscar_send_im;
+	ret->set_info = oscar_set_info;
+	ret->get_info = oscar_get_info;
+	ret->set_away = oscar_set_away;
+	ret->get_away_msg = oscar_get_away_msg;
+	ret->set_dir = oscar_set_dir;
+	ret->get_dir = NULL; /* Oscar really doesn't have this */
+	ret->dir_search = oscar_dir_search;
+	ret->set_idle = oscar_set_idle;
+	ret->change_passwd = NULL; /* Oscar doesn't have this either */
+	ret->add_buddy = oscar_add_buddy;
+	ret->add_buddies = oscar_add_buddies;
+	ret->remove_buddy = oscar_remove_buddy;
+	ret->add_permit = NULL; /* Oscar's permit/deny stuff is messed up */
+	ret->add_deny = NULL; /* at least, i can't figure it out :-P */
+	ret->warn = oscar_warn;
+	ret->accept_chat = NULL; /* oscar doesn't have accept, it just joins */
+	ret->join_chat = oscar_join_chat;
+	ret->chat_invite = oscar_chat_invite;
+	ret->chat_leave = oscar_chat_leave;
+	ret->chat_whisper = oscar_chat_whisper;
+	ret->chat_send = oscar_chat_send;
+	ret->keepalive = oscar_keepalive;
+	
+	return ret;
+}
+
+#endif
