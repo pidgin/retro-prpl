@@ -25,7 +25,4 @@
 
 #define XPATCH BAD /* Because Kalla Said So */
 
-/* Functions in idle.c */
-extern gint check_idle(gpointer);
-
 #endif /* _GAIM_H_ */
