@@ -83,6 +83,6 @@ libmsn_la_SOURCES = $(MSNSOURCES)
 endif
 
 AM_CPPFLAGS = \
-	-I$(top_srcdir)/core \
+	-I$(top_srcdir)/libgaim \
 	$(GLIB_CFLAGS) \
 	$(DEBUG_CFLAGS)

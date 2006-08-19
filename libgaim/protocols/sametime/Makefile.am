@@ -34,7 +34,7 @@ libsametime_la_LIBADD = $(GLIB_LIBS) $(MEANWHILE_LIBS)
 AM_CFLAGS = \
 	$(GLIB_CFLAGS) $(MEANWHILE_CFLAGS) \
 	$(DEBUG_CFLAGS) \
-	-I$(top_srcdir)/core
+	-I$(top_srcdir)/libgaim
 
 
 AM_CPPFLAGS = \

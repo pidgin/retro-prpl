@@ -91,7 +91,7 @@ libqq_la_SOURCES = $(QQSOURCES)
 endif
 
 AM_CPPFLAGS = \
-	-I$(top_srcdir)/core \
+	-I$(top_srcdir)/libgaim \
         -DVERSION=\"$(VERSION)\" \
         $(DEBUG_CFLAGS) \
         $(GLIB_CFLAGS) \

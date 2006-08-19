@@ -101,8 +101,8 @@ endif
 
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
-	-I$(top_srcdir)/core \
-	-I$(top_srcdir)/core/protocols \
+	-I$(top_srcdir)/libgaim \
+	-I$(top_srcdir)/libgaim/protocols \
 	-DCONFDIR=\"$(confdir)\" \
 	$(GLIB_CFLAGS) \
 	$(KRB4_CFLAGS) \

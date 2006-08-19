@@ -50,6 +50,6 @@ libnovell_la_SOURCES = $(NOVELLSOURCES)
 endif
 
 AM_CPPFLAGS = \
-	-I$(top_srcdir)/core \
+	-I$(top_srcdir)/libgaim \
 	$(DEBUG_CFLAGS) \
 	$(GLIB_CFLAGS)

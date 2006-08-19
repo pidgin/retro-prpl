@@ -53,7 +53,7 @@ libgg_la_LIBADD  = $(GADU_LIBS)
 endif
 
 AM_CPPFLAGS = \
-	-I$(top_srcdir)/core \
+	-I$(top_srcdir)/libgaim \
 	$(GLIB_CFLAGS) \
 	$(DEBUG_CFLAGS)
 
