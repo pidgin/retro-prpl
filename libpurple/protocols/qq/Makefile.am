@@ -92,7 +92,7 @@ libqq_la_LIBADD  = $(GLIB_LIBS)
 endif
 
 AM_CPPFLAGS = \
-	-I$(top_srcdir)/libgaim \
+	-I$(top_srcdir)/libpurple \
 	-DVERSION=\"$(VERSION)\" \
 	-DQQ_BUDDY_ICON_DIR=\"$(datadir)/pixmaps/gaim/buddy_icons/qq\" \
 	$(DEBUG_CFLAGS) \

@@ -29,7 +29,7 @@ INTGGSOURCES = \
 	lib/pubdir50.c \
 	lib/pubdir.c
 
-INTGG_CFLAGS = -I$(top_srcdir)/libgaim/protocols/gg/lib
+INTGG_CFLAGS = -I$(top_srcdir)/libpurple/protocols/gg/lib
 endif
 
 GGSOURCES = \
@@ -71,7 +71,7 @@ libgg_la_LIBADD  = $(GLIB_LIBS) $(GADU_LIBS)
 endif
 
 AM_CPPFLAGS = \
-	-I$(top_srcdir)/libgaim \
+	-I$(top_srcdir)/libpurple \
 	$(INTGG_CFLAGS) \
 	$(GLIB_CFLAGS) \
 	$(DEBUG_CFLAGS)

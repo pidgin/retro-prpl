@@ -48,6 +48,6 @@ libyahoo_la_LIBADD  = $(GLIB_LIBS)
 endif
 
 AM_CPPFLAGS = \
-	-I$(top_srcdir)/libgaim \
+	-I$(top_srcdir)/libpurple \
 	$(GLIB_CFLAGS) \
 	$(DEBUG_CFLAGS)

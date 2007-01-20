@@ -51,6 +51,6 @@ libnovell_la_LIBADD  = $(GLIB_LIBS)
 endif
 
 AM_CPPFLAGS = \
-	-I$(top_srcdir)/libgaim \
+	-I$(top_srcdir)/libpurple \
 	$(DEBUG_CFLAGS) \
 	$(GLIB_CFLAGS)
