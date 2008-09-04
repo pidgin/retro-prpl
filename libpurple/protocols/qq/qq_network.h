@@ -1,5 +1,5 @@
 /**
- * @file udp_proxy_s5.h
+ * @file qq_network.h
  *
  * purple
  *
@@ -22,13 +22,29 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02111-1301  USA
  */
 
-#ifndef _QQ_UDP_PROXY_S5_H_
-#define _QQ_UDP_PROXY_S5_H_
+#ifndef _QQ_NETWORK_H
+#define _QQ_NETWORK_H
 
-#include "internal.h"		/* for socket stuff */
+#include <glib.h>
+#include "connection.h"
 
-#include "qq_proxy.h"
+#include "qq.h"
 
-gint qq_proxy_socks5(struct PHB *phb, struct sockaddr *addr, socklen_t addrlen);
+#define QQ_CONNECT_STEPS    3	/* steps in connection */
 
+void qq_connect(PurpleAccount *account);
+void qq_disconnect(PurpleConnection *gc);
+void qq_connect_later(PurpleConnection *gc);
+
+gint qq_send_cmd(qq_data *qd, guint16 cmd, guint8 *data, gint datalen);
+gint qq_send_data(qq_data *qd, guint16 cmd, guint16 seq, gboolean need_ack,
+	guint8 *data, gint data_len);
+gint qq_send_cmd_detail(qq_data *qd, guint16 cmd, guint16 seq, gboolean need_ack,
+	guint8 *data, gint data_len);
+
+gint qq_send_room_cmd(PurpleConnection *gc, guint8 room_cmd, guint32 room_id,
+		guint8 *data, gint data_len);
+gint qq_send_room_cmd_only(PurpleConnection *gc, guint8 room_cmd, guint32 room_id);
+gint qq_send_room_cmd_noid(PurpleConnection *gc, guint8 room_cmd, 
+		guint8 *data, gint data_len);
 #endif

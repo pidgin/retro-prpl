@@ -1,5 +1,5 @@
-/**
- * @file qq_proxy.h
+ /**
+ * @file qq_crypt.h
  *
  * purple
  *
@@ -19,38 +19,15 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02111-1301  USA
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _QQ_PROXY_H
-#define _QQ_PROXY_H
+#ifndef _QQ_CRYPT_H_
+#define _QQ_CRYPT_H_
 
 #include <glib.h>
-#include "dnsquery.h"
-#include "proxy.h"
 
-#include "qq.h"
-
-#define QQ_CONNECT_STEPS    2	/* steps in connection */
-
-struct PHB {
-	PurpleProxyConnectFunction func;
-	gpointer data;
-	gchar *host;
-	gint port;
-	gint inpa;
-	PurpleProxyInfo *gpi;
-	PurpleAccount *account;
-	gint udpsock;
-	gpointer sockbuf;
-};
-
-gint qq_proxy_read(qq_data *qd, guint8 *data, gint len);
-gint qq_proxy_write(qq_data *qd, guint8 *data, gint len);
-
-gint qq_connect(PurpleAccount *account, const gchar *host, guint16 port, gboolean use_tcp, gboolean is_redirect);
-void qq_disconnect(PurpleConnection *gc);
-
-void _qq_show_packet(const gchar *desc, const guint8 *buf, gint len);
-
+gint qq_encrypt(guint8* crypted, const guint8* const plain, const gint plain_len, const guint8* const key);
+		
+gint qq_decrypt(guint8 *plain, const guint8* const crypted, const gint crypted_len, const guint8* const key);
 #endif
