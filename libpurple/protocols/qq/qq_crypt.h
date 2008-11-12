@@ -1,5 +1,5 @@
-/**
- * @file slpsession.h SLP Session functions
+ /**
+ * @file qq_crypt.h
  *
  * purple
  *
@@ -19,30 +19,15 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02111-1301  USA
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#ifndef _MSN_SLPSESSION_H_
-#define _MSN_SLPSESSION_H_
 
-typedef struct _MsnSlpSession MsnSlpSession;
+#ifndef _QQ_CRYPT_H_
+#define _QQ_CRYPT_H_
 
-#include "slpcall.h"
-#include "slpsession.h"
-#include "slpmsg.h"
+#include <glib.h>
 
-struct _MsnSlpSession
-{
-	/* MsnSlpLink *slplink; */
-	MsnSlpCall *slpcall;
-
-	long id;
-
-	long app_id;
-	char *call_id;
-};
-
-MsnSlpSession *msn_slp_session_new(MsnSlpCall *slpcall);
-void msn_slp_session_destroy(MsnSlpSession *slpsession);
-void msn_slpsession_send_slpmsg(MsnSlpSession *slpsession,
-								MsnSlpMessage *slpmsg);
-#endif /* _MSN_SLPSESSION_H_ */
+gint qq_encrypt(guint8* crypted, const guint8* const plain, const gint plain_len, const guint8* const key);
+		
+gint qq_decrypt(guint8 *plain, const guint8* const crypted, const gint crypted_len, const guint8* const key);
+#endif
