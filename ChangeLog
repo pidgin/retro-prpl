@@ -25,6 +25,7 @@ version 2.12.1 (??/??/????):
 	Pidgin:
 	* Better support for dark themes. (#12572 Alyssa Rosenzweig and Gary Kramlich)
 	* Fixed IPv6 links by not escaping []'s. (#16391 cyisfor) (PR #270 Daniel Kamil Kozar)
+	* Only write buddy icons to the cache if they're not already cached.  (PR #276 David Woodhouse)
 
 	Finch:
 	* Fix handling of search results (#17238 David Woodhouse)
