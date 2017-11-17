@@ -22,6 +22,7 @@ version 2.13.0 (??/??/????):
 	  (and possibly others not based on charybdis/ratbox/ircd-seven)
 	* Fix issues with plugins that modify outgoing messages
 	  (such as the custom PART/QUIT feature of the IRC More plugin)
+	* Fix IRC buffer handling.  (#12562 PR #272 Shivaram Lingamneni)
 
 	Pidgin:
 	* Better support for dark themes. (#12572 Alyssa Rosenzweig and Gary Kramlich)
