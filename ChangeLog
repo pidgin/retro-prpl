@@ -31,6 +31,7 @@ version 2.13.0 (??/??/????):
 	* Only write buddy icons to the cache if they're not already cached.  (PR #276 David Woodhouse)
 	* Rejoin persistent chats after reconnect.  (#15687 PR #285 Christof Meerwald)
 	* Made the WIN32 Transparency plugin work on all platforms. (#3124 PR #287 Daniel Kamil Kozar)
+	* Ensure search results buttons are labeled (Backport from de2d88e575ee)
 
 	Finch:
 	* Fix handling of search results (#17238 David Woodhouse)
