@@ -33,6 +33,7 @@ version 2.13.0 (??/??/????):
 	* Rejoin persistent chats after reconnect.  (#15687 PR #285 Christof Meerwald)
 	* Made the WIN32 Transparency plugin work on all platforms. (#3124 PR #287 Daniel Kamil Kozar)
 	* Ensure search results buttons are labeled (Backport from de2d88e575ee)
+	* Fix matching unicode smilies.  (#17232 gnubfx PR #262 Daniel Kamil Kozar)
 
 	Finch:
 	* Fix handling of search results (#17238 David Woodhouse)
