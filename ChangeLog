@@ -34,6 +34,7 @@ version 2.13.0 (??/??/????):
 	* Made the WIN32 Transparency plugin work on all platforms. (#3124 PR #287 Daniel Kamil Kozar)
 	* Ensure search results buttons are labeled (Backport from de2d88e575ee)
 	* Fix matching unicode smilies.  (#17232 gnubfx PR #262 Daniel Kamil Kozar)
+	* Correctly update mute/unmute status when the remote side mutes/unmutes us. (#17273 PR #302 David Woodhouse)
 
 	Finch:
 	* Fix handling of search results (#17238 David Woodhouse)
