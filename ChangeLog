@@ -35,6 +35,7 @@ version 2.13.0 (??/??/????):
 	* Ensure search results buttons are labeled (Backport from de2d88e575ee)
 	* Fix matching unicode smilies.  (#17232 gnubfx PR #262 Daniel Kamil Kozar)
 	* Correctly update mute/unmute status when the remote side mutes/unmutes us. (#17273 PR #302 David Woodhouse)
+	* Rework the status icon blinking to not used deprecated API.  (#17174 zelch PR #264 Daniel Kamil Kozar)
 
 	Finch:
 	* Fix handling of search results (#17238 David Woodhouse)
