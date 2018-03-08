@@ -25,6 +25,8 @@ version 2.13.0 (??/??/????):
 	* Fix issues with plugins that modify outgoing messages
 	  (such as the custom PART/QUIT feature of the IRC More plugin)
 	* Fix IRC buffer handling.  (#12562 PR #272 Shivaram Lingamneni)
+	* Properly handle AUTHENTICATE as a normal command with server prefix.
+	  (PR #316 dx)
 
 	Pidgin:
 	* Better support for dark themes. (#12572 Alyssa Rosenzweig and Gary Kramlich)
