@@ -4,6 +4,9 @@ version 2.13.0 (??/??/????):
 	libpurple:
 	* Unified string comparison. (PR #186) (Arkadiy Illarionov)
 	* Properlly shell escape URI's when opening them. (PR #271 Daniel Kamil Kozar)
+	* Fix a one byte buffer overread in function purple_markup_linkify
+	* Fix an issue were utf8 was incorrectly truncated which could lead to
+	  crashes as we were potentially feeding garbage into glib/gtk.
 
 	libgnt:
 	* Fixed build against curses 6.0 with opaque structs set. (#16764 dimstar)
@@ -27,6 +30,10 @@ version 2.13.0 (??/??/????):
 	* Fix IRC buffer handling.  (#12562 PR #272 Shivaram Lingamneni)
 	* Properly handle AUTHENTICATE as a normal command with server prefix.
 	  (PR #316 dx)
+	* Fix a crash caused by a use after free of the MOTD.
+	* Fix an out of bounds read in irc_nick_skip_mode.
+	* Fix a write of a single byte before the start of a buffer in
+	  irc_parse_ctcp.
 
 	Pidgin:
 	* Better support for dark themes. (#12572 Alyssa Rosenzweig and Gary Kramlich)
