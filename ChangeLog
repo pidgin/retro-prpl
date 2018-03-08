@@ -1,6 +1,6 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
-version 2.13.0 (??/??/????):
+version 2.13.0 (03/08/2018):
 	libpurple:
 	* Unified string comparison. (PR #186) (Arkadiy Illarionov)
 	* Properlly shell escape URI's when opening them. (PR #271 Daniel Kamil Kozar)
