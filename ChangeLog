@@ -2,7 +2,7 @@ Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
 version 2.13.1 (??/??/????):
 	General:
-	* Nothing yet!  Be the first!!
+	* Fixed a memory leak in search results. (#17292 PR #320 David Woodhouse)
 
 version 2.13.0 (03/08/2018):
 	libpurple:
