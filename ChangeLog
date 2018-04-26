@@ -4,6 +4,10 @@ version 2.14.0 (??/??/????):
 	General:
 	* Fixed a memory leak in search results. (#17292 PR #320 David Woodhouse)
 
+	libpurple:
+	* Add invisible buddy support to support presence/name/photos for non buddies.
+	  (#17295 PR 321 David Woodhouse)
+
 	Voice & Video:
 	* Improve webcam failure handling. (PR #322 David Woodhouse)
 	* Show error when creating media pipeline fails. (#17290 PR 322 David Woodhouse)
