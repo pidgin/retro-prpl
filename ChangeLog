@@ -15,6 +15,7 @@ version 2.14.0 (??/??/????):
 	* Keep track of devices managed by GstDeviceMonitor. (PR #322 David Woodhouse)
 	* Ignore PulseAudio monitors.  (PR #322 David Woodhouse)
 	* Backport native Voice & Video prefs from 3.0.  (PR #322 David Woodhouse)
+	* Fixed building againstg GStreamer 0.10 (PR #325 David Woodhouse)
 
 version 2.13.0 (03/08/2018):
 	libpurple:
