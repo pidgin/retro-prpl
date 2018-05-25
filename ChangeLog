@@ -8,6 +8,9 @@ version 2.14.0 (??/??/????):
 	* Add invisible buddy support to support presence/name/photos for non buddies.
 	  (#17295 PR 321 David Woodhouse)
 
+	XMPP:
+	* Support for XEP-0198 Stream Management (PR #309 defanor)
+
 	Voice & Video:
 	* Improve webcam failure handling. (PR #322 David Woodhouse)
 	* Show error when creating media pipeline fails. (#17290 PR 322 David Woodhouse)
