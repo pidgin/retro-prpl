@@ -21,6 +21,7 @@ version 2.14.0 (??/??/????):
 	* Ignore PulseAudio monitors.  (PR #322 David Woodhouse)
 	* Backport native Voice & Video prefs from 3.0.  (PR #322 David Woodhouse)
 	* Fixed building againstg GStreamer 0.10 (PR #325 David Woodhouse)
+	* Fixed initial delay on incoming audio (PR #379 David Woodhouse)
 
 version 2.13.0 (03/08/2018):
 	libpurple:
