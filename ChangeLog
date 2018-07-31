@@ -10,6 +10,9 @@ version 2.14.0 (??/??/????):
 	* Make purple-remote compatible with both Python 2 and Python 3. (Jan
 	  Synacek of RedHat)
 
+	Bonjour:
+	* Always use port fallback for IPv4 addresses. (PR #382 Michael Osborne)
+
 	XMPP:
 	* Support for XEP-0198 Stream Management (PR #309 defanor)
 
