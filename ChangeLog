@@ -27,6 +27,8 @@ version 2.14.0 (??/??/????):
 	* Fixed building againstg GStreamer 0.10 (PR #325 David Woodhouse)
 	* Fixed initial delay on incoming audio (PR #379 David Woodhouse)
 	* Properly cleanup timeouts. (PR #383 Jakub Adam)
+	* Added an audio mixer so mixed sources don't cause a pipe failure. (PR #522
+	  Fabrice Bellet)
 
 version 2.13.0 (03/08/2018):
 	libpurple:
