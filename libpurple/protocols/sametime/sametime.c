@@ -5155,6 +5155,7 @@ static PurplePluginProtocolInfo mw_prpl_info = {
   NULL,
   NULL,
   NULL,
+  NULL,
   NULL
 };
 

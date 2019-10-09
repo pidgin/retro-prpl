@@ -1,9 +1,42 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
-version 2.13.0 (??/??/????):
+version 2.14.0 (??/??/????):
+	General:
+	* Fixed a memory leak in search results. (#17292 PR #320 David Woodhouse)
+
+	libpurple:
+	* Add invisible buddy support to support presence/name/photos for non buddies.
+	  (#17295 PR 321 David Woodhouse)
+	* Make purple-remote compatible with both Python 2 and Python 3. (Jan
+	  Synacek of RedHat)
+	* Fixed some leaky deprecation warnings.  (PR #586 Gary Kramlich)
+
+	Bonjour:
+	* Always use port fallback for IPv4 addresses. (PR #382 Michael Osborne)
+
+	XMPP:
+	* Support for XEP-0198 Stream Management (PR #309 defanor)
+
+	Voice & Video:
+	* Improve webcam failure handling. (PR #322 David Woodhouse)
+	* Show error when creating media pipeline fails. (#17290 PR 322 David Woodhouse)
+	* Clip audio level reporting. (#14426 PR #322 David Woodhouse)
+	* Keep track of devices managed by GstDeviceMonitor. (PR #322 David Woodhouse)
+	* Ignore PulseAudio monitors.  (PR #322 David Woodhouse)
+	* Backport native Voice & Video prefs from 3.0.  (PR #322 David Woodhouse)
+	* Fixed building againstg GStreamer 0.10 (PR #325 David Woodhouse)
+	* Fixed initial delay on incoming audio (PR #379 David Woodhouse)
+	* Properly cleanup timeouts. (PR #383 Jakub Adam)
+	* Added an audio mixer so mixed sources don't cause a pipe failure. (PR #522
+	  Fabrice Bellet)
+
+version 2.13.0 (03/08/2018):
 	libpurple:
 	* Unified string comparison. (PR #186) (Arkadiy Illarionov)
 	* Properlly shell escape URI's when opening them. (PR #271 Daniel Kamil Kozar)
+	* Fix a one byte buffer overread in function purple_markup_linkify
+	* Fix an issue were utf8 was incorrectly truncated which could lead to
+	  crashes as we were potentially feeding garbage into glib/gtk.
 
 	libgnt:
 	* Fixed build against curses 6.0 with opaque structs set. (#16764 dimstar)
@@ -25,6 +58,12 @@ version 2.13.0 (??/??/????):
 	* Fix issues with plugins that modify outgoing messages
 	  (such as the custom PART/QUIT feature of the IRC More plugin)
 	* Fix IRC buffer handling.  (#12562 PR #272 Shivaram Lingamneni)
+	* Properly handle AUTHENTICATE as a normal command with server prefix.
+	  (PR #316 dx)
+	* Fix a crash caused by a use after free of the MOTD.
+	* Fix an out of bounds read in irc_nick_skip_mode.
+	* Fix a write of a single byte before the start of a buffer in
+	  irc_parse_ctcp.
 
 	Pidgin:
 	* Better support for dark themes. (#12572 Alyssa Rosenzweig and Gary Kramlich)
@@ -36,9 +75,13 @@ version 2.13.0 (??/??/????):
 	* Fix matching unicode smilies.  (#17232 gnubfx PR #262 Daniel Kamil Kozar)
 	* Correctly update mute/unmute status when the remote side mutes/unmutes us. (#17273 PR #302 David Woodhouse)
 	* Rework the status icon blinking to not used deprecated API.  (#17174 zelch PR #264 Daniel Kamil Kozar)
+	* Don't allow adding a buddy to protocols that don't have an add_buddy callback.  (#4061 Paradox)
 
 	Finch:
 	* Fix handling of search results (#17238 David Woodhouse)
+
+	Voice & Video:
+	* Port backend-fs to newer api for farstream relay-info property  (#17274 bellet)
 
 version 2.12.0 (03/09/2017):
 	libpurple:
