@@ -10,6 +10,8 @@ version 2.14.0 (??/??/????):
 	* Make purple-remote compatible with both Python 2 and Python 3. (Jan
 	  Synacek of RedHat)
 	* Fixed some leaky deprecation warnings.  (PR #586 Gary Kramlich)
+	* Fixed HTML logs which were writing invalid HTML. (#17280 stars PR #312
+	  Daniel Kamil Kozar)
 
 	Bonjour:
 	* Always use port fallback for IPv4 addresses. (PR #382 Michael Osborne)
