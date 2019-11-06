@@ -18,7 +18,7 @@ version 2.14.0 (??/??/????):
 
 	XMPP:
 	* Support for XEP-0198 Stream Management (PR #309 defanor)
-	* Decrease delay for file transfer using streamhosts (PR #464 Evert Mouw)
+	* Decrease delay for file transfer using streamhosts (PR #464 #627 Evert Mouw)
 
 	Voice & Video:
 	* Improve webcam failure handling. (PR #322 David Woodhouse)
