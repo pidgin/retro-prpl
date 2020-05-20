@@ -114,6 +114,8 @@ static PurplePluginProtocolInfo prpl_info =
 	oscar_add_buddy,		/* add_buddy_with_invite */
 	NULL,					/* add_buddies_with_invite */
 	NULL,					/* get_cb_alias */
+	NULL,					/* chat_can_receive_file */
+	NULL,					/* chat_send_file */
 };
 
 static PurplePluginInfo info =
