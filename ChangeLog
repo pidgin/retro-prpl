@@ -7,29 +7,36 @@ version 2.14.0 (??/??/????):
 	* Add additional error handling to NSS and GNUTLS. (PR #679 Samuel Thibault)
 
 	libpurple:
-	* Add invisible buddy support to support presence/name/photos for non buddies.
-	  (#17295 PR 321 David Woodhouse)
+	* Add invisible buddy support to support presence/name/photos for non
+	  buddies. (#17295 PR 321 David Woodhouse)
 	* Make purple-remote compatible with both Python 2 and Python 3. (Jan
 	  Synacek of RedHat)
 	* Fixed some leaky deprecation warnings.  (PR #586 Gary Kramlich)
 	* Fixed HTML logs which were writing invalid HTML. (#17280 stars PR #312
 	  Daniel Kamil Kozar)
+	* Fixed a user after free in purple_smiley_set_data_impl. (PR #694 Gary
+	  Kramlich)
 
 	Pidgin:
 	* Treat <p> tags as line breaks when pasting. (PR #678 Colin Xu)
+	* Reverted Ticket 17232/PR #695.  It caused more harm than good and a new
+	  solution needs to be found.  (PR #695 Gary Kramlich)
 
 	Bonjour:
 	* Always use port fallback for IPv4 addresses. (PR #382 Michael Osborne)
 
 	XMPP:
 	* Support for XEP-0198 Stream Management (PR #309 defanor)
-	* Decrease delay for file transfer using streamhosts (PR #464 #627 Evert Mouw)
+	* Decrease delay for file transfer using streamhosts (PR #464 #627 Evert
+	  Mouw)
 
 	Voice & Video:
 	* Improve webcam failure handling. (PR #322 David Woodhouse)
-	* Show error when creating media pipeline fails. (#17290 PR 322 David Woodhouse)
+	* Show error when creating media pipeline fails. (#17290 PR 322 David
+	  Woodhouse)
 	* Clip audio level reporting. (#14426 PR #322 David Woodhouse)
-	* Keep track of devices managed by GstDeviceMonitor. (PR #322 David Woodhouse)
+	* Keep track of devices managed by GstDeviceMonitor. (PR #322 David
+	  Woodhouse)
 	* Ignore PulseAudio monitors.  (PR #322 David Woodhouse)
 	* Backport native Voice & Video prefs from 3.0.  (PR #322 David Woodhouse)
 	* Fixed building againstg GStreamer 0.10 (PR #325 David Woodhouse)
@@ -37,6 +44,10 @@ version 2.14.0 (??/??/????):
 	* Properly cleanup timeouts. (PR #383 Jakub Adam)
 	* Added an audio mixer so mixed sources don't cause a pipe failure. (PR #522
 	  Fabrice Bellet)
+	* Added screen share support for Wayland via XDP Portal. (PR #337 David
+	  Woodhouse)
+	* Handle unplug and replug events of selected media device. (PR #699 David
+	  Woodhouse)
 
 version 2.13.0 (03/08/2018):
 	libpurple:
