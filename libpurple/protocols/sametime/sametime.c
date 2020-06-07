@@ -5156,7 +5156,9 @@ static PurplePluginProtocolInfo mw_prpl_info = {
   NULL,
   NULL,
   NULL,
-  NULL
+  NULL, /* get_cb_alias */
+  NULL, /* chat_can_receive_file */
+  NULL, /* chat_send_file */
 };
 
 
