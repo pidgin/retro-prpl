@@ -16,6 +16,8 @@ version 2.14.0 (??/??/????):
 	  Daniel Kamil Kozar)
 	* Fixed a user after free in purple_smiley_set_data_impl. (PR #694 Gary
 	  Kramlich)
+	* Added the chat_send_file ability to protocol plugins. (PR #701 David
+	  Woodhouse)
 
 	Pidgin:
 	* Treat <p> tags as line breaks when pasting. (PR #678 Colin Xu)
