@@ -1,6 +1,6 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
-version 2.14.0 (??/??/????):
+version 2.14.0 (10/06/2020):
 	General:
 	* Fixed a memory leak in search results. (#17292 PR #320 David Woodhouse)
 	* Support SNI with GNUTLS. (#17300 tiagosalem) (PR #659 Mihai Moldovan)
