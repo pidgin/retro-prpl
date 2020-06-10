@@ -17,14 +17,14 @@ version 2.14.0 (10/06/2020):
 	* Fixed some leaky deprecation warnings.  (PR #586 Gary Kramlich)
 	* Fixed HTML logs which were writing invalid HTML. (#17280 stars PR #312
 	  Daniel Kamil Kozar)
-	* Fixed a user after free in purple_smiley_set_data_impl. (PR #694 Gary
+	* Fixed a use after free in purple_smiley_set_data_impl. (PR #694 Gary
 	  Kramlich)
 	* Added the chat_send_file ability to protocol plugins. (PR #701 David
 	  Woodhouse)
 
 	Pidgin:
 	* Treat <p> tags as line breaks when pasting. (PR #678 Colin Xu)
-	* Reverted Ticket 17232/PR #695.  It caused more harm than good and a new
+	* Reverted Ticket #17232/PR #695.  It caused more harm than good and a new
 	  solution needs to be found.  (PR #695 Gary Kramlich)
 
 	Bonjour:
@@ -44,7 +44,7 @@ version 2.14.0 (10/06/2020):
 	  Woodhouse)
 	* Ignore PulseAudio monitors.  (PR #322 David Woodhouse)
 	* Backport native Voice & Video prefs from 3.0.  (PR #322 David Woodhouse)
-	* Fixed building againstg GStreamer 0.10 (PR #325 David Woodhouse)
+	* Fixed building against GStreamer 0.10 (PR #325 David Woodhouse)
 	* Fixed initial delay on incoming audio (PR #379 David Woodhouse)
 	* Properly cleanup timeouts. (PR #383 Jakub Adam)
 	* Added an audio mixer so mixed sources don't cause a pipe failure. (PR #522
