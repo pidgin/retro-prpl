@@ -2300,7 +2300,7 @@ purple_parse_clientauto_ch2(OscarData *od, const char *who, guint16 reason, cons
 		if (conn == NULL)
 		{
 			purple_debug_info("oscar", "Received a rendezvous cancel message "
-					"for a nonexistant connection from %s.\n", who);
+					"for a nonexistent connection from %s.\n", who);
 		}
 		else
 		{
