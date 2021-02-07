@@ -20,6 +20,8 @@
 
 #include "oscar.h"
 
+#include "glibcompat.h"
+
 static aim_tlv_t *
 createtlv(guint16 type, guint16 length, guint8 *value)
 {
@@ -300,7 +302,7 @@ int aim_tlvlist_add_raw(GSList **list, const guint16 type, const guint16 length,
 
 	tlv = createtlv(type, length, NULL);
 	if (tlv->length > 0)
-		tlv->value = g_memdup(value, length);
+		tlv->value = g_memdup2(value, length);
 
 	*list = g_slist_append(*list, tlv);
 
@@ -535,7 +537,7 @@ int aim_tlvlist_replace_raw(GSList **list, const guint16 type, const guint16 len
 	g_free(tlv->value);
 	tlv->length = length;
 	if (tlv->length > 0) {
-		tlv->value = g_memdup(value, length);
+		tlv->value = g_memdup2(value, length);
 	} else
 		tlv->value = NULL;
 

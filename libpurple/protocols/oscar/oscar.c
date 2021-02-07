@@ -38,6 +38,7 @@
 #include "core.h"
 #include "debug.h"
 #include "encoding.h"
+#include "glibcompat.h"
 #include "imgstore.h"
 #include "network.h"
 #include "notify.h"
@@ -1065,7 +1066,7 @@ int oscar_connect_to_bos(PurpleConnection *gc, OscarData *od, const char *host, 
 
 	conn = flap_connection_new(od, SNAC_FAMILY_LOCATE);
 	conn->cookielen = cookielen;
-	conn->cookie = g_memdup(cookie, cookielen);
+	conn->cookie = g_memdup2(cookie, cookielen);
 
 	/*
 	 * Use TLS only if the server provided us with a tls_certname. The server might not specify a tls_certname even if we requested to use TLS,
@@ -1185,7 +1186,7 @@ purple_parse_auth_resp(OscarData *od, FlapConnection *conn, FlapFrame *fr, ...)
 	host = g_strndup(info->bosip, i);
 	newconn = flap_connection_new(od, SNAC_FAMILY_LOCATE);
 	newconn->cookielen = info->cookielen;
-	newconn->cookie = g_memdup(info->cookie, info->cookielen);
+	newconn->cookie = g_memdup2(info->cookie, info->cookielen);
 
 	if (od->use_ssl)
 	{
@@ -1353,7 +1354,7 @@ purple_handle_redirect(OscarData *od, FlapConnection *conn, FlapFrame *fr, ...)
 
 	newconn = flap_connection_new(od, redir->group);
 	newconn->cookielen = redir->cookielen;
-	newconn->cookie = g_memdup(redir->cookie, redir->cookielen);
+	newconn->cookie = g_memdup2(redir->cookie, redir->cookielen);
 	if (newconn->type == SNAC_FAMILY_CHAT)
 	{
 		struct chat_connection *cc;
@@ -1829,7 +1830,7 @@ incomingim_chan2(OscarData *od, FlapConnection *conn, aim_userinfo_t *userinfo, 
 	else if (args->type & OSCAR_CAPABILITY_BUDDYICON)
 	{
 		purple_buddy_icons_set_for_user(account, userinfo->bn,
-									  g_memdup(args->info.icon.icon, args->info.icon.length),
+									  g_memdup2(args->info.icon.icon, args->info.icon.length),
 									  args->info.icon.length,
 									  NULL);
 	}
@@ -2711,7 +2712,7 @@ static int purple_icon_parseicon(OscarData *od, FlapConnection *conn, FlapFrame 
 	if ((iconlen > 0) && (iconlen != 90)) {
 		char *b16 = purple_base16_encode(iconcsum, iconcsumlen);
 		purple_buddy_icons_set_for_user(purple_connection_get_account(gc),
-									  bn, g_memdup(icon, iconlen), iconlen, b16);
+									  bn, g_memdup2(icon, iconlen), iconlen, b16);
 		g_free(b16);
 	}
 

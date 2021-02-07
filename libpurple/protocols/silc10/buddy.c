@@ -22,6 +22,8 @@
 #include "silcpurple.h"
 #include "wb.h"
 
+#include "glibcompat.h"
+
 /***************************** Key Agreement *********************************/
 
 static void
@@ -992,7 +994,7 @@ silcpurple_add_buddy_save(bool success, void *context)
 					data = silc_mime_get_data(m, &data_len);
 					if (data) {
 						/* TODO: Check if SILC gives us something to use as the checksum instead */
-						purple_buddy_icons_set_for_user(purple_buddy_get_account(r->b), purple_buddy_get_name(r->b), g_memdup(data, data_len), data_len, NULL);
+						purple_buddy_icons_set_for_user(purple_buddy_get_account(r->b), purple_buddy_get_name(r->b), g_memdup2(data, data_len), data_len, NULL);
 					}
 				}
 				silc_mime_free(m);

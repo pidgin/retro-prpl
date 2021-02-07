@@ -26,6 +26,7 @@
 /* From Purple */
 #include "conversation.h"
 #include "imgstore.h"
+#include "glibcompat.h"
 #include "util.h"
 
 #define DIRECTIM_MAX_FILESIZE 52428800
@@ -354,7 +355,7 @@ peer_odc_handle_payload(PeerConnection *conn, const char *msg, size_t len, int e
 
 			if ((embedded_data != NULL) && (embedded_data->size == size))
 			{
-				imgid = purple_imgstore_add_with_id(g_memdup(embedded_data->data, size), size, src);
+				imgid = purple_imgstore_add_with_id(g_memdup2(embedded_data->data, size), size, src);
 
 				/* Record the image number */
 				images = g_slist_append(images, GINT_TO_POINTER(imgid));

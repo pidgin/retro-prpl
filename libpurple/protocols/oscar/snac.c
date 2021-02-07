@@ -34,6 +34,8 @@
 
 #include "oscar.h"
 
+#include "glibcompat.h"
+
 /*
  * Called from oscar_session_new() to initialize the hash.
  */
@@ -57,7 +59,7 @@ aim_snacid_t aim_cachesnac(OscarData *od, const guint16 family, const guint16 ty
 	snac.flags = flags;
 
 	if (datalen)
-		snac.data = g_memdup(data, datalen);
+		snac.data = g_memdup2(data, datalen);
 	else
 		snac.data = NULL;
 
@@ -76,7 +78,7 @@ aim_snacid_t aim_newsnac(OscarData *od, aim_snac_t *newsnac)
 	if (!newsnac)
 		return 0;
 
-	snac = g_memdup(newsnac, sizeof(aim_snac_t));
+	snac = g_memdup2(newsnac, sizeof(aim_snac_t));
 	snac->issuetime = time(NULL);
 
 	index = snac->id % FAIM_SNAC_HASH_SIZE;

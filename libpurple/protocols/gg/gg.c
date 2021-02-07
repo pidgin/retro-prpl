@@ -35,6 +35,7 @@
 #include "blist.h"
 #include "accountopt.h"
 #include "debug.h"
+#include "glibcompat.h"
 #include "util.h"
 #include "request.h"
 #include "xmlnode.h"
@@ -521,7 +522,7 @@ static void gg_fetch_avatar_cb(PurpleUtilFetchUrlData *url_data, gpointer user_d
 	if (buddy == NULL)
 		goto out;
 
-	buddy_icon_data = g_memdup(data, len);
+	buddy_icon_data = g_memdup2(data, len);
 
 	purple_buddy_icons_set_for_user(account, purple_buddy_get_name(buddy),
 			buddy_icon_data, len, d->avatar_url);
@@ -982,7 +983,7 @@ static void ggp_recv_image_handler(PurpleConnection *gc, const struct gg_event *
 	gchar *handlerid = g_strdup_printf("IMGID_HANDLER-%i", ev->event.image_reply.crc32);
 
 	imgid = purple_imgstore_add_with_id(
-		g_memdup(ev->event.image_reply.image, ev->event.image_reply.size),
+		g_memdup2(ev->event.image_reply.image, ev->event.image_reply.size),
 		ev->event.image_reply.size,
 		ev->event.image_reply.filename);
 

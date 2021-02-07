@@ -56,6 +56,7 @@
 #include "oscar.h"
 #include "peer.h"
 
+#include "glibcompat.h"
 #include "util.h"
 
 #define CHECKSUM_BUFFER_SIZE 256 * 1024
@@ -230,7 +231,7 @@ peer_oft_copy_xfer_data(PeerConnection *conn, OftFrame *frame)
 	g_free(conn->xferdata.name);
 
 	memcpy(&(conn->xferdata), frame, sizeof(OftFrame));
-	conn->xferdata.name = g_memdup(frame->name, frame->name_length);
+	conn->xferdata.name = g_memdup2(frame->name, frame->name_length);
 }
 
 /**
