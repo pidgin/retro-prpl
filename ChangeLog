@@ -2,9 +2,11 @@ Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
 version 2.14.2 (??/??/????):
 	* Fix a build issue when compiling with gstreamer but without voice and
-	  video. (RR #25 Gary Kramlich)
-	* Enable cyrus-sasl by default. (RR #26 Gary Kramlich)
+	  video. (RR #25)
+	* Enable cyrus-sasl by default. (RR #26)
 	* Fix an issue with opening link in Firefox. (RR #503) (PIDGIN-16589)
+	* Fix a regression from 2.14.0 where extra white space would be displayed
+	  when pasting <p> elements from HTML. (RR #504) (PIDGIN-17437)
 
 version 2.14.1 (11/06/2020):
 	* Fixed issues with Windows installer that always thought Pidgin was
