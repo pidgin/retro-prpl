@@ -1,6 +1,6 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
-version 2.14.2 (??/??/????):
+version 2.14.2 (04/01/2021):
 	* Fix a build issue when compiling with gstreamer but without voice and
 	  video. (RR #25)
 	* Enable cyrus-sasl by default. (RR #26)
@@ -8,6 +8,8 @@ version 2.14.2 (??/??/????):
 	* Fix a regression from 2.14.0 where extra whitespace would be displayed
 	  when pasting <p> elements from HTML. (RR #504) (PIDGIN-17437)
 	* Require Python 3 for generating the D-Bus bindings. (RR #550)
+	* Fix an issue where pasting <hr>'s and other HTML elements would
+	  eventually lead to a crash. (RR #514) (PIDGIN-17446)
 
 version 2.14.1 (11/06/2020):
 	* Fixed issues with Windows installer that always thought Pidgin was
