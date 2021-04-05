@@ -1,5 +1,8 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
+version 2.14.3 (??/??/????):
+	* Nothing yet, be the first!
+
 version 2.14.2 (04/01/2021):
 	* Fix a build issue when compiling with gstreamer but without voice and
 	  video. (RR #25)
