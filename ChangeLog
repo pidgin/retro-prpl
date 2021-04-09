@@ -1,7 +1,18 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
-version 2.14.3 (??/??/????):
-	* Nothing yet, be the first!
+version 2.14.3 (04/08/2021):
+	libpurple:
+	* Removed the AIM protocol plugin. AIM has been shut down since December
+	  15th of 2017. We left it around because of a third party server, but our
+	  plugin no longer works with it. (RR #598) (Gary Kramlich)
+
+	Windows:
+	* Standardize on wprintf in pidgin/win32/winpidgin.c (RR #593) (Gary
+	  Kramlich)
+	* Use the inetc nsis plugin that supports https (RR #593, #594)
+	  (PIDGIN-17511) (Gary Kramlich)
+	* If building under msys2 copy libgcc_s_dw2-1.dll and libwinpthread to the
+	  install directory. (RR #593) (PIDGIN-17511) (Gary Kramlich)
 
 version 2.14.2 (04/01/2021):
 	* Fix a build issue when compiling with gstreamer but without voice and
