@@ -1,7 +1,17 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
 version 2.14.4 (??/??/????):
-	* Nothing yet, be the first!
+	libpurple:
+	* Removed a dangling reference to oscar that was causing the unit tests
+	  to fail. (RR #605) (Gary Kramlich)
+	* Update purple-remote and purple-url-handler to have a Python 3 shebang.
+	  (RR #609) (Richard Laager)
+
+	Pidgin:
+	* Install our AppData file into the $prefix/share/metainfo. (RR 607)
+	  (Lars Wendler)
+	* Re-enable the Gevolution plugin and set the evolution-data-server
+	  requirement to >= 3.6. (RR #610) (Ed Catmur, Lars Wendler)
 
 version 2.14.3 (04/08/2021):
 	libpurple:
