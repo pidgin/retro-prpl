@@ -1,6 +1,10 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
-version 2.14.4 (??/??/????):
+version 2.14.4 (04/29/2021):
+	General:
+	* Use LT_LIB_M to find the math library.  This should simplify things for
+	  various distros including the BSD's. (RR #608) (and, Justin Lechner)
+
 	libpurple:
 	* Removed a dangling reference to oscar that was causing the unit tests
 	  to fail. (RR #605) (Gary Kramlich)
@@ -13,13 +17,21 @@ version 2.14.4 (??/??/????):
 	* Re-enable the Gevolution plugin and set the evolution-data-server
 	  requirement to >= 3.6. (RR #610) (Ed Catmur, Lars Wendler)
 
+	Windows-Specific Changes:
+	* Output pkg-config files so that our Windows builds can be seen by meson.
+	  Grim owes a blog post on how this works. (RR #615) (Gary Kramlich)
+	* Update the debug symbols download in the installer to the inetc plugin.
+	  (RR #627) (Gary Kramlich)
+	* Make sure the uninstaller removes all files that we install. (RR #612)
+	  (Gary Kramlich)
+
 version 2.14.3 (04/08/2021):
 	libpurple:
 	* Removed the AIM protocol plugin. AIM has been shut down since December
 	  15th of 2017. We left it around because of a third party server, but our
 	  plugin no longer works with it. (RR #598) (Gary Kramlich)
 
-	Windows:
+	Windows-Specific Changes:
 	* Standardize on wprintf in pidgin/win32/winpidgin.c (RR #593) (Gary
 	  Kramlich)
 	* Use the inetc nsis plugin that supports https (RR #593, #594)
