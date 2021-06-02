@@ -1729,12 +1729,13 @@ static void ggp_login_to(PurpleAccount *account, uint32_t server)
 	glp->server_addr = server;
 
 	info->session = gg_login(glp);
+	g_free(glp);
+
 	purple_connection_update_progress(gc, _("Connecting"), 0, 2);
 	if (info->session == NULL) {
 		purple_connection_error_reason (gc,
 			PURPLE_CONNECTION_ERROR_NETWORK_ERROR,
 			_("Connection failed"));
-		g_free(glp);
 		return;
 	}
 	gc->inpa = purple_input_add(info->session->fd,
@@ -1922,7 +1923,8 @@ static int ggp_send_im(PurpleConnection *gc, const char *who, const char *msg,
 
 		/* Add text after the images */
 		if(last && *last) {
-			pos = pos + g_utf8_strlen(last, -1);
+			/* this is currently not used, but might be useful later? */
+			/* pos = pos + g_utf8_strlen(last, -1); */
 			g_string_append(string_buffer, last);
 		}
 
