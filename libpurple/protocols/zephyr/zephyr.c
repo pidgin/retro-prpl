@@ -739,8 +739,8 @@ static gboolean pending_zloc(zephyr_account *zephyr, const char *who)
 	for (curr = zephyr->pending_zloc_names; curr != NULL; curr = curr->next) {
 		char* normalized_who = local_zephyr_normalize(zephyr,who);
 		if (!g_ascii_strcasecmp(normalized_who, (char *)curr->data)) {
-			g_free((char *)curr->data);
-			zephyr->pending_zloc_names = g_list_remove(zephyr->pending_zloc_names, curr->data);
+			g_free(curr->data);
+			zephyr->pending_zloc_names = g_list_delete_link(zephyr->pending_zloc_names, curr);
 			return TRUE;
 		}
 	}
@@ -1214,12 +1214,11 @@ static gint check_notify_tzc(gpointer data)
 			else if (!g_ascii_strncasecmp(spewtype,"error",5)) {
 				/* XXX handle */
 			}
-		} else {
 		}
-	} else {
 	}
 
 	free_parse_tree(newparsetree);
+	g_free(newparsetree);
 	return TRUE;
 }
 
@@ -1439,8 +1438,6 @@ static void process_zsubs(zephyr_account *zephyr)
 					char *tmp = g_strdup_printf("%s", zephyr->username);
 					char *atptr;
 
-					z_class = triple[0];
-					z_instance = triple[1];
 					if (triple[2] == NULL) {
 						recip = g_malloc0(1);
 					} else if (!g_ascii_strcasecmp(triple[2], "%me%")) {
@@ -2799,13 +2796,10 @@ static void zephyr_action_get_subs_from_server(PurplePluginAction *action)
 {
 	PurpleConnection *gc = (PurpleConnection *) action->context;
 	zephyr_account *zephyr = gc->proto_data;
-	gchar *title;
 	int retval, nsubs, one,i;
 	ZSubscription_t subs;
 	if (use_zeph02(zephyr)) {
 		GString* subout = g_string_new("Subscription list<br>");
-
-		title = g_strdup_printf("Server subscriptions for %s", zephyr->username);
 
 		if (zephyr->port == 0) {
 			purple_debug_error("zephyr", "error while retrieving port\n");
@@ -2820,14 +2814,21 @@ static void zephyr_action_get_subs_from_server(PurplePluginAction *action)
 			one = 1;
 			if ((retval = ZGetSubscriptions(&subs,&one)) != ZERR_NONE) {
 				/* XXX better error handling */
-				purple_debug_error("zephyr", "error while retrieving individual subscription\n");
-				return;
+				break;
 			}
 			g_string_append_printf(subout, "Class %s Instance %s Recipient %s<br>",
 					       subs.zsub_class, subs.zsub_classinst,
 					       subs.zsub_recipient);
 		}
-		purple_notify_formatted(gc, title, title, NULL,  subout->str, NULL, NULL);
+
+		if (retval == ZERR_NONE) {
+			gchar *title = g_strdup_printf("Server subscriptions for %s", zephyr->username);
+			purple_notify_formatted(gc, title, title, NULL, subout->str, NULL, NULL);
+			g_free(title);
+		} else {
+			/* XXX better error handling */
+			purple_debug_error("zephyr", "error while retrieving individual subscription\n");
+		}
 	} else {
 		/* XXX fix */
 		purple_notify_error(gc,"","tzc doesn't support this action",NULL);
