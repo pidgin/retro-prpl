@@ -927,15 +927,11 @@ nm_process_event(NMUser * user, int type)
 	} else if (rc == NM_OK && (cb = nm_user_get_event_callback(user))) {
 
 		cb(user, event);
-
-		if (event)
-			nm_release_event(event);
-	} else {
-		if (event)
-			nm_release_event(event);
 	}
 
 	/* Cleanup */
+	if (event)
+		nm_release_event(event);
 	if (source)
 		g_free(source);
 

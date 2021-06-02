@@ -339,9 +339,6 @@ _value_to_string(NMField * field)
 			value = g_strdup(NM_FIELD_FALSE);
 		}
 	} else {
-		/* assume it is a number */
-		value = g_new0(char, 20);
-
 		switch (field->type) {
 		case NMFIELD_TYPE_BYTE:
 		case NMFIELD_TYPE_WORD:

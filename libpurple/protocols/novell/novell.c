@@ -3306,6 +3306,8 @@ novell_set_permit_deny(PurpleConnection *gc)
 							rc = nm_send_create_privacy_item(user, dn, TRUE,
 															 _create_privacy_item_deny_resp_cb,
 															 g_strdup(dn));
+							if (_check_for_disconnect(user, rc))
+								return;
 						}
 					} else {
 						purple_privacy_permit_remove(gc->account, (char *)node->data, TRUE);
@@ -3349,6 +3351,8 @@ novell_set_permit_deny(PurpleConnection *gc)
 							rc = nm_send_create_privacy_item(user, dn, FALSE,
 															 _create_privacy_item_deny_resp_cb,
 															 g_strdup(name));
+							if (_check_for_disconnect(user, rc))
+								return;
 						}
 					} else {
 						purple_privacy_deny_remove(gc->account, (char *)node->data, TRUE);
