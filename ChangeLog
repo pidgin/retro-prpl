@@ -1,7 +1,22 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
-version 2.14.5 (??/??/????):
-	* Nothing yet, be the first!
+version 2.14.5 (06/03/2021):
+	General:
+	* Updated our bundled certificates to the latest version from Mozilla.
+	  (RR #722) (PIDGIN-17535) (Gary Kramlich)
+	* Made the project scan-build clean. (RR #692-705, #707-714, #716-#719)
+	  (Gary Kramlich)
+	* Fixed some of Gary's scan-build fixes that were a bit verbose. (RR #715)
+	  (Elliott Sales de Andrade)
+	* Disabled UPnP and NAT-PMP by default for new user. (RR #706) (Gary
+	  Kramlich)
+
+	IRC:
+	* Changed the default server to irc.libera.chat. (RR #675) (Gary Kramlich)
+
+	Windows Specific Changes:
+	* Fixed the installer not running when Mandatory ASLR was turned on.
+	  (RR #721) (PIDGIN-17524) (Gary Kramlich)
 
 version 2.14.4 (04/29/2021):
 	General:
