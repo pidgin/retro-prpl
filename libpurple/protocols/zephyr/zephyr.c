@@ -2192,7 +2192,7 @@ static int zephyr_send_message(zephyr_account *zephyr,char* zclass, char* instan
 		notice.z_message = buf;
 		notice.z_opcode = g_strdup(opcode);
 		purple_debug_info("zephyr","About to send notice\n");
-		if (! ZSendNotice(&notice, ZAUTH) == ZERR_NONE) {
+		if (ZSendNotice(&notice, ZAUTH) != ZERR_NONE) {
 			/* XXX handle errors here */
 			g_free(buf);
 			g_free(html_buf2);
