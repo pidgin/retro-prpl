@@ -166,8 +166,8 @@ typedef union
 	struct sockaddr_storage storage;
 } common_sockaddr_t;
 
-#define PURPLE_WEBSITE "http://pidgin.im/"
-#define PURPLE_DEVEL_WEBSITE "http://developer.pidgin.im/"
+#define PURPLE_WEBSITE "https://pidgin.im/"
+#define PURPLE_DEVEL_WEBSITE "https://pidgin.im/development/"
 
 
 /* INTERNAL FUNCTIONS */
