@@ -14,6 +14,10 @@ version 2.14.6 (??/??/????):
 	* Replace newlines in topics with spaces. (PIDGIN-16704) (RR 730) (Gary
 	  Kramlich)
 
+	libpurple:
+	* added support for the no_proxy environment variable. (PIDGIN-17518)
+	  (RR #667) (Alynx Zhou and Gary Kramlich)
+
 	XMPP:
 	* Enable session management after binding a resource. (PIDGIN-17520) (RR
 	  759) (defanor)
