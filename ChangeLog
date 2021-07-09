@@ -15,8 +15,10 @@ version 2.14.6 (??/??/????):
 	  Kramlich)
 
 	libpurple:
-	* added support for the no_proxy environment variable. (PIDGIN-17518)
+	* Added support for the no_proxy environment variable. (PIDGIN-17518)
 	  (RR #667) (Alynx Zhou and Gary Kramlich)
+	* Added infrastructure for fuzzing as well as some initial fuzzers.
+	  (RR #760) (Jordy Zomer)
 
 	XMPP:
 	* Enable session management after binding a resource. (PIDGIN-17520) (RR
