@@ -1,6 +1,6 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
-version 2.14.6 (??/??/????):
+version 2.14.6 (07/08/2021):
 	General:
 	* Update references to point to our current websites. (RR 766) (Gary
 	  Kramlich)
@@ -19,6 +19,8 @@ version 2.14.6 (??/??/????):
 	  (RR #667) (Alynx Zhou and Gary Kramlich)
 	* Added infrastructure for fuzzing as well as some initial fuzzers.
 	  (RR #760) (Jordy Zomer)
+	* Fix an out of bounds write in purple_markup_linkify. (RR 781) (Thomas
+	  Roth, Dominik Maier, and Fabian Freyer)
 
 	XMPP:
 	* Enable session management after binding a resource. (PIDGIN-17520) (RR
