@@ -1,5 +1,23 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
+version 2.14.7 (09/16/2021):
+	libpurple:
+	* Fix leak in purple_markup_find_tag on error. (OSS-FUZZ 35816) (RR 924)
+	  (Elliott Sales de Andrade)
+	* Fix an issue where the XMPP utility tests would fail if libidn was
+	  disabled. (RR 922) (Gary Kramlich)
+	* Fix an assert in purple_markup_html_to_xhtml (OSS-FUZZ 35029) (RR 921)
+	  (Elliott Sales de Andrade)
+	* Fix building on Haiku (RR 916) (Haiku Ports Team)
+	* Correctly free parse tags at end of purple_html_to_xhtml (OSS-FUZZ 34996)
+	  (RR 913) (Elliott Sales de Andrade)
+	* Fix leak that may occur when xmlnode_from_str fails (OSS-FUZZ 34988)
+	  (RR 911) (Elliott Sales de Andrade)
+	* Cleanup, standardize and create starting corpora for all of the fuzzers.
+	  (RR 920) (Gary Kramlich)
+	* Port purple_str_to_time to use a regular expression and add additional
+	  unit tests for it. (RR 923) (Gary Kramlich)
+
 version 2.14.6 (07/08/2021):
 	General:
 	* Update references to point to our current websites. (RR 766) (Gary
