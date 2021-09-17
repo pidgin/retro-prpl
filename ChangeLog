@@ -1,5 +1,9 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
+version 2.14.8 (??/??/????):
+	General:
+	* Nothing yet, be the first!
+
 version 2.14.7 (09/16/2021):
 	libpurple:
 	* Fix leak in purple_markup_find_tag on error. (OSS-FUZZ 35816) (RR 924)
