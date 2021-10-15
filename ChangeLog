@@ -1,5 +1,9 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
+version 2.14.9 (??/??/????):
+	General:
+	* Nothing yet, be the first!
+
 version 2.14.8 (10/14/2021):
 	libpurple:
 	* Fix a regression in purple_str_to_time. (PIDGIN-17552) (RR 931) (Gary
