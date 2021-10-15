@@ -1,8 +1,17 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
-version 2.14.8 (??/??/????):
-	General:
-	* Nothing yet, be the first!
+version 2.14.8 (10/14/2021):
+	libpurple:
+	* Fix a regression in purple_str_to_time. (PIDGIN-17552) (RR 931) (Gary
+	  Kramlich)
+
+	XMPP:
+	* Fix a double free in jabber/message.c. (PIDGIN-17547) (RR 932) (Gary
+	  Kramlich, pv32768)
+
+	Pidgin:
+	* Fix the link to the support mailing list archive in the About Dialog.
+	  (RR 929) (Gary Kramlich)
 
 version 2.14.7 (09/16/2021):
 	libpurple:
