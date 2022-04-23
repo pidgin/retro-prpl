@@ -2,7 +2,33 @@ Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
 version 2.14.9 (??/??/????):
 	General:
-	* Nothing yet, be the first!
+	* Fix a GLib CRITICAL message with typing time outs. (RR 1123) (Mohammed
+	  Sadiq)
+	* Fix an issue where the unit tests for purple_str_to_time would fail.
+	  (GENTOO-819774) (RR 1238) (Gary Kramlich)
+	* Fix a memory leak in pidgin_conversations_set_tab_colors. (RR 1244)
+	  (ivanhoe)
+	* Fix a typo in the German translations. (PIDGIN-17575) (RR 1242) (ivanhoe)
+	* Fix the download of dictionaries in the Windows installer. (PIDGIN-14618,
+	  PIDGIN-15648, PIDGIN-15540, PIDGIN-14612, PIDGIN-14893) (RR 1303) (Gary
+	  Kramlich)
+	* Fix an issue with the CSeq numbers in SIMPLE. (PIDGIN-9675) (RR 1379)
+	  (dohmniq)
+	* Fix IRC file transfers on Windows. (PIDGIN-17175) (RR 1382) (Belgin
+	  Știrbu)
+	* Add transient-buddy back which is used to show some context menus and
+	  other things. (PIDGIN-17523) (RR 1381) (Belgin Știrbu)
+	* Fixed the majority of the infinite resizing issues in the input box.
+	  (PIDGIN-16753, PIDGIN-16999, PIDGIN-17287, PIDGIN-17413, PIDGIN-17430,
+	  PIDGIN-17568, PIDGIN-17602) (RR 1342) (Belgin Știrbu)
+	* Fix file transfers failing at 99% on IRC. (PIDGIN-15893) (RR 1385) (Belgin
+	  Știrbu)
+	* Fix XMPP attention messages being sent to incorrect JIDs. (PIDGIN-14714)
+	  (RR 1387) (itsnotabigtruck, Belgin Știrbu)
+	* Default realname and ident name in IRC to the username (nickname) of the
+	  account. (PIDGIN-17610) (RR 1386) (Belgin Știrbu)
+	* Add an advanced account option to IRC accounts for explicitly setting the
+	  SASL login name. (PIDGIN-15451) (RR 1388) (Belgin Știrbu)
 
 version 2.14.8 (10/14/2021):
 	libpurple:
