@@ -1,5 +1,8 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
+version 2.14.10 (??/??/????):
+	* Nothing yet! Be the first!!
+
 version 2.14.9 (04/28/2022):
 	Security:
 	* Remove _xmppconnect support. (RR 1357) (CVE-2022-26491) (Gary Kramlich)
