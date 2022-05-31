@@ -1,7 +1,31 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
 version 2.14.10 (??/??/????):
-	* Nothing yet! Be the first!!
+	General:
+	* Audit and correct the COPYRIGHT file. (RR 1425) (Richard Laager)
+	* Fix a spelling error in a debug message for proxies. (RR 1426) (Richard
+	  Laager)
+	* Install some emojis already in the theme but not being installed.
+	  (RR 1428) (Richard Laager)
+	* Drop the QQ smileys as we don't ship QQ anymore. (PIDGIN-14385) (RR 1429)
+	  (Richard Laager)
+	* Modernize the desktop file. (RR 1433) (Richard Laager)
+	* Modernize the appdata file. (RR 1431) (Richard Laager)
+	* Make privacy settings persist. (PIDGIN-17137) (RR 1463) (Belgin Știrbu)
+
+	IRC:
+	* Fix a crash if the server sends a short form JOIN message. (PIDGIN-17375)
+	  (RR 1484) (Belgin Știrbu)
+
+	XMPP:
+	* Fix a regression from 2.14.9 where XMPP accounts state would get lost
+	  after failing to connect. (PIDGIN-17621) (RR 1455) (Belgin Știrbu)
+	* Fix a crash when requesting your own info in an XMPP conference. (RR 1465)
+	  (Belgin Știrbu)
+	* Fix hang when completing a file transfer over XMPP. (RR 1466) (Belgin
+	  Știrbu)
+	* Fix updating custom smileys. (PIDGIN-17153) (RR 1477) (Belgin Știrbu)
+	* Fix unblocking users. (PIDGIN-16414) (RR 1479) (Belgin Știrbu)
 
 version 2.14.9 (04/28/2022):
 	Security:
