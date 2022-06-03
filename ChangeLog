@@ -1,6 +1,6 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
-version 2.14.10 (??/??/????):
+version 2.14.10 (06/02/2022):
 	General:
 	* Audit and correct the COPYRIGHT file. (RR 1425) (Richard Laager)
 	* Fix a spelling error in a debug message for proxies. (RR 1426) (Richard
@@ -12,6 +12,9 @@ version 2.14.10 (??/??/????):
 	* Modernize the desktop file. (RR 1433) (Richard Laager)
 	* Modernize the appdata file. (RR 1431) (Richard Laager)
 	* Make privacy settings persist. (PIDGIN-17137) (RR 1463) (Belgin Știrbu)
+
+	Pidgin:
+	* Fix a use after free that was introduced in 2.14.9. (RR 1488) (ivanhoe)
 
 	IRC:
 	* Fix a crash if the server sends a short form JOIN message. (PIDGIN-17375)
@@ -26,6 +29,8 @@ version 2.14.10 (??/??/????):
 	  Știrbu)
 	* Fix updating custom smileys. (PIDGIN-17153) (RR 1477) (Belgin Știrbu)
 	* Fix unblocking users. (PIDGIN-16414) (RR 1479) (Belgin Știrbu)
+	* Fix a crash when cancelling a file transfer. (PIDGIN-17189) (RR 1485)
+	  (Belgin Știrbu)
 
 version 2.14.9 (04/28/2022):
 	Security:
