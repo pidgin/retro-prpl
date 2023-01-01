@@ -1,7 +1,15 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
-version 2.14.11 (??/??/????):
-	* Nothing yet, be the first!
+version 2.14.11 (12/31/2022):
+	* Add Markus "ivanhoe" Fischer to the Crazy Patch Writers! Congrats Markus!
+	  (RR 1952) (Gary Kramlich)
+	* Fix a crash when closing a group chat with spellchk plugin enabled. (RR
+	  1951) (Markus Fischer)
+	* Fix network interface detection on Windows to fix broken file transfers.
+	  (PIDGIN-17123, PIDGIN-17293, PIDGIN-17516, PIDGIN-17704) (RR 2018) (Gary
+	  Kramlich)
+	* Update the about box to point people to Discourse instead of the mailing
+	  lists. (RR 2154) (Gary Kramlich)
 
 version 2.14.10 (06/02/2022):
 	General:
