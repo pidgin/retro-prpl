@@ -1,7 +1,19 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
 version 2.14.13 (??/??/????):
-	* Nothing yet, be the first!!
+	* Fix compile warning (Wcast-function-type). (RR 2225) (Markus Fischer)
+	* Fix memory leak originating in purple_prefs_connect_callback. (RR 2226)
+	  (Markus Fisher)
+	* Don't use the Real name as a candidate for the SASL username in IRC.
+	  (RR 2535) (Gary Kramlich)
+	* Don't link with libgadu unnecessarily. (RR 2684) (Elliott Sales de
+	  Andrade)
+	* Make collapsed groups searchable in the buddy list. (PIDGIN-7877)
+	  (RR 1494) (Belgin Știrbu)
+	* Fix incompatible type conversion errors. (PIDGIN-17850) (RR 2944)
+	  (Jaroslav Škarvada, Elliott Sales de Andrade)
+	* Stop removing -Wall from CFLAGS. (PIDGIN-16593) (RR 2946) (Elliott Sales
+	  de Andrade)
 
 version 2.14.12 (12/31/2022):
 	* Remove a string from the Romanian translation that's breaks the creation
