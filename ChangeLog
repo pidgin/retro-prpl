@@ -14,6 +14,9 @@ version 2.14.13 (02/23/2024):
 	  (Jaroslav Škarvada, Elliott Sales de Andrade)
 	* Stop removing -Wall from CFLAGS. (PIDGIN-16593) (RR 2946) (Elliott Sales
 	  de Andrade)
+	* Updated the spell checking dictionaries on Windows. (Gary Kramlich)
+	* Resolved the crash on exit under Windows by reverting to the old
+	  toolchain. (PIDGIN-17710) (Gary Kramlich)
 
 version 2.14.12 (12/31/2022):
 	* Remove a string from the Romanian translation that's breaks the creation
