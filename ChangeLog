@@ -1,5 +1,8 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
+version 2.14.14 (??/??/????):
+	* Nothing yet, be the first!
+
 version 2.14.13 (02/23/2024):
 	* Fix compile warning (Wcast-function-type). (RR 2225) (Markus Fischer)
 	* Fix memory leak originating in purple_prefs_connect_callback. (RR 2226)
