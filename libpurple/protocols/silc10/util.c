@@ -534,12 +534,11 @@ silcpurple_parse_attrs(SilcDList attrs, char **moodstr, char **statusstr,
 		if (mood & SILC_ATTRIBUTE_MOOD_ANXIOUS)
 			g_string_append_printf(s, "[%s] ", _("Anxious"));
 	}
-	if (strlen(s->str)) {
-		*moodstr = s->str;
-		g_string_free(s, FALSE);
-		g_strchomp(*moodstr);
-	} else
+	if (s->len != 0) {
+		*moodstr = g_strchomp(g_string_free(s, FALSE));
+	} else {
 		g_string_free(s, TRUE);
+	}
 
 	attr = silcpurple_get_attr(attrs, SILC_ATTRIBUTE_STATUS_FREETEXT);
 	memset(tmp, 0, sizeof(tmp));
@@ -564,12 +563,11 @@ silcpurple_parse_attrs(SilcDList attrs, char **moodstr, char **statusstr,
 		if (contact & SILC_ATTRIBUTE_CONTACT_VIDEO)
 			g_string_append_printf(s, "[%s] ", _("Video Conferencing"));
 	}
-	if (strlen(s->str)) {
-		*contactstr = s->str;
-		g_string_free(s, FALSE);
-		g_strchomp(*contactstr);
-	} else
+	if (s->len != 0) {
+		*contactstr = g_strchomp(g_string_free(s, FALSE));
+	} else {
 		g_string_free(s, TRUE);
+	}
 
 	attr = silcpurple_get_attr(attrs, SILC_ATTRIBUTE_PREFERRED_LANGUAGE);
 	memset(tmp, 0, sizeof(tmp));
@@ -594,11 +592,11 @@ silcpurple_parse_attrs(SilcDList attrs, char **moodstr, char **statusstr,
 				device.model ? device.model : "",
 				device.language ? device.language : "");
 	}
-	if (strlen(s->str)) {
-		*devicestr = s->str;
-		g_string_free(s, FALSE);
-	} else
+	if (s->len != 0) {
+		*devicestr = g_string_free(s, FALSE);
+	} else {
 		g_string_free(s, TRUE);
+	}
 
 	attr = silcpurple_get_attr(attrs, SILC_ATTRIBUTE_TIMEZONE);
 	memset(tmp, 0, sizeof(tmp));

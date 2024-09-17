@@ -1146,8 +1146,7 @@ static void ggp_recv_message_handler(PurpleConnection *gc, const struct gg_event
 			}
 		}
 
-		msg = message->str;
-		g_string_free(message, FALSE);
+		msg = g_string_free(message, FALSE);
 
 		if (got_image) {
 			info->pending_richtext_messages = g_list_append(info->pending_richtext_messages, msg);

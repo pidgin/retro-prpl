@@ -3932,10 +3932,7 @@ static char *im_mime_convert(PurpleConnection *gc,
 
   str = g_string_new(NULL);
   purple_mime_document_write(doc, str);
-  tmp = str->str;
-  g_string_free(str, FALSE);
-
-  return tmp;
+  return g_string_free(str, FALSE);
 }
 
 

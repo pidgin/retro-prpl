@@ -600,8 +600,7 @@ static char *html_to_zephyr(const char *message)
 			g_string_append_c(frames->text, *message++);
 		}
 	}
-	ret = frames->text->str;
-	g_string_free(frames->text, FALSE);
+	ret = g_string_free(frames->text, FALSE);
 	g_free(frames);
 	purple_debug_info("zephyr","zephyr outputted  %s\n",ret);
 	return ret;
@@ -726,8 +725,7 @@ static char *zephyr_to_html(const char *message)
 		frames = frames->enclosing;
 		g_free(curr);
 	}
-	ret = frames->text->str;
-	g_string_free(frames->text, FALSE);
+	ret = g_string_free(frames->text, FALSE);
 	g_free(frames);
 	return ret;
 }
