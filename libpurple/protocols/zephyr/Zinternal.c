@@ -71,9 +71,8 @@ static int find_or_insert_uid __P((ZUnique_Id_t *uid, ZNotice_Kind_t kind));
  * order, so we can usually search for a uid or insert it into the buffer
  * by looking back just a few entries from the end.  Since this code is
  * only executed by the client, the implementation isn't microoptimized. */
-static int find_or_insert_uid(uid, kind)
-    ZUnique_Id_t *uid;
-    ZNotice_Kind_t kind;
+static int
+find_or_insert_uid(ZUnique_Id_t *uid, ZNotice_Kind_t kind)
 {
     static struct _filter {
 	ZUnique_Id_t	uid;
@@ -172,7 +171,8 @@ Code_t Z_WaitForComplete(void)
 
 /* Read any available packets and enqueue them */
 
-Code_t Z_ReadEnqueue()
+Code_t
+Z_ReadEnqueue(void)
 {
     Code_t retval;
 
@@ -222,7 +222,8 @@ static struct _Z_InputQ *Z_SearchQueue(ZUnique_Id_t *uid, ZNotice_Kind_t kind)
  * returns.
  */
 
-Code_t Z_ReadWait()
+Code_t
+Z_ReadWait(void)
 {
     register struct _Z_InputQ *qptr;
     ZNotice_t notice;
@@ -470,10 +471,8 @@ Code_t Z_ReadWait()
 
 /* Fragment management routines - compliments, more or less, of RFC815 */
 
-Code_t Z_AddNoticeToEntry(qptr, notice, part)
-    struct _Z_InputQ *qptr;
-    ZNotice_t *notice;
-    int part;
+Code_t
+Z_AddNoticeToEntry(struct _Z_InputQ *qptr, ZNotice_t *notice, int part)
 {
     int last, oldfirst, oldlast;
     struct _Z_Hole *hole, *lasthole;
@@ -587,12 +586,9 @@ Code_t Z_AddNoticeToEntry(qptr, notice, part)
     return (ZERR_NONE);
 }
 
-Code_t Z_FormatHeader(notice, buffer, buffer_len, len, cert_routine)
-    ZNotice_t *notice;
-    char *buffer;
-    int buffer_len;
-    int *len;
-    Z_AuthProc cert_routine;
+Code_t
+Z_FormatHeader(ZNotice_t *notice, char *buffer, int buffer_len, int *len,
+               Z_AuthProc cert_routine)
 {
     Code_t retval;
     static char version[BUFSIZ]; /* default init should be all \0 */
@@ -632,12 +628,9 @@ Code_t Z_FormatHeader(notice, buffer, buffer_len, len, cert_routine)
     return Z_FormatAuthHeader(notice, buffer, buffer_len, len, cert_routine);
 }
 
-Code_t Z_FormatAuthHeader(notice, buffer, buffer_len, len, cert_routine)
-    ZNotice_t *notice;
-    char *buffer;
-    int buffer_len;
-    int *len;
-    Z_AuthProc cert_routine;
+Code_t
+Z_FormatAuthHeader(ZNotice_t *notice, char *buffer, int buffer_len, int *len,
+                   Z_AuthProc cert_routine)
 {
     if (!cert_routine) {
 	notice->z_auth = 0;
@@ -651,12 +644,9 @@ Code_t Z_FormatAuthHeader(notice, buffer, buffer_len, len, cert_routine)
     return ((*cert_routine)(notice, buffer, buffer_len, len));
 }
 
-Code_t Z_FormatRawHeader(notice, buffer, buffer_len, len, cstart, cend)
-    ZNotice_t *notice;
-    char *buffer;
-    gsize buffer_len;
-    int *len;
-    char **cstart, **cend;
+Code_t
+Z_FormatRawHeader(ZNotice_t *notice, char *buffer, gsize buffer_len, int *len,
+                  char **cstart, char **cend)
 {
     char newrecip[BUFSIZ];
     char *ptr, *end;
@@ -781,7 +771,8 @@ Z_AddField(char **ptr, const char *field, char *end)
     return 0;
 }
 
-struct _Z_InputQ *Z_GetFirstComplete()
+struct _Z_InputQ *
+Z_GetFirstComplete(void)
 {
     struct _Z_InputQ *qptr;
 
@@ -796,8 +787,8 @@ struct _Z_InputQ *Z_GetFirstComplete()
     return ((struct _Z_InputQ *)0);
 }
 
-struct _Z_InputQ *Z_GetNextComplete(qptr)
-    struct _Z_InputQ *qptr;
+struct _Z_InputQ *
+Z_GetNextComplete(struct _Z_InputQ *qptr)
 {
     qptr = qptr->next;
     while (qptr) {
@@ -809,8 +800,8 @@ struct _Z_InputQ *Z_GetNextComplete(qptr)
     return ((struct _Z_InputQ *)0);
 }
 
-void Z_RemQueue(qptr)
-    struct _Z_InputQ *qptr;
+void
+Z_RemQueue(struct _Z_InputQ *qptr)
 {
     struct _Z_Hole *hole, *nexthole;
 
@@ -858,11 +849,9 @@ void Z_RemQueue(qptr)
     return;
 }
 
-Code_t Z_SendFragmentedNotice(notice, len, cert_func, send_func)
-    ZNotice_t *notice;
-    int len;
-    Z_AuthProc cert_func;
-    Z_SendProc send_func;
+Code_t
+Z_SendFragmentedNotice(ZNotice_t *notice, int len, Z_AuthProc cert_func,
+                       Z_SendProc send_func)
 {
     ZNotice_t partnotice;
     ZPacket_t buffer;
@@ -914,11 +903,8 @@ Code_t Z_SendFragmentedNotice(notice, len, cert_func, send_func)
 }
 
 /*ARGSUSED*/
-Code_t Z_XmitFragment(notice, buf, len, wait)
-ZNotice_t *notice;
-char *buf;
-int len;
-int wait;
+Code_t
+Z_XmitFragment(ZNotice_t *notice, char *buf, int len, int wait)
 {
 	return(ZSendPacket(buf, len, wait));
 }
@@ -958,10 +944,8 @@ void Z_debug (va_alist) va_dcl
 }
 #endif
 
-void Z_debug_stderr (format, args, closure)
-     const char *format;
-     va_list args;
-     void *closure;
+void
+Z_debug_stderr(const char *format, va_list args, void *closure)
 {
 #ifdef HAVE_VPRINTF
     vfprintf (stderr, format, args);
@@ -972,21 +956,36 @@ void Z_debug_stderr (format, args, closure)
 }
 
 #undef ZGetFD
-int ZGetFD () { return __Zephyr_fd; }
+int
+ZGetFD(void)
+{
+	return __Zephyr_fd;
+}
 
 #undef ZQLength
-int ZQLength () { return __Q_CompleteLength; }
+int
+ZQLength(void)
+{
+	return __Q_CompleteLength;
+}
 
 #undef ZGetDestAddr
-struct sockaddr_in ZGetDestAddr () { return __HM_addr; }
+struct sockaddr_in
+ZGetDestAddr(void)
+{
+	return __HM_addr;
+}
 
 #undef ZGetRealm
-Zconst char * ZGetRealm () { return __Zephyr_realm; }
+Zconst char *
+ZGetRealm(void)
+{
+	return __Zephyr_realm;
+}
 
 #undef ZSetDebug
-void ZSetDebug(proc, arg)
-    void (*proc) __P((const char *, va_list, void *));
-    char *arg;
+void
+ZSetDebug(void (*proc) __P((const char *, va_list, void *)), char *arg)
 {
     __Z_debug_print = proc;
     __Z_debug_print_closure = arg;

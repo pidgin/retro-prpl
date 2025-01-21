@@ -10,8 +10,8 @@
 
 #include "internal.h"
 
-Code_t ZSetServerState(state)
-	int	state;
+Code_t
+ZSetServerState(int state)
 {
 	__Zephyr_server = state;
 

@@ -19,20 +19,22 @@
 #include <stdlib.h>
 #include <errno.h>
 
-Code_t ZSetLocation(exposure)
-    char *exposure;
+Code_t
+ZSetLocation(char *exposure)
 {
     return (Z_SendLocation(LOGIN_CLASS, exposure, ZAUTH,
 			   "$sender logged in to $1 on $3 at $2"));
 }
 
-Code_t ZUnsetLocation()
+Code_t
+ZUnsetLocation(void)
 {
     return (Z_SendLocation(LOGIN_CLASS, LOGIN_USER_LOGOUT, ZNOAUTH,
 			   "$sender logged out of $1 on $3 at $2"));
 }
 
-Code_t ZFlushMyLocations()
+Code_t
+ZFlushMyLocations(void)
 {
     return (Z_SendLocation(LOGIN_CLASS, LOGIN_USER_FLUSH, ZAUTH, ""));
 }
@@ -41,11 +43,8 @@ static char host[MAXHOSTNAMELEN];
 static char *mytty = NULL;
 static int reenter = 0;
 
-Code_t Z_SendLocation(class, opcode, auth, format)
-    char *class;
-    char *opcode;
-    Z_AuthProc auth;
-    char *format;
+Code_t
+Z_SendLocation(char *class, char *opcode, Z_AuthProc auth, char *format)
 {
     int retval;
     time_t ourtime;

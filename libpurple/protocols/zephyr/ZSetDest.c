@@ -10,8 +10,8 @@
 
 #include "internal.h"
 
-Code_t ZSetDestAddr(addr)
-	struct	sockaddr_in *addr;
+Code_t
+ZSetDestAddr(struct sockaddr_in *addr)
 {
 	__HM_addr = *addr;
 

@@ -10,7 +10,8 @@
 
 #include "internal.h"
 
-int ZGetWGPort()
+int
+ZGetWGPort(void)
 {
     char *envptr, name[128];
     FILE *fp;

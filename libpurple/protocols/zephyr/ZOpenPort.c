@@ -16,8 +16,8 @@
 #include <sys/socket.h>
 #endif
 
-Code_t ZOpenPort(port)
-    unsigned short *port;
+Code_t
+ZOpenPort(unsigned short *port)
 {
     struct sockaddr_in bindin;
     socklen_t len;

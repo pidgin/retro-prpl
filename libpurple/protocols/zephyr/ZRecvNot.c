@@ -10,9 +10,8 @@
 
 #include "internal.h"
 
-Code_t ZReceiveNotice(notice, from)
-    ZNotice_t *notice;
-    struct sockaddr_in *from;
+Code_t
+ZReceiveNotice(ZNotice_t *notice, struct sockaddr_in *from)
 {
     char *buffer;
     struct _Z_InputQ *nextq;

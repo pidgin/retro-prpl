@@ -14,7 +14,8 @@
 #include <pwd.h>
 #endif
 
-char *ZGetSender()
+char *
+ZGetSender(void)
 {
 	struct passwd *pw;
 #ifdef ZEPHYR_USES_KERBEROS

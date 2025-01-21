@@ -11,12 +11,9 @@
 #include "internal.h"
 
 #ifdef ZEPHYR_USES_KERBEROS
-Code_t ZFormatAuthenticNotice(notice, buffer, buffer_len, len, session)
-    ZNotice_t *notice;
-    register char *buffer;
-    register int buffer_len;
-    int *len;
-    C_Block session;
+Code_t
+ZFormatAuthenticNotice(ZNotice_t *notice, register char *buffer,
+                       register int buffer_len, int *len, C_Block session)
 {
     ZNotice_t newnotice;
     char *ptr;

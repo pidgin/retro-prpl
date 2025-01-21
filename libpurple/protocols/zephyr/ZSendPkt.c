@@ -17,10 +17,8 @@
 
 static int wait_for_hmack(ZNotice_t *notice, void *uid);
 
-Code_t ZSendPacket(packet, len, waitforack)
-    char *packet;
-    int len;
-    int waitforack;
+Code_t
+ZSendPacket(char *packet, int len, int waitforack)
 {
     Code_t retval;
     struct sockaddr_in dest;

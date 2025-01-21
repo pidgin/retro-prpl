@@ -10,14 +10,9 @@
 
 #include "internal.h"
 
-Code_t ZFormatNoticeList(notice, list, nitems, buffer, ret_len,
-			 cert_routine)
-    ZNotice_t *notice;
-    register char **list;
-    int nitems;
-    char **buffer;
-    int *ret_len;
-    Z_AuthProc cert_routine;
+Code_t
+ZFormatNoticeList(ZNotice_t *notice, register char **list, int nitems,
+                  char **buffer, int *ret_len, Z_AuthProc cert_routine)
 {
     char header[Z_MAXHEADERLEN];
     register int i;

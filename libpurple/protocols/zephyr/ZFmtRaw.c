@@ -10,10 +10,8 @@
 
 #include "internal.h"
 
-Code_t ZFormatRawNotice(notice, buffer, ret_len)
-    register ZNotice_t *notice;
-    char **buffer;
-    int *ret_len;
+Code_t
+ZFormatRawNotice(register ZNotice_t *notice, char **buffer, int *ret_len)
 {
     char header[Z_MAXHEADERLEN];
     int hdrlen;

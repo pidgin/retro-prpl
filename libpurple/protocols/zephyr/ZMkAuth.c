@@ -33,11 +33,9 @@ Code_t ZResetAuthentication () {
 }
 #endif
 
-Code_t ZMakeAuthentication(notice, buffer, buffer_len, len)
-    register ZNotice_t *notice;
-    char *buffer;
-    int buffer_len;
-    int *len;
+Code_t
+ZMakeAuthentication(register ZNotice_t *notice, char *buffer, int buffer_len,
+                    int *len)
 {
 #ifdef ZEPHYR_USES_KERBEROS
     int result;

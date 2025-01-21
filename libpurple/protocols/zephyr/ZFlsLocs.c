@@ -10,7 +10,8 @@
 
 #include "internal.h"
 
-Code_t ZFlushLocations()
+Code_t
+ZFlushLocations(void)
 {
 	int i;
 

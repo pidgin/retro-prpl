@@ -10,7 +10,8 @@
 
 #include "internal.h"
 
-Code_t ZClosePort()
+Code_t
+ZClosePort(void)
 {
     if (__Zephyr_fd >= 0 && __Zephyr_open)
 	(void) close(__Zephyr_fd);

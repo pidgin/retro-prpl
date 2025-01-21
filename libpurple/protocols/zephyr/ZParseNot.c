@@ -60,10 +60,8 @@ static char *next_field_1 (s) char *s; {
 #define next_field(ptr)	ptr=next_field_1(ptr)
 #endif
 
-Code_t ZParseNotice(buffer, len, notice)
-    char *buffer;
-    int len;
-    ZNotice_t *notice;
+Code_t
+ZParseNotice(char *buffer, int len, ZNotice_t *notice)
 {
     char *ptr, *end;
     unsigned long temp;

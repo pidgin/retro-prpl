@@ -29,7 +29,8 @@
 #define INADDR_NONE 0xffffffff
 #endif
 
-Code_t ZInitialize()
+Code_t
+ZInitialize(void)
 {
     struct servent *hmserv;
     struct hostent *hostent;

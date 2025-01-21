@@ -10,7 +10,8 @@
 
 #include "internal.h"
 
-int ZPending()
+int
+ZPending(void)
 {
 	int retval;
 

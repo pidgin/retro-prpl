@@ -10,10 +10,8 @@
 
 #include "internal.h"
 
-Code_t ZFormatSmallRawNotice(notice, buffer, ret_len)
-    ZNotice_t *notice;
-    ZPacket_t buffer;
-    int *ret_len;
+Code_t
+ZFormatSmallRawNotice(ZNotice_t *notice, ZPacket_t buffer, int *ret_len)
 {
     Code_t retval;
     int hdrlen;

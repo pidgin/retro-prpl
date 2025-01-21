@@ -30,11 +30,9 @@ static int  gettimeofday(struct timeval* tv, struct timezone* tz){
 #include <sys/socket.h>
 #endif
 
-Code_t Z_WaitForNotice (notice, pred, arg, timeout)
-     ZNotice_t *notice;
-     int (*pred) __P((ZNotice_t *, void *));
-     void *arg;
-     int timeout;
+Code_t
+Z_WaitForNotice(ZNotice_t *notice, int (*pred) __P((ZNotice_t *, void *)), void *arg,
+                int timeout)
 {
   Code_t retval;
   struct timeval tv, t0;

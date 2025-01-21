@@ -10,7 +10,8 @@
 
 #include "internal.h"
 
-Code_t ZFlushSubscriptions()
+Code_t
+ZFlushSubscriptions(void)
 {
 	register int i;
 

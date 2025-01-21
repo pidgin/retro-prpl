@@ -10,10 +10,8 @@
 
 #include "internal.h"
 
-Code_t ZLocateUser(user, nlocs, auth)
-    char *user;
-    int *nlocs;
-    Z_AuthProc auth;
+Code_t
+ZLocateUser(char *user, int *nlocs, Z_AuthProc auth)
 {
     Code_t retval;
     ZNotice_t notice;

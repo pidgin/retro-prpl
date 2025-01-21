@@ -10,11 +10,9 @@
 
 #include "internal.h"
 
-Code_t ZIfNotice(notice, from, predicate, args)
-    ZNotice_t *notice;
-    struct sockaddr_in *from;
-    int (*predicate) __P((ZNotice_t *, void *));
-    void *args;
+Code_t
+ZIfNotice(ZNotice_t *notice, struct sockaddr_in *from,
+          int (*predicate) __P((ZNotice_t *, void *)), void *args)
 {
     ZNotice_t tmpnotice;
     Code_t retval;
