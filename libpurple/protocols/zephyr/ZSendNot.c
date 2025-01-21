@@ -18,7 +18,7 @@ ZSendNotice(ZNotice_t *notice, Z_AuthProc cert_routine)
 
 Code_t
 ZSrvSendNotice(ZNotice_t *notice, Z_AuthProc cert_routine,
-               Code_t (*send_routine)())
+               Z_SendProc send_routine)
 {
     Code_t retval;
     ZNotice_t newnotice;
