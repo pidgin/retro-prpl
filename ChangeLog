@@ -1,7 +1,31 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
-version 2.14.14 (??/??/????):
-	* Nothing yet, be the first!
+version 2.14.14 (01/23/2025):
+	* Update the date in COPYRIGHT as it was a few years behind (RR 3007)
+	  (Gary Kramlich)
+	* Add convey plans for Debian Trixie and Fedora 40 (RR 3283) (Gary
+	  Kramlich)
+	* Fix incompatible pointer types for GtkItemFactoryCallbacks on gcc-14
+	  (RR 3282) (Yoann Congal)
+	* Update the build image for the docs (RR 3285) (Gary Kramlich)
+	* Fix type mismatch with IOKit usage (PIDGIN-17891) (RR 3507) (Elliott
+	  Sales de Andrade)
+	* Use the result of g_string_free(..., FALSE) (RR 3509) (Elliott Sales de
+	  Andrade)
+	* NSS: Load intermediate certificates from the server (PIDGIN-17886)
+	  (RR 3608) (John Schanck)
+	* Finally add proper support for italics on IRC (PIDGIN-14560) (RR 3609)
+	  (Gary Kramlich)
+	* Fix some type conversion errors (RR 3777) (Elliott Sales de Andrade,
+	  Gary Kramlich)
+	* Use raw strings for Python regular expressions (RR 3774) (Elliott Sales
+	  de Andrade)
+	* zephyr: Modernize K&R function prototypes (RR 3775) (Elliott Sales de
+	  Andrade)
+	* Fix invalid prototypes that will break with C23 (PIDGIN-18028) (RR 3776)
+	  (Elliott Sales de Andrade)
+	* Add the ability to run a custom command for signing the binaries
+	  (RR 3778) (Gary Kramlich)
 
 version 2.14.13 (02/23/2024):
 	* Fix compile warning (Wcast-function-type). (RR 2225) (Markus Fischer)
