@@ -17,7 +17,6 @@ REDISTRIBUTION OF THIS SOFTWARE.
 */
 
 #include <string.h>
-#include <memory.h>
 
 #include "aes.h"
 

@@ -61,9 +61,8 @@
 #define GG_CONFIG_HAVE_ZLIB
 
 /* Defined if uintX_t types are defined in <stdint.h>. */
-#undef GG_CONFIG_HAVE_STDINT_H
-#ifdef HAVE_STDINT_H
-#  define GG_CONFIG_HAVE_STDINT_H
+#ifndef GG_CONFIG_HAVE_STDINT_H
+#define GG_CONFIG_HAVE_STDINT_H
 #endif
 
 /* Defined if uintX_t types are defined in <inttypes.h>. */

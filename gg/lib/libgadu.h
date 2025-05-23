@@ -83,9 +83,6 @@ extern "C" {
 /* Defined if libgadu was compiled and linked with zlib support. */
 #undef GG_CONFIG_HAVE_ZLIB
 
-/* Defined if uintX_t types are defined in <stdint.h>. */
-#undef GG_CONFIG_HAVE_STDINT_H
-
 /* Defined if uintX_t types are defined in <inttypes.h>. */
 #undef GG_CONFIG_HAVE_INTTYPES_H
 
@@ -111,33 +108,7 @@ extern "C" {
 #include <openssl/ssl.h>
 #endif
 
-#ifdef GG_CONFIG_HAVE_STDINT_H
 #include <stdint.h>
-#else
-#  ifdef GG_CONFIG_HAVE_INTTYPES_H
-#  include <inttypes.h>
-#  else
-#    ifdef GG_CONFIG_HAVE_SYS_INTTYPES_H
-#    include <sys/inttypes.h>
-#    else
-#      ifdef GG_CONFIG_HAVE_SYS_INT_TYPES_H
-#      include <sys/int_types.h>
-#      else
-#        ifdef GG_CONFIG_HAVE_SYS_TYPES_H
-#        include <sys/types.h>
-#        else
-
-/* ISO C 9X: 7.18 Integer types <stdint.h> */
-
-typedef unsigned char   uint8_t;
-typedef unsigned short uint16_t;
-typedef unsigned int   uint32_t;
-
-#        endif
-#      endif
-#    endif
-#  endif
-#endif
 
 #ifndef GG_CONFIG_HAVE_UINT64_T
 typedef unsigned long long uint64_t;
