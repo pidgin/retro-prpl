@@ -49,6 +49,7 @@ if feature.allowed()
     include_directories: toplevel_inc,
     dependencies: [libpurple_dep, glib_dep],
     link_with: liboscar,
+    install: true,
     install_dir: libpurple_dep.get_variable('plugindir'),
   )
 endif
@@ -56,11 +57,14 @@ endif
 feature = get_option('icq')
 summary({'ICQ': feature}, section : 'Protocols')
 if feature.allowed()
-  libicq = static_library('icq',
+  libicq = shared_library('icq',
     'libicq.c',
     include_directories: toplevel_inc,
     dependencies: [libpurple_dep, glib_dep],
     link_with: liboscar,
+    install: true,
     install_dir: libpurple_dep.get_variable('plugindir'),
   )
 endif
+
+subdir('pixmaps')

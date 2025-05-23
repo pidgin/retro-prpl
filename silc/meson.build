@@ -26,5 +26,8 @@ silc_prpl = shared_library('silc',
   'wb.c',
   include_directories: toplevel_inc,
   dependencies: [silc_dep, libpurple_dep, glib_dep],
+  install: true,
   install_dir: libpurple_dep.get_variable('plugindir'),
 )
+
+subdir('pixmaps')

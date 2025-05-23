@@ -39,5 +39,8 @@ qq_prpl = shared_library('qq',
   c_args: f'-DQQ_BUDDY_ICON_DIR="@datadir@/pixmaps/purple/buddy_icons/qq"',
   include_directories: toplevel_inc,
   dependencies: [libpurple_dep, glib_dep],
+  install: true,
   install_dir: libpurple_dep.get_variable('plugindir'),
 )
+
+subdir('pixmaps')

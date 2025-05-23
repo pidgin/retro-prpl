@@ -13,5 +13,8 @@ sametime_prpl = shared_library('sametime',
   'sametime.c',
   include_directories: toplevel_inc,
   dependencies: [meanwhile_dep, libpurple_dep, glib_dep],
+  install: true,
   install_dir: libpurple_dep.get_variable('plugindir'),
 )
+
+subdir('pixmaps')
