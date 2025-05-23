@@ -6,7 +6,7 @@ if not feature.allowed()
   subdir_done()
 endif
 
-novell_prpl = shared_library('napster',
+napster_prpl = shared_library('napster',
   'napster.c',
   include_directories: toplevel_inc,
   dependencies: [libpurple_dep, glib_dep],
