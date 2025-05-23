@@ -9,7 +9,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 static Code_t Z_Subscriptions __P((register ZSubscription_t *sublist,
 				   int nitems, unsigned int port,

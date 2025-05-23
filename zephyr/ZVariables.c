@@ -9,8 +9,8 @@
  *	"mit-copyright.h".
  */
 
-#include "libpurple/internal.h"
 #include "internal.h"
+#include "zephyrlib_internal.h"
 #include "util.h"
 
 #include <ctype.h>

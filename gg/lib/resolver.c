@@ -32,7 +32,7 @@
 
 #include "strman.h"
 #include "network.h"
-#include "config.h"
+#include "ggconfig.h"
 #include "libgadu.h"
 #include "resolver.h"
 #include "session.h"

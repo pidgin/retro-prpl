@@ -49,7 +49,7 @@
 #include <string.h>	/* for strcmp, strlen, memcpy, memmove, memset */
 
 /* Pull WORDS_BIGENDIAN etc */
-#include "config.h"
+#include "ggconfig.h"
 
 #include "protobuf-c.h"
 

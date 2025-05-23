@@ -8,7 +8,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 int
 ZCompareUID(ZUnique_Id_t *uid1, ZUnique_Id_t *uid2)

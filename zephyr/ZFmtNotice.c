@@ -8,7 +8,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 Code_t
 ZFormatNotice(register ZNotice_t *notice, char **buffer, int *ret_len,

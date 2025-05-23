@@ -26,7 +26,7 @@
  *
 
 */
-#include "libpurple/internal.h"
+#include "internal.h"
 
 #include "accountopt.h"
 #include "debug.h"
@@ -38,7 +38,7 @@
 #include "privacy.h"
 #include "version.h"
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 #include <strings.h>
 

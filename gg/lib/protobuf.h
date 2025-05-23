@@ -25,7 +25,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "config.h"
+#include "ggconfig.h"
 #ifdef GG_CONFIG_HAVE_PROTOBUF_C
 #include <protobuf-c/protobuf-c.h>
 #else

@@ -39,7 +39,7 @@
 #include "debug.h"
 #include "session.h"
 #include "resolver.h"
-#include "config.h"
+#include "ggconfig.h"
 
 #include <errno.h>
 #include <string.h>

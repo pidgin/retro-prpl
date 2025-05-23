@@ -8,7 +8,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 Code_t
 ZFormatRawNoticeList(ZNotice_t *notice, char *list[], int nitems, char **buffer,

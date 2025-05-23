@@ -8,7 +8,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 #if 0
 Code_t ZPeekIfNotice(notice, from, predicate, args)

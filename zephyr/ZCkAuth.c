@@ -8,7 +8,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 /* Check authentication of the notice.
    If it looks authentic but fails the Kerberos check, return -1.

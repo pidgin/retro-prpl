@@ -8,7 +8,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 Code_t
 ZSetDestAddr(struct sockaddr_in *addr)

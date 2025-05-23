@@ -8,7 +8,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 Code_t
 ZReceivePacket(ZPacket_t buffer, int *ret_len, struct sockaddr_in *from)

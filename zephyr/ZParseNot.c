@@ -8,7 +8,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 /* Assume that strlen is efficient on this machine... */
 #define next_field(ptr)	ptr += strlen (ptr) + 1

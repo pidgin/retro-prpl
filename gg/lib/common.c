@@ -36,7 +36,7 @@
 #include <ctype.h>
 #include <time.h>
 
-#include "config.h"
+#include "ggconfig.h"
 #include "libgadu.h"
 #include "internal.h"
 

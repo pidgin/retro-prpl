@@ -32,7 +32,7 @@
 #include "libgadu.h"
 #include "internal.h"
 #include "fileio.h"
-#include "config.h"
+#include "ggconfig.h"
 
 /** \cond ignore */
 
