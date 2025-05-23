@@ -22,7 +22,7 @@ Many people have asked us about bringing back our old protocols so that they
 can use Pidgin on these networks. Initially we rejected this idea as this code
 hasn't been maintained in years and may potentially have security issues.
 
-However, we realized that if we don't support these protocol plugins other's
+However, we realized that if we don't support these protocol plugins others
 may do so and when people need support they'll most likely look to us. While
 this should be fine, it could take a while to figure out exactly what's going
 on, especially if there are multiple versions out there.
