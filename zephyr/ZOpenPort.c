@@ -8,7 +8,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 #include "debug.h"
 #ifdef WIN32
 #include <winsock2.h>

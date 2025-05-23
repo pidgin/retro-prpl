@@ -16,7 +16,7 @@
 #endif
 #endif
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 #ifdef WIN32
 #include <winsock2.h>

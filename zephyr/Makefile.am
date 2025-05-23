@@ -55,7 +55,7 @@ ZEPHYRSOURCES = \
 	error_table.h \
 	et_name.c \
 	init_et.c \
-	internal.h \
+	zephyrlib_internal.h \
 	mit-copyright.h \
 	mit-sipb-copyright.h \
 	sysdep.h \

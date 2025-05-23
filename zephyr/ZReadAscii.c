@@ -8,7 +8,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 #define Z_cnvt_xtoi(c)  ((temp=(c)-'0'),(temp<10)?(int)temp:((temp-='A'-'9'-1),(temp<16)?(int)temp:-1))
 

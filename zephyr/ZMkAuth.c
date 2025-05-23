@@ -8,7 +8,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 #ifndef ERROR_TABLE_BASE_krb
 #define ERROR_TABLE_BASE_krb (39525376L)

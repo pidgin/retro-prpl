@@ -9,7 +9,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 #include "util.h"
 
 static Code_t Z_RetSubs(ZNotice_t *notice, int *nsubs, Z_AuthProc auth_routine);

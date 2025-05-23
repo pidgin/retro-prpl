@@ -8,7 +8,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 Code_t
 ZLocateUser(char *user, int *nlocs, Z_AuthProc auth)

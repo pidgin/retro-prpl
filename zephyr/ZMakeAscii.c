@@ -8,7 +8,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 static char *itox_chars = "0123456789ABCDEF";
 

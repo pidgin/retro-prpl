@@ -8,7 +8,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 #ifdef ZEPHYR_USES_KERBEROS
 Code_t

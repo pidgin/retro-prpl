@@ -8,7 +8,7 @@
  *	"mit-copyright.h".
  */
 
-#include "internal.h"
+#include "zephyrlib_internal.h"
 
 Code_t
 ZSendList(ZNotice_t *notice, char *list[], int nitems, Z_AuthProc cert_routine)

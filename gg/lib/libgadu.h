@@ -102,7 +102,7 @@ extern "C" {
    other non-GPL compliant library support). */
 #undef GG_CONFIG_IS_GPL_COMPLIANT
 
-#include "config.h"
+#include "ggconfig.h"
 
 #ifdef GG_CONFIG_HAVE_OPENSSL
 #include <openssl/ssl.h>
