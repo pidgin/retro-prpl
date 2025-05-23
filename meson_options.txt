@@ -1,3 +1,7 @@
+option('use-purple-prefix', type : 'boolean', value : true,
+       description : 'Install everything to the purple prefix and plugin directory')
+
+# Protocols
 option('aim', type : 'feature',
        description : 'build the AIM protocol plugin')
 option('gadu-gadu', type : 'feature',

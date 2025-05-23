@@ -23,7 +23,7 @@ if feature.allowed()
     dependencies: [libpurple_dep, glib_dep],
     link_with: libyahoo,
     install: true,
-    install_dir: libpurple_dep.get_variable('plugindir'),
+    install_dir: plugin_dir,
   )
 endif
 
@@ -36,7 +36,7 @@ if feature.allowed()
     dependencies: [libpurple_dep, glib_dep],
     link_with: libyahoo,
     install: true,
-    install_dir: libpurple_dep.get_variable('plugindir'),
+    install_dir: plugin_dir,
   )
 endif
 
