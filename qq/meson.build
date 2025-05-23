@@ -1,3 +1,11 @@
+feature = get_option('qq')
+
+summary({'QQ': feature}, section : 'Protocols')
+
+if not feature.allowed()
+  subdir_done()
+endif
+
 datadir = get_option('prefix') / get_option('datadir')
 
 qq_prpl = shared_library('qq',

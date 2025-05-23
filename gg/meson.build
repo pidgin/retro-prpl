@@ -1,3 +1,11 @@
+feature = get_option('gadu-gadu')
+
+summary({'Gadu-Gadu': feature}, section : 'Protocols')
+
+if not feature.allowed()
+  subdir_done()
+endif
+
 if host_machine.endian() == 'big'
   cfg.set('WORDS_BIGENDIAN', true)
 endif

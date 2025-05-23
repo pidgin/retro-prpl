@@ -1,3 +1,11 @@
+feature = get_option('novell')
+
+summary({'Novell': feature}, section : 'Protocols')
+
+if not feature.allowed()
+  subdir_done()
+endif
+
 novell_prpl = shared_library('novell',
   'nmconference.c',
   'nmconn.c',

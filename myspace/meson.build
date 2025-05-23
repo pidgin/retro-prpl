@@ -1,3 +1,11 @@
+feature = get_option('myspace')
+
+summary({'MySpace': feature}, section : 'Protocols')
+
+if not feature.allowed()
+  subdir_done()
+endif
+
 math = cc.find_library('m', required: false)
 
 myspace_prpl = shared_library('myspace',
