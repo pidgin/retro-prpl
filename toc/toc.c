@@ -24,6 +24,7 @@
 #include "accountopt.h"
 #include "conversation.h"
 #include "debug.h"
+#include "glibcompat.h"
 #include "notify.h"
 #include "privacy.h"
 #include "proxy.h"
@@ -373,7 +374,7 @@ static int sflap_send(PurpleConnection *gc, const char *buf, int olen, int type)
 		escaped = escape_message(buf);
 		len = strlen(escaped);
 	} else {
-		escaped = g_memdup(buf, olen);
+		escaped = g_memdup2(buf, olen);
 		len = olen;
 	}
 
@@ -459,7 +460,7 @@ static int wait_reply(PurpleConnection *gc, char *buffer, size_t buflen)
 static unsigned char *roast_password(const char *pass)
 {
 	/* Trivial "encryption" */
-	static unsigned char rp[256];
+	static char rp[256];
 	static char *roast = ROAST;
 	int pos = 2;
 	int x;
@@ -467,16 +468,25 @@ static unsigned char *roast_password(const char *pass)
 	for (x = 0; (x < 150) && pass[x]; x++)
 		pos += sprintf(&rp[pos], "%02x", pass[x] ^ roast[x % strlen(roast)]);
 	rp[pos] = '\0';
-	return rp;
+	return (unsigned char *)rp;
 }
 
-static void toc_got_info(void *data, const char *url_text, size_t len)
+static void toc_got_info(G_GNUC_UNUSED PurpleUtilFetchUrlData *url_data,
+                         G_GNUC_UNUSED gpointer user_data,
+                         const gchar *url_text,
+                         G_GNUC_UNUSED gsize len,
+                         const gchar *error_message)
 {
-	if (!url_text)
+	if(error_message != NULL) {
 		return;
+	}
 
-	purple_notify_formatted(data, NULL, _("Buddy Information"), NULL,
-						  url_text, NULL, NULL);
+	if(url_text == NULL) {
+		return;
+	}
+
+	purple_notify_formatted(user_data, NULL, _("Buddy Information"), NULL,
+	                        url_text, NULL, NULL);
 }
 
 static char *show_error_message()
@@ -634,13 +644,17 @@ parse_toc_buddy_list(PurpleAccount *account, char *config)
 		} else if (*c == 'd') {
 			purple_privacy_deny_add(account, c + 2, TRUE);
 		} else if (!strncmp("toc", c, 3)) {
-			sscanf(c + strlen(c) - 1, "%d", &account->perm_deny);
+			int value = 0;
+			sscanf(c + strlen(c) - 1, "%d", &value);
+			account->perm_deny = value;
 			purple_debug(PURPLE_DEBUG_MISC, "toc blist",
 					   "permdeny: %d\n", account->perm_deny);
 			if (account->perm_deny == 0)
 				account->perm_deny = PURPLE_PRIVACY_ALLOW_ALL;
 		} else if (*c == 'm') {
-			sscanf(c + 2, "%d", &account->perm_deny);
+			int value = 0;
+			sscanf(c + 2, "%d", &value);
+			account->perm_deny = value;
 			purple_debug(PURPLE_DEBUG_MISC, "toc blist",
 					   "permdeny: %d\n", account->perm_deny);
 			if (account->perm_deny == 0)
@@ -749,7 +763,7 @@ static void toc_callback(gpointer data, gint source, PurpleInputCondition condit
 		buddy = purple_buddy_new(account, username, NULL);
 		/* XXX - Pick a group to add to */
 		/* purple_blist_add(buddy, NULL, g, NULL); */
-		purple_account_add_buddy(gc, buddy);
+		purple_account_add_buddy(account, buddy);
 
 		/* Client sends TOC toc_init_done message */
 		purple_debug(PURPLE_DEBUG_INFO, "toc",
@@ -881,13 +895,7 @@ static void toc_callback(gpointer data, gint source, PurpleInputCondition condit
 	} else if (!g_ascii_strcasecmp(c, "ERROR")) {
 		purple_notify_error(gc, NULL, show_error_message(), NULL);
 	} else if (!g_ascii_strcasecmp(c, "EVILED")) {
-		int lev;
-		char *name;
-
-		sscanf(strtok(NULL, ":"), "%d", &lev);
-		name = strtok(NULL, ":");
-
-		/*	purple_prpl_got_account_warning_level(account, name, lev); */
+		/* The warning API was removed some time ago. */
 	} else if (!g_ascii_strcasecmp(c, "CHAT_JOIN")) {
 		char *name;
 		int id;
@@ -911,7 +919,7 @@ static void toc_callback(gpointer data, gint source, PurpleInputCondition condit
 
 		flags = (whisper && (*whisper == 'T')) ? PURPLE_MESSAGE_WHISPER : 0;
 
-		serv_got_chat_in(gc, id, who, flags, m, time((time_t)NULL));
+		serv_got_chat_in(gc, id, who, flags, m, time(NULL));
 	} else if (!g_ascii_strcasecmp(c, "CHAT_UPDATE_BUDDY")) {
 		int id;
 		char *in, *buddy;
@@ -973,24 +981,19 @@ static void toc_callback(gpointer data, gint source, PurpleInputCondition condit
 		if (!b)
 			return;
 
-		if (b->window) {
-			char error_buf[BUF_LONG];
-			purple_conversation_set_account(b, NULL);
-			g_snprintf(error_buf, sizeof error_buf, _("You have been disconnected"
-								  " from chat room %s."), b->name);
-			purple_notify_error(gc, NULL, error_buf, NULL);
-		} else
-			serv_got_chat_left(gc, id);
+		serv_got_chat_left(gc, id);
 	} else if (!g_ascii_strcasecmp(c, "GOTO_URL")) {
 		char *name, *url, tmp[256];
 
 		name = strtok(NULL, ":");
 		url = strtok(NULL, ":");
+		(void)name;
 
 		g_snprintf(tmp, sizeof(tmp), "http://%s:%d/%s", tdt->toc_ip,
 				purple_account_get_int(gc->account, "port", TOC_PORT),
 				url);
-		purple_url_fetch(tmp, FALSE, NULL, FALSE, toc_got_info, gc);
+
+		purple_util_fetch_url(tmp, TRUE, NULL, FALSE, toc_got_info, gc);
 	} else if (!g_ascii_strcasecmp(c, "DIR_STATUS")) {
 	} else if (!g_ascii_strcasecmp(c, "ADMIN_NICK_STATUS")) {
 	} else if (!g_ascii_strcasecmp(c, "ADMIN_PASSWD_STATUS")) {
@@ -1352,13 +1355,6 @@ static void toc_set_idle(PurpleConnection *g, int time)
 	sflap_send(g, buf, -1, TYPE_DATA);
 }
 
-static void toc_warn(PurpleConnection *g, const char *name, int anon)
-{
-	char send[BUF_LEN * 2];
-	g_snprintf(send, 255, "toc_evil %s %s", name, ((anon) ? "anon" : "norm"));
-	sflap_send(g, send, -1, TYPE_DATA);
-}
-
 static GList *toc_chat_info(PurpleConnection *gc)
 {
 	GList *m = NULL;
@@ -1507,25 +1503,29 @@ static const char *toc_list_icon(PurpleAccount *a, PurpleBuddy *b)
 {
 	if (!b || (b && b->name && b->name[0] == '+')) {
 		if (a != NULL && isdigit(*purple_account_get_username(a)))
-			return "icq";
+			return "toc-icq";
 		else
-			return "aim";
+			return "toc-aim";
 	}
 
 	if (b && b->name && isdigit(b->name[0]))
-		return "icq";
-	return "aim";
+		return "toc-icq";
+	return "toc-aim";
 }
 
 static const char* toc_list_emblem(PurpleBuddy *b)
 {
+	/* Apparently we never set this, so we just ignore it for now. */
+#if 0
 	if (b->uc & UC_AOL)
 		return "aol";
 	if (b->uc & UC_ADMIN)
 		return "admin";
 	if (b->uc & UC_WIRELESS)
 		return "mobile";
-	return NULL	
+#endif
+
+	return NULL;
 }
 
 static GList *toc_blist_node_menu(PurpleBlistNode *node)
@@ -1535,7 +1535,7 @@ static GList *toc_blist_node_menu(PurpleBlistNode *node)
 
 	if(PURPLE_BLIST_NODE_IS_BUDDY(node)) {
 		act = purple_menu_action_new(_("Get Dir Info"),
-		                           toc_get_dir, NULL, NULL);
+		                             PURPLE_CALLBACK(toc_get_dir), NULL, NULL);
 		m = g_list_append(m, act);
 	}
 
