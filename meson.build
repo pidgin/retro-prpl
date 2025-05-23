@@ -22,6 +22,8 @@ cfg.set('SIZEOF_TIME_T',
 
 toplevel_inc = include_directories('.')
 
+pixmap_dir = get_option('datadir') / 'pixmaps/pidgin'
+
 subdir('gg')
 subdir('msn')
 subdir('mxit')

@@ -22,6 +22,7 @@ if feature.allowed()
     include_directories: toplevel_inc,
     dependencies: [libpurple_dep, glib_dep],
     link_with: libyahoo,
+    install: true,
     install_dir: libpurple_dep.get_variable('plugindir'),
   )
 endif
@@ -34,6 +35,9 @@ if feature.allowed()
     include_directories: toplevel_inc,
     dependencies: [libpurple_dep, glib_dep],
     link_with: libyahoo,
+    install: true,
     install_dir: libpurple_dep.get_variable('plugindir'),
   )
 endif
+
+subdir('pixmaps')

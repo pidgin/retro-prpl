@@ -17,5 +17,8 @@ myspace_prpl = shared_library('myspace',
   'zap.c',
   include_directories: toplevel_inc,
   dependencies: [libpurple_dep, glib_dep, math],
+  install: true,
   install_dir: libpurple_dep.get_variable('plugindir'),
 )
+
+subdir('pixmaps')
