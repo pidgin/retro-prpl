@@ -35,6 +35,7 @@ subdir('qq')
 subdir('sametime')
 subdir('silc')
 subdir('silc10')
+subdir('toc')
 subdir('yahoo')
 subdir('zephyr')
 
