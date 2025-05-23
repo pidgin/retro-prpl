@@ -1,3 +1,11 @@
+feature = get_option('mxit')
+
+summary({'MXit': feature}, section : 'Protocols')
+
+if not feature.allowed()
+  subdir_done()
+endif
+
 mxit_prpl = shared_library('mxit',
   'actions.c',
   'aes.c',

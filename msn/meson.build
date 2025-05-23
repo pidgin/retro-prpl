@@ -1,3 +1,11 @@
+feature = get_option('msn')
+
+summary({'MSN': feature}, section : 'Protocols')
+
+if not feature.allowed()
+  subdir_done()
+endif
+
 msn_prpl = shared_library('msn',
   'cmdproc.c',
   'command.c',

@@ -1,0 +1,34 @@
+option('aim', type : 'feature',
+       description : 'build the AIM protocol plugin')
+option('gadu-gadu', type : 'feature',
+       description : 'build the gadu-gadu protocol plugin')
+option('icq', type : 'feature',
+       description : 'build the ICQ protocol plugin')
+option('msn', type : 'feature',
+       description : 'build the MSN protocol plugin')
+option('mxit', type : 'feature',
+       description : 'build the MXit protocol plugin')
+option('myspace', type : 'feature',
+       description : 'build the Myspace protocol plugin')
+option('napster', type : 'feature',
+       description : 'build the Napster protocol plugin')
+option('novell', type : 'feature',
+       description : 'build the Novell protocol plugin')
+option('qq', type : 'feature',
+       description : 'build the QQ protocol plugin')
+option('sametime', type : 'feature',
+       description : 'build the Sametime protocol plugin')
+option('silc', type : 'feature',
+       description : 'build the SILC protocol plugin')
+option('silc10', type : 'feature',
+       description : 'build the SILC 10 protocol plugin')
+option('toc', type : 'feature',
+       description : 'build the TOC protocol plugin')
+option('trepia', type : 'feature',
+       description : 'build the Trepia protocol plugin')
+option('yahoo', type : 'feature',
+       description : 'build the Yahoo! protocol plugin')
+option('yahoojp', type : 'feature',
+       description : 'build the Yahoo! Japan protocol plugin')
+option('zephyr', type : 'feature',
+       description : 'build the Zephyr protocol plugin')

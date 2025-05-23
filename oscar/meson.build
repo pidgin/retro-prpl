@@ -40,17 +40,27 @@ liboscar = static_library('oscar',
   include_directories: toplevel_inc,
   dependencies: [libpurple_dep, glib_dep],
 )
-libaim = shared_library('aim',
-  'libaim.c',
-  include_directories: toplevel_inc,
-  dependencies: [libpurple_dep, glib_dep],
-  link_with: liboscar,
-  install_dir: libpurple_dep.get_variable('plugindir'),
-)
-libicq = static_library('icq',
-  'libicq.c',
-  include_directories: toplevel_inc,
-  dependencies: [libpurple_dep, glib_dep],
-  link_with: liboscar,
-  install_dir: libpurple_dep.get_variable('plugindir'),
-)
+
+feature = get_option('aim')
+summary({'AIM': feature}, section : 'Protocols')
+if feature.allowed()
+  libaim = shared_library('aim',
+    'libaim.c',
+    include_directories: toplevel_inc,
+    dependencies: [libpurple_dep, glib_dep],
+    link_with: liboscar,
+    install_dir: libpurple_dep.get_variable('plugindir'),
+  )
+endif
+
+feature = get_option('icq')
+summary({'ICQ': feature}, section : 'Protocols')
+if feature.allowed()
+  libicq = static_library('icq',
+    'libicq.c',
+    include_directories: toplevel_inc,
+    dependencies: [libpurple_dep, glib_dep],
+    link_with: liboscar,
+    install_dir: libpurple_dep.get_variable('plugindir'),
+  )
+endif

@@ -1,3 +1,11 @@
+feature = get_option('sametime')
+
+summary({'Sametime': feature}, section : 'Protocols')
+
+if not feature.allowed()
+  subdir_done()
+endif
+
 meanwhile_dep = dependency('meanwhile', version: ['>= 1.0.0', '< 2.0.0'],
                            required: false, disabler: true)
 

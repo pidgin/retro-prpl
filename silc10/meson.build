@@ -1,3 +1,11 @@
+feature = get_option('silc10')
+
+summary({'SILC 10': feature}, section : 'Protocols')
+
+if not feature.allowed()
+  subdir_done()
+endif
+
 silc_dep = dependency('silcclient', required: false, disabler: true)
 
 if silc_dep.found()

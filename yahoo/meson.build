@@ -13,17 +13,27 @@ libyahoo = static_library('yahoo',
   include_directories: toplevel_inc,
   dependencies: [libpurple_dep, glib_dep],
 )
-yahoo_prpl = shared_library('yahoo',
-  'libyahoo.c',
-  include_directories: toplevel_inc,
-  dependencies: [libpurple_dep, glib_dep],
-  link_with: libyahoo,
-  install_dir: libpurple_dep.get_variable('plugindir'),
-)
-yahoojp_prpl = shared_library('yahoojp',
-  'libyahoojp.c',
-  include_directories: toplevel_inc,
-  dependencies: [libpurple_dep, glib_dep],
-  link_with: libyahoo,
-  install_dir: libpurple_dep.get_variable('plugindir'),
-)
+
+feature = get_option('yahoo')
+summary({'Yahoo!': feature}, section : 'Protocols')
+if feature.allowed()
+  yahoo_prpl = shared_library('yahoo',
+    'libyahoo.c',
+    include_directories: toplevel_inc,
+    dependencies: [libpurple_dep, glib_dep],
+    link_with: libyahoo,
+    install_dir: libpurple_dep.get_variable('plugindir'),
+  )
+endif
+
+feature = get_option('yahoojp')
+summary({'Yahoo! Japan': feature}, section : 'Protocols')
+if feature.allowed()
+  yahoojp_prpl = shared_library('yahoojp',
+    'libyahoojp.c',
+    include_directories: toplevel_inc,
+    dependencies: [libpurple_dep, glib_dep],
+    link_with: libyahoo,
+    install_dir: libpurple_dep.get_variable('plugindir'),
+  )
+endif

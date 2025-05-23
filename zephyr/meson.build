@@ -1,3 +1,11 @@
+feature = get_option('zephyr')
+
+summary({'Zephyr': feature}, section : 'Protocols')
+
+if not feature.allowed()
+  subdir_done()
+endif
+
 foreach header : ['fcntl.h', 'malloc.h', 'paths.h', 'sgtty.h', 'sys/cdefs.h',
                   'sys/file.h', 'sys/filio.h', 'sys/ioctl.h', 'sys/msgbuf.h',
                   'sys/select.h', 'sys/uio.h', 'sys/utsname.h', 'sys/wait.h',
