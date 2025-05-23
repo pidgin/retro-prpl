@@ -20,7 +20,7 @@ to different extents.
 
 Many people have asked us about bringing back our old protocols so that they
 can use Pidgin on these networks. Initially we rejected this idea as this code
-hasn't maintained in years and may potentially have security issues.
+hasn't been maintained in years and may potentially have security issues.
 
 However, we realized that if we don't support these protocol plugins other's
 may do so and when people need support they'll most likely look to us. While
