@@ -22,7 +22,19 @@ cfg.set('SIZEOF_TIME_T',
 
 toplevel_inc = include_directories('.')
 
-pixmap_dir = get_option('datadir') / 'pixmaps/pidgin'
+if get_option('use-purple-prefix')
+  pixmap_dir = libpurple_dep.get_variable('datadir') / 'pixmaps/pidgin'
+  plugin_dir = libpurple_dep.get_variable('plugindir')
+else
+  pixmap_dir = get_option('prefix') / get_option('datadir') / 'pixmaps/pidgin'
+  plugin_dir = get_option('prefix') / get_option('libdir') / 'purple-2'
+endif
+
+summary({
+  'plugins': plugin_dir,
+  'pixmaps': pixmap_dir,
+  },
+  section : 'Install Directories')
 
 subdir('gg')
 subdir('msn')

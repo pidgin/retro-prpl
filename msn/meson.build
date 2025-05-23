@@ -44,7 +44,7 @@ msn_prpl = shared_library('msn',
   include_directories: toplevel_inc,
   dependencies: [libpurple_dep, glib_dep],
   install: true,
-  install_dir: libpurple_dep.get_variable('plugindir'),
+  install_dir: plugin_dir,
 )
 
 subdir('pixmaps')
