@@ -1,6 +1,6 @@
 project('retro-prpl', 'c', meson_version: '>=1.0.0')
 
-add_project_arguments('-DHAVE_CONFIG_H', language: 'c')
+add_project_arguments('-DHAVE_CONFIG_H', '-DPURPLE_PLUGINS', language: 'c')
 
 cc = meson.get_compiler('c')
 
