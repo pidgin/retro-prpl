@@ -1,5 +1,7 @@
 zlib_dep = dependency('zlib')
 
+libgadu_inc = include_directories('include')
+
 libgadu = static_library('libgadu',
   'common.c',
   'dcc7.c',
@@ -24,11 +26,12 @@ libgadu = static_library('libgadu',
   'sha1.c',
   'tvbuff.c',
   'tvbuilder.c',
-  include_directories: toplevel_inc,
+  include_directories: [libgadu_inc, toplevel_inc],
   dependencies: zlib_dep,
 )
 
 libgadu_dep = declare_dependency(
+  include_directories: libgadu_inc,
   dependencies: zlib_dep,
   link_with: libgadu,
 )
