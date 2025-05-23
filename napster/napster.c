@@ -1,7 +1,11 @@
 /*
- * gaim - Napster Protocol Plugin
+ * napster - Napster Protocol Plugin
  *
  * Copyright (C) 2000-2001, Rob Flynn <rob@marko.net>
+ *
+ * Assimilated for inclusion in the Plugin Pack:
+ * Copyright (C) 2006-2008 Gary Kramlich <grim@reaperworld.com>
+ * Copyright (C) 2007 John Bailey <rekkanoryo@rekkanoryo.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,8 +19,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02111-1301  USA
  */
+
 #include "internal.h"
 
 #include "account.h"
@@ -30,6 +35,11 @@
 #include "util.h"
 #include "version.h"
 
+#include <errno.h>
+#include <fcntl.h>
+#include <string.h>
+#include <unistd.h>
+
 #define NAP_SERVER "64.124.41.187"
 #define NAP_PORT 8888
 
@@ -42,13 +52,13 @@ struct nap_data {
 	gchar *email;
 };
 
-static GaimConversation *nap_find_chat(GaimConnection *gc, const char *name)
-{
+static PurpleConversation *
+nap_find_chat(PurpleConnection *gc, const char *name) {
 	GSList *bcs = gc->buddy_chats;
 
 	while (bcs) {
-		GaimConversation *b = bcs->data;
-		if (!gaim_utf8_strcasecmp(b->name, name))
+		PurpleConversation *b = bcs->data;
+		if (!purple_utf8_strcasecmp(b->name, name))
 			return b;
 		bcs = bcs->next;
 	}
@@ -56,7 +66,9 @@ static GaimConversation *nap_find_chat(GaimConnection *gc, const char *name)
 	return NULL;
 }
 
-static void nap_write_packet(GaimConnection *gc, unsigned short command, const char *format, ...)
+static void
+nap_write_packet(PurpleConnection *gc, unsigned short command,
+				 const char *format, ...)
 {
 	struct nap_data *ndata = (struct nap_data *)gc->proto_data;
 	va_list ap;
@@ -68,7 +80,7 @@ static void nap_write_packet(GaimConnection *gc, unsigned short command, const c
 	va_end(ap);
 
 	size = strlen(message);
-	gaim_debug(GAIM_DEBUG_MISC, "napster", "S %3hd: %s\n", command, message);
+	purple_debug(PURPLE_DEBUG_MISC, "napster", "S %3hd: %s\n", command, message);
 
 	write(ndata->fd, &size, 2);
 	write(ndata->fd, &command, 2);
@@ -77,11 +89,11 @@ static void nap_write_packet(GaimConnection *gc, unsigned short command, const c
 	g_free(message);
 }
 
-static int nap_do_irc_style(GaimConnection *gc, const char *message, const char *name)
-{
+static int
+nap_do_irc_style(PurpleConnection *gc, const char *message, const char *name) {
 	gchar **res;
 
-        gaim_debug(GAIM_DEBUG_MISC, "napster", "C %s\n", message);
+        purple_debug(PURPLE_DEBUG_MISC, "napster", "C %s\n", message);
 
 	res = g_strsplit(message, " ", 2);
 
@@ -126,9 +138,11 @@ static int nap_do_irc_style(GaimConnection *gc, const char *message, const char 
 }
 
 /* 205 - MSG_CLIENT_PRIVMSG */
-static int nap_send_im(GaimConnection *gc, const char *who, const char *message, GaimMessageFlags flags)
+static int
+nap_send_im(PurpleConnection *gc, const char *who, const char *message,
+			PurpleMessageFlags flags)
 {
-	char *tmp = gaim_unescape_html(message);
+	char *tmp = purple_unescape_html(message);
 
 	if ((strlen(tmp) < 2) || (tmp[0] != '/' ) || (tmp[1] == '/')) {
 		/* Actually send a chat message */
@@ -144,33 +158,33 @@ static int nap_send_im(GaimConnection *gc, const char *who, const char *message,
 }
 
 /* 207 - MSG_CLIENT_ADD_HOTLIST */
-static void nap_add_buddy(GaimConnection *gc, GaimBuddy *buddy, GaimGroup *group)
-{
+static void
+nap_add_buddy(PurpleConnection *gc, PurpleBuddy *buddy, PurpleGroup *group) {
 	nap_write_packet(gc, 207, "%s", buddy->name);
 }
 
 /* 208 - MSG_CLIENT_ADD_HOTLIST_SEQ */
-static void nap_send_buddylist(GaimConnection *gc)
-{
-	GaimBuddyList *blist;
-	GaimBlistNode *gnode, *cnode, *bnode;
-	GaimBuddy *buddy;
+static void
+nap_send_buddylist(PurpleConnection *gc) {
+	PurpleBuddyList *blist;
+	PurpleBlistNode *gnode, *cnode, *bnode;
+	PurpleBuddy *buddy;
 
-	if ((blist = gaim_get_blist()) != NULL)
+	if ((blist = purple_get_blist()) != NULL)
 	{
 		for (gnode = blist->root; gnode != NULL; gnode = gnode->next)
 		{
-			if (!GAIM_BLIST_NODE_IS_GROUP(gnode))
+			if (!PURPLE_BLIST_NODE_IS_GROUP(gnode))
 				continue;
 			for (cnode = gnode->child; cnode != NULL; cnode = cnode->next)
 			{
-				if (!GAIM_BLIST_NODE_IS_CONTACT(cnode))
+				if (!PURPLE_BLIST_NODE_IS_CONTACT(cnode))
 					continue;
 				for (bnode = cnode->child; bnode != NULL; bnode = bnode->next)
 				{
-					if (!GAIM_BLIST_NODE_IS_BUDDY(bnode))
+					if (!PURPLE_BLIST_NODE_IS_BUDDY(bnode))
 						continue;
-					buddy = (GaimBuddy *)bnode;
+					buddy = (PurpleBuddy *)bnode;
 					nap_write_packet(gc, 208, "%s", buddy->name);
 				}
 			}
@@ -179,12 +193,13 @@ static void nap_send_buddylist(GaimConnection *gc)
 }
 
 /* 303 - MSG_CLIENT_REMOVE_HOTLIST */
-static void nap_remove_buddy(GaimConnection *gc, GaimBuddy *buddy, GaimGroup *group)
-{
+static void
+nap_remove_buddy(PurpleConnection *gc, PurpleBuddy *buddy, PurpleGroup *group) {
 	nap_write_packet(gc, 303, "%s", buddy->name);
 }
 
-static char *nap_get_chat_name(GHashTable *data) {
+static char *
+nap_get_chat_name(GHashTable *data) {
 	char *name = g_hash_table_lookup(data, "group");
 
 	/* Make sure the name has a # preceding it */
@@ -196,8 +211,8 @@ static char *nap_get_chat_name(GHashTable *data) {
 }
 
 /* 400 - MSG_CLIENT_JOIN */
-static void nap_join_chat(GaimConnection *gc, GHashTable *data)
-{
+static void
+nap_join_chat(PurpleConnection *gc, GHashTable *data) {
 	char *name;
 
 	if (!data)
@@ -212,9 +227,9 @@ static void nap_join_chat(GaimConnection *gc, GHashTable *data)
 }
 
 /* 401 - MSG_CLIENT_PART */
-static void nap_chat_leave(GaimConnection *gc, int id)
-{
-	GaimConversation *c = gaim_find_chat(gc, id);
+static void
+nap_chat_leave(PurpleConnection *gc, int id) {
+	PurpleConversation *c = purple_find_chat(gc, id);
 
 	if (!c)
 		return;
@@ -223,10 +238,12 @@ static void nap_chat_leave(GaimConnection *gc, int id)
 }
 
 /* 402 - MSG_CLIENT_PUBLIC */
-static int nap_chat_send(GaimConnection *gc, int id, const char *message, GaimMessageFlags flags)
+static int
+nap_chat_send(PurpleConnection *gc, int id, const char *message,
+			  PurpleMessageFlags flags)
 {
-	GaimConversation *c = gaim_find_chat(gc, id);
-	char *tmp = gaim_unescape_html(message);
+	PurpleConversation *c = purple_find_chat(gc, id);
+	char *tmp = purple_unescape_html(message);
 
 	if (!c)
 		return -EINVAL;
@@ -245,25 +262,28 @@ static int nap_chat_send(GaimConnection *gc, int id, const char *message, GaimMe
 }
 
 /* 603 - MSG_CLIENT_WHOIS */
-static void nap_get_info(GaimConnection *gc, const char *who)
-{
+static void
+nap_get_info(PurpleConnection *gc, const char *who) {
 	nap_write_packet(gc, 603, "%s", who);
 }
 
-static void nap_callback(gpointer data, gint source, GaimInputCondition condition)
-{
-	GaimConnection *gc = data;
+static void
+nap_callback(gpointer data, gint source, PurpleInputCondition condition) {
+	PurpleConnection *gc = data;
 	struct nap_data *ndata = gc->proto_data;
-	GaimAccount *account = gaim_connection_get_account(gc);
-	GaimConversation *c;
-	gchar *buf, *buf2, *buf3, **res;
-	unsigned short header[2];
-	int len;
-	int command;
+	PurpleAccount *account = NULL;
+	PurpleConversation *c = NULL;
+	PurpleNotifyUserInfo *pnui = NULL;
+	gchar *buf = NULL, *buf2 = NULL, *buf3 = NULL, **res = NULL;
+	unsigned short header[2] = { 0 , 0 };
+	int len = 0;
+	int command = 0;
 	int i;
 
+	account = purple_connection_get_account(gc);
+
 	if (read(source, (void*)header, 4) != 4) {
-		gaim_connection_error(gc, _("Unable to read header from server"));
+		purple_connection_error(gc, _("Unable to read header from server"));
 		return;
 	}
 
@@ -277,31 +297,31 @@ static void nap_callback(gpointer data, gint source, GaimInputCondition conditio
 		int tmp = read(source, buf + i, len - i);
 		if (tmp <= 0) {
 			g_free(buf);
-			buf = g_strdup_printf(_("Unable to read message from server: %s.  Command is %hd, length is %hd."), strerror(errno), len, command); 
-			gaim_connection_error(gc, buf);
+			buf = g_strdup_printf(_("Unable to read message from server: %s.  Command is %hd, length is %hd."), strerror(errno), len, command);
+			purple_connection_error(gc, buf);
 			g_free(buf);
 			return;
 		}
 		i += tmp;
 	} while (i != len);
 
-	gaim_debug(GAIM_DEBUG_MISC, "napster", "R %3hd: %s\n", command, buf);
+	purple_debug(PURPLE_DEBUG_MISC, "napster", "R %3hd: %s\n", command, buf);
 
 	switch (command) {
 	case 000: /* MSG_SERVER_ERROR */
-		gaim_notify_error(gc, NULL, buf, NULL);
-		gaim_input_remove(gc->inpa);
+		purple_notify_error(gc, NULL, buf, NULL);
+		purple_input_remove(gc->inpa);
 		gc->inpa = 0;
 		close(source);
-		gaim_connection_error(gc, _("Unknown server error."));
+		purple_connection_error(gc, _("Unknown server error."));
 		break;
 
 	case 003: /* MSG_SERVER_EMAIL */
-		gaim_debug(GAIM_DEBUG_MISC, "napster", "Registered with e-mail address: %s\n", buf);
+		purple_debug(PURPLE_DEBUG_MISC, "napster", "Registered with e-mail address: %s\n", buf);
 		ndata->email = g_strdup(buf);
 
 		/* Our signon is complete */
-		gaim_connection_set_state(gc, GAIM_CONNECTED);
+		purple_connection_set_state(gc, PURPLE_CONNECTED);
 
 		/* Send the server our buddy list */
 		nap_send_buddylist(gc);
@@ -310,12 +330,12 @@ static void nap_callback(gpointer data, gint source, GaimInputCondition conditio
 
 	case 201: /* MSG_SERVER_SEARCH_RESULT */
 		res = g_strsplit(buf, " ", 0);
-		gaim_prpl_got_user_status(account, res[0], "available", NULL);
+		purple_prpl_got_user_status(account, res[0], "available", NULL);
 		g_strfreev(res);
 		break;
 
 	case 202: /* MSG_SERVER_SEARCH_END */
-		gaim_prpl_got_user_status(account, buf, "offline", NULL);
+		purple_prpl_got_user_status(account, buf, "offline", NULL);
 		break;
 
 	case 205: /* MSG_CLIENT_PRIVMSG */
@@ -329,14 +349,14 @@ static void nap_callback(gpointer data, gint source, GaimInputCondition conditio
 	case 209: /* MSG_SERVER_USER_SIGNON */
 		/* USERNAME SPEED */
 		res = g_strsplit(buf, " ", 2);
-		gaim_prpl_got_user_status(account, res[0], "available", NULL);
+		purple_prpl_got_user_status(account, res[0], "available", NULL);
 		g_strfreev(res);
 		break;
 
 	case 210: /* MSG_SERVER_USER_SIGNOFF */
 		/* USERNAME SPEED */
 		res = g_strsplit(buf, " ", 2);
-		gaim_prpl_got_user_status(account, res[0], "offline", NULL);
+		purple_prpl_got_user_status(account, res[0], "offline", NULL);
 		g_strfreev(res);
 		break;
 
@@ -354,26 +374,26 @@ static void nap_callback(gpointer data, gint source, GaimInputCondition conditio
 
 	case 302: /* MSG_SERVER_HOTLIST_ERROR */
 		buf2 = g_strdup_printf(_("Unable to add \"%s\" to your Napster hotlist"), buf);
-		gaim_notify_error(gc, NULL, buf2, NULL);
+		purple_notify_error(gc, NULL, buf2, NULL);
 		g_free(buf2);
 		break;
 
 	case 316: /* MSG_SERVER_DISCONNECTING */
 		/* we have been kicked off =^( */
-		gaim_connection_error(gc, _("You were disconnected from the server."));
+		purple_connection_error(gc, _("You were disconnected from the server."));
 		break;
 
 	case 401: /* MSG_CLIENT_PART */
 		c = nap_find_chat(gc, buf);
 		if (c)
-			serv_got_chat_left(gc, gaim_conv_chat_get_id(GAIM_CONV_CHAT(c)));
+			serv_got_chat_left(gc, purple_conv_chat_get_id(PURPLE_CONV_CHAT(c)));
 		break;
 
 	case 403: /* MSG_SERVER_PUBLIC */
 		res = g_strsplit(buf, " ", 3);
 		c = nap_find_chat(gc, res[0]);
 		if (c)
-			serv_got_chat_in(gc, gaim_conv_chat_get_id(GAIM_CONV_CHAT(c)), res[1], 0, res[2], time((time_t)NULL));
+			serv_got_chat_in(gc, purple_conv_chat_get_id(PURPLE_CONV_CHAT(c)), res[1], 0, res[2], time(NULL));
 		g_strfreev(res);
 		break;
 
@@ -387,13 +407,13 @@ static void nap_callback(gpointer data, gint source, GaimInputCondition conditio
 	case 405: /* MSG_SERVER_JOIN_ACK */
 		c = nap_find_chat(gc, buf);
 		if (!c)
-			serv_got_joined_chat(gc, gaim_conv_chat_get_id(GAIM_CONV_CHAT(c)), buf);
+			serv_got_joined_chat(gc, purple_conv_chat_get_id(PURPLE_CONV_CHAT(c)), buf);
 		break;
 
 	case 407: /* MSG_SERVER_PART */
 		res = g_strsplit(buf, " ", 0);
 		c = nap_find_chat(gc, res[0]);
-		gaim_conv_chat_remove_user(GAIM_CONV_CHAT(c), res[1], NULL);
+		purple_conv_chat_remove_user(PURPLE_CONV_CHAT(c), res[1], NULL);
 		g_strfreev(res);
 		break;
 
@@ -401,7 +421,7 @@ static void nap_callback(gpointer data, gint source, GaimInputCondition conditio
 	case 408: /* MSG_SERVER_CHANNEL_USER_LIST */
 		res = g_strsplit(buf, " ", 4);
 		c = nap_find_chat(gc, res[0]);
-		gaim_conv_chat_add_user(GAIM_CONV_CHAT(c), res[1], NULL, GAIM_CBFLAGS_NONE, TRUE);
+		purple_conv_chat_add_user(PURPLE_CONV_CHAT(c), res[1], NULL, PURPLE_CBFLAGS_NONE, TRUE);
 		g_strfreev(res);
 		break;
 
@@ -412,7 +432,7 @@ static void nap_callback(gpointer data, gint source, GaimInputCondition conditio
 		/* display the topic in the channel */
 		res = g_strsplit(buf, " ", 2);
 		c = nap_find_chat(gc, res[0]);
-		gaim_conv_chat_set_topic(GAIM_CONV_CHAT(c), res[0], res[1]);
+		purple_conv_chat_set_topic(PURPLE_CONV_CHAT(c), res[0], res[1]);
 		g_strfreev(res);
 		break;
 
@@ -423,10 +443,12 @@ static void nap_callback(gpointer data, gint source, GaimInputCondition conditio
 		break;
 
 	case 604: /* MSG_SERVER_WHOIS_RESPONSE */
-		/* XXX - Format is:   "Elite" 37 " " "Active" 0 0 0 0 "gaim 0.63cvs" 0 0 192.168.1.41 32798 0 unknown flounder */
+		/* XXX - Format is:   "Elite" 37 " " "Active" 0 0 0 0 "purple 0.63cvs" 0 0 192.168.1.41 32798 0 unknown flounder */
 		res = g_strsplit(buf, " ", 2);
 		/* res[0] == username */
-		gaim_notify_userinfo(gc, res[0], res[1], NULL, NULL);
+		pnui = purple_notify_user_info_new();
+		purple_notify_user_info_add_pair(pnui, _("Napster User Info:"), res[1]);
+		purple_notify_userinfo(gc, res[0], pnui, NULL, NULL);
 		g_strfreev(res);
 		break;
 
@@ -453,7 +475,7 @@ static void nap_callback(gpointer data, gint source, GaimInputCondition conditio
 
 	case 748: /* MSG_SERVER_GHOST */
 		/* Looks like someone logged in as us! =-O */
-		gaim_connection_error(gc, _("You have signed on from another location."));
+		purple_connection_error(gc, _("You have signed on from another location."));
 		break;
 
 	case 751: /* MSG_CLIENT_PING */
@@ -467,7 +489,7 @@ static void nap_callback(gpointer data, gint source, GaimInputCondition conditio
 
 	case 752: /* MSG_CLIENT_PONG */
 		buf2 = g_strdup_printf("Received pong from %s", buf);
-		gaim_notify_info(gc, NULL, buf2, NULL);
+		purple_notify_info(gc, NULL, buf2, NULL);
 		g_free(buf2);
 		break;
 
@@ -477,14 +499,14 @@ static void nap_callback(gpointer data, gint source, GaimInputCondition conditio
 		buf3 = g_strdup_printf("/me %s", buf2);
 		g_free(buf2);
 		if ((c = nap_find_chat(gc, res[0]))) {
-			gaim_conv_chat_write(GAIM_CONV_CHAT(c), res[1], buf3, GAIM_MESSAGE_NICK, time(NULL));
+			purple_conv_chat_write(PURPLE_CONV_CHAT(c), res[1], buf3, PURPLE_MESSAGE_NICK, time(NULL));
 		}
 		g_free(buf3);
 		g_strfreev(res);
 		break;
 
 	default:
-	        gaim_debug(GAIM_DEBUG_MISC, "napster", "Unknown packet %hd: %s\n", command, buf);
+	        purple_debug(PURPLE_DEBUG_MISC, "napster", "Unknown packet %hd: %s\n", command, buf);
 		break;
 	}
 
@@ -492,19 +514,19 @@ static void nap_callback(gpointer data, gint source, GaimInputCondition conditio
 }
 
 /* 002 - MSG_CLIENT_LOGIN */
-static void nap_login_connect(gpointer data, gint source, GaimInputCondition cond)
-{
-	GaimConnection *gc = data;
+static void
+nap_login_connect(gpointer data, gint source, const gchar *error_message) {
+	PurpleConnection *gc = data;
 	struct nap_data *ndata = (struct nap_data *)gc->proto_data;
 	gchar *buf;
 
-	if (!g_list_find(gaim_connections_get_all(), gc)) {
+	if (!g_list_find(purple_connections_get_all(), gc)) {
 		close(source);
 		return;
 	}
 
 	if (source < 0) {
-		gaim_connection_error(gc, _("Unable to connect."));
+		purple_connection_error(gc, _("Unable to connect."));
 		return;
 	}
 
@@ -516,40 +538,40 @@ static void nap_login_connect(gpointer data, gint source, GaimInputCondition con
 	ndata->fd = source;
 
 	/* Update the login progress status display */
-	buf = g_strdup_printf("Logging in: %s", gaim_account_get_username(gc->account));
-	gaim_connection_update_progress(gc, buf, 1, NAPSTER_CONNECT_STEPS);
+	buf = g_strdup_printf("Logging in: %s", purple_account_get_username(gc->account));
+	purple_connection_update_progress(gc, buf, 1, NAPSTER_CONNECT_STEPS);
 	g_free(buf);
 
 	/* Write our signon data */
-	nap_write_packet(gc, 2, "%s %s 0 \"gaim %s\" 0",
-			gaim_account_get_username(gc->account),
-			gaim_connection_get_password(gc), VERSION);
+	nap_write_packet(gc, 2, "%s %s 0 \"purple %s\" 0",
+			purple_account_get_username(gc->account),
+			purple_connection_get_password(gc), VERSION);
 
 	/* And set up the input watcher */
-	gc->inpa = gaim_input_add(ndata->fd, GAIM_INPUT_READ, nap_callback, gc);
+	gc->inpa = purple_input_add(ndata->fd, PURPLE_INPUT_READ, nap_callback, gc);
 }
 
-static void nap_login(GaimAccount *account)
-{
-	GaimConnection *gc = gaim_account_get_connection(account);
+static void
+nap_login(PurpleAccount *account) {
+	PurpleConnection *gc = purple_account_get_connection(account);
 
-	gaim_connection_update_progress(gc, _("Connecting"), 0, NAPSTER_CONNECT_STEPS);
+	purple_connection_update_progress(gc, _("Connecting"), 0, NAPSTER_CONNECT_STEPS);
 
 	gc->proto_data = g_new0(struct nap_data, 1);
-	if (gaim_proxy_connect(account,
-				gaim_account_get_string(account, "server", NAP_SERVER),
-				gaim_account_get_int(account, "port", NAP_PORT),
+	if (purple_proxy_connect(gc, account,
+				purple_account_get_string(account, "server", NAP_SERVER),
+				purple_account_get_int(account, "port", NAP_PORT),
 				nap_login_connect, gc) != 0) {
-		gaim_connection_error(gc, _("Unable to connect."));
+		purple_connection_error(gc, _("Unable to connect."));
 	}
 }
 
-static void nap_close(GaimConnection *gc)
-{
+static void
+nap_close(PurpleConnection *gc) {
 	struct nap_data *ndata = (struct nap_data *)gc->proto_data;
 
 	if (gc->inpa)
-		gaim_input_remove(gc->inpa);
+		purple_input_remove(gc->inpa);
 
 	if (!ndata)
 		return;
@@ -560,38 +582,31 @@ static void nap_close(GaimConnection *gc)
 	g_free(ndata);
 }
 
-static const char* nap_list_icon(GaimAccount *a, GaimBuddy *b)
-{
+static const char *
+nap_list_icon(PurpleAccount *a, PurpleBuddy *b) {
 	return "napster";
 }
 
-static void nap_list_emblems(GaimBuddy *b, const char **se, const char **sw,
-							 const char **nw, const char **ne)
-{
-	if(!GAIM_BUDDY_IS_ONLINE(b))
-		*se = "offline";
-}
-
-static GList *nap_status_types(GaimAccount *account)
-{
+static GList *
+nap_status_types(PurpleAccount *account) {
 	GList *types = NULL;
-	GaimStatusType *type;
+	PurpleStatusType *type;
 
 	g_return_val_if_fail(account != NULL, NULL);
 
-	type = gaim_status_type_new_full(GAIM_STATUS_AVAILABLE,
+	type = purple_status_type_new_full(PURPLE_STATUS_AVAILABLE,
 									 NULL, NULL, TRUE, TRUE, FALSE);
 	types = g_list_append(types, type);
 
-	type = gaim_status_type_new_full(GAIM_STATUS_OFFLINE,
+	type = purple_status_type_new_full(PURPLE_STATUS_OFFLINE,
 									 NULL, NULL, TRUE, TRUE, FALSE);
 	types = g_list_append(types, type);
 
 	return types;
 }
 
-static GList *nap_chat_info(GaimConnection *gc)
-{
+static GList *
+nap_chat_info(PurpleConnection *gc) {
 	GList *m = NULL;
 	struct proto_chat_entry *pce;
 
@@ -603,8 +618,8 @@ static GList *nap_chat_info(GaimConnection *gc)
 	return m;
 }
 
-static GHashTable *nap_chat_info_defaults(GaimConnection *gc, const char *chat_name)
-{
+static GHashTable *
+nap_chat_info_defaults(PurpleConnection *gc, const char *chat_name) {
 	GHashTable *defaults;
 
 	defaults = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
@@ -615,16 +630,15 @@ static GHashTable *nap_chat_info_defaults(GaimConnection *gc, const char *chat_n
 	return defaults;
 }
 
-static GaimPlugin *my_protocol = NULL;
+static PurplePlugin *my_protocol = NULL;
 
-static GaimPluginProtocolInfo prpl_info =
-{
+static PurplePluginProtocolInfo prpl_info = {
 	OPT_PROTO_CHAT_TOPIC,
 	NULL,					/* user_splits */
 	NULL,					/* protocol_options */
 	NO_BUDDY_ICONS,			/* icon_spec */
 	nap_list_icon,			/* list_icon */
-	nap_list_emblems,		/* list_emblems */
+	NULL,					/* list_emblems */
 	NULL,					/* status_text */
 	NULL,					/* tooltip_text */
 	nap_status_types,		/* status_types */
@@ -679,28 +693,39 @@ static GaimPluginProtocolInfo prpl_info =
 	NULL,					/* new_xfer */
 	NULL,					/* offline_message */
 	NULL,					/* whiteboard_prpl_ops */
+	NULL,					/* send_raw */
+	NULL,					/* roomlist_room_serialize */
+	NULL,					/* unregister_user */
+	NULL,					/* send_attention */
+	NULL,					/* get_attention_types */
+	sizeof(PurplePluginProtocolInfo),	/* struct_size */
+	NULL,					/* get_account_text_table */
+	NULL,					/* initiate_media */
+	NULL,					/* get_media_caps */
+	NULL,					/* get_moods */
+	NULL,					/* set_public_alias */
+	NULL					/* get_public_alias */
 };
 
-static GaimPluginInfo info =
-{
-	GAIM_PLUGIN_MAGIC,
-	GAIM_MAJOR_VERSION,
-	GAIM_MINOR_VERSION,
-	GAIM_PLUGIN_PROTOCOL,                             /**< type           */
+static PurplePluginInfo info = {
+	PURPLE_PLUGIN_MAGIC,
+	PURPLE_MAJOR_VERSION,
+	PURPLE_MINOR_VERSION,
+	PURPLE_PLUGIN_PROTOCOL,                           /**< type           */
 	NULL,                                             /**< ui_requirement */
 	0,                                                /**< flags          */
 	NULL,                                             /**< dependencies   */
-	GAIM_PRIORITY_DEFAULT,                            /**< priority       */
+	PURPLE_PRIORITY_DEFAULT,                          /**< priority       */
 
 	"prpl-napster",                                   /**< id             */
-	"Napster",                                        /**< name           */
+	N_("Napster"),                                    /**< name           */
 	VERSION,                                          /**< version        */
 	                                                  /**  summary        */
 	N_("NAPSTER Protocol Plugin"),
 	                                                  /**  description    */
 	N_("NAPSTER Protocol Plugin"),
 	NULL,                                             /**< author         */
-	GAIM_WEBSITE,                                     /**< homepage       */
+	PURPLE_WEBSITE,                                   /**< homepage       */
 
 	NULL,                                             /**< load           */
 	NULL,                                             /**< unload         */
@@ -709,23 +734,32 @@ static GaimPluginInfo info =
 	NULL,                                             /**< ui_info        */
 	&prpl_info,                                       /**< extra_info     */
 	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
 	NULL
 };
 
-static void init_plugin(GaimPlugin *plugin)
-{
-	GaimAccountOption *option;
+static void
+init_plugin(PurplePlugin *plugin) {
+	PurpleAccountOption *option;
 
-	option = gaim_account_option_string_new(_("Server"), "server",
-											NAP_SERVER);
-	prpl_info.protocol_options = g_list_append(prpl_info.protocol_options,
-											   option);
+#ifdef ENABLE_NLS
+	bindtextdomain(GETTEXT_PACKAGE, PP_LOCALEDIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+#endif /* ENABLE_NLS */
 
-	option = gaim_account_option_int_new(_("Port"), "port", 8888);
-	prpl_info.protocol_options = g_list_append(prpl_info.protocol_options,
-											   option);
+	option = purple_account_option_string_new(_("Server"), "server", NAP_SERVER);
+	prpl_info.protocol_options = g_list_append(prpl_info.protocol_options, option);
+
+	option = purple_account_option_int_new(_("Port"), "port", 8888);
+	prpl_info.protocol_options = g_list_append(prpl_info.protocol_options, option);
 
 	my_protocol = plugin;
+
+	info.description = N_(info.description);
+	info.summary = N_(info.summary);
 }
 
-GAIM_INIT_PLUGIN(napster, init_plugin, info);
+PURPLE_INIT_PLUGIN(napster, init_plugin, info);

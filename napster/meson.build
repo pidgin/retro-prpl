@@ -12,3 +12,5 @@ novell_prpl = shared_library('napster',
   dependencies: [libpurple_dep, glib_dep],
   install_dir: libpurple_dep.get_variable('plugindir'),
 )
+
+subdir('pixmaps')
