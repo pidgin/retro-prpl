@@ -211,14 +211,14 @@ static gint _qq_xfer_read_file(guint8 *buffer, guint index, guint len, PurpleXfe
 {
 	ft_info *info = xfer->data;
 
-	fseek(info->dest_fp, index * len, SEEK_SET);
+	fseek(info->dest_fp, (long)index * len, SEEK_SET);
 	return fread(buffer, 1, len, info->dest_fp);
 }
 
 static gint _qq_xfer_write_file(guint8 *buffer, guint index, guint len, PurpleXfer *xfer)
 {
 	ft_info *info = xfer->data;
-	fseek(info->dest_fp, index * len, SEEK_SET);
+	fseek(info->dest_fp, (long)index * len, SEEK_SET);
 	return fwrite(buffer, 1, len, info->dest_fp);
 }
 
