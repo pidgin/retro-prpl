@@ -250,7 +250,7 @@ msn_message_parse_payload(MsnMessage *msg,
 	/* Now we *should* be at the body. */
 	content_type = msn_message_get_content_type(msg);
 
-	if (payload_len - (tmp - tmp_base) > 0) {
+	if (payload_len > (tmp - tmp_base)) {
 		msg->body_len = payload_len - (tmp - tmp_base);
 		g_free(msg->body);
 		msg->body = g_malloc(msg->body_len + 1);

@@ -270,7 +270,7 @@ peer_proxy_connection_recv_cb(gpointer data, gint source, PurpleInputCondition c
 	}
 
 	/* If this frame has a payload then attempt to read it */
-	if (frame->payload.len - frame->payload.offset > 0)
+	if (frame->payload.len > frame->payload.offset)
 	{
 		/* Read data into the temporary buffer until it is complete */
 		read = recv(conn->fd,
