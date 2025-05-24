@@ -1138,7 +1138,7 @@ char* mxit_convert_markup_tx( const char* message, int* msgtype )
 					tag->type = MXIT_TAG_SIZE;
 					tagstack = g_list_prepend( tagstack, tag );
 					// TODO: implement size control
-					if ( sscanf( &message[i+12], "%i", &fontsize ) ) {
+					if ( sscanf( &message[i+12], "%i", &fontsize ) == 1 ) {
 						purple_debug_info( MXIT_PLUGIN_ID, "Font size set to %i\n", fontsize );
 					}
 				}
@@ -1178,7 +1178,7 @@ char* mxit_convert_markup_tx( const char* message, int* msgtype )
 					/* inline image */
 					int imgid;
 
-					if ( sscanf( &message[i+9], "%i", &imgid ) ) {
+					if ( sscanf( &message[i+9], "%i", &imgid ) == 1 ) {
 						inline_image_add( mx, imgid );
 						*msgtype = CP_MSGTYPE_COMMAND;		/* inline image must be sent as a MXit command */
 					}
