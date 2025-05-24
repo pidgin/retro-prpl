@@ -1043,8 +1043,6 @@ static int purple_memrequest(OscarData *od, FlapConnection *conn, FlapFrame *fr,
 			straight_to_hell, pos) == NULL)
 	{
 		char buf[256];
-		g_free(pos->modname);
-		g_free(pos);
 
 		g_snprintf(buf, sizeof(buf), _("You may be disconnected shortly.  "
 			"If so, check %s for updates."),
@@ -1052,6 +1050,9 @@ static int purple_memrequest(OscarData *od, FlapConnection *conn, FlapFrame *fr,
 		purple_notify_warning(pos->gc, NULL,
 							_("Unable to get a valid login hash."),
 							buf);
+
+		g_free(pos->modname);
+		g_free(pos);
 	}
 
 	return 1;
