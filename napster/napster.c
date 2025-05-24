@@ -470,7 +470,7 @@ nap_callback(gpointer data, gint source, PurpleInputCondition condition) {
 	case 628: /* MSG_CLIENT_ANNOUNCE */
 		buf2 = g_markup_escape_text(buf, -1);
 		serv_got_im(gc, "announce", buf2, 0, time(NULL));
-		g_free(buf);
+		g_free(buf2);
 		break;
 
 	case 748: /* MSG_SERVER_GHOST */
