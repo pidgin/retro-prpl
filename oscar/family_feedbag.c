@@ -1664,6 +1664,7 @@ static int receiveauthgrant(OscarData *od, FlapConnection *conn, aim_module_t *m
 		purple_debug_warning("oscar", "Dropping auth grant SNAC "
 				"because the username was not valid UTF-8\n");
 		g_free(bn);
+		return 0;
 	}
 
 	/* Read message */
@@ -1755,6 +1756,7 @@ static int receiveauthrequest(OscarData *od, FlapConnection *conn, aim_module_t 
 		purple_debug_warning("oscar", "Dropping auth request SNAC "
 				"because the username was not valid UTF-8\n");
 		g_free(bn);
+		return 0;
 	}
 
 	/* Read message */
@@ -1856,6 +1858,7 @@ static int receiveauthreply(OscarData *od, FlapConnection *conn, aim_module_t *m
 		purple_debug_warning("oscar", "Dropping auth reply SNAC "
 				"because the username was not valid UTF-8\n");
 		g_free(bn);
+		return 0;
 	}
 
 	/* Read reply */
@@ -1910,6 +1913,7 @@ static int receiveadded(OscarData *od, FlapConnection *conn, aim_module_t *mod, 
 		purple_debug_warning("oscar", "Dropping 'you were added' SNAC "
 				"because the username was not valid UTF-8\n");
 		g_free(bn);
+		return 0;
 	}
 
 	if ((userfunc = aim_callhandler(od, snac->family, snac->subtype)))
