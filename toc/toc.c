@@ -1310,12 +1310,13 @@ static void toc_add_buddies(PurpleConnection *gc, GList *buddies, GList *groups)
 	n = g_snprintf(buf, sizeof(buf), "toc_add_buddy");
 	for (cur = buddies; cur != NULL; cur = cur->next) {
 		PurpleBuddy *buddy = cur->data;
+		const char *normalized_name = purple_normalize(gc->account, buddy->name);
 
-		if (strlen(purple_normalize(gc->account, buddy->name)) + n + 32 > MSG_LEN) {
+		if (strlen(normalized_name) + n + 32 > MSG_LEN) {
 			sflap_send(gc, buf, -1, TYPE_DATA);
 			n = g_snprintf(buf, sizeof(buf), "toc_add_buddy");
 		}
-		n += g_snprintf(buf + n, sizeof(buf) - n, " %s", purple_normalize(gc->account, buddy->name));
+		n += g_snprintf(buf + n, sizeof(buf) - n, " %s", normalized_name);
 	}
 	sflap_send(gc, buf, -1, TYPE_DATA);
 }
@@ -1337,12 +1338,13 @@ static void toc_remove_buddies(PurpleConnection *gc, GList *buddies, GList *grou
 	n = g_snprintf(buf, sizeof(buf), "toc_remove_buddy");
 	for (cur = buddies; cur != NULL; cur = cur->next) {
 		PurpleBuddy *buddy = cur->data;
+		const char *normalized_name = purple_normalize(gc->account, buddy->name);
 
-		if (strlen(purple_normalize(gc->account, buddy->name)) + n + 32 > MSG_LEN) {
+		if (strlen(normalized_name) + n + 32 > MSG_LEN) {
 			sflap_send(gc, buf, -1, TYPE_DATA);
 			n = g_snprintf(buf, sizeof(buf), "toc_remove_buddy");
 		}
-		n += g_snprintf(buf + n, sizeof(buf) - n, " %s", purple_normalize(gc->account, buddy->name));
+		n += g_snprintf(buf + n, sizeof(buf) - n, " %s", normalized_name);
 	}
 	sflap_send(gc, buf, -1, TYPE_DATA);
 	toc_set_config(gc);
