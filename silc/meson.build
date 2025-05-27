@@ -25,7 +25,7 @@ silc_prpl = shared_library('silc',
   'util.c',
   'wb.c',
   include_directories: toplevel_inc,
-  dependencies: [silc_dep, libpurple_dep, glib_dep],
+  dependencies: [silc_dep, libpurple_dep, glib_dep, ws2_32_dep],
   install: true,
   install_dir: plugin_dir,
 )

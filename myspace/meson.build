@@ -16,7 +16,7 @@ myspace_prpl = shared_library('myspace',
   'user.c',
   'zap.c',
   include_directories: toplevel_inc,
-  dependencies: [libpurple_dep, glib_dep, math],
+  dependencies: [libpurple_dep, glib_dep, math, ws2_32_dep],
   install: true,
   install_dir: plugin_dir,
 )

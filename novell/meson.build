@@ -19,7 +19,7 @@ novell_prpl = shared_library('novell',
   'nmuserrecord.c',
   'novell.c',
   include_directories: toplevel_inc,
-  dependencies: [libpurple_dep, glib_dep],
+  dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
   install: true,
   install_dir: plugin_dir,
 )

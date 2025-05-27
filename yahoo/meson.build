@@ -11,7 +11,7 @@ libyahoo = static_library('yahoo',
   'yahoo_profile.c',
   'ycht.c',
   include_directories: toplevel_inc,
-  dependencies: [libpurple_dep, glib_dep],
+  dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
 )
 
 feature = get_option('yahoo')
@@ -20,7 +20,7 @@ if feature.allowed()
   yahoo_prpl = shared_library('yahoo',
     'libyahoo.c',
     include_directories: toplevel_inc,
-    dependencies: [libpurple_dep, glib_dep],
+    dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
     link_with: libyahoo,
     install: true,
     install_dir: plugin_dir,
@@ -33,7 +33,7 @@ if feature.allowed()
   yahoojp_prpl = shared_library('yahoojp',
     'libyahoojp.c',
     include_directories: toplevel_inc,
-    dependencies: [libpurple_dep, glib_dep],
+    dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
     link_with: libyahoo,
     install: true,
     install_dir: plugin_dir,

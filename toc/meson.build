@@ -9,7 +9,7 @@ endif
 toc_prpl = shared_library('toc',
   'toc.c',
   include_directories: toplevel_inc,
-  dependencies: [libpurple_dep, glib_dep],
+  dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
   install: true,
   install_dir: libpurple_dep.get_variable('plugindir'),
 )
