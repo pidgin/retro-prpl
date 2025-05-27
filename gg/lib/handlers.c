@@ -881,8 +881,7 @@ static int gg_handle_recv_msg_options(struct gg_session *sess,
 
 				count = gg_fix32(m->count);
 
-				if (p + count * sizeof(uin_t) > packet_end ||
-					p + count * sizeof(uin_t) < p ||
+				if (count * sizeof(uin_t) > packet_end - p ||
 					count > 0xffff)
 				{
 					gg_debug_session(sess, GG_DEBUG_MISC,
