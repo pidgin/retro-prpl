@@ -26,6 +26,7 @@ libgadu = static_library('libgadu',
   'sha1.c',
   'tvbuff.c',
   'tvbuilder.c',
+  c_args: '-DGG_IGNORE_DEPRECATED',
   include_directories: [libgadu_inc, toplevel_inc],
   dependencies: zlib_dep,
 )
