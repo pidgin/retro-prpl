@@ -38,7 +38,7 @@ liboscar = static_library('oscar',
   'util.c',
   'visibility.c',
   include_directories: toplevel_inc,
-  dependencies: [libpurple_dep, glib_dep],
+  dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
 )
 
 feature = get_option('aim')
@@ -47,7 +47,7 @@ if feature.allowed()
   libaim = shared_library('aim',
     'libaim.c',
     include_directories: toplevel_inc,
-    dependencies: [libpurple_dep, glib_dep],
+    dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
     link_with: liboscar,
     install: true,
     install_dir: plugin_dir,
@@ -60,7 +60,7 @@ if feature.allowed()
   libicq = shared_library('icq',
     'libicq.c',
     include_directories: toplevel_inc,
-    dependencies: [libpurple_dep, glib_dep],
+    dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
     link_with: liboscar,
     install: true,
     install_dir: plugin_dir,

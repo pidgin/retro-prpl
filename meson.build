@@ -30,6 +30,12 @@ else
   plugin_dir = get_option('prefix') / get_option('libdir') / 'purple-2'
 endif
 
+if host_machine.system() == 'windows'
+  ws2_32_dep = cc.find_library('ws2_32')
+else
+  ws2_32_dep = []
+endif
+
 summary({
   'plugins': plugin_dir,
   'pixmaps': pixmap_dir,

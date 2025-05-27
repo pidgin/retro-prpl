@@ -1,8 +1,10 @@
 feature = get_option('zephyr')
 
-summary({'Zephyr': feature}, section : 'Protocols')
+real_feature = feature.disable_auto_if(host_machine.system() == 'windows')
 
-if not feature.allowed()
+summary({'Zephyr': real_feature}, section : 'Protocols')
+
+if not real_feature.allowed()
   subdir_done()
 endif
 
@@ -84,7 +86,7 @@ zephyr_prpl = shared_library('zephyr',
   'zephyr.c',
   'zephyr_err.c',
   include_directories: toplevel_inc,
-  dependencies: [libpurple_dep, glib_dep],
+  dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
   install: true,
   install_dir: plugin_dir,
 )

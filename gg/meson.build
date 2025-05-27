@@ -22,7 +22,7 @@ gg_prpl = shared_library('gg',
   'gg-utils.c',
   'search.c',
   include_directories: toplevel_inc,
-  dependencies: [libgadu_dep, libpurple_dep, glib_dep],
+  dependencies: [libgadu_dep, libpurple_dep, glib_dep, ws2_32_dep],
   install: true,
   install_dir: plugin_dir,
 )

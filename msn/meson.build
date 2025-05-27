@@ -42,7 +42,7 @@ msn_prpl = shared_library('msn',
   'userlist.c',
   'xfer.c',
   include_directories: toplevel_inc,
-  dependencies: [libpurple_dep, glib_dep],
+  dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
   install: true,
   install_dir: plugin_dir,
 )
