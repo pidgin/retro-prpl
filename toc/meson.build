@@ -11,7 +11,7 @@ toc_prpl = shared_library('toc',
   include_directories: toplevel_inc,
   dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
   install: true,
-  install_dir: libpurple_dep.get_variable('plugindir'),
+  install_dir: plugin_dir,
 )
 
 subdir('pixmaps')
