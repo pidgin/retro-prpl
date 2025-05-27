@@ -759,15 +759,28 @@ int gg_token_watch_fd(struct gg_http *h)
 
 		gg_debug(GG_DEBUG_MISC, "=> token body \"%s\"\n", h->body);
 
-		results_len = h->body ? strlen(h->body) : 0;
+		if (!h->body) {
+			gg_debug(GG_DEBUG_MISC, "=> token, parsing failed\n");
+			errno = EINVAL;
+			return -1;
+		}
 
-		if (h->body && (!(url = malloc(results_len)) || !(tokenid = malloc(results_len)))) {
+		results_len = strlen(h->body) + 1;
+
+		url = malloc(results_len);
+		if (!url) {
+			gg_debug(GG_DEBUG_MISC, "=> token, not enough memory for results\n");
+			return -1;
+		}
+
+		tokenid = malloc(results_len);
+		if (!tokenid) {
 			gg_debug(GG_DEBUG_MISC, "=> token, not enough memory for results\n");
 			free(url);
 			return -1;
 		}
 
-		if (!h->body || sscanf(h->body, "%d %d %d\r\n%s\r\n%s", &width, &height, &length, tokenid, url) != 5) {
+		if (sscanf(h->body, "%d %d %d\r\n%s\r\n%s", &width, &height, &length, tokenid, url) != 5) {
 			gg_debug(GG_DEBUG_MISC, "=> token, parsing failed\n");
 			free(url);
 			free(tokenid);
