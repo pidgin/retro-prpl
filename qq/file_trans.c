@@ -670,12 +670,12 @@ static void _qq_update_send_progess(PurpleConnection *gc, guint32 fragment_index
 			return;
 		}
 		mask = 0x1 << (info->max_fragment_index % sizeof(info->window));
+		buffer = g_newa(guint8, info->fragment_len);
 		while (info->window & mask)
 		{
 			/* move the slide window */
 			info->window &= ~mask;
 
-			buffer = g_newa(guint8, info->fragment_len);
 			readbytes = _qq_xfer_read_file(buffer, info->max_fragment_index + sizeof(info->window),
 					info->fragment_len, xfer);
 			if (readbytes > 0)
