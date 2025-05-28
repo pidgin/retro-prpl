@@ -69,8 +69,8 @@ jobs:
 
       - name: Create purple.pc
         run : |
-          echo "prefix=$RUNNER_TEMP/pidgin/libpurple" | tee $RUNNER_TEMP/pidgin/libpurple/data/purple.pc
-          cat << 'EOF' | tee -a $RUNNER_TEMP/pidgin/libpurple/data/purple.pc
+          cat << 'EOF' | tee $RUNNER_TEMP/pidgin/libpurple/data/purple.pc
+          prefix=${{ runner.temp }}/pidgin/libpurple
           exec_prefix=${prefix}
           libdir=${exec_prefix}
           includedir=${prefix}
