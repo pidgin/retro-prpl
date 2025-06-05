@@ -49,6 +49,7 @@ if feature.allowed()
     include_directories: toplevel_inc,
     dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
     link_with: liboscar,
+    name_suffix: plugin_suffix,
     install: true,
     install_dir: plugin_dir,
   )
@@ -62,6 +63,7 @@ if feature.allowed()
     include_directories: toplevel_inc,
     dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
     link_with: liboscar,
+    name_suffix: plugin_suffix,
     install: true,
     install_dir: plugin_dir,
   )

@@ -36,6 +36,11 @@ else
   ws2_32_dep = []
 endif
 
+plugin_suffix = []
+if host_machine.system() == 'darwin'
+  plugin_suffix = 'so'
+endif
+
 summary({
   'plugins': plugin_dir,
   'pixmaps': pixmap_dir,
