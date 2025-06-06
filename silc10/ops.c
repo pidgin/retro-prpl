@@ -995,7 +995,6 @@ silcpurple_whois_more(SilcClientEntry client_entry, gint id)
 {
 	SilcAttributePayload attr;
 	SilcAttribute attribute;
-	char *buf;
 	GString *s;
 	SilcVCardStruct vcard;
 	int i;
@@ -1085,10 +1084,9 @@ silcpurple_whois_more(SilcClientEntry client_entry, gint id)
 		}
 	}
 
-	buf = g_string_free(s, FALSE);
 	purple_notify_info(NULL, _("User Information"), _("User Information"),
-			 buf);
-	g_free(buf);
+			 s->str);
+	g_string_free(s, TRUE);
 }
 #endif
 

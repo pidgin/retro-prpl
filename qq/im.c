@@ -454,7 +454,6 @@ static gchar *emoticon_get(guint8 symbol)
    Notice: text is in qq charset, GB18030 or utf8 */
 gchar *qq_emoticon_to_purple(gchar *text)
 {
-	gchar *ret;
 	GString *converted;
 	gchar **segments;
 	gboolean have_smiley;
@@ -511,9 +510,7 @@ gchar *qq_emoticon_to_purple(gchar *text)
 		g_string_prepend(converted, "<font sml=\"none\">");
 		g_string_append(converted, "</font>");
 	}
-	ret = converted->str;
-	g_string_free(converted, FALSE);
-	return ret;
+	return g_string_free(converted, FALSE);
 }
 
 void qq_im_fmt_free(qq_im_format *fmt)
@@ -614,7 +611,6 @@ qq_im_format *qq_im_fmt_new_by_purple(const gchar *msg)
 gchar *qq_im_fmt_to_purple(qq_im_format *fmt, gchar *text)
 {
 	GString *converted, *tmp;
-	gchar *ret;
 	gint size;
 
 	converted = g_string_new(text);
@@ -658,9 +654,7 @@ gchar *qq_im_fmt_to_purple(qq_im_format *fmt, gchar *text)
 	}
 
 	g_string_free(tmp, TRUE);
-	ret = converted->str;
-	g_string_free(converted, FALSE);
-	return ret;
+	return g_string_free(converted, FALSE);
 }
 
 gint qq_put_im_tail(guint8 *buf, qq_im_format *fmt)

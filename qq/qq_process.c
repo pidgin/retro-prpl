@@ -200,8 +200,7 @@ static void do_msg_sys_4c(PurpleConnection *gc, guint8 *data, gint data_len)
 		purple_debug_warning("QQ", "Failed to read QQ_MSG_SYS_4C\n");
 		qq_show_packet("do_msg_sys_4c", data, data_len);
 	}
-	qq_got_message(gc, content->str);
-	g_string_free(content, FALSE);
+	qq_got_message(gc, g_string_free(content, FALSE));
 }
 
 static const gchar *get_im_type_desc(gint type)

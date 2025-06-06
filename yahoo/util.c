@@ -784,8 +784,7 @@ static void parse_font_tag(GString *dest, const char *tag_name, const char *tag,
 		*tags = g_slist_prepend(*tags, g_strdup("</font>"));
 		g_string_free(tmp, TRUE);
 	} else {
-		*tags = g_slist_prepend(*tags, tmp->str);
-		g_string_free(tmp, FALSE);
+		*tags = g_slist_prepend(*tags, g_string_free(tmp, FALSE));
 	}
 
 	g_datalist_clear(&attributes);
