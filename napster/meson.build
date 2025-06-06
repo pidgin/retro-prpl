@@ -1,6 +1,6 @@
 feature = get_option('napster')
 
-summary({'Napster': feature}, section : 'Protocols')
+summary({'Napster': feature.allowed()}, bool_yn : true, section : 'Protocols')
 
 if not feature.allowed()
   subdir_done()

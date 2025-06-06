@@ -15,7 +15,7 @@ libyahoo = static_library('yahoo',
 )
 
 feature = get_option('yahoo')
-summary({'Yahoo!': feature}, section : 'Protocols')
+summary({'Yahoo!': feature.allowed()}, bool_yn : true, section : 'Protocols')
 if feature.allowed()
   yahoo_prpl = shared_library('yahoo',
     'libyahoo.c',
@@ -29,7 +29,7 @@ if feature.allowed()
 endif
 
 feature = get_option('yahoojp')
-summary({'Yahoo! Japan': feature}, section : 'Protocols')
+summary({'Yahoo! Japan': feature.allowed()}, bool_yn : true, section : 'Protocols')
 if feature.allowed()
   yahoojp_prpl = shared_library('yahoojp',
     'libyahoojp.c',

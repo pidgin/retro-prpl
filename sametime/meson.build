@@ -1,13 +1,13 @@
 feature = get_option('sametime')
 
-summary({'Sametime': feature}, section : 'Protocols')
+meanwhile_dep = dependency('meanwhile', version: ['>= 1.0.0', '< 2.0.0'],
+                           required: feature)
 
-if not feature.allowed()
+summary({'Sametime': meanwhile_dep.found()}, bool_yn : true, section : 'Protocols')
+
+if not meanwhile_dep.found()
   subdir_done()
 endif
-
-meanwhile_dep = dependency('meanwhile', version: ['>= 1.0.0', '< 2.0.0'],
-                           required: false, disabler: true)
 
 sametime_prpl = shared_library('sametime',
   'sametime.c',

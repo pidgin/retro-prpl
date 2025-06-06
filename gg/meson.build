@@ -1,6 +1,6 @@
 feature = get_option('gadu-gadu')
 
-summary({'Gadu-Gadu': feature}, section : 'Protocols')
+summary({'Gadu-Gadu': feature.allowed()}, bool_yn : true, section : 'Protocols')
 
 if not feature.allowed()
   subdir_done()
