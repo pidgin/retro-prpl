@@ -203,7 +203,7 @@ gchar* try_dump_as_gbk(const guint8 *const data, gint len)
 static gchar *strstrip(const gchar *const buffer)
 {
 	GString *stripped;
-	gchar *ret, cur;
+	gchar cur;
 	gint i;
 
 	g_return_val_if_fail(buffer != NULL, NULL);
@@ -214,10 +214,8 @@ static gchar *strstrip(const gchar *const buffer)
 		if (cur != ' ' && cur != '\n')
 			g_string_append_c(stripped, buffer[i]);
 	}
-	ret = stripped->str;
-	g_string_free(stripped, FALSE);
 
-	return ret;
+	return g_string_free(stripped, FALSE);
 }
 
 /* Attempts to dump an ASCII hex string to a string of bytes.
@@ -281,7 +279,6 @@ guint8 *hex_str_to_bytes(const gchar *const buffer, gint *out_len)
 static gchar *hex_dump_to_str(const guint8 *const buffer, gint bytes)
 {
 	GString *str;
-	gchar *ret;
 	gint i, j, ch;
 
 	str = g_string_new("");
@@ -308,11 +305,7 @@ static gchar *hex_dump_to_str(const guint8 *const buffer, gint bytes)
 		g_string_append_c(str, '\n');
 	}
 
-	ret = str->str;
-	/* GString can be freed without freeing it character data */
-	g_string_free(str, FALSE);
-
-	return ret;
+	return g_string_free(str, FALSE);
 }
 
 void qq_hex_dump(PurpleDebugLevel level, const char *category,

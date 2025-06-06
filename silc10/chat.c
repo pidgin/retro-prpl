@@ -92,7 +92,7 @@ silcpurple_chat_getinfo(PurpleConnection *gc, GHashTable *components)
 {
 	SilcPurple sg = gc->proto_data;
 	const char *chname;
-	char *buf, tmp[256], *tmp2;
+	char tmp[256], *tmp2;
 	GString *s;
 	SilcChannelEntry channel;
 	SilcHashTableList htl;
@@ -170,9 +170,8 @@ silcpurple_chat_getinfo(PurpleConnection *gc, GHashTable *components)
 		silc_free(pk);
 	}
 
-	buf = g_string_free(s, FALSE);
-	purple_notify_formatted(gc, NULL, _("Channel Information"), NULL, buf, NULL, NULL);
-	g_free(buf);
+	purple_notify_formatted(gc, NULL, _("Channel Information"), NULL, s->str, NULL, NULL);
+	g_string_free(s, TRUE);
 }
 
 

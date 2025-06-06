@@ -332,7 +332,6 @@ void silcpurple_show_public_key(SilcPurple sg,
 	unsigned char *pk;
 	SilcUInt32 pk_len, key_len = 0;
 	GString *s;
-	char *buf;
 
 	ident = silc_pkcs_decode_identifier(public_key->identifier);
 	if (!ident)
@@ -369,14 +368,12 @@ void silcpurple_show_public_key(SilcPurple sg,
 	g_string_append_printf(s, _("Public Key Fingerprint:\n%s\n\n"), fingerprint);
 	g_string_append_printf(s, _("Public Key Babbleprint:\n%s"), babbleprint);
 
-	buf = g_string_free(s, FALSE);
-
 	purple_request_action(sg->gc, _("Public Key Information"),
 			    _("Public Key Information"),
-			    buf, 0, purple_connection_get_account(sg->gc),
+			    s->str, 0, purple_connection_get_account(sg->gc),
 				NULL, NULL, context, 1, _("Close"), callback);
 
-	g_free(buf);
+	g_string_free(s, TRUE);
 	silc_free(fingerprint);
 	silc_free(babbleprint);
 	silc_free(pk);
