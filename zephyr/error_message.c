@@ -13,17 +13,16 @@ char *error_table_name_r __P((int, char *));
 
 struct et_list * _et_list = (struct et_list *) NULL;
 
-const char * error_message (code)
-long	code;
+const char *
+error_message (long code)
 {
     static char buf[COM_ERR_BUF_LEN];
 
     return(error_message_r(code, buf));
 }
 
-const char * error_message_r (code, buf)
-long	code;
-char	*buf;
+const char *
+error_message_r (long code, char *buf)
 {
     int offset;
     struct et_list *et;
