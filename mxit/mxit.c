@@ -273,7 +273,7 @@ static const char* mxit_list_emblem( PurpleBuddy* buddy )
 
 	/* subscription state is Pending, Rejected or Deleted */
 	if ( contact->subtype != MXIT_SUBTYPE_BOTH )
-		return "not-authorized";
+		return "mxit-not-authorized";
 
 	switch ( contact-> type ) {
 		case MXIT_TYPE_JABBER :			/* external contacts via MXit */
@@ -283,12 +283,12 @@ static const char* mxit_list_emblem( PurpleBuddy* buddy )
 		case MXIT_TYPE_AIM :
 		case MXIT_TYPE_QQ :
 		case MXIT_TYPE_WV :
-			return "external";
+			return "mxit-external";
 
 		case MXIT_TYPE_BOT :			/* MXit services */
 		case MXIT_TYPE_GALLERY :
 		case MXIT_TYPE_INFO :
-			return "bot";
+			return "mxit-bot";
 
 		case MXIT_TYPE_CHATROOM :		/* MXit group chat services */
 		case MXIT_TYPE_MULTIMX :

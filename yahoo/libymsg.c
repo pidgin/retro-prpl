@@ -4047,17 +4047,17 @@ const char *yahoo_list_emblem(PurpleBuddy *b)
 
 	f = yahoo_friend_find(gc, purple_buddy_get_name(b));
 	if (!f) {
-		return "not-authorized";
+		return "yahoo-not-authorized";
 	}
 
 	presence = purple_buddy_get_presence(b);
 
 	if (purple_presence_is_online(presence)) {
 		if (yahoo_friend_get_game(f))
-			return "game";
+			return "yahoo-game";
 
 		if (f->fed)
-			return "external";
+			return "yahoo-external";
 	}
 	return NULL;
 }
