@@ -953,18 +953,18 @@ msn_list_emblems(PurpleBuddy *b)
 
 	if (user != NULL) {
 		if (user->clientid & MSN_CAP_BOT)
-			return "bot";
+			return "msn-bot";
 		if (user->clientid & MSN_CAP_VIA_MOBILE)
-			return "mobile";
+			return "msn-mobile";
 #if 0
 		/* XXX: Since we don't support this, there's no point in showing it just yet */
 		if (user->clientid & MSN_CAP_SCHANNEL)
-			return "secure";
+			return "msn-secure";
 #endif
 		if (user->clientid & MSN_CAP_VIA_WEBIM)
-			return "external";
+			return "msn-external";
 		if (user->networkid == MSN_NETWORK_YAHOO)
-			return "yahoo";
+			return "msn-yahoo";
 	}
 
 	return NULL;

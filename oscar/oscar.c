@@ -4652,26 +4652,26 @@ const char *oscar_list_emblem(PurpleBuddy *b)
 		if ((name) && (od) && (od->ssi.received_data) &&
 			(gname = aim_ssi_itemlist_findparentname(od->ssi.local, name)) &&
 			(aim_ssi_waitingforauth(od->ssi.local, gname, name))) {
-			return "not-authorized";
+			return "oscar-not-authorized";
 		}
 	}
 
 	if (userinfo != NULL ) {
 		if (userinfo->flags & AIM_FLAG_ADMINISTRATOR)
-			return "admin";
+			return "oscar-admin";
 		if (userinfo->flags & AIM_FLAG_ACTIVEBUDDY)
-			return "bot";
+			return "oscar-bot";
 		if (userinfo->capabilities & OSCAR_CAPABILITY_SECUREIM)
-			return "secure";
+			return "oscar-secure";
 		if (userinfo->icqinfo.status & AIM_ICQ_STATE_BIRTHDAY)
-			return "birthday";
+			return "oscar-birthday";
 
 		/* Make the mood icon override anything below this. */
 		if (purple_presence_is_status_primitive_active(presence, PURPLE_STATUS_MOOD))
 			return NULL;
 
 		if (userinfo->capabilities & OSCAR_CAPABILITY_HIPTOP)
-			return "hiptop";
+			return "oscar-hiptop";
 	}
 	return NULL;
 }

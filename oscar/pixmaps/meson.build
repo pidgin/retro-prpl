@@ -1,3 +1,5 @@
+install_subdir('emblems', install_dir: pixmap_dir)
+
 foreach prpl: ['aim', 'icq']
   if get_option(prpl).allowed()
     foreach size : [16, 22, 48]

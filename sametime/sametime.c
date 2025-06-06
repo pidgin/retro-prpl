@@ -3220,7 +3220,7 @@ static const char *mw_prpl_list_icon(PurpleAccount *a, PurpleBuddy *b) {
 static const char* mw_prpl_list_emblem(PurpleBuddy *b)
 {
   if(buddy_is_external(b))
-    return "external";
+    return "sametime-external";
 
   return NULL;
 }

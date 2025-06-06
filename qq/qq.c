@@ -393,15 +393,15 @@ static const char *qq_list_emblem(PurpleBuddy *b)
 
 	buddy = purple_buddy_get_protocol_data(b);
 	if (!buddy) {
-		return "not-authorized";
+		return "qq-not-authorized";
 	}
 
 	if (buddy->comm_flag & QQ_COMM_FLAG_MOBILE)
-		return "mobile";
+		return "qq-mobile";
 	if (buddy->comm_flag & QQ_COMM_FLAG_VIDEO)
-		return "video";
+		return "qq-video";
 	if (buddy->comm_flag & QQ_COMM_FLAG_QQ_MEMBER)
-		return "qq_member";
+		return "qq-member";
 
 	return NULL;
 }
