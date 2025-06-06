@@ -42,7 +42,7 @@ liboscar = static_library('oscar',
 )
 
 feature = get_option('aim')
-summary({'AIM': feature}, section : 'Protocols')
+summary({'AIM': feature.allowed()}, bool_yn : true, section : 'Protocols')
 if feature.allowed()
   libaim = shared_library('aim',
     'libaim.c',
@@ -56,7 +56,7 @@ if feature.allowed()
 endif
 
 feature = get_option('icq')
-summary({'ICQ': feature}, section : 'Protocols')
+summary({'ICQ': feature.allowed()}, bool_yn : true, section : 'Protocols')
 if feature.allowed()
   libicq = shared_library('icq',
     'libicq.c',

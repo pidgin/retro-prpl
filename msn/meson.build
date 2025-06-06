@@ -1,6 +1,6 @@
 feature = get_option('msn')
 
-summary({'MSN': feature}, section : 'Protocols')
+summary({'MSN': feature.allowed()}, bool_yn : true, section : 'Protocols')
 
 if not feature.allowed()
   subdir_done()

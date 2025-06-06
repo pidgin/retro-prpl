@@ -1,6 +1,6 @@
 feature = get_option('mxit')
 
-summary({'MXit': feature}, section : 'Protocols')
+summary({'MXit': feature.allowed()}, bool_yn : true, section : 'Protocols')
 
 if not feature.allowed()
   subdir_done()

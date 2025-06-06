@@ -1,10 +1,10 @@
 feature = get_option('zephyr')
 
-real_feature = feature.disable_auto_if(host_machine.system() == 'windows')
+feature = feature.disable_auto_if(host_machine.system() == 'windows')
 
-summary({'Zephyr': real_feature}, section : 'Protocols')
+summary({'Zephyr': feature.allowed()}, bool_yn : true, section : 'Protocols')
 
-if not real_feature.allowed()
+if not feature.allowed()
   subdir_done()
 endif
 

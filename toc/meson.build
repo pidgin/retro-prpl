@@ -1,6 +1,6 @@
 feature = get_option('toc')
 
-summary({'TOC': feature}, section : 'Protocols')
+summary({'TOC': feature.allowed()}, bool_yn : true, section : 'Protocols')
 
 if not feature.allowed()
   subdir_done()

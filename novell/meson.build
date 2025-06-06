@@ -1,6 +1,6 @@
 feature = get_option('novell')
 
-summary({'Novell': feature}, section : 'Protocols')
+summary({'Novell': feature.allowed()}, bool_yn : true, section : 'Protocols')
 
 if not feature.allowed()
   subdir_done()

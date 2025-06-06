@@ -1,6 +1,6 @@
 feature = get_option('myspace')
 
-summary({'MySpace': feature}, section : 'Protocols')
+summary({'MySpace': feature.allowed()}, bool_yn : true, section : 'Protocols')
 
 if not feature.allowed()
   subdir_done()

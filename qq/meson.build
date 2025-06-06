@@ -1,6 +1,6 @@
 feature = get_option('qq')
 
-summary({'QQ': feature}, section : 'Protocols')
+summary({'QQ': feature.allowed()}, bool_yn : true, section : 'Protocols')
 
 if not feature.allowed()
   subdir_done()

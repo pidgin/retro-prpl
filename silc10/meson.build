@@ -1,12 +1,12 @@
 feature = get_option('silc10')
 
-summary({'SILC 10': feature}, section : 'Protocols')
+silc_dep = dependency('silcclient', required: feature)
 
-if not feature.allowed()
+summary({'SILC 10': silc_dep.found()}, bool_yn : true, section : 'Protocols')
+
+if not silc_dep.found()
   subdir_done()
 endif
-
-silc_dep = dependency('silcclient', required: false, disabler: true)
 
 if silc_dep.found()
   if silc_dep.version().version_compare('>= 1.1') or \
