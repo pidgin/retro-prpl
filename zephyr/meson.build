@@ -87,6 +87,7 @@ zephyr_prpl = shared_library('zephyr',
   'zephyr_err.c',
   include_directories: toplevel_inc,
   dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
+  name_suffix: plugin_suffix,
   install: true,
   install_dir: plugin_dir,
 )

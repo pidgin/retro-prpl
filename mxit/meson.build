@@ -24,6 +24,7 @@ mxit_prpl = shared_library('mxit',
   'splashscreen.c',
   include_directories: toplevel_inc,
   dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
+  name_suffix: plugin_suffix,
   install: true,
   install_dir: plugin_dir,
 )
