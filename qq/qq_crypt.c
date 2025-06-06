@@ -147,7 +147,7 @@ static inline void encrypt_out(guint8 *crypted, const gint crypted_len, const gu
 	p32_prev[0] = 0; p32_prev[1] = 0;
 	plain32[0] = crypted32[0] ^ p32_prev[0]; plain32[1] = crypted32[1] ^ p32_prev[1];
 
-	g_memmove(key32, key, 16);
+	memmove(key32, key, 16);
 	count64 = crypted_len / 8;
 	while (count64-- > 0){
 		/* encrypt it */
@@ -156,7 +156,7 @@ static inline void encrypt_out(guint8 *crypted, const gint crypted_len, const gu
 		crypted32[0] ^= p32_prev[0]; crypted32[1] ^= p32_prev[1];
 
 		/* store curr 64 bits crypted */
-		g_memmove(crypted_ptr, crypted32, sizeof(crypted32));
+		memmove(crypted_ptr, crypted32, sizeof(crypted32));
 
 		/* set prev */
 		p32_prev[0] = plain32[0]; p32_prev[1] = plain32[1];
@@ -206,7 +206,7 @@ gint qq_encrypt(guint8* crypted, const guint8* const plain, const gint plain_len
 		crypted_ptr[pos++] = rand() & 0xff;
 	}
 
-	g_memmove(crypted_ptr + pos, plain, plain_len);
+	memmove(crypted_ptr + pos, plain, plain_len);
 	pos += plain_len;
 
 	/* header padding len + plain len must be multiple of 8
@@ -330,7 +330,7 @@ gint qq_decrypt(guint8 *plain, const guint8* const crypted, const gint crypted_l
 	}
 
 	hdr_padding = crypted_len - plain_len - 7;
-	g_memmove(plain, plain + hdr_padding, plain_len);
+	memmove(plain, plain + hdr_padding, plain_len);
 
 	return plain_len;
 }

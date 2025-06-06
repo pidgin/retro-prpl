@@ -657,7 +657,7 @@ void add_buddy_authorize_input(PurpleConnection *gc, UID uid,
 	add_req->auth_len = 0;
 	if (auth != NULL && auth_len > 0) {
 		add_req->auth = g_new0(guint8, auth_len);
-		g_memmove(add_req->auth, auth, auth_len);
+		memmove(add_req->auth, auth, auth_len);
 		add_req->auth_len = auth_len;
 	}
 

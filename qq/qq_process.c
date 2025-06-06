@@ -435,7 +435,7 @@ static void process_server_msg(PurpleConnection *gc, guint8 *data, gint data_len
 	qd = (qq_data *) gc->proto_data;
 
 	data_str = g_newa(guint8, data_len + 1);
-	g_memmove(data_str, data, data_len);
+	memmove(data_str, data, data_len);
 	data_str[data_len] = 0x00;
 
 	segments = g_strsplit((gchar *) data_str, "\x1f", 0);
