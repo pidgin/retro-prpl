@@ -271,7 +271,7 @@ guint8 *hex_str_to_bytes(const gchar *const buffer, gint *out_len)
 	}
 	*out_len = strlen(hex_str) / 2;
 	g_free(hex_str);
-	return g_memdup(bytes, *out_len);
+	return g_memdup2(bytes, *out_len);
 }
 
 /* Dumps a chunk of raw data into an ASCII hex string.

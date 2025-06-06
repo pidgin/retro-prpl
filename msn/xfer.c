@@ -224,7 +224,7 @@ msn_file_context_from_wire(const char *buf, gsize len)
 
 	if (context->type == 0 && len > context->length) {
 		context->preview_len = len - context->length;
-		context->preview = g_memdup(buf, context->preview_len);
+		context->preview = g_memdup2(buf, context->preview_len);
 	} else {
 		context->preview_len = 0;
 		context->preview = NULL;

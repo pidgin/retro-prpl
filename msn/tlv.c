@@ -82,7 +82,7 @@ msn_tlvlist_read(const char *bs, size_t bs_len)
 
 		tlv = createtlv(type, length, NULL);
 		if (length > 0) {
-			tlv->value = g_memdup(bs, length);
+			tlv->value = g_memdup2(bs, length);
 			if (!tlv->value) {
 				freetlv(tlv);
 				msn_tlvlist_free(list);
@@ -178,7 +178,7 @@ msn_tlvlist_add_raw(GSList **list, const guint8 type, const guint8 length, const
 
 	tlv = createtlv(type, length, NULL);
 	if (length > 0)
-		tlv->value = g_memdup(value, length);
+		tlv->value = g_memdup2(value, length);
 
 	*list = g_slist_append(*list, tlv);
 
@@ -255,7 +255,7 @@ msn_tlvlist_replace_raw(GSList **list, const guint8 type, const guint8 length, c
 	g_free(tlv->value);
 	tlv->length = length;
 	if (length > 0) {
-		tlv->value = g_memdup(value, length);
+		tlv->value = g_memdup2(value, length);
 	} else
 		tlv->value = NULL;
 

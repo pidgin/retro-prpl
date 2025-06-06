@@ -500,7 +500,7 @@ MsnServConn *msn_servconn_process_data(MsnServConn *servconn)
 	if (servconn->connected && !servconn->wasted)
 	{
 		if (servconn->rx_len > 0)
-			servconn->rx_buf = g_memdup(cur, servconn->rx_len);
+			servconn->rx_buf = g_memdup2(cur, servconn->rx_len);
 		else
 			servconn->rx_buf = NULL;
 	}

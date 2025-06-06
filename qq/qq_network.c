@@ -461,7 +461,7 @@ static void tcp_pending(gpointer data, gint source, PurpleInputCondition cond)
 		conn->tcp_rxlen -= pkt_len;
 		if (conn->tcp_rxlen) {
 			/* purple_debug_info("TCP_PENDING", "shrink tcp_rxqueue to %d\n", conn->tcp_rxlen);	*/
-			jump = g_memdup(conn->tcp_rxqueue + pkt_len, conn->tcp_rxlen);
+			jump = g_memdup2(conn->tcp_rxqueue + pkt_len, conn->tcp_rxlen);
 			g_free(conn->tcp_rxqueue);
 			conn->tcp_rxqueue = jump;
 		} else {

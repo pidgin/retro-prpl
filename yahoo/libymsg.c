@@ -3427,7 +3427,7 @@ static void yahoo_pending(gpointer data, gint source, PurpleInputCondition cond)
 
 		yd->rxlen -= YAHOO_PACKET_HDRLEN + pktlen;
 		if (yd->rxlen) {
-			guchar *tmp = g_memdup(yd->rxqueue + YAHOO_PACKET_HDRLEN + pktlen, yd->rxlen);
+			guchar *tmp = g_memdup2(yd->rxqueue + YAHOO_PACKET_HDRLEN + pktlen, yd->rxlen);
 			g_free(yd->rxqueue);
 			yd->rxqueue = tmp;
 		} else {

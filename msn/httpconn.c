@@ -522,7 +522,7 @@ msn_httpconn_write(MsnHttpConn *httpconn, const char *body, size_t body_len)
 		MsnHttpQueueData *queue_data = g_new0(MsnHttpQueueData, 1);
 
 		queue_data->httpconn = httpconn;
-		queue_data->body     = g_memdup(body, body_len);
+		queue_data->body     = g_memdup2(body, body_len);
 		queue_data->body_len = body_len;
 
 		httpconn->queue = g_list_append(httpconn->queue, queue_data);

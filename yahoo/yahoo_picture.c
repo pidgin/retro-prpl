@@ -61,7 +61,7 @@ yahoo_fetch_picture_cb(PurpleUtilFetchUrlData *url_data, gpointer user_data,
 		purple_debug_error("yahoo", "Fetched an icon with length 0.  Strange.\n");
 	} else {
 		char *checksum = g_strdup_printf("%i", d->checksum);
-		purple_buddy_icons_set_for_user(purple_connection_get_account(d->gc), d->who, g_memdup(pic_data, len), len, checksum);
+		purple_buddy_icons_set_for_user(purple_connection_get_account(d->gc), d->who, g_memdup2(pic_data, len), len, checksum);
 		g_free(checksum);
 	}
 
