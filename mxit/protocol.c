@@ -52,11 +52,15 @@
  */
 gint64 mxit_now_milli( void )
 {
+#if GLIB_CHECK_VERSION(2, 28, 0)
+	return g_get_real_time() / 1000;
+#else
 	GTimeVal	now;
 
 	g_get_current_time( &now );
 
 	return ( ( now.tv_sec * 1000 ) + ( now.tv_usec / 1000 ) );
+#endif
 }
 
 
