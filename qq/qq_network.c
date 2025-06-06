@@ -449,13 +449,13 @@ static void tcp_pending(gpointer data, gint source, PurpleInputCondition cond)
 			/* jump and over QQ_PACKET_TAIL */
 			jump_len = (jump - conn->tcp_rxqueue) + 1;
 			purple_debug_warning("TCP_PENDING", "Find next tail at %d, jump %d\n", jump_len, jump_len + 1);
-			g_memmove(conn->tcp_rxqueue, jump, conn->tcp_rxlen - jump_len);
+			memmove(conn->tcp_rxqueue, jump, conn->tcp_rxlen - jump_len);
 			conn->tcp_rxlen -= jump_len;
 			continue;
 		}
 
 		memset(pkt, 0, MAX_PACKET_SIZE);
-		g_memmove(pkt, conn->tcp_rxqueue + bytes, pkt_len - bytes);
+		memmove(pkt, conn->tcp_rxqueue + bytes, pkt_len - bytes);
 
 		/* jump to next packet */
 		conn->tcp_rxlen -= pkt_len;

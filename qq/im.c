@@ -580,7 +580,7 @@ qq_im_format *qq_im_fmt_new_by_purple(const gchar *msg)
 			gsize rgb_len;
 			rgb = purple_base16_decode(tmp + 1, &rgb_len);
 			if (rgb != NULL && rgb_len >= 3)
-				g_memmove(fmt->rgb, rgb, 3);
+				memmove(fmt->rgb, rgb, 3);
 			g_free(rgb);
 		}
 

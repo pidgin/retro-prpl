@@ -807,11 +807,11 @@ void qq_process_recv_file_request(guint8 *data, gint data_len, UID sender_uid, P
 		bd = (b == NULL) ? NULL : purple_buddy_get_protocol_data(b);
 		if (bd) {
 			if(0 != info->remote_real_ip) {
-				g_memmove(&(bd->ip), &info->remote_real_ip, sizeof(bd->ip));
+				memmove(&(bd->ip), &info->remote_real_ip, sizeof(bd->ip));
 				bd->port = info->remote_minor_port;
 			}
 			else if (0 != info->remote_internet_ip) {
-				g_memmove(&(bd->ip), &info->remote_internet_ip, sizeof(bd->ip));
+				memmove(&(bd->ip), &info->remote_internet_ip, sizeof(bd->ip));
 				bd->port = info->remote_major_port;
 			}
 

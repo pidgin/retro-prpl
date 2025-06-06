@@ -338,7 +338,7 @@ guint16 qq_process_get_buddies(guint8 *data, gint data_len, PurpleConnection *gc
 		bd.last_update = time(NULL);
 		qq_update_buddy_status(gc, bd.uid, bd.status, bd.comm_flag);
 
-		g_memmove(purple_buddy_get_protocol_data(buddy), &bd, sizeof(qq_buddy_data));
+		memmove(purple_buddy_get_protocol_data(buddy), &bd, sizeof(qq_buddy_data));
 		/* nickname has been copy to buddy_data do not free
 		   g_free(bd.nickname);
 		*/

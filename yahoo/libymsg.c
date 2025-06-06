@@ -2753,7 +2753,7 @@ static void yahoo_p2p_read_pkt_cb(gpointer data, gint source, PurpleInputConditi
 		purple_debug_warning("yahoo","p2p: Got something other than YMSG packet\n");
 
 		len -= (start - buf);
-		g_memmove(buf, start, len);
+		memmove(buf, start, len);
 	}
 
 	pos += 4;	/* YMSG */
@@ -3392,7 +3392,7 @@ static void yahoo_pending(gpointer data, gint source, PurpleInputCondition cond)
 
 			start = memchr(yd->rxqueue + 1, 'Y', yd->rxlen - 1);
 			if (start) {
-				g_memmove(yd->rxqueue, start, yd->rxlen - (start - yd->rxqueue));
+				memmove(yd->rxqueue, start, yd->rxlen - (start - yd->rxqueue));
 				yd->rxlen -= start - yd->rxqueue;
 				continue;
 			} else {

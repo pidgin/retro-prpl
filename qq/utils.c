@@ -105,7 +105,7 @@ gchar **split_data(guint8 *data, gint len, const gchar *delimit, gint expected_f
 	/* as the last field would be string, but data is not ended with 0x00
 	 * we have to duplicate the data and append a 0x00 at the end */
 	input = g_newa(guint8, len + 1);
-	g_memmove(input, data, len);
+	memmove(input, data, len);
 	input[len] = 0x00;
 
 	segments = g_strsplit((gchar *) input, delimit, 0);
@@ -181,7 +181,7 @@ gchar* try_dump_as_gbk(const guint8 *const data, gint len)
 	gchar *msg_utf8;
 
 	incoming = g_newa(guint8, len + 1);
-	g_memmove(incoming, data, len);
+	memmove(incoming, data, len);
 	incoming[len] = 0x00;
 	/* GBK code:
 	 * Single-byte ASCII:      0x21-0x7E

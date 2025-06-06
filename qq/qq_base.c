@@ -340,7 +340,7 @@ guint8 qq_process_token(PurpleConnection *gc, guint8 *buf, gint buf_len)
 	}
 	qd->ld.token = g_new0(guint8, token_len);
 	qd->ld.token_len = token_len;
-	g_memmove(qd->ld.token, buf + 2, qd->ld.token_len);
+	memmove(qd->ld.token, buf + 2, qd->ld.token_len);
 	return ret;
 }
 
@@ -857,7 +857,7 @@ void qq_captcha_input_dialog(PurpleConnection *gc,qq_captcha_data *captcha)
 	captcha_req = g_new0(qq_captcha_request, 1);
 	captcha_req->gc = gc;
 	captcha_req->token = g_new0(guint8, captcha->token_len);
-	g_memmove(captcha_req->token, captcha->token, captcha->token_len);
+	memmove(captcha_req->token, captcha->token, captcha->token_len);
 	captcha_req->token_len = captcha->token_len;
 
 	account = purple_connection_get_account(gc);
