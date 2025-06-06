@@ -1253,8 +1253,10 @@ gint qq_send_im(PurpleConnection *gc, const gchar *who, const gchar *what, Purpl
 	gint msg_len;
 	const gchar *start_invalid;
 	gboolean is_smiley_none;
+#if 0
 	guint8 frag_count, frag_index;
 	guint8 msg_id;
+#endif
 
 	g_return_val_if_fail(NULL != gc && NULL != gc->proto_data, -1);
 	g_return_val_if_fail(who != NULL && what != NULL, -1);
@@ -1300,18 +1302,24 @@ gint qq_send_im(PurpleConnection *gc, const gchar *who, const gchar *what, Purpl
 	}
 
 	qd->send_im_id++;
+#if 0
 	msg_id = (guint8)(qd->send_im_id && 0xFF);
+#endif
 	fmt = qq_im_fmt_new_by_purple(what);
+#if 0
 	frag_count = g_slist_length(segments);
 	frag_index = 0;
+#endif
 	for (it = segments; it; it = it->next) {
-		/*
+#if 0
 		request_send_im(gc, uid_to, type, fmt, (gchar *)it->data,
 			msg_id, frag_count, frag_index);
-		*/
+#endif
 		request_send_im(gc, uid_to, type, fmt, (gchar *)it->data, 0, 0, 0);
 		g_free(it->data);
+#if 0
 		frag_index++;
+#endif
 	}
 	g_slist_free(segments);
 	qq_im_fmt_free(fmt);
