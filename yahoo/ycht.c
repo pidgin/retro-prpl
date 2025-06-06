@@ -523,7 +523,7 @@ static void ycht_pending(gpointer data, gint source, PurpleInputCondition cond)
 
 		ycht->rxlen -= YCHT_HEADER_LEN + pktlen;
 		if (ycht->rxlen) {
-			guchar *tmp = g_memdup(ycht->rxqueue + YCHT_HEADER_LEN + pktlen, ycht->rxlen);
+			guchar *tmp = g_memdup2(ycht->rxqueue + YCHT_HEADER_LEN + pktlen, ycht->rxlen);
 			g_free(ycht->rxqueue);
 			ycht->rxqueue = tmp;
 		} else {

@@ -105,7 +105,7 @@ static qq_transaction *trans_create(PurpleConnection *gc, gint fd,
 	trans->data_len = 0;
 	if (data != NULL && data_len > 0) {
 		/* don't use g_strdup, may have 0x00 */
-		trans->data = g_memdup(data, data_len);
+		trans->data = g_memdup2(data, data_len);
 		trans->data_len = data_len;
 	}
 
@@ -248,7 +248,7 @@ void qq_trans_add_server_reply(PurpleConnection *gc, guint16 cmd, guint16 seq,
 
 	if (trans->data)	g_free(trans->data);
 
-	trans->data = g_memdup(reply, reply_len);
+	trans->data = g_memdup2(reply, reply_len);
 	trans->data_len = reply_len;
 }
 

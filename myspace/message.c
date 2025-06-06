@@ -1371,7 +1371,7 @@ msim_msg_get_binary_from_element(MsimMessageElement *elem, gchar **binary_data, 
 			gs = (GString *)elem->data;
 
 			/* Duplicate data, so caller can g_free() it. */
-			*binary_data = g_memdup(gs->str, gs->len);
+			*binary_data = g_memdup2(gs->str, gs->len);
 			*binary_length = gs->len;
 
 			return TRUE;

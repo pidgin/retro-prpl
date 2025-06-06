@@ -172,7 +172,7 @@ msn_cmdproc_process_payload(MsnCmdProc *cmdproc, char *payload,
 	g_return_if_fail(cmdproc != NULL);
 
 	last = cmdproc->last_cmd;
-	last->payload = g_memdup(payload, payload_len);
+	last->payload = g_memdup2(payload, payload_len);
 	last->payload_len = payload_len;
 
 	if (last->payload_cb != NULL)

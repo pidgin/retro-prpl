@@ -228,7 +228,7 @@ msim_downloaded_buddy_icon(PurpleUtilFetchUrlData *url_data,
 
 	account = purple_buddy_get_account(user->buddy);
 	purple_buddy_icons_set_for_user(account, name,
-			g_memdup((gchar *)url_text, len), len,
+			g_memdup2((gchar *)url_text, len), len,
 			/* Use URL itself as buddy icon "checksum" (TODO: ETag) */
 			user->image_url);		/* checksum */
 }

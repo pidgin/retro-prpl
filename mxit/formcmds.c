@@ -104,7 +104,7 @@ static void mxit_cb_ii_returned(PurpleUtilFetchUrlData* url_data, gpointer user_
 	}
 
 	/* we now have the inline image, store a copy in the imagestore */
-	id = purple_imgstore_add_with_id(g_memdup(url_text, len), len, NULL);
+	id = purple_imgstore_add_with_id(g_memdup2(url_text, len), len, NULL);
 
 	/* map the inline image id to purple image id */
 	intptr = g_malloc(sizeof(int));

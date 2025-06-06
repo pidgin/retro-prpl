@@ -130,7 +130,7 @@ got_user_display(MsnSlpCall *slpcall,
 	account = slpcall->slplink->session->account;
 
 	purple_buddy_icons_set_for_user(account, slpcall->slplink->remote_user,
-								  g_memdup(data, size), size, info);
+								  g_memdup2(data, size), size, info);
 }
 
 static void
@@ -180,7 +180,7 @@ fetched_user_display(PurpleUtilFetchUrlData *url_data, gpointer user_data,
 
 	if (url_text) {
 		purple_buddy_icons_set_for_user(session->account, data->remote_user,
-		                                g_memdup(url_text, len), len,
+		                                g_memdup2(url_text, len), len,
 		                                data->sha1);
 	}
 
@@ -213,7 +213,7 @@ request_own_user_display(MsnUser *user)
 		info = msn_object_get_sha1(my_obj);
 	}
 
-	purple_buddy_icons_set_for_user(account, user->passport, g_memdup(data, len), len, info);
+	purple_buddy_icons_set_for_user(account, user->passport, g_memdup2(data, len), len, info);
 
 	/* Free one window slot */
 	session->userlist->buddy_icon_window++;
