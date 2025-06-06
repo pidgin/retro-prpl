@@ -890,7 +890,6 @@ guint8 qq_process_token_ex(PurpleConnection *gc, guint8 *data, gint data_len)
 {
 	qq_data *qd;
 	int bytes;
-	guint8 ret;
 	guint8 sub_cmd;
 	guint8 reply;
 	guint16 captcha_len;
@@ -900,8 +899,6 @@ guint8 qq_process_token_ex(PurpleConnection *gc, guint8 *data, gint data_len)
 
 	g_return_val_if_fail(gc != NULL  && gc->proto_data != NULL, QQ_LOGIN_REPLY_ERR);
 	qd = (qq_data *) gc->proto_data;
-
-	ret = data[0];
 
 	bytes = 0;
 	bytes += qq_get8(&sub_cmd, data + bytes); /* 03: ok; 04: need verifying */
