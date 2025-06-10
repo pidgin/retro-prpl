@@ -17,9 +17,9 @@ def run_git(cmd: str) -> str:
 
     full_cmd.extend(cmd.split())
 
-    output = subprocess.check_output(full_cmd)
+    output = subprocess.check_output(full_cmd, encoding='utf-8')
 
-    return output.decode("utf-8").strip()
+    return output.strip()
 
 
 commit_hash = os.environ.get('GITHUB_SHA', None)
