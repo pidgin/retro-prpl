@@ -28,10 +28,17 @@ toplevel_inc = include_directories('.')
 if get_option('use-purple-prefix')
   pixmap_dir = libpurple_dep.get_variable('datadir') / 'pixmaps/pidgin'
   plugin_dir = libpurple_dep.get_variable('plugindir')
+  locale_dir = libpurple_dep.get_variable('datadir') / 'locale'
 else
   pixmap_dir = get_option('prefix') / get_option('datadir') / 'pixmaps/pidgin'
   plugin_dir = get_option('prefix') / get_option('libdir') / 'purple-2'
+  locale_dir = get_option('prefix') / get_option('localedir')
 endif
+
+add_project_arguments(f'-DLOCALEDIR="@locale_dir@"', language : 'c')
+
+GETTEXT_PACKAGE = 'retro-prpl'
+add_project_arguments(f'-DGETTEXT_PACKAGE="@GETTEXT_PACKAGE@"', language : 'c')
 
 if host_machine.system() == 'windows'
   ws2_32_dep = cc.find_library('ws2_32')
@@ -45,6 +52,7 @@ if host_machine.system() == 'darwin'
 endif
 
 summary({
+  'locales': locale_dir,
   'plugins': plugin_dir,
   'pixmaps': pixmap_dir,
   },
@@ -57,6 +65,7 @@ subdir('myspace')
 subdir('napster')
 subdir('novell')
 subdir('oscar')
+subdir('po')
 subdir('qq')
 subdir('sametime')
 subdir('silc')
