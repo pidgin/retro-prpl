@@ -25,7 +25,7 @@ def run_git(cmd: str) -> str:
 commit_hash = os.environ.get('GITHUB_SHA', None)
 dt = None
 if commit_hash is not None:
-    iso8601 = run_git('show --no-patch --format=%cI HEAD')
+    iso8601 = run_git(f'show --no-patch --format=%cI {commit_hash}')
     dt = datetime.fromisoformat(iso8601)
 else:
     commit_hash = run_git('describe --dirty --always')
