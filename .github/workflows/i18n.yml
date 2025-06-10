@@ -1,0 +1,41 @@
+---
+name: Test i18n
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: "Test i18n"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Prepare build environment
+        run: |
+          sudo apt-get update -yy
+          sudo apt-get install -yy --no-install-recommends \
+            build-essential \
+            gettext \
+            libpurple-dev \
+            meson
+
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+
+      - name: Setup Meson build
+        run: meson setup build
+
+      - name: Build the pot file
+        run: ninja -C build retro-prpl-pot
+
+      - name: Add all translatable files to POTFILES
+        run: git ls-files --deduplicate '*.c' | LANG=en_US.UTF-8 sort > po/POTFILES
+
+      - name: Check for any changes to po/POTFILES
+        run: git diff --exit-code -- po/POTFILES
