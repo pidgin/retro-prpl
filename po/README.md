@@ -7,5 +7,5 @@ Our `POTFILES` file is generated with the following command ran from the top
 source directory:
 
 ```sh
-find . -type f -iname '*.c'  | sort | cut -d / -f 2- > po/POTFILES
+git ls-files '*.c' | sort > po/POTFILES
 ```

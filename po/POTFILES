@@ -1,6 +1,3 @@
-build-cross/meson-private/sanitycheckc.c
-build/meson-private/__CMake_compiler_info__/CMakeFiles/3.31.6/CompilerIdC/CMakeCCompilerId.c
-build/meson-private/sanitycheckc.c
 gg/buddylist.c
 gg/confer.c
 gg/gg.c
