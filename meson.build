@@ -1,4 +1,4 @@
-project('retro-prpl', 'c', meson_version : '>=1.0.0', version : '2025-06-10-1badb7f198be4dc97b138a11e8cf8c0b24df08ad')
+project('retro-prpl', 'c', meson_version : '>=1.0.0', version : '2025-06-10-3bcde8491f7aff046388dcdad49ddc390b5a9655')
 
 add_project_arguments('-DHAVE_CONFIG_H', '-DPURPLE_PLUGINS', language: 'c')
 
