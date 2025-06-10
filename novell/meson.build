@@ -6,7 +6,7 @@ if not feature.allowed()
   subdir_done()
 endif
 
-novell_prpl = shared_library('novell',
+novell_prpl = shared_library('retronovell',
   'nmconference.c',
   'nmconn.c',
   'nmcontact.c',

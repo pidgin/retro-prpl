@@ -17,7 +17,7 @@ libyahoo = static_library('yahoo',
 feature = get_option('yahoo')
 summary({'Yahoo!': feature.allowed()}, bool_yn : true, section : 'Protocols')
 if feature.allowed()
-  yahoo_prpl = shared_library('yahoo',
+  yahoo_prpl = shared_library('retroyahoo',
     'libyahoo.c',
     include_directories: toplevel_inc,
     dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
@@ -31,7 +31,7 @@ endif
 feature = get_option('yahoojp')
 summary({'Yahoo! Japan': feature.allowed()}, bool_yn : true, section : 'Protocols')
 if feature.allowed()
-  yahoojp_prpl = shared_library('yahoojp',
+  yahoojp_prpl = shared_library('retroyahoojp',
     'libyahoojp.c',
     include_directories: toplevel_inc,
     dependencies: [libpurple_dep, glib_dep, ws2_32_dep],

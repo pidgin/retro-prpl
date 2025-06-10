@@ -44,7 +44,7 @@ liboscar = static_library('oscar',
 feature = get_option('aim')
 summary({'AIM': feature.allowed()}, bool_yn : true, section : 'Protocols')
 if feature.allowed()
-  libaim = shared_library('aim',
+  libaim = shared_library('retroaim',
     'libaim.c',
     include_directories: toplevel_inc,
     dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
@@ -58,7 +58,7 @@ endif
 feature = get_option('icq')
 summary({'ICQ': feature.allowed()}, bool_yn : true, section : 'Protocols')
 if feature.allowed()
-  libicq = shared_library('icq',
+  libicq = shared_library('retroicq',
     'libicq.c',
     include_directories: toplevel_inc,
     dependencies: [libpurple_dep, glib_dep, ws2_32_dep],

@@ -6,7 +6,7 @@ if not feature.allowed()
   subdir_done()
 endif
 
-mxit_prpl = shared_library('mxit',
+mxit_prpl = shared_library('retromxit',
   'actions.c',
   'aes.c',
   'chunk.c',

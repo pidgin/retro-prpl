@@ -15,7 +15,7 @@ if not libgadu_dep.found()
   subdir('lib')
 endif
 
-gg_prpl = shared_library('gg',
+gg_prpl = shared_library('retrogg',
   'buddylist.c',
   'confer.c',
   'gg.c',
