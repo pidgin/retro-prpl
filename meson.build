@@ -3,6 +3,8 @@ project(
   meson_version : '>=1.0.0',
   version : run_command('get-version.py', check : true).stdout().strip())
 
+meson.add_dist_script('dist-version.sh', meson.project_version())
+
 add_project_arguments('-DHAVE_CONFIG_H', '-DPURPLE_PLUGINS', language: 'c')
 
 cc = meson.get_compiler('c')
