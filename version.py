@@ -42,8 +42,8 @@ def set_dist(version):
     meson_rewrite = os.environ['MESONREWRITE']
     meson_dist_root = os.environ['MESON_PROJECT_DIST_ROOT']
 
-    args = meson_rewrite.split()
-    args += [
+    args = [
+        *meson_rewrite.split(),
         f'--sourcedir={meson_dist_root}',
         'kwargs',
         'set',
