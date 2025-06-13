@@ -8,7 +8,7 @@ endif
 
 math = cc.find_library('m', required: false)
 
-myspace_prpl = shared_library('myspace',
+myspace_prpl = shared_library('retromyspace',
   'markup.c',
   'message.c',
   'myspace.c',

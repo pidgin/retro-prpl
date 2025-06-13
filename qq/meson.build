@@ -8,7 +8,7 @@ endif
 
 datadir = get_option('prefix') / get_option('datadir')
 
-qq_prpl = shared_library('qq',
+qq_prpl = shared_library('retroqq',
   'buddy_info.c',
   'buddy_list.c',
   'buddy_memo.c',

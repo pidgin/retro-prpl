@@ -6,7 +6,7 @@ if not feature.allowed()
   subdir_done()
 endif
 
-msn_prpl = shared_library('msn',
+msn_prpl = shared_library('retromsn',
   'cmdproc.c',
   'command.c',
   'contact.c',

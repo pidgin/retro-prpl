@@ -9,7 +9,7 @@ if not meanwhile_dep.found()
   subdir_done()
 endif
 
-sametime_prpl = shared_library('sametime',
+sametime_prpl = shared_library('retrosametime',
   'sametime.c',
   include_directories: toplevel_inc,
   dependencies: [meanwhile_dep, libpurple_dep, glib_dep, ws2_32_dep],

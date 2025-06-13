@@ -30,7 +30,7 @@ cfg.set('ZEPHYR_INT32', 'long')
 
 cfg.set_quoted('CONFDIR', get_option('prefix') / get_option('sysconfdir'))
 
-zephyr_prpl = shared_library('zephyr',
+zephyr_prpl = shared_library('retrozephyr',
   'ZAsyncLocate.c',
   'ZCkAuth.c',
   'ZCkIfNot.c',

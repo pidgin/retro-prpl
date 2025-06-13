@@ -15,7 +15,7 @@ if silc_dep.found()
   endif
 endif
 
-silc_prpl = shared_library('silc',
+silc_prpl = shared_library('retrosilc',
   'buddy.c',
   'chat.c',
   'ft.c',
