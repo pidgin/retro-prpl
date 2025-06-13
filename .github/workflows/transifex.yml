@@ -30,6 +30,6 @@ jobs:
         run: ninja -C build retro-prpl-pot
 
       - name: Upload pot file
-        with:
-            TX_TOKEN: ${{ secrets.TX_TOKEN }}
         uses: transifex/cli-action@584fd205cbe598773b5a81ce711fa44842678189  # v2
+        with:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
