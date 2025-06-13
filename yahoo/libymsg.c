@@ -27,6 +27,8 @@
  * it is UTF-8 using g_utf8_validate() or use yahoo_string_decode().
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "internal.h"
 
 #include "account.h"

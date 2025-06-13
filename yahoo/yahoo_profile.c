@@ -23,6 +23,8 @@
 
 #define PHOTO_SUPPORT 1
 
+#include <glib/gi18n-lib.h>
+
 #include "internal.h"
 #include "debug.h"
 #include "notify.h"

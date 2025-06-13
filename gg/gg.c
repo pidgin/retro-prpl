@@ -26,6 +26,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02111-1301  USA
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "internal.h"
 
 #include "plugin.h"
@@ -2411,6 +2413,9 @@ static void init_plugin(PurplePlugin *plugin)
 {
 	PurpleAccountOption *option;
 	GList *encryption_options = NULL;
+
+	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 
 	option = purple_account_option_string_new(_("Nickname"),
 			"nick", _("Gadu-Gadu User"));

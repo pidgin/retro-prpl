@@ -25,6 +25,8 @@
  * Now we're up to bat
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "oscar.h"
 
 #include "core.h"

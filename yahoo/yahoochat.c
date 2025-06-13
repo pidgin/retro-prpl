@@ -26,6 +26,8 @@
  *
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "internal.h"
 
 #ifdef HAVE_CONFIG_H

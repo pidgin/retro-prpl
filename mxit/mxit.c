@@ -23,6 +23,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02111-1301  USA
  */
 
+#include <glib/gi18n-lib.h>
+
 #include	"internal.h"
 #include	"debug.h"
 #include	"accountopt.h"
@@ -842,6 +844,9 @@ static PurplePluginInfo plugin_info = {
 static void init_plugin( PurplePlugin* plugin )
 {
 	PurpleAccountOption*	option;
+
+	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 
 	purple_debug_info( MXIT_PLUGIN_ID, "Loading MXit libPurple plugin...\n" );
 

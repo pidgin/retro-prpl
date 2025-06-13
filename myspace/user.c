@@ -17,6 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02111-1301  USA
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "myspace.h"
 
 static void msim_check_username_availability_cb(PurpleConnection *gc, const char *username_to_check);

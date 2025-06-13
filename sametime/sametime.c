@@ -21,6 +21,8 @@
   USA.
 */
 
+#include <glib/gi18n-lib.h>
+
 #include "internal.h"
 
 /* system includes */
@@ -5738,6 +5740,9 @@ static void mw_plugin_init(PurplePlugin *plugin) {
 
   GLogLevelFlags logflags =
     G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION;
+
+  bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
+  bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 
   /* set up the preferences */
   purple_prefs_add_none(MW_PRPL_OPT_BASE);

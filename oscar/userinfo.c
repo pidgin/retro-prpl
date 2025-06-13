@@ -22,6 +22,8 @@
  * Displaying various information about buddies.
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "encoding.h"
 #include "oscar.h"
 

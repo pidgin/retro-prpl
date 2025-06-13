@@ -34,6 +34,8 @@
 
 #define PURPLE_PLUGIN
 
+#include <glib/gi18n-lib.h>
+
 #include "myspace.h"
 
 #include "privacy.h"
@@ -3613,6 +3615,9 @@ init_plugin(PurplePlugin *plugin)
 
 	PurpleAccountOption *option;
 	static gboolean initialized = FALSE;
+
+	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 
 #ifdef MSIM_CHECK_NEWER_VERSION
 	/* PROBLEM: MySpace's servers always return Content-Location, and
