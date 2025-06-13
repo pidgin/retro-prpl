@@ -23,6 +23,8 @@
  */
 #define PHOTO_SUPPORT 1
 
+#include <glib/gi18n-lib.h>
+
 #include "internal.h"
 
 #include "debug.h"
@@ -3020,6 +3022,9 @@ static void
 init_plugin(PurplePlugin *plugin)
 {
 	PurpleAccountOption *option;
+
+	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 
 	option = purple_account_option_string_new(_("Server"), "server",
 											MSN_SERVER);

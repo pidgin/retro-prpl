@@ -53,6 +53,8 @@
  *      "received" checksum and size) and closes the connection.
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "oscar.h"
 #include "peer.h"
 

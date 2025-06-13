@@ -18,6 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02111-1301  USA
 */
 
+#include <glib/gi18n-lib.h>
+
 #include "visibility.h"
 
 /* Translators: This string is a menu option that, if selected, will cause

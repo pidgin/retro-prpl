@@ -26,6 +26,8 @@
 #define		_XOPEN_SOURCE	1
 #include	<time.h>
 
+#include <glib/gi18n-lib.h>
+
 #include	"internal.h"
 
 #include	"mxit.h"

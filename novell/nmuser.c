@@ -18,8 +18,11 @@
  *
  */
 
-#include "internal.h"
 #include <string.h>
+
+#include <glib/gi18n-lib.h>
+
+#include "internal.h"
 #include "nmfield.h"
 #include "nmuser.h"
 #include "nmconn.h"

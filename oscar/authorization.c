@@ -22,6 +22,8 @@
  * Everything related to OSCAR authorization requests.
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "oscar.h"
 #include "request.h"
 

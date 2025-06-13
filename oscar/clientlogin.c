@@ -36,6 +36,8 @@
  * http://dev.aol.com/authentication_for_clients
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "oscar.h"
 #include "oscarcommon.h"
 

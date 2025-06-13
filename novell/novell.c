@@ -18,6 +18,8 @@
  *
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "internal.h"
 #include "accountopt.h"
 #include "debug.h"
@@ -3574,6 +3576,9 @@ static void
 init_plugin(PurplePlugin * plugin)
 {
 	PurpleAccountOption *option;
+
+	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 
 	option = purple_account_option_string_new(_("Server address"), "server", NULL);
 	prpl_info.protocol_options =

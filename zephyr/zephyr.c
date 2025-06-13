@@ -26,6 +26,9 @@
  *
 
 */
+
+#include <glib/gi18n-lib.h>
+
 #include "internal.h"
 
 #include "accountopt.h"
@@ -2971,6 +2974,9 @@ static void init_plugin(PurplePlugin * plugin)
 {
 	PurpleAccountOption *option;
 	char *tmp = get_exposure_level();
+
+	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 
 	option = purple_account_option_bool_new(_("Use tzc"), "use_tzc", FALSE);
 	prpl_info.protocol_options = g_list_append(prpl_info.protocol_options, option);

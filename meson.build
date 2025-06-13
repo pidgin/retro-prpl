@@ -13,7 +13,6 @@ libpurple_dep = dependency('purple', version: '>= 2.14.0')
 
 cfg = configuration_data()
 cfg.set_quoted('DISPLAY_VERSION', meson.project_version())
-cfg.set_quoted('GETTEXT_PACKAGE', meson.project_name())
 cfg.set_quoted('PACKAGE', meson.project_name())
 cfg.set_quoted('PACKAGE_NAME', meson.project_name())
 cfg.set_quoted('PACKAGE_VERSION', meson.project_version())

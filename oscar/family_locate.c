@@ -26,6 +26,8 @@
  * for getting and setting info, away messages, directory profile thingy, etc.
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "oscar.h"
 #ifdef _WIN32
 #include "win32dep.h"

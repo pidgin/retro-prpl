@@ -34,35 +34,6 @@
 #ifdef SKYOS
 #include <net/sockios.h>
 #endif
-/*
- * If we're using NLS, make sure gettext works.  If not, then define
- * dummy macros in place of the normal gettext macros.
- *
- * Also, the perl XS config.h file sometimes defines _  So we need to
- * make sure _ isn't already defined before trying to define it.
- *
- * The Singular/Plural/Number ngettext dummy definition below was
- * taken from an email to the texinfo mailing list by Manuel Guerrero.
- * Thank you Manuel, and thank you Alex's good friend Google.
- */
-#ifdef ENABLE_NLS
-#  include <locale.h>
-#  include <libintl.h>
-#  define _(String) ((const char *)dgettext(PACKAGE, String))
-#  ifdef gettext_noop
-#    define N_(String) gettext_noop (String)
-#  else
-#    define N_(String) (String)
-#  endif
-#else
-#  include <locale.h>
-#  define N_(String) (String)
-#  ifndef _
-#    define _(String) ((const char *)String)
-#  endif
-#  define ngettext(Singular, Plural, Number) ((Number == 1) ? ((const char *)Singular) : ((const char *)Plural))
-#  define dngettext(Domain, Singular, Plural, Number) ((Number == 1) ? ((const char *)Singular) : ((const char *)Plural))
-#endif
 
 #ifdef HAVE_ENDIAN_H
 # include <endian.h>

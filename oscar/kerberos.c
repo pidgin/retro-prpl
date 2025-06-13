@@ -34,6 +34,8 @@
  *
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "oscar.h"
 #include "oscarcommon.h"
 #include "core.h"

@@ -22,6 +22,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02111-1301  USA
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "internal.h"
 
 #include "accountopt.h"
@@ -1094,6 +1096,9 @@ static void init_plugin(PurplePlugin *plugin)
 	/* #ifdef DEBUG */
 	GList *version_kv_list = NULL;
 	/* #endif */
+
+	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 
 	server_list = server_list_build('A');
 

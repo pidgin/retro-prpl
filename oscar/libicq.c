@@ -24,6 +24,7 @@
  * which contains all the shared implementation code with libaim
  */
 
+#include <glib/gi18n-lib.h>
 
 #include "oscarcommon.h"
 
@@ -159,6 +160,9 @@ static void
 init_plugin(PurplePlugin *plugin)
 {
 	PurpleAccountOption *option;
+
+	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 
 	oscar_init(plugin, TRUE);
 

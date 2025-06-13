@@ -29,6 +29,8 @@
 #include  <config.h>
 #endif
 
+#include <glib/gi18n-lib.h>
+
 /* From the oscar PRPL */
 #include "oscar.h"
 #include "peer.h"

@@ -44,6 +44,8 @@
  *       Make sure flap_connection_findbygroup is used by all functions.
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "encoding.h"
 #include "oscar.h"
 #include "peer.h"

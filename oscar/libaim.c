@@ -24,6 +24,8 @@
  * which contains all the shared implementation code with libicq
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "oscarcommon.h"
 #include "oscar.h"
 
@@ -148,6 +150,9 @@ static PurplePluginInfo info =
 static void
 init_plugin(PurplePlugin *plugin)
 {
+	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+
 	oscar_init(plugin, FALSE);
 }
 

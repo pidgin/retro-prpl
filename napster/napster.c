@@ -22,6 +22,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02111-1301  USA
  */
 
+#include <glib/gi18n-lib.h>
+
 #include "internal.h"
 
 #include "account.h"
@@ -745,10 +747,8 @@ static void
 init_plugin(PurplePlugin *plugin) {
 	PurpleAccountOption *option;
 
-#ifdef ENABLE_NLS
-	bindtextdomain(GETTEXT_PACKAGE, PP_LOCALEDIR);
+	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
 	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
-#endif /* ENABLE_NLS */
 
 	option = purple_account_option_string_new(_("Server"), "server", NAP_SERVER);
 	prpl_info.protocol_options = g_list_append(prpl_info.protocol_options, option);
