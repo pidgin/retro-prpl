@@ -1,7 +1,7 @@
 project(
   'retro-prpl', 'c',
   meson_version : '>=1.0.0',
-  version : run_command('get-version.py').stdout().strip())
+  version : run_command('get-version.py', check : true).stdout().strip())
 
 add_project_arguments('-DHAVE_CONFIG_H', '-DPURPLE_PLUGINS', language: 'c')
 
