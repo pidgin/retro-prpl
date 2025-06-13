@@ -29,6 +29,7 @@ libgadu = static_library('libgadu',
   c_args: '-DGG_IGNORE_DEPRECATED',
   include_directories: [libgadu_inc, toplevel_inc],
   dependencies: zlib_dep,
+  gnu_symbol_visibility: 'hidden',
 )
 
 libgadu_dep = declare_dependency(

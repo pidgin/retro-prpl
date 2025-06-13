@@ -12,6 +12,7 @@ libyahoo = static_library('yahoo',
   'ycht.c',
   include_directories: toplevel_inc,
   dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
+  gnu_symbol_visibility: 'hidden',
 )
 
 feature = get_option('yahoo')
@@ -21,6 +22,7 @@ if feature.allowed()
     'libyahoo.c',
     include_directories: toplevel_inc,
     dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
+    gnu_symbol_visibility: 'hidden',
     link_with: libyahoo,
     name_suffix: plugin_suffix,
     install: true,
@@ -35,6 +37,7 @@ if feature.allowed()
     'libyahoojp.c',
     include_directories: toplevel_inc,
     dependencies: [libpurple_dep, glib_dep, ws2_32_dep],
+    gnu_symbol_visibility: 'hidden',
     link_with: libyahoo,
     name_suffix: plugin_suffix,
     install: true,
