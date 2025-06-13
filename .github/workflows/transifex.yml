@@ -1,0 +1,35 @@
+on:
+  push:
+    branches:
+      - main
+
+name: "Upload pot file to Transifex"
+
+jobs:
+  retro-prpl-pot:
+    name: upload new pot file
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Prepare build environment
+        run: |
+          sudo apt-get update -yy
+          sudo apt-get install -yy --no-install-recommends \
+            build-essential \
+            gettext \
+            libpurple-dev \
+            meson
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+
+      - name: Setup Meson build
+        run: meson setup build
+
+      - name: Build project
+        run: ninja -C build retro-prpl-pot
+
+      - name: Upload pot file
+        uses: transifex/cli-action@584fd205cbe598773b5a81ce711fa44842678189  # v2
+        with:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
