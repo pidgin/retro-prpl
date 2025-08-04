@@ -4920,11 +4920,13 @@ unsigned int yahoo_send_typing(PurpleConnection *gc, const char *who, PurpleTypi
 				break;
 		}
 
-		yahoo_packet_hash(pkt, "ssssss", 49, "TYPING", 1, purple_connection_get_display_name(gc),
-                  14, " ", 13, state == PURPLE_TYPING ? "1" : "0",
-                  5, fed_who, 1002, "1");
-        if (fed)
-        	yahoo_packet_hash_int(pkt, 241, fed);
+		yahoo_packet_hash(pkt, "ssssss", 49, "TYPING", 1,
+		                  purple_connection_get_display_name(gc),
+		                  14, " ", 13, state == PURPLE_TYPING ? "1" : "0",
+		                  5, fed_who, 1002, "1");
+		if (fed) {
+			yahoo_packet_hash_int(pkt, 241, fed);
+		}
 		yahoo_packet_send_and_free(pkt, yd);
 	}
 
