@@ -42,7 +42,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#define NAP_SERVER "64.124.41.187"
+#define NAP_SERVER ""
 #define NAP_PORT 8888
 
 #define NAPSTER_CONNECT_STEPS 2
