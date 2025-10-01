@@ -1,6 +1,7 @@
 project(
   'retro-prpl', 'c',
-  version : run_command('version.py', 'get-version', check : true).stdout().strip())
+  version : run_command('version.py', 'get-version', check : true).stdout().strip(),
+  meson_version : '>=1.1.0')
 
 meson.add_dist_script('version.py', 'set-dist', meson.project_version())
 
