@@ -180,7 +180,7 @@ int gg_dcc_fill_file_info2(struct gg_dcc *d, const char *filename, const char *l
 		ext = name + strlen(name);
 
 	for (i = 0, p = name; i < 8 && p < ext; i++, p++)
-		d->file_info.short_filename[i] = toupper(name[i]);
+		d->file_info.short_filename[i] = toupper((unsigned char)name[i]);
 
 	if (i == 8 && p < ext) {
 		d->file_info.short_filename[6] = '~';
@@ -189,7 +189,7 @@ int gg_dcc_fill_file_info2(struct gg_dcc *d, const char *filename, const char *l
 
 	if (strlen(ext) > 0) {
 		for (j = 0; *ext && j < 4; j++, p++)
-			d->file_info.short_filename[i + j] = toupper(ext[j]);
+			d->file_info.short_filename[i + j] = toupper((unsigned char)ext[j]);
 	}
 
 	for (q = d->file_info.short_filename; *q; q++) {

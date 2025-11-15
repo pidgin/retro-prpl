@@ -630,7 +630,7 @@ static char *zephyr_to_html(const char *message)
 			message += 2;
 		} else if (*message == '@') {
 			int end;
-			for (end = 1; message[end] && (isalnum(message[end]) || message[end] == '_'); end++);
+			for (end = 1; message[end] && (isalnum((unsigned char)message[end]) || message[end] == '_'); end++);
 			if (message[end] &&
 			    (message[end] == '{' || message[end] == '[' || message[end] == '(' ||
 			     !g_ascii_strncasecmp(message + end, "&lt;", 4))) {

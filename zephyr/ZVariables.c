@@ -196,7 +196,7 @@ varline(char *bfr, char *var)
 	return (0);
 
     cp = bfr;
-    while (*cp && !isspace(*cp) && (*cp != '='))
+    while (*cp && !isspace((unsigned char)*cp) && (*cp != '='))
 	cp++;
 
 #ifndef WIN32
@@ -211,7 +211,7 @@ varline(char *bfr, char *var)
     if (!cp)
 	return(0);
     cp++;
-    while (*cp && isspace(*cp))		/* space up to variable value */
+    while (*cp && isspace((unsigned char)*cp))		/* space up to variable value */
 	cp++;
 
     return (cp - bfr);			/* return index */

@@ -694,7 +694,7 @@ size_t gg_message_html_to_text(char *dst, unsigned char *format,
 		*format_len = 0;
 
 	for (src = html; *src != 0; src++) {
-		if (in_entity && !(isalnum(*src) || *src == '#' || *src == ';')) {
+		if (in_entity && !(isalnum((unsigned char)*src) || *src == '#' || *src == ';')) {
 			int first = 1;
 			size_t i, append_len = src - entity;
 
@@ -738,7 +738,7 @@ size_t gg_message_html_to_text(char *dst, unsigned char *format,
 					int i, ok = 1;
 
 					for (i = 0; i < 16; i++) {
-						if (!isxdigit(tag[i])) {
+						if (!isxdigit((unsigned char)tag[i])) {
 							ok = 0;
 							break;
 						}
@@ -839,7 +839,7 @@ size_t gg_message_html_to_text(char *dst, unsigned char *format,
 								break;
 
 							for (i = 0; i < 6; i++) {
-								if (!isxdigit(tag[i])) {
+								if (!isxdigit((unsigned char)tag[i])) {
 									ok = 0;
 									break;
 								}
@@ -914,7 +914,7 @@ size_t gg_message_html_to_text(char *dst, unsigned char *format,
 			continue;
 		}
 
-		if (in_entity && !(isalnum(*src) || *src == '#'))
+		if (in_entity && !(isalnum((unsigned char)*src) || *src == '#'))
 			in_entity = 0;
 
 		if (in_entity)
