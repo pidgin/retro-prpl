@@ -232,7 +232,7 @@ msn_session_activate_login_timeout(MsnSession *session);
 void msn_session_set_login_step(MsnSession *session, MsnLoginStep step);
 
 /**
- * Finish the login proccess.
+ * Finish the login process.
  *
  * @param session The MSN session.
  */

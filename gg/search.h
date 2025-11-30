@@ -89,7 +89,7 @@ ggp_search_add(GGPSearches *searches, guint32 seq, GGPSearchForm *form);
 /**
  * Remove a search from the list.
  *
- * If you want to destory the search completely also call:
+ * If you want to destroy the search completely also call:
  * ggp_search_form_destroy().
  *
  * @param searches The list of searches.
@@ -139,7 +139,7 @@ ggp_search_start(PurpleConnection *gc, GGPSearchForm *form);
  *
  * @param res    Public directory look-up result.
  * @param num    Id of the record.
- * @param fileld Name of the field.
+ * @param field  Name of the field.
  *
  * @return UTF-8 encoded value of the field.
  */

@@ -291,7 +291,7 @@ static int aim_im_paraminfo(OscarData *od, FlapConnection *conn, aim_module_t *m
  * Implementation note:  Since this is one of the most-used functions
  * in all of libfaim, it is written with performance in mind.  As such,
  * it is not as clear as it could be in respect to how this message is
- * supposed to be layed out. Most obviously, tlvlists should be used
+ * supposed to be laid out. Most obviously, tlvlists should be used
  * instead of writing out the bytes manually.
  */
 int aim_im_sendch1_ext(OscarData *od, struct aim_sendimext_args *args)

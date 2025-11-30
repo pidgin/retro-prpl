@@ -25,7 +25,7 @@ typedef struct _NMConference NMConference;
 
 #include "nmuserrecord.h"
 
-/* A blank GUID -- represents an uninstatiated conference */
+/* A blank GUID -- represents an uninstantiated conference */
 #define BLANK_GUID "[00000000-00000000-00000000-0000-0000]"
 
 /* This is how much of the conference GUIDs to compare when testing

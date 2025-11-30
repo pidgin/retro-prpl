@@ -40,7 +40,7 @@
 #define MSIM_CMD_IS_ERROR(x)      (x & MSIM_CMD_BIT_ERROR)
 #define MSIM_CMD_IS_NORMAL(x)    !(x & MSIM_CMD_BIT_ERROR)
 
-/** Define a set of _DSN and _LID constants for a persistance request. */
+/** Define a set of _DSN and _LID constants for a persistence request. */
 #define MSIM_PERSIST_DSN_LID(name,dsn,lid)             \
     static const int name##_DSN = dsn;                 \
     static const int name##_LID = lid;

@@ -1915,7 +1915,7 @@ silc_ask_passphrase(SilcClient client, SilcClientConnection conn,
 /* Notifies application that failure packet was received.  This is called
    if there is some protocol active in the client.  The `protocol' is the
    protocol context.  The `failure' is opaque pointer to the failure
-   indication.  Note, that the `failure' is protocol dependant and
+   indication.  Note, that the `failure' is protocol dependent and
    application must explicitly cast it to correct type.  Usually `failure'
    is 32 bit failure type (see protocol specs for all protocol failure
    types). */
@@ -2017,7 +2017,7 @@ silc_ftp(SilcClient client, SilcClientConnection conn,
    application.  If application has issued SILC_COMMAND_DETACH command
    the client session in the SILC network is not quit.  The client remains
    in the network but is detached.  The detachment data may be used later
-   to resume the session in the SILC Network.  The appliation is
+   to resume the session in the SILC Network.  The application is
    responsible of saving the `detach_data', to for example in a file.
 
    The detachment data can be given as argument to the functions

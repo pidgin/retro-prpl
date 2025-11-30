@@ -138,7 +138,7 @@ struct MXitSession {
 	unsigned int		http_sesid;					/* HTTP session id */
 	unsigned int		http_seqno;					/* HTTP request sequence number */
 	guint				http_timer_id;				/* timer resource id (pidgin) */
-	int					http_interval;				/* poll inverval */
+	int					http_interval;				/* poll interval */
 	gint64				http_last_poll;				/* the last time a poll has been sent */
 	guint				http_handler;				/* HTTP connection handler */
 

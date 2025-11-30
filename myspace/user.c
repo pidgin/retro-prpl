@@ -559,7 +559,7 @@ msim_is_email(const gchar *user)
  * @param session
  * @param user The user id, email address, or username. Not freed.
  * @param cb Callback, called with user information when available.
- * @param data An arbitray data pointer passed to the callback.
+ * @param data An arbitrary data pointer passed to the callback.
  */
 /* TODO: change to not use callbacks */
 void
@@ -698,7 +698,7 @@ static void msim_username_is_set_cb(MsimSession *session, const MsimMessage *use
  * @param session
  * @param username The username we're setting for ourselves. Not freed.
  * @param cb Callback, called with user information when available.
- * @param data An arbitray data pointer passed to the callback.
+ * @param data An arbitrary data pointer passed to the callback.
  */
 static void
 msim_set_username(MsimSession *session, const gchar *username,
@@ -819,7 +819,7 @@ static void msim_username_is_available_cb(MsimSession *session, const MsimMessag
 			G_CALLBACK(msim_do_not_set_username_cb));
 	} else {
 		/* Looks like its in use or we have an invalid response */
-		purple_debug_info("msim_username_is_available_cb", "Username unavaiable. Prompting for new entry.\n");
+		purple_debug_info("msim_username_is_available_cb", "Username unavailable. Prompting for new entry.\n");
 		purple_request_input(session->gc, _("MySpaceIM - Please Set a Username"),
 			_("This username is unavailable."),
 				_("Please try another username:"),

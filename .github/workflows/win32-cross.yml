@@ -47,6 +47,7 @@ jobs:
         run: |
           sudo apt update -yy
           sudo apt install -yy --no-install-recommends \
+            codespell \
             gcc-mingw-w64-i686-win32 \
             meson \
             pkg-config

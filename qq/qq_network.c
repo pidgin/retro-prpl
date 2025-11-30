@@ -172,9 +172,9 @@ static gboolean connect_check(gpointer data)
 	return FALSE;
 }
 
-/* Warning: qq_connect_later destory all connection
+/* Warning: qq_connect_later destroy all connection
  *  Any function should be care of use qq_data after call this function
- *  Please conside tcp_pending and udp_pending */
+ *  Please consider tcp_pending and udp_pending */
 gboolean qq_connect_later(gpointer data)
 {
 	PurpleConnection *gc;
@@ -295,7 +295,7 @@ static gboolean packet_process(PurpleConnection *gc, guint8 *buf, gint buf_len)
 	/* this is the length of all the encrypted data (also remove tail tag) */
 	bytes_not_read = buf_len - bytes - 1;
 
-	/* ack packet, we need to update send tranactions */
+	/* ack packet, we need to update send transactions */
 	/* we do not check duplication for server ack */
 	trans = qq_trans_find_rcved(gc, cmd, seq);
 	if (trans == NULL) {
@@ -472,11 +472,11 @@ static void tcp_pending(gpointer data, gint source, PurpleInputCondition cond)
 			conn->tcp_rxqueue = NULL;
 		}
 
-		/* packet_process may call disconnect and destory data like conn
+		/* packet_process may call disconnect and destroy data like conn
 		 * do not call packet_process before jump,
 		 * break if packet_process return FALSE */
 		if (packet_process(gc, pkt, pkt_len - bytes) == FALSE) {
-			purple_debug_info("TCP_PENDING", "Connection has been destory\n");
+			purple_debug_info("TCP_PENDING", "Connection has been destroy\n");
 			break;
 		}
 	}
@@ -500,7 +500,7 @@ static void udp_pending(gpointer data, gint source, PurpleInputCondition cond)
 
 	buf = g_newa(guint8, MAX_PACKET_SIZE);
 
-	/* here we have UDP proxy suppport */
+	/* here we have UDP proxy support */
 	buf_len = read(source, buf, MAX_PACKET_SIZE);
 	if (buf_len <= 0) {
 		purple_connection_error_reason(gc,
@@ -523,7 +523,7 @@ static void udp_pending(gpointer data, gint source, PurpleInputCondition cond)
 		}
 	}
 
-	/* packet_process may call disconnect and destory data like conn
+	/* packet_process may call disconnect and destroy data like conn
 	 * do not call packet_process before jump,
 	 * break if packet_process return FALSE */
 	packet_process(gc, buf, buf_len);
@@ -756,7 +756,7 @@ static void connect_cb(gpointer data, gint source, const gchar *error_message)
 
 	qd = (qq_data *) gc->proto_data;
 
-	/* conn_data will be destoryed */
+	/* conn_data will be destroyed */
 	qd->conn_data = NULL;
 
 	if (!PURPLE_CONNECTION_IS_VALID(gc)) {
@@ -1065,7 +1065,7 @@ static gint packet_encap(qq_data *qd, guint8 *buf, gint maxlen, guint16 cmd, gui
 	g_return_val_if_fail(qd != NULL && buf != NULL && maxlen > 0, -1);
 	g_return_val_if_fail(data != NULL && data_len > 0, -1);
 
-	/* QQ TCP packet has two bytes in the begining defines packet length
+	/* QQ TCP packet has two bytes in the beginning defines packet length
 	 * so leave room here to store packet size */
 	if (qd->use_tcp) {
 		bytes += qq_put16(buf + bytes, 0x0000);

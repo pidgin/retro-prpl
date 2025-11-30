@@ -173,11 +173,11 @@ _purple_buddy_icon_set_old_icons_dir(const char *dirname);
  *       function instead.
  *
  * @param account  The account the connection should be connecting to.
- * @param regist   Whether we are registering a new account or just
+ * @param registration Whether we are registering a new account or just
  *                 trying to do a normal signon.
  * @param password The password to use.
  */
-void _purple_connection_new(PurpleAccount *account, gboolean regist,
+void _purple_connection_new(PurpleAccount *account, gboolean registration,
                             const char *password);
 /**
  * Tries to unregister the account on the server. If the account is not

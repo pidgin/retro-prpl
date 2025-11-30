@@ -85,7 +85,7 @@ void msn_parse_socket(const char *str, char **ret_host, int *ret_port);
 void msn_parse_user(const char *str, char **ret_user, int *ret_network);
 
 /**
- * Verify if the email is a vaild passport.
+ * Verify if the email is a valid passport.
  *
  * @param passport 	The email
  *
@@ -99,7 +99,7 @@ gboolean msn_email_is_valid(const char *passport);
  * http://imfreedom.org/wiki/index.php/MSN:NS/Challenges
  *
  * @param input 	Challenge input.
- * @param output 	Callenge output.
+ * @param output 	Challenge output.
  */
 void msn_handle_chl(char *input, char *output);
 

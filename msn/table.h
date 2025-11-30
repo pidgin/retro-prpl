@@ -38,7 +38,7 @@ struct _MsnTable
 	GHashTable *msgs; 		/**< Callbacks that manage incoming messages. */
 	GHashTable *errors; 	/**< Callbacks that manage command errors. */
 
-	GHashTable *async; 		/**< Callbacks that manage incoming asyncronous messages. */
+	GHashTable *async; 		/**< Callbacks that manage incoming asynchronous messages. */
 	/* TODO: Does this one is really needed? */
 	GHashTable *fallback; 	/**< Fallback callback. */
 };
@@ -59,14 +59,14 @@ MsnTable *msn_table_new(void);
 void msn_table_destroy(MsnTable *table);
 
 /**
- * Relate an incomming command from server with a callback able to handle
+ * Relate an incoming command from server with a callback able to handle
  * the event.
  *
  * @param table 	The MsnTable.
- * @param command 	If NULL this add an incoming asyncronous command set in answer.
+ * @param command 	If NULL this add an incoming asynchronous command set in answer.
  * 					Else, the command sent.
  * @param answer 	The server answer to 'command'. If 'command' is NULL,
- * 					the asyncronous command sent by the server.
+ * 					the asynchronous command sent by the server.
  * @param cb 		Callback to handle this event.
  */
 void msn_table_add_cmd(MsnTable *table, char *command, char *answer,

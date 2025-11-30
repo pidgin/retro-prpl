@@ -210,7 +210,7 @@ msim_markup_f_to_html(MsimSession *session, xmlnode *root, gchar **begin, gchar 
 	decor = decor_str != NULL ? atol(decor_str) : 0;
 
 	/*
-	 * The HTML we're constructing here is a bit redudant.  Ideally we
+	 * The HTML we're constructing here is a bit redundant.  Ideally we
 	 * would use only the font-family and font-size CSS span, but Pidgin
 	 * doesn't support it (it's included for other UIs).  For Pidgin we
 	 * wrap the whole thing in an ugly font tag, and Pidgin will happily

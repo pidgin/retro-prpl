@@ -124,7 +124,7 @@ static const profile_lang_node_t profile_langs[] = {
 	{ IT,    "Ultimo aggiornamento:",                                NULL },
 	{ JA,    "\xba\xc7\xbd\xaa\xb9\xb9\xbf\xb7\xc6\xfc\xa1\xa7",     NULL },
 	{ KO,    "\xb0\xbb\xbd\xc5\x20\xb3\xaf\xc2\xa5&nbsp;",           NULL },
-	{ NO,    "Sist oppdatert&nbsp;",                                 NULL },
+	{ NO,    "Sist oppdatert&nbsp;",                                 NULL }, /* codespell:ignore */
 	{ PT,    "\332ltima atualiza\347\343o&nbsp;",                    NULL },
 	{ PT_BR, "\332ltima atualiza\347\343o:",                         NULL },
 	{ SV,    "Senast uppdaterad&nbsp;",                              NULL },
@@ -358,13 +358,13 @@ static const profile_strings_node_t profile_strings[] = {
 		"Passe-temps:",
 		"Actualités:",
 		"Citation préférée",
-		"Liens",
+		"Liens", /* codespell:ignore */
 		"Pas de mention d'une page personnelle",
 		"Page personnelle:",
-		"Pas de mention d'un lien favori",
-		"Lien préféré 1:",
-		"Lien préféré 2:",
-		"Lien préféré 3:",
+		"Pas de mention d'un lien favori", /* codespell:ignore */
+		"Lien préféré 1:", /* codespell:ignore */
+		"Lien préféré 2:", /* codespell:ignore */
+		"Lien préféré 3:", /* codespell:ignore */
 		NULL
 	},
 	{ FR_FR, "fr_FR", "ISO-8859-1",
@@ -381,13 +381,13 @@ static const profile_strings_node_t profile_strings[] = {
 		"Centres d'intérêts:",
 		"Actualités:",
 		"Citation préférée",
-		"Liens",
+		"Liens", /* codespell:ignore */
 		"Pas de mention d'une page perso",
 		"Page perso:",
-		"Pas de mention d'un lien favori",
-		"Lien préféré 1:",
-		"Lien préféré 2:",
-		"Lien préféré 3:",
+		"Pas de mention d'un lien favori",  /* codespell:ignore */
+		"Lien préféré 1:", /* codespell:ignore */
+		"Lien préféré 2:", /* codespell:ignore */
+		"Lien préféré 3:", /* codespell:ignore */
 		NULL
 	},
 	{ IT, "it", "ISO-8859-1",
@@ -395,7 +395,7 @@ static const profile_strings_node_t profile_strings[] = {
 		"Non pubblica",
 		"Nessuna risposta",
 		"La mia e-mail:",
-		"Nome vero:",
+		"Nome vero:",  /* codespell:ignore */
 		"Località:",
 		"Età:",
 		"Stato civile:",
@@ -466,7 +466,7 @@ static const profile_strings_node_t profile_strings[] = {
 	{ NO, "no", "ISO-8859-1",
 		"Yahoo! ID:",
 		"Privat",
-		"Ikke noe svar",
+		"Ikke noe svar",  /* codespell:ignore */
 		"Min e-post",
 		"Virkelig navn:",
 		"Sted:",
@@ -490,8 +490,8 @@ static const profile_strings_node_t profile_strings[] = {
 		"ID Yahoo!:",
 		"Particular",
 		"Sem resposta",
-		"Meu e-mail",
-		"Nome verdadeiro:",
+		"Meu e-mail", /* codespell:ignore */
+		"Nome verdadeiro:", /* codespell:ignore */
 		"Local:",
 		"Idade:",
 		"Estado civil:",
@@ -513,8 +513,8 @@ static const profile_strings_node_t profile_strings[] = {
 		"ID Yahoo!:",
 		"Particular",
 		"Sem resposta",
-		"Meu e-mail",
-		"Nome verdadeiro:",
+		"Meu e-mail", /* codespell:ignore */
+		"Nome verdadeiro:", /* codespell:ignore */
 		"Localização:",
 		"Idade:",
 		"Estado civil:",

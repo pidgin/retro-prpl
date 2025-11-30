@@ -79,26 +79,26 @@ out:
 		struct MXitProfile*	profile		= session->profile;
 		GString*			attributes	= g_string_sized_new( 128 );
 		char				attrib[512];
-		unsigned int		acount		= 0;
+		unsigned int		attr_count	= 0;
 
 
 		/* update name */
 		g_strlcpy( profile->nickname, name, sizeof( profile->nickname ) );
 		g_snprintf( attrib, sizeof( attrib ), "\01%s\01%i\01%s", CP_PROFILE_FULLNAME, CP_PROFILE_TYPE_UTF8, profile->nickname );
 		g_string_append( attributes, attrib );
-		acount++;
+		attr_count++;
 
 		/* update birthday */
 		g_strlcpy( profile->birthday, bday, sizeof( profile->birthday ) );
 		g_snprintf( attrib, sizeof( attrib ), "\01%s\01%i\01%s", CP_PROFILE_BIRTHDATE, CP_PROFILE_TYPE_UTF8, profile->birthday );
 		g_string_append( attributes, attrib );
-		acount++;
+		attr_count++;
 
 		/* update gender */
 		profile->male = ( purple_request_fields_get_choice( fields, "male" ) != 0 );
 		g_snprintf( attrib, sizeof( attrib ), "\01%s\01%i\01%s", CP_PROFILE_GENDER, CP_PROFILE_TYPE_BOOL, ( profile->male ) ? "1" : "0" );
 		g_string_append( attributes, attrib );
-		acount++;
+		attr_count++;
 
 		/* update title */
 		name = purple_request_fields_get_string( fields, "title" );
@@ -108,7 +108,7 @@ out:
 			g_strlcpy( profile->title, name, sizeof( profile->title ) );
 		g_snprintf( attrib, sizeof( attrib ), "\01%s\01%i\01%s", CP_PROFILE_TITLE, CP_PROFILE_TYPE_UTF8, profile->title );
 		g_string_append( attributes, attrib );
-		acount++;
+		attr_count++;
 
 		/* update firstname */
 		name = purple_request_fields_get_string( fields, "firstname" );
@@ -118,7 +118,7 @@ out:
 			g_strlcpy( profile->firstname, name, sizeof( profile->firstname ) );
 		g_snprintf( attrib, sizeof( attrib ), "\01%s\01%i\01%s", CP_PROFILE_FIRSTNAME, CP_PROFILE_TYPE_UTF8, profile->firstname );
 		g_string_append( attributes, attrib );
-		acount++;
+		attr_count++;
 
 		/* update lastname */
 		name = purple_request_fields_get_string( fields, "lastname" );
@@ -128,7 +128,7 @@ out:
 			g_strlcpy( profile->lastname, name, sizeof( profile->lastname ) );
 		g_snprintf( attrib, sizeof( attrib ), "\01%s\01%i\01%s", CP_PROFILE_LASTNAME, CP_PROFILE_TYPE_UTF8, profile->lastname );
 		g_string_append( attributes, attrib );
-		acount++;
+		attr_count++;
 
 		/* update email address */
 		name = purple_request_fields_get_string( fields, "email" );
@@ -138,7 +138,7 @@ out:
 			g_strlcpy( profile->email, name, sizeof( profile->email ) );
 		g_snprintf( attrib, sizeof( attrib ), "\01%s\01%i\01%s", CP_PROFILE_EMAIL, CP_PROFILE_TYPE_UTF8, profile->email );
 		g_string_append( attributes, attrib );
-		acount++;
+		attr_count++;
 
 		/* update mobile number */
 		name = purple_request_fields_get_string( fields, "mobilenumber" );
@@ -148,7 +148,7 @@ out:
 			g_strlcpy( profile->mobilenr, name, sizeof( profile->mobilenr ) );
 		g_snprintf( attrib, sizeof( attrib ), "\01%s\01%i\01%s", CP_PROFILE_MOBILENR, CP_PROFILE_TYPE_UTF8, profile->mobilenr );
 		g_string_append( attributes, attrib );
-		acount++;
+		attr_count++;
 
 		/* update about me */
 		name = purple_request_fields_get_string( fields, "aboutme" );
@@ -158,7 +158,7 @@ out:
 			g_strlcpy( profile->aboutme, name, sizeof( profile->aboutme ) );
 		g_snprintf( attrib, sizeof( attrib ), "\01%s\01%i\01%s", CP_PROFILE_ABOUTME, CP_PROFILE_TYPE_UTF8, profile->aboutme );
 		g_string_append( attributes, attrib );
-		acount++;
+		attr_count++;
 
 		/* update where am i */
 		name = purple_request_fields_get_string( fields, "whereami" );
@@ -168,7 +168,7 @@ out:
 			g_strlcpy( profile->whereami, name, sizeof( profile->whereami ) );
 		g_snprintf( attrib, sizeof( attrib ), "\01%s\01%i\01%s", CP_PROFILE_WHEREAMI, CP_PROFILE_TYPE_UTF8, profile->whereami );
 		g_string_append( attributes, attrib );
-		acount++;
+		attr_count++;
 
 		/* relationship status */
 		field = purple_request_fields_get_field( fields, "relationship" );
@@ -176,7 +176,7 @@ out:
 		profile->relationship = atoi( purple_request_field_list_get_data( field, entry->data ) );
 		g_snprintf( attrib, sizeof( attrib ), "\01%s\01%i\01%i", CP_PROFILE_RELATIONSHIP, CP_PROFILE_TYPE_SHORT, profile->relationship );
 		g_string_append( attributes, attrib );
-		acount++;
+		attr_count++;
 
 		/* update flags */
 		field = purple_request_fields_get_field( fields, "searchable" );
@@ -191,10 +191,10 @@ out:
 			profile->flags |= CP_PROF_NOT_SUGGESTABLE;
 		g_snprintf( attrib, sizeof( attrib ), "\01%s\01%i\01%" G_GINT64_FORMAT, CP_PROFILE_FLAGS, CP_PROFILE_TYPE_LONG, profile->flags);
 		g_string_append( attributes, attrib );
-		acount++;
+		attr_count++;
 
 		/* send the profile update to MXit */
-		mxit_send_extprofile_update( session, NULL, acount, attributes->str );
+		mxit_send_extprofile_update( session, NULL, attr_count, attributes->str );
 		g_string_free( attributes, TRUE );
 	}
 	else {

@@ -963,7 +963,7 @@ struct aim_icq_info
 	char *last;
 	char *email;
 	char *homecity;
-	char *homestate;
+	char *homestate; /* codespell:ignore */
 	char *homephone;
 	char *homefax;
 	char *homeaddr;
@@ -1091,7 +1091,7 @@ int aim_tlvlist_add_userinfo(GSList **list, guint16 type, aim_userinfo_t *userin
 int aim_tlvlist_add_chatroom(GSList **list, guint16 type, guint16 exchange, const char *roomname, guint16 instance);
 int aim_tlvlist_add_frozentlvlist(GSList **list, guint16 type, GSList **tl);
 
-int aim_tlvlist_replace_raw(GSList **list, const guint16 type, const guint16 lenth, const guint8 *value);
+int aim_tlvlist_replace_raw(GSList **list, const guint16 type, const guint16 length, const guint8 *value);
 int aim_tlvlist_replace_str(GSList **list, const guint16 type, const char *str);
 int aim_tlvlist_replace_noval(GSList **list, const guint16 type);
 int aim_tlvlist_replace_8(GSList **list, const guint16 type, const guint8 value);

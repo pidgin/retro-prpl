@@ -354,7 +354,7 @@ in_addr_t get_real_ip()
 #define MAXINTERFACES 16
 in_addr_t get_real_ip()
 {
-	int fd, intrface, i;
+	int fd, interface, i;
 	struct ifconf ifc;
 	struct ifreq buf[MAXINTERFACES];
 	in_addr_t ret;
@@ -363,9 +363,9 @@ in_addr_t get_real_ip()
 	ifc.ifc_len = sizeof(buf);
 	ifc.ifc_buf = (caddr_t) buf;
 	if (ioctl(fd, SIOCGIFCONF, (char *) &ifc) < 0) return 0;
-	intrface = ifc.ifc_len / sizeof(struct ifreq);
-	for (i = 0; i < intrface; i++) {
-		/* buf[intrface].ifr_name */
+	interface = ifc.ifc_len / sizeof(struct ifreq);
+	for (i = 0; i < interface; i++) {
+		/* buf[interface].ifr_name */
 		if (ioctl(fd, SIOCGIFADDR, (char *) &buf[i]) >= 0)
 		{
 			ret = (((struct sockaddr_in *)(&buf[i].ifr_addr))->sin_addr).s_addr;

@@ -561,7 +561,7 @@ static char *html_to_zephyr(const char *message)
 				}
 				frames = new_f;
 			} else {
-				/* Catch all for all unrecognized/misparsed <foo> tage */
+				/* Catch all for all unrecognized/misparsed <foo> tags */
 				g_string_append_c(frames->text, *message++);
 			}
 		} else if (*message == '@') {

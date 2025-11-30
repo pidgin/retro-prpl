@@ -624,7 +624,7 @@ aim_receive_custom_icon(OscarData *od, ByteStream *bs, int len)
 	const char *result = NULL;
 
 	for (offset = 0; byte_stream_bytes_left(bs) && (offset < len); offset += 0x10) {
-		/* check wheather this capability is a custom user icon */
+		/* check whether this capability is a custom user icon */
 		guint8 *cap;
 		int i;
 

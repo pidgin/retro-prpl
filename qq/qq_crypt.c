@@ -126,60 +126,67 @@ static gint crypt_rand(void) {
 #endif
 
 /* 64-bit blocks and some kind of feedback mode of operation */
-static inline void encrypt_out(guint8 *crypted, const gint crypted_len, const guint8 *key)
+static inline void encrypt_out(guint8 *encrypted, const gint encrypted_len, const guint8 *key)
 {
 	/* ships in encipher */
 	guint32 plain32[2];
 	guint32 p32_prev[2];
 	guint32 key32[4];
-	guint32 crypted32[2];
+	guint32 encrypted32[2];
 	guint32 c32_prev[2];
 
-	guint8 *crypted_ptr;
+	guint8 *encrypted_ptr;
 	gint count64;
 
 	/* prepare at first */
-	crypted_ptr = crypted;
+	encrypted_ptr = encrypted;
 
-	memcpy(crypted32, crypted_ptr, sizeof(crypted32));
-	c32_prev[0] = crypted32[0]; c32_prev[1] = crypted32[1];
+	memcpy(encrypted32, encrypted_ptr, sizeof(encrypted32));
+	c32_prev[0] = encrypted32[0];
+	c32_prev[1] = encrypted32[1];
 
-	p32_prev[0] = 0; p32_prev[1] = 0;
-	plain32[0] = crypted32[0] ^ p32_prev[0]; plain32[1] = crypted32[1] ^ p32_prev[1];
+	p32_prev[0] = 0;
+	p32_prev[1] = 0;
+	plain32[0] = encrypted32[0] ^ p32_prev[0];
+	plain32[1] = encrypted32[1] ^ p32_prev[1];
 
 	memmove(key32, key, 16);
-	count64 = crypted_len / 8;
+	count64 = encrypted_len / 8;
 	while (count64-- > 0){
 		/* encrypt it */
-		qq_encipher(plain32, key32, crypted32);
+		qq_encipher(plain32, key32, encrypted32);
 
-		crypted32[0] ^= p32_prev[0]; crypted32[1] ^= p32_prev[1];
+		encrypted32[0] ^= p32_prev[0];
+		encrypted32[1] ^= p32_prev[1];
 
-		/* store curr 64 bits crypted */
-		memmove(crypted_ptr, crypted32, sizeof(crypted32));
+		/* store curr 64 bits encrypted */
+		memmove(encrypted_ptr, encrypted32, sizeof(encrypted32));
 
 		/* set prev */
-		p32_prev[0] = plain32[0]; p32_prev[1] = plain32[1];
-		c32_prev[0] = crypted32[0]; c32_prev[1] = crypted32[1];
+		p32_prev[0] = plain32[0];
+		p32_prev[1] = plain32[1];
+		c32_prev[0] = encrypted32[0];
+		c32_prev[1] = encrypted32[1];
 
 		/* set next 64 bits want to crypt*/
 		if (count64 > 0) {
-			crypted_ptr += 8;
-			memcpy(crypted32, crypted_ptr, sizeof(crypted32));
-			plain32[0] = crypted32[0] ^ c32_prev[0]; plain32[1] = crypted32[1] ^ c32_prev[1];
+			encrypted_ptr += 8;
+			memcpy(encrypted32, encrypted_ptr, sizeof(encrypted32));
+			plain32[0] = encrypted32[0] ^ c32_prev[0];
+			plain32[1] = encrypted32[1] ^ c32_prev[1];
 		}
 	}
 }
 
-/* length of crypted buffer must be plain_len + 17*/
+/* length of encrypted buffer must be plain_len + 17*/
 /*
  * The above comment used to say "plain_len + 16", but based on the
  * behavior of the function that is wrong.  If you give this function
  * a plain string with len%8 = 7 then the returned length is len+17
  */
-gint qq_encrypt(guint8* crypted, const guint8* const plain, const gint plain_len, const guint8* const key)
+gint qq_encrypt(guint8* encrypted, const guint8* const plain, const gint plain_len, const guint8* const key)
 {
-	guint8 *crypted_ptr = crypted;		/* current position of dest */
+	guint8 *encrypted_ptr = encrypted;		/* current position of dest */
 	gint pos, padding;
 
 	padding = (plain_len + 10) % 8;
@@ -190,7 +197,7 @@ gint qq_encrypt(guint8* crypted, const guint8* const plain, const gint plain_len
 	pos = 0;
 
 	/* set first byte as padding len */
-	crypted_ptr[pos] = (rand() & 0xf8) | padding;
+	encrypted_ptr[pos] = (rand() & 0xf8) | padding;
 	pos++;
 
 	/* extra 2 bytes */
@@ -203,23 +210,23 @@ gint qq_encrypt(guint8* crypted, const guint8* const plain, const gint plain_len
 
 	/* more random */
 	while (padding--) {
-		crypted_ptr[pos++] = rand() & 0xff;
+		encrypted_ptr[pos++] = rand() & 0xff;
 	}
 
-	memmove(crypted_ptr + pos, plain, plain_len);
+	memmove(encrypted_ptr + pos, plain, plain_len);
 	pos += plain_len;
 
 	/* header padding len + plain len must be multiple of 8
-	 * tail pading len is always 8 - (1st byte)
+	 * tail padding len is always 8 - (1st byte)
 	 */
-	memset(crypted_ptr + pos, 0x00, 7);
+	memset(encrypted_ptr + pos, 0x00, 7);
 	pos += 7;
 
-	show_binary("After padding", crypted, pos);
+	show_binary("After padding", encrypted, pos);
 
-	encrypt_out(crypted, pos, key);
+	encrypt_out(encrypted, pos, key);
 
-	show_binary("Encrypted", crypted, pos);
+	show_binary("Encrypted", encrypted, pos);
 	return pos;
 }
 
@@ -299,28 +306,28 @@ static inline gint decrypt_out(guint8 *dest, gint crypted_len, const guint8* con
 }
 
 /* length of plain buffer must be equal to crypted_len */
-gint qq_decrypt(guint8 *plain, const guint8* const crypted, const gint crypted_len, const guint8* const key)
+gint qq_decrypt(guint8 *plain, const guint8* const encrypted, const gint encrypted_len, const guint8* const key)
 {
 	gint plain_len = 0;
 	gint hdr_padding;
 	gint pos;
 
 	/* at least 16 bytes and %8 == 0 */
-	if ((crypted_len % 8) || (crypted_len < 16)) {
+	if ((encrypted_len % 8) || (encrypted_len < 16)) {
 		return -1;
 	}
 
-	memcpy(plain, crypted, crypted_len);
+	memcpy(plain, encrypted, encrypted_len);
 
-	plain_len = decrypt_out(plain, crypted_len, key);
+	plain_len = decrypt_out(plain, encrypted_len, key);
 	if (plain_len < 0) {
 		return plain_len;	/* invalid first 64 bits */
 	}
 
-	show_binary("Decrypted with padding", plain, crypted_len);
+	show_binary("Decrypted with padding", plain, encrypted_len);
 
 	/* check last 7 bytes is zero or not? */
-	for (pos = crypted_len - 1; pos > crypted_len - 8; pos--) {
+	for (pos = encrypted_len - 1; pos > encrypted_len - 8; pos--) {
 		if (plain[pos] != 0) {
 			return -3;
 		}
@@ -329,7 +336,7 @@ gint qq_decrypt(guint8 *plain, const guint8* const crypted, const gint crypted_l
 		return plain_len;
 	}
 
-	hdr_padding = crypted_len - plain_len - 7;
+	hdr_padding = encrypted_len - plain_len - 7;
 	memmove(plain, plain + hdr_padding, plain_len);
 
 	return plain_len;

@@ -92,7 +92,7 @@
 #define MW_CONNECT_STEPS  11
 
 
-/* stages of conciousness */
+/* stages of consciousness */
 #define MW_STATE_OFFLINE      "offline"
 #define MW_STATE_ACTIVE       "active"
 #define MW_STATE_AWAY         "away"
@@ -1182,7 +1182,7 @@ static void blist_sync(PurpleConnection *gc, struct mwSametimeList *stlist) {
     if(owner && purple_strequal(owner, acct_n))
        continue;
 
-    /* we actually are synching by this key as opposed to the group
+    /* we actually are syncing by this key as opposed to the group
        title, which can be different things in the st list */
     gname = purple_blist_node_get_string(gn, GROUP_KEY_NAME);
     if(! gname) gname = purple_group_get_name(grp);
@@ -2261,7 +2261,7 @@ static void mw_ft_opened(struct mwFileTransfer *ft) {
 static void mw_ft_closed(struct mwFileTransfer *ft, guint32 code) {
   /*
     - get purple ft from client data in ft
-    - indicate rejection/cancelation/completion
+    - indicate rejection/cancellation/completion
     - free the file transfer itself
   */
 
@@ -2299,7 +2299,7 @@ static void mw_ft_recv(struct mwFileTransfer *ft,
 		       struct mwOpaque *data) {
   /*
     - get purple ft from client data in ft
-    - update transfered percentage
+    - update transferred percentage
     - if done, destroy the ft, disassociate from purple ft
   */
 

@@ -389,7 +389,7 @@ void silcpurple_wb_send(PurpleWhiteboard *wb, GList *draw_list)
 	if (!packet)
 		return;
 
-	/* Assmeble packet */
+	/* Assemble packet */
 	silc_buffer_format(packet,
 			   SILC_STR_UI32_STRING(SILCPURPLE_WB_MIME),
 			   SILC_STR_UI_CHAR(SILCPURPLE_WB_DRAW),
@@ -491,7 +491,7 @@ void silcpurple_wb_clear(PurpleWhiteboard *wb)
 	if (!packet)
 		return;
 
-	/* Assmeble packet */
+	/* Assemble packet */
 	silc_buffer_format(packet,
 			   SILC_STR_UI32_STRING(SILCPURPLE_WB_MIME),
 			   SILC_STR_UI_CHAR(SILCPURPLE_WB_CLEAR),

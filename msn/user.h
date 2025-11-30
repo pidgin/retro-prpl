@@ -129,11 +129,11 @@ struct _MsnUser
  * A specific user endpoint.
  */
 typedef struct MsnUserEndpoint {
-	char *id;               /**< The client's endpoint ID          */
-	char *name;             /**< The client's endpoint's name      */
-	int type;               /**< The client's endpoint type        */
-	guint clientid;         /**< The client's ID                   */
-	guint extcaps;          /**< The client's extended capabilites */
+	char *id;               /**< The client's endpoint ID           */
+	char *name;             /**< The client's endpoint's name       */
+	int type;               /**< The client's endpoint type         */
+	guint clientid;         /**< The client's ID                    */
+	guint extcaps;          /**< The client's extended capabilities */
 
 } MsnUserEndpoint;
 
@@ -510,7 +510,7 @@ void msn_user_unset_op(MsnUser *user, MsnListOp list_op);
  * @oaran passport 	Passport to compare.
  *
  * @return Zero if the passport match with the one of the user, otherwise
- * a positive integer if the user passport is greather than the one given
+ * a positive integer if the user passport is greater than the one given
  * and a negative integer if it is less.
  */
 int msn_user_passport_cmp(MsnUser *user, const char *passport);

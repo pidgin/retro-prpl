@@ -26,6 +26,7 @@ jobs:
           sudo apt-get update -yy
           sudo apt-get install -yy --no-install-recommends \
             build-essential \
+            gettext \
             libpurple-dev \
             meson
 
@@ -43,7 +44,7 @@ jobs:
         run: meson setup build
 
       - name: Build project
-        run: ninja -C build
+        run: ninja -C build turtles
 
       - name: Install build results
         run: DESTDIR=$PWD/dist ninja -C build install

@@ -57,7 +57,7 @@ encoding_multi_convert_to_utf8(const gchar *text, gssize textlen, const gchar *e
 
 		utf8 = g_convert(text, textlen, "UTF-8", curr_encoding_ro, NULL, NULL, NULL);
 
-		if (!end) /* last occurence. do not free curr_encoding: buffer was'nt allocated */
+		if (!end) /* last occurrence. do not free curr_encoding: buffer wasn't allocated */
 			break;
 
 		g_free(curr_encoding); /* free allocated buffer for encoding here */

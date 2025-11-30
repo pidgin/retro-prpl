@@ -146,7 +146,7 @@
  * hardcoding these values below (used in msim_compute_login_response).
  * This is not immediately
  * important because you can still connect and perform basic
- * functions of the protocol. There is also a high chance that the addreses
+ * functions of the protocol. There is also a high chance that the addresses
  * are RFC1918 private, so the servers couldn't do anything with them
  * anyways except make note of that fact. Probably important for any
  * kind of direct connection, or file transfer functionality.

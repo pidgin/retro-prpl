@@ -45,7 +45,7 @@ typedef struct _qq_room_data {
 	qq_room_role my_role;	/* my role for this room */
 	guint32 id;
 	guint32 ext_id;
-	guint8 type8;			/* permanent or temporory */
+	guint8 type8;			/* permanent or temporary */
 	UID creator_uid;
 	guint32 category;
 	guint8 auth_type;

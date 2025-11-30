@@ -129,12 +129,12 @@ enum yahoo_status {
 	YAHOO_STATUS_WEBLOGIN = 0x5a55aa55,
 	YAHOO_STATUS_OFFLINE = 0x5a55aa56, /* don't ask */
 	YAHOO_STATUS_TYPING = 0x16,
-	YAHOO_STATUS_DISCONNECTED = -1 /* 0xffffffff; in ymsg 15. doesnt mean the normal sense of 'disconnected' */
+	YAHOO_STATUS_DISCONNECTED = -1 /* 0xffffffff; in ymsg 15. doesn't mean the normal sense of 'disconnected' */
 };
 
 /*
  * Yahoo federated networks.  Key 241 in ymsg.
- * If it doesn't exist, it is on Yahoo's netowrk.
+ * If it doesn't exist, it is on Yahoo's network.
  * It if does exist, send to another IM network.
  */
 
@@ -313,7 +313,7 @@ char *yahoo_codes_to_html(const char *x);
  * 1. We always close all tags, whereas official Yahoo clients leave tags
  *    dangling open at the end of each message (and the client treats them
  *    as closed).
- * 2. We always close inner tags first before closing outter tags.
+ * 2. We always close inner tags first before closing outer tags.
  *
  * For example, if you want to send this message:
  *   <b> bold <i> bolditalic </i></b><i> italic </i>

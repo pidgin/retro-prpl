@@ -146,7 +146,7 @@ static const gchar *qq_get_file_cmd_desc(gint type)
 	}
 }
 
-/* The memmap version has better performance for big files transfering
+/* The memmap version has better performance for big files transferring
  * but it will spend plenty of memory, so do not use it in a low-memory host */
 #ifdef USE_MMAP
 #include <sys/mman.h>
@@ -402,7 +402,7 @@ static void _qq_send_file_data_packet(PurpleConnection *gc, guint16 packet_type,
 					info->fragment_len = QQ_FILE_FRAGMENT_MAXLEN;
 
 					purple_debug_info("QQ",
-							"start transfering data, %d fragments with %d length each\n",
+							"start transferring data, %d fragments with %d length each\n",
 							info->fragment_num, info->fragment_len);
 					/* Unknown */
 					bytes += qq_put16(raw_data  + bytes, 0x0000);
@@ -600,7 +600,7 @@ static void _qq_recv_file_progess(PurpleConnection *gc, guint8 *buffer, guint16 
 		if (mask & 0x8000) mask = 0x0001;
 		else mask = mask << 1;
 	}
-	purple_debug_info("QQ", "procceed %dth fragment, slide window status %o, max_fragment_index %d\n",
+	purple_debug_info("QQ", "processed %dth fragment, slide window status %o, max_fragment_index %d\n",
 			index, info->window, info->max_fragment_index);
 }
 
@@ -688,7 +688,7 @@ static void _qq_update_send_progess(PurpleConnection *gc, guint32 fragment_index
 		}
 	}
 	purple_debug_info("QQ",
-			"procceed %dth fragment ack, slide window status %o, max_fragment_index %d\n",
+			"processed %dth fragment ack, slide window status %o, max_fragment_index %d\n",
 			fragment_index, info->window, info->max_fragment_index);
 }
 

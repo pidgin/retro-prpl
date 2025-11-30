@@ -2589,7 +2589,7 @@ static gboolean yahoo_p2p_keepalive(gpointer data)
 
 /* destroy p2p_data associated with a peer and close p2p connection.
  * g_hash_table_remove() calls this function to destroy p2p_data associated with the peer,
- * call g_hash_table_remove() instead of this fucntion if peer has an entry in the table */
+ * call g_hash_table_remove() instead of this function if peer has an entry in the table */
 static void yahoo_p2p_disconnect_destroy_data(gpointer data)
 {
 	struct yahoo_p2p_data *p2p_data;
@@ -2629,7 +2629,7 @@ static void yahoo_p2p_process_p2pfilexfer(gpointer data, gint source, struct yah
 
 	yd = p2p_data->gc->proto_data;
 
-	/* lets see whats in the packet */
+	/* lets see what's in the packet */
 	while (l) {
 		struct yahoo_pair *pair = l->data;
 
@@ -2734,7 +2734,7 @@ static void yahoo_p2p_read_pkt_cb(gpointer data, gint source, PurpleInputConditi
 	}
 
 	/* TODO: It looks like there's a bug here (and above) where an incorrect
-	 * assumtion is being made that the buffer will be added to when this
+	 * assumption is being made that the buffer will be added to when this
 	 * is next called, but that's not really the case! */
 	if(len < YAHOO_PACKET_HDRLEN)
 		return;
@@ -2913,7 +2913,7 @@ void yahoo_send_p2p_pkt(PurpleConnection *gc, const char *who, int val_13)
 	if( strcmp(purple_normalize(account, purple_account_get_username(account)), who) == 0)
 		return;
 
-	/* send packet to only those friends who arent p2p connected and to whom we havent already sent. Do not send if this condition doesn't hold good */
+	/* send packet to only those friends who aren't p2p connected and to whom we haven't already sent. Do not send if this condition doesn't hold good */
 	if( !( f && (yahoo_friend_get_p2p_status(f) == YAHOO_P2PSTATUS_NOT_CONNECTED) && (f->p2p_packet_sent == 0)) )
 		return;
 
@@ -4833,7 +4833,7 @@ int yahoo_send_im(PurpleConnection *gc, const char *who, const char *what, Purpl
 	 * format the chat packet with the correct IMV information (thanks Yahoo!)
 	 *
 	 * Otherwise attempt to use the same IMVironment as the remote user,
-	 * just so that we don't inadvertantly reset their IMVironment back
+	 * just so that we don't inadvertently reset their IMVironment back
 	 * to nothing.
 	 *
 	 * If they have not set an IMVironment, then use the default.

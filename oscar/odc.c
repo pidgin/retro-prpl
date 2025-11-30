@@ -279,7 +279,7 @@ peer_odc_handle_payload(PeerConnection *conn, const char *msg, size_t len, int e
 		/* Move our pointer to immediately after the <binary> tag */
 		tmp = binary_start + 8;
 
-		/* The embedded binary markup has a mimimum length of 29 bytes */
+		/* The embedded binary markup has a minimum length of 29 bytes */
 		while ((tmp + 29 <= dataend) &&
 				purple_markup_find_tag("data", tmp, &start, &tmp, &attributes))
 		{

@@ -166,7 +166,7 @@ typedef struct _qq_data {
 
 	/* get from login reply packet */
 	struct in_addr my_local_ip;			/* my local ip address detected by server */
-	guint16 my_local_port;		/* my lcoal port detected by server */
+	guint16 my_local_port;		/* my local port detected by server */
 	time_t login_time;
 	time_t last_login_time[3];
 	struct in_addr last_login_ip;

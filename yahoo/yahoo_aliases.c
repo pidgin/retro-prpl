@@ -508,8 +508,8 @@ yahoo_set_userinfo_cb(PurpleConnection *gc, PurpleRequestFields *fields)
 		for (i = 0; yfields[i]; i++) {
 			const char *v = purple_request_fields_get_string(fields, yfields[i]);
 			if (v) {
-				xmlnode *nd = xmlnode_new_child(node, yfields[i]);
-				xmlnode_insert_data(nd, v, -1);
+				xmlnode *child = xmlnode_new_child(node, yfields[i]);
+				xmlnode_insert_data(child, v, -1);
 			}
 		}
 
@@ -606,7 +606,7 @@ void yahoo_set_userinfo(PurpleConnection *gc)
 static gboolean
 parse_contact_details(YahooData *yd, const char *who, const char *xml)
 {
-	xmlnode *node, *nd;
+	xmlnode *node, *child;
 	YahooFriend *f;
 	char *yid;
 
@@ -617,8 +617,8 @@ parse_contact_details(YahooData *yd, const char *who, const char *xml)
 		return FALSE;
 	}
 
-	nd = xmlnode_get_child(node, "yi");
-	if (!nd || !(yid = xmlnode_get_data(nd))) {
+	child = xmlnode_get_child(node, "yi");
+	if (!child || !(yid = xmlnode_get_data(child))) {
 		xmlnode_free(node);
 		return FALSE;
 	}
@@ -663,8 +663,8 @@ parse_contact_details(YahooData *yd, const char *who, const char *xml)
 		yahoo_personal_details_reset(ypd, FALSE);
 
 		for (i = 0; details[i].id; i++) {
-			nd = xmlnode_get_child(node, details[i].id);
-			*details[i].field = nd ? xmlnode_get_data(nd) : NULL;
+			child = xmlnode_get_child(node, details[i].id);
+			*details[i].field = child ? xmlnode_get_data(child) : NULL;
 		}
 
 		if (ypd->names.nick)

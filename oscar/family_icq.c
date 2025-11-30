@@ -47,7 +47,7 @@ static void aim_icq_freeinfo(struct aim_icq_info *info) {
 	g_free(info->last);
 	g_free(info->email);
 	g_free(info->homecity);
-	g_free(info->homestate);
+	g_free(info->homestate); /* codespell:ignore */
 	g_free(info->homephone);
 	g_free(info->homefax);
 	g_free(info->homeaddr);
@@ -491,7 +491,7 @@ icqresponse(OscarData *od, aim_modsnac_t *snac, ByteStream *bs)
 			info->last = byte_stream_getstr(&qbs, byte_stream_getle16(&qbs));
 			info->email = byte_stream_getstr(&qbs, byte_stream_getle16(&qbs));
 			info->homecity = byte_stream_getstr(&qbs, byte_stream_getle16(&qbs));
-			info->homestate = byte_stream_getstr(&qbs, byte_stream_getle16(&qbs));
+			info->homestate = byte_stream_getstr(&qbs, byte_stream_getle16(&qbs)); /* codespell:ignore */
 			info->homephone = byte_stream_getstr(&qbs, byte_stream_getle16(&qbs));
 			info->homefax = byte_stream_getstr(&qbs, byte_stream_getle16(&qbs));
 			info->homeaddr = byte_stream_getstr(&qbs, byte_stream_getle16(&qbs));
@@ -690,7 +690,7 @@ icqresponse(OscarData *od, aim_modsnac_t *snac, ByteStream *bs)
 				byte_stream_putle32(&bs, 0x00000000); /* unknown */
 				byte_stream_putle32(&bs, 0x00000000);
 				byte_stream_putle32(&bs, 0x00000000);
-				byte_stream_put8(&bs, 0x1a); /* message type: plugin message descibed by text string */
+				byte_stream_put8(&bs, 0x1a); /* message type: plugin message described by text string */
 				byte_stream_put8(&bs, 0x00); /* message flags */
 				byte_stream_putle16(&bs, 0x0000); /* status code */
 				byte_stream_putle16(&bs, 0x0001); /* priority code */

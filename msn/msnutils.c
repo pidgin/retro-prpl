@@ -571,7 +571,7 @@ msn_handle_chl(char *input, char *output)
 	/* Split it into four integers */
 	md5Parts = (unsigned int *)md5Hash;
 	for (i = 0; i < 4; i++) {
-		/* adjust endianess */
+		/* adjust endianness */
 		md5Parts[i] = GUINT_TO_LE(md5Parts[i]);
 
 		/* & each integer with 0x7FFFFFFF          */

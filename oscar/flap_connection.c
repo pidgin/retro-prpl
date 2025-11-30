@@ -828,7 +828,7 @@ parse_flap_ch4(OscarData *od, FlapConnection *conn, FlapFrame *frame)
 		msg = aim_tlv_getstr(tlvlist, 0x000b, 1);
 
 	/*
-	 * The server ended this FLAP connnection, so let's be nice and
+	 * The server ended this FLAP connection, so let's be nice and
 	 * close the physical TCP connection
 	 */
 	flap_connection_schedule_destroy(conn,
@@ -874,7 +874,7 @@ parse_flap(OscarData *od, FlapConnection *conn, FlapFrame *frame)
 
 /**
  * Read in all available data on the socket for a given connection.
- * All complete FLAPs handled immedate after they're received.
+ * All complete FLAPs handled immediate after they're received.
  * Incomplete FLAP data is stored locally and appended to the next
  * time this callback is triggered.
  *

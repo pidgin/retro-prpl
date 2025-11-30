@@ -666,7 +666,7 @@ static void yahoo_xfer_end(PurpleXfer *xfer_old)
 			gc = xfer_data->gc;
 			yd = gc->proto_data;
 
-			/* setting up xfer_data for next file's tranfer */
+			/* setting up xfer_data for next file's transfer */
 			g_free(xfer_data->host);
 			g_free(xfer_data->path);
 			g_free(xfer_data->txbuf);
@@ -1010,22 +1010,22 @@ PurpleXfer *yahoo_new_xfer(PurpleConnection *gc, const char *who)
 
 static gchar* yahoo_xfer_new_xfer_id(void)
 {
-	gchar *ans;
+	gchar *id;
 	int i,j;
-	ans = g_strnfill(24, ' ');
-	ans[23] = '$';
-	ans[22] = '$';
+	id = g_strnfill(24, ' ');
+	id[23] = '$';
+	id[22] = '$';
 	for(i = 0; i < 22; i++)
 	{
 		j = g_random_int_range (0,61);
 		if(j < 26)
-			ans[i] = j + 'a';
+			id[i] = j + 'a';
 		else if(j < 52)
-			ans[i] = j - 26 + 'A';
+			id[i] = j - 26 + 'A';
 		else
-			ans[i] = j - 52 + '0';
+			id[i] = j - 52 + '0';
 	}
-	return ans;
+	return id;
 }
 
 static void yahoo_xfer_dns_connected_15(GSList *hosts, gpointer data, const char *error_message)

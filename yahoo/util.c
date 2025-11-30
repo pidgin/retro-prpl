@@ -58,7 +58,7 @@ yahoo_account_use_http_proxy(PurpleConnection *pc)
  */
 gchar* yahoo_get_cookies(PurpleConnection *gc)
 {
-	gchar *ans = NULL;
+	gchar *cookie = NULL;
 	gchar *cur;
 	char firstflag = 1;
 	gchar *t1,*t2,*t3;
@@ -69,16 +69,16 @@ gchar* yahoo_get_cookies(PurpleConnection *gc)
 	while(tmp)
 	{
 		cur = tmp->data;
-		t1 = ans;
+		t1 = cookie;
 		t2 = g_strrstr(cur, ";expires=");
 		if(t2 == NULL)
 			t2 = g_strrstr(cur, "; expires=");
 		if(t2 == NULL)
 		{
 			if(firstflag)
-				ans = g_strdup_printf("%c=%s", cur[0], cur+2);
+				cookie = g_strdup_printf("%c=%s", cur[0], cur+2);
 			else
-				ans = g_strdup_printf("%s; %c=%s", t1, cur[0], cur+2);
+				cookie = g_strdup_printf("%s; %c=%s", t1, cur[0], cur+2);
 		}
 		else
 		{
@@ -88,9 +88,9 @@ gchar* yahoo_get_cookies(PurpleConnection *gc)
 				t2[0] = '\0';
 
 				if(firstflag)
-					ans = g_strdup_printf("%c=%s%s", cur[0], cur+2, t3);
+					cookie = g_strdup_printf("%c=%s%s", cur[0], cur+2, t3);
 				else
-					ans = g_strdup_printf("%s; %c=%s%s", t1, cur[0], cur+2, t3);
+					cookie = g_strdup_printf("%s; %c=%s%s", t1, cur[0], cur+2, t3);
 
 				t2[0] = ';';
 			}
@@ -99,9 +99,9 @@ gchar* yahoo_get_cookies(PurpleConnection *gc)
 				t2[0] = '\0';
 
 				if(firstflag)
-					ans = g_strdup_printf("%c=%s", cur[0], cur+2);
+					cookie = g_strdup_printf("%c=%s", cur[0], cur+2);
 				else
-					ans = g_strdup_printf("%s; %c=%s", t1, cur[0], cur+2);
+					cookie = g_strdup_printf("%s; %c=%s", t1, cur[0], cur+2);
 
 				t2[0] = ';';
 			}
@@ -112,7 +112,7 @@ gchar* yahoo_get_cookies(PurpleConnection *gc)
 			g_free(t1);
 		tmp = g_slist_next(tmp);
 	}
-	return ans;
+	return cookie;
 }
 
 /**
@@ -151,7 +151,7 @@ char *yahoo_string_encode(PurpleConnection *gc, const char *str, gboolean *utf8)
 			g_error_free(error);
 		} else {
 			purple_debug_error("yahoo", "Could not convert %s from UTF-8 to "
-					"%s: unkown error\n", str ? str : "(null)", to_codeset);
+					"%s: unknown error\n", str ? str : "(null)", to_codeset);
 		}
 		return g_strdup("");
 	}
@@ -195,7 +195,7 @@ char *yahoo_string_decode(PurpleConnection *gc, const char *str, gboolean utf8)
 			g_error_free(error);
 		} else {
 			purple_debug_error("yahoo", "Could not convert %s from %s to "
-					"UTF-8: unkown error\n", str ? str : "(null)",
+					"UTF-8: unknown error\n", str ? str : "(null)",
 					from_codeset);
 		}
 		return g_strdup("");
@@ -689,8 +689,8 @@ char *yahoo_codes_to_html(const char *x)
 	xmlstr1 = xmlnode_to_str(html, NULL);
 	xmlnode_free(html);
 
-	/* Strip off the outter HTML node */
-	/* This probably isn't necessary, especially if we made the outter HTML
+	/* Strip off the outer HTML node */
+	/* This probably isn't necessary, especially if we made the outer HTML
 	 * node an empty span.  But the HTML is simpler this way. */
 	if (!purple_strequal(xmlstr1, "<html/>"))
 		xmlstr2 = g_strndup(xmlstr1 + 6, strlen(xmlstr1) - 13);

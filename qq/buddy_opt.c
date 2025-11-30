@@ -358,7 +358,7 @@ void qq_request_question(PurpleConnection *gc,
 		qq_send_cmd_mess(gc, QQ_CMD_BUDDY_QUESTION, raw_data, bytes, 0, uid);
 		return;
 	}
-	/* Unknow 2 bytes, 0x(00 01) */
+	/* Unknown 2 bytes, 0x(00 01) */
 	bytes += qq_put8(raw_data + bytes, 0x00);
 	bytes += qq_put8(raw_data + bytes, 0x01);
 	g_return_if_fail(uid != 0);
@@ -421,7 +421,7 @@ void qq_process_question(PurpleConnection *gc, guint8 *data, gint data_len, UID 
 	if (cmd == QQ_QUESTION_SET) {
 		bytes += qq_get8(&reply, data + bytes);
 		if (reply == 0) {
-			purple_debug_info("QQ", "Successed setting Q&A\n");
+			purple_debug_info("QQ", "Succeeded setting Q&A\n");
 		} else {
 			purple_debug_warning("QQ", "Failed setting Q&A, reply %d\n", reply);
 		}
@@ -680,7 +680,7 @@ void add_buddy_authorize_input(PurpleConnection *gc, UID uid,
 
 /* add a buddy and send packet to QQ server
  * note that when purple load local cached buddy list into its blist
- * it also calls this funtion, so we have to
+ * it also calls this function, so we have to
  * define qd->is_login=TRUE AFTER LOGIN */
 void qq_add_buddy(PurpleConnection *gc, PurpleBuddy *buddy, PurpleGroup *group)
 {
@@ -813,7 +813,7 @@ void qq_process_add_buddy_no_auth(PurpleConnection *gc,
 		}
 		qq_request_get_buddies_online(gc, 0, 0);
 
-		purple_debug_info("QQ", "Successed adding into %u's buddy list\n", uid);
+		purple_debug_info("QQ", "Succeeded adding into %u's buddy list\n", uid);
 		g_strfreev(segments);
 		return;
 	}
@@ -1286,7 +1286,7 @@ void qq_process_buddy_from_server(PurpleConnection *gc, int funct,
 		server_buddy_adding_ex(gc, from, to, data, data_len);
 		break;
 	default:
-		purple_debug_warning("QQ", "Unknow buddy operate (%d) from server\n", funct);
+		purple_debug_warning("QQ", "Unknown buddy operate (%d) from server\n", funct);
 		break;
 	}
 }

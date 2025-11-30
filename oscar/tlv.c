@@ -287,7 +287,7 @@ int aim_tlvlist_size(GSList *list)
  * Adds the passed string as a TLV element of the passed type
  * to the TLV chain.
  *
- * @param list Desination chain (%NULL pointer if empty).
+ * @param list Destination chain (%NULL pointer if empty).
  * @param type TLV type.
  * @param length Length of string to add (not including %NULL).
  * @param value String to add.
@@ -509,7 +509,7 @@ int aim_tlvlist_add_frozentlvlist(GSList **list, guint16 type, GSList **tlvlist)
  * you attempt to replace a TLV that does not exist, this function will
  * just add a new TLV as if you called aim_tlvlist_add_raw().
  *
- * @param list Desination chain (%NULL pointer if empty).
+ * @param list Destination chain (%NULL pointer if empty).
  * @param type TLV type.
  * @param length Length of string to add (not including %NULL).
  * @param value String to add.
@@ -549,7 +549,7 @@ int aim_tlvlist_replace_raw(GSList **list, const guint16 type, const guint16 len
  * you attempt to replace a TLV that does not exist, this function will
  * just add a new TLV as if you called aim_tlvlist_add_str().
  *
- * @param list Desination chain (%NULL pointer if empty).
+ * @param list Destination chain (%NULL pointer if empty).
  * @param type TLV type.
  * @param str String to add.
  * @return The length of the TLV.
@@ -564,7 +564,7 @@ int aim_tlvlist_replace_str(GSList **list, const guint16 type, const char *str)
  * you attempt to replace a TLV that does not exist, this function will
  * just add a new TLV as if you called aim_tlvlist_add_raw().
  *
- * @param list Desination chain (%NULL pointer if empty).
+ * @param list Destination chain (%NULL pointer if empty).
  * @param type TLV type.
  * @return The length of the TLV.
  */
@@ -578,7 +578,7 @@ int aim_tlvlist_replace_noval(GSList **list, const guint16 type)
  * you attempt to replace a TLV that does not exist, this function will
  * just add a new TLV as if you called aim_tlvlist_add_raw().
  *
- * @param list Desination chain (%NULL pointer if empty).
+ * @param list Destination chain (%NULL pointer if empty).
  * @param type TLV type.
  * @param value 8 bit value to add.
  * @return The length of the TLV.
@@ -597,7 +597,7 @@ int aim_tlvlist_replace_8(GSList **list, const guint16 type, const guint8 value)
  * you attempt to replace a TLV that does not exist, this function will
  * just add a new TLV as if you called aim_tlvlist_add_raw().
  *
- * @param list Desination chain (%NULL pointer if empty).
+ * @param list Destination chain (%NULL pointer if empty).
  * @param type TLV type.
  * @param value 32 bit value to add.
  * @return The length of the TLV.
@@ -615,7 +615,7 @@ int aim_tlvlist_replace_32(GSList **list, const guint16 type, const guint32 valu
  * Remove all TLVs of a given type.  If you attempt to remove a TLV
  * that does not exist, nothing happens.
  *
- * @param list Desination chain (%NULL pointer if empty).
+ * @param list Destination chain (%NULL pointer if empty).
  * @param type TLV type.
  */
 void aim_tlvlist_remove(GSList **list, const guint16 type)

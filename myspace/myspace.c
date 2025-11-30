@@ -870,7 +870,7 @@ msim_check_inbox_cb(MsimSession *session, const MsimMessage *reply, gpointer dat
 		{ "FriendRequest", MSIM_INBOX_FRIEND_REQUEST, "http://messaging.myspace.com/index.cfm?fuseaction=mail.friendRequests", NULL },
 		{ "PictureComment", MSIM_INBOX_PICTURE_COMMENT, "http://home.myspace.com/index.cfm?fuseaction=user", NULL }
 	};
-	const gchar *froms[G_N_ELEMENTS(message_types) + 1] = { "" },
+	const gchar *authors[G_N_ELEMENTS(message_types) + 1] = { "" },
 		*tos[G_N_ELEMENTS(message_types) + 1] = { "" },
 		*urls[G_N_ELEMENTS(message_types) + 1] = { "" },
 		*subjects[G_N_ELEMENTS(message_types) + 1] = { "" };
@@ -908,7 +908,7 @@ msim_check_inbox_cb(MsimSession *session, const MsimMessage *reply, gpointer dat
 						key ? key : "(NULL)", n);
 
 				subjects[n] = message_types[i].text;
-				froms[n] = _("MySpace");
+				authors[n] = _("MySpace");
 				tos[n] = session->username;
 				/* TODO: append token, web challenge, so automatically logs in.
 				 * Would also need to free strings because they won't be static
@@ -934,7 +934,7 @@ msim_check_inbox_cb(MsimSession *session, const MsimMessage *reply, gpointer dat
 		purple_notify_emails(session->gc,         /* handle */
 				n,                        /* count */
 				TRUE,                     /* detailed */
-				subjects, froms, tos, urls,
+				subjects, authors, tos, urls,
 				NULL,                     /* PurpleNotifyCloseCallback cb */
 				NULL);                    /* gpointer user_data */
 
@@ -1694,7 +1694,7 @@ msim_incoming_bm(MsimSession *session, MsimMessage *msg)
 			 * we'll show broken gibberish if MySpace starts sending us
 			 * other message types.
 			 */
-			purple_debug_warning("myspace", "Received unknown imcoming "
+			purple_debug_warning("myspace", "Received unknown incoming "
 					"message, bm=%u\n", bm);
 			return TRUE;
 	}
@@ -1752,7 +1752,7 @@ msim_web_challenge(MsimSession *session, MsimMessage *msg)
 }
 
 /**
- * Process a persistance message reply from the server.
+ * Process a persistence message reply from the server.
  *
  * @param session
  * @param msg Message reply from server.
@@ -1921,7 +1921,7 @@ msim_process(MsimSession *session, MsimMessage *msg)
  * After a uid is resolved to username, tag it with the username and submit for processing.
  *
  * @param session
- * @param userinfo Response messsage to resolving request.
+ * @param userinfo Response message to resolving request.
  * @param data MsimMessage *, the message to attach information to.
  */
 static void
@@ -2490,7 +2490,7 @@ static void
 msim_set_status(PurpleAccount *account, PurpleStatus *status)
 {
 	PurpleStatusType *type;
-	PurplePresence *pres;
+	PurplePresence *presence;
 	MsimSession *session;
 	guint status_code;
 	const gchar *message;
@@ -2500,7 +2500,7 @@ msim_set_status(PurpleAccount *account, PurpleStatus *status)
 	session = (MsimSession *)account->gc->proto_data;
 
 	type = purple_status_get_type(status);
-	pres = purple_status_get_presence(status);
+	presence = purple_status_get_presence(status);
 
 	switch (purple_status_type_get_primitive(type)) {
 		case PURPLE_STATUS_AVAILABLE:
@@ -2545,7 +2545,7 @@ msim_set_status(PurpleAccount *account, PurpleStatus *status)
 	msim_set_status_code(session, status_code, stripped);
 
 	/* If we should be idle, set that status. Time is irrelevant here. */
-	if (purple_presence_is_idle(pres) && status_code != MSIM_STATUS_CODE_OFFLINE_OR_HIDDEN)
+	if (purple_presence_is_idle(presence) && status_code != MSIM_STATUS_CODE_OFFLINE_OR_HIDDEN)
 		msim_set_idle(account->gc, 1);
 }
 
@@ -2849,7 +2849,7 @@ msim_rem_deny(PurpleConnection *gc, const char *name)
 /**
  * Returns a string of a username in canonical form. Basically removes all the
  * spaces, lowercases the string, and looks up user IDs to usernames.
- * Normalizing tom, TOM, Tom, and 6221 wil all return 'tom'.
+ * Normalizing tom, TOM, Tom, and 6221 will all return 'tom'.
  *
  * Borrowed this code from oscar_normalize. Added checking for
  * "if userid, get name before normalizing"
@@ -3416,7 +3416,7 @@ msim_check_newer_version_cb(PurpleUtilFetchUrlData *url_data,
 	error = NULL;
 	keyfile = g_key_file_new();
 
-	/* Default list seperator is ;, but currentversion.txt doesn't have
+	/* Default list separator is ;, but currentversion.txt doesn't have
 	 * these, so set to an unused character to avoid parsing problems. */
 	g_key_file_set_list_separator(keyfile, '\0');
 
