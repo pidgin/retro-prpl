@@ -268,7 +268,7 @@ set_profile(GaimPluginAction *action)
 	field = gaim_request_field_string_new("firstname", _("First Name"), NULL,
 										  FALSE);
 	gaim_request_field_group_add_field(group, field);
-	gaim_debug(GAIM_DEBUG_MISC, "trepia", "feld type = %d\n",
+	gaim_debug(GAIM_DEBUG_MISC, "trepia", "field type = %d\n",
 			   field->type);
 
 	/* Last Name */

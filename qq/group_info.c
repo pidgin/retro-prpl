@@ -222,7 +222,7 @@ void qq_process_room_cmd_get_info(guint8 *data, gint data_len, guint32 action, P
 			rmd->type8, rmd->creator_uid, rmd->category, max_members);
 
 	if (qd->client_version >= 2007) {
-		/* skip 7 bytes unknow in qq2007 0x(00 00 01 00 00 00 fc)*/
+		/* skip 7 bytes unknown in qq2007 0x(00 00 01 00 00 00 fc)*/
 		bytes += 7;
 	}
 	/* qq_show_packet("Room Info", data + bytes, data_len - bytes); */
@@ -232,7 +232,7 @@ void qq_process_room_cmd_get_info(guint8 *data, gint data_len, guint32 action, P
 	bytes += qq_get_vstr(&notice, QQ_CHARSET_DEFAULT, data + bytes);
 	bytes += qq_get_vstr(&(rmd->desc_utf8), QQ_CHARSET_DEFAULT, data + bytes);
 
-	purple_debug_info("QQ", "room [%s] notice [%s] desc [%s] unknow 0x%04X\n",
+	purple_debug_info("QQ", "room [%s] notice [%s] desc [%s] unknown 0x%04X\n",
 			rmd->title_utf8, notice, rmd->desc_utf8, unknown);
 
 	num = 0;

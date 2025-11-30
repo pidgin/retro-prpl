@@ -324,7 +324,7 @@ incomingim_ch3(OscarData *od, FlapConnection *conn, aim_module_t *mod, FlapFrame
 	}
 
 	/*
-	 * Type 0x0005: Message Block.  Conains more TLVs.
+	 * Type 0x0005: Message Block.  Contains more TLVs.
 	 */
 	tlv = aim_tlv_gettlv(tlvlist, 0x0005, 1);
 	if (tlv != NULL)

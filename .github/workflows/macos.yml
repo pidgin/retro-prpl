@@ -24,7 +24,7 @@ jobs:
       - name: Prepare build environment
         run: |
           brew update
-          brew install meson pidgin
+          brew install codespell gettext meson pidgin
 
       - name: Install external dependencies
         if: matrix.dependencies == 'external'
@@ -37,7 +37,7 @@ jobs:
         run: meson setup build
 
       - name: Build project
-        run: ninja -C build
+        run: ninja -C build turtles
 
       - name: Install build results
         run: DESTDIR=$PWD/dist ninja -C build install

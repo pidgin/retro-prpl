@@ -104,14 +104,14 @@ static gint8 process_login_ok(PurpleConnection *gc, guint8 *data, gint len)
 	bytes += 2;
 	/* skip unknown 24 bytes, maybe token to access Qun shared files */
 	bytes += 24;
-	/* unknow ip and port */
+	/* unknown ip and port */
 	bytes += qq_getIP(&ip, data + bytes);
 	bytes += qq_get16(&port, data + bytes);
-	purple_debug_info("QQ", "Unknow IP: %s, %d\n", inet_ntoa(ip), port);
-	/* unknow ip and port */
+	purple_debug_info("QQ", "Unknown IP: %s, %d\n", inet_ntoa(ip), port);
+	/* unknown ip and port */
 	bytes += qq_getIP(&ip, data + bytes);
 	bytes += qq_get16(&port, data + bytes);
-	purple_debug_info("QQ", "Unknow IP: %s, %d\n", inet_ntoa(ip), port);
+	purple_debug_info("QQ", "Unknown IP: %s, %d\n", inet_ntoa(ip), port);
 	/* unknown 4 bytes, 0x(00 81 00 00)*/
 	bytes += 4;
 	/* skip unknown 32 bytes, maybe key to access QQ Home */
@@ -124,7 +124,7 @@ static gint8 process_login_ok(PurpleConnection *gc, guint8 *data, gint len)
 	purple_debug_info("QQ", "Last login time: %d-%d-%d, %d:%d:%d\n",
 			(1900 +tm_local->tm_year), (1 + tm_local->tm_mon), tm_local->tm_mday,
 			tm_local->tm_hour, tm_local->tm_min, tm_local->tm_sec);
-	/* unknow time */
+	/* unknown time */
 	g_return_val_if_fail(sizeof(qd->last_login_time) / sizeof(time_t) > 1, QQ_LOGIN_REPLY_OK);
 	bytes += qq_getime(&qd->last_login_time[1], data + bytes);
 	tm_local = localtime(&qd->last_login_time[1]);
@@ -138,7 +138,7 @@ static gint8 process_login_ok(PurpleConnection *gc, guint8 *data, gint len)
 	purple_debug_info("QQ", "Time: %d-%d-%d, %d:%d:%d\n",
 			(1900 +tm_local->tm_year), (1 + tm_local->tm_mon), tm_local->tm_mday,
 			tm_local->tm_hour, tm_local->tm_min, tm_local->tm_sec);
-	/* unknow 9 bytes, 0x(00 0a 00 0a 01 00 00 0e 10) */
+	/* unknown 9 bytes, 0x(00 0a 00 0a 01 00 00 0e 10) */
 
 	if (len > 148) {
 		qq_show_packet("Login reply OK, but length > 139", data, len);
@@ -1182,7 +1182,7 @@ void qq_request_login_2007(PurpleConnection *gc)
 
 	/* create packet */
 	bytes = 0;
-	bytes += qq_put16(raw_data + bytes, 0);		/* Unknow */
+	bytes += qq_put16(raw_data + bytes, 0);		/* Unknown */
 	/* password encrypted */
 	bytes += qq_put16(raw_data + bytes, encrypted_len);
 	bytes += qq_putdata(raw_data + bytes, encrypted, encrypted_len);
@@ -1190,25 +1190,25 @@ void qq_request_login_2007(PurpleConnection *gc)
 	encrypted_len = qq_encrypt(encrypted, (guint8 *) "", 0, qd->ld.pwd_twice_md5);
 	g_return_if_fail(encrypted_len == 16);
 	bytes += qq_putdata(raw_data + bytes, encrypted, encrypted_len);
-	/* unknow fill 0 */
+	/* unknown fill 0 */
 	memset(raw_data + bytes, 0, 19);
 	bytes += 19;
 	bytes += qq_putdata(raw_data + bytes, login_1_16, sizeof(login_1_16));
 
 	bytes += qq_put8(raw_data + bytes, rand() & 0xff);
 	bytes += qq_put8(raw_data + bytes, qd->login_mode);
-	/* unknow 10 bytes zero filled*/
+	/* unknown 10 bytes zero filled*/
 	memset(raw_data + bytes, 0, 10);
 	bytes += 10;
 	/* redirect data, 15 bytes */
 	/* qq_show_packet("Redirect", qd->redirect, qd->redirect_len); */
 	bytes += qq_putdata(raw_data + bytes, qd->redirect, qd->redirect_len);
-	/* unknow fill */
+	/* unknown fill */
 	bytes += qq_putdata(raw_data + bytes, login_2_16, sizeof(login_2_16));
 	/* captcha token get from qq_process_token_ex */
 	bytes += qq_put8(raw_data + bytes, (guint8)(qd->ld.token_ex_len & 0xff));
 	bytes += qq_putdata(raw_data + bytes, qd->ld.token_ex, qd->ld.token_ex_len);
-	/* unknow fill */
+	/* unknown fill */
 	bytes += qq_putdata(raw_data + bytes, login_3_83, sizeof(login_3_83));
 	memset(raw_data + bytes, 0, 332 - sizeof(login_3_83));
 	bytes += 332 - sizeof(login_3_83);
@@ -1290,11 +1290,11 @@ guint8 qq_process_login_2007( PurpleConnection *gc, guint8 *data, gint data_len)
 	bytes += qq_getIP(&qd->my_local_ip, data + bytes);
 	bytes += qq_get16(&qd->my_local_port, data + bytes);
 	bytes += qq_getime(&qd->login_time, data + bytes);
-	/* skip unknow 50 byte */
+	/* skip unknown 50 byte */
 	bytes += 50;
 	/* skip client key 32 byte */
 	bytes += 32;
-	/* skip unknow 12 byte */
+	/* skip unknown 12 byte */
 	bytes += 12;
 	/* last login */
 	bytes += qq_getIP(&qd->last_login_ip, data + bytes);
@@ -1358,7 +1358,7 @@ void qq_request_login_2008(PurpleConnection *gc)
 
 	/* create packet */
 	bytes = 0;
-	bytes += qq_put16(raw_data + bytes, 0);		/* Unknow */
+	bytes += qq_put16(raw_data + bytes, 0);		/* Unknown */
 	/* password encrypted */
 	bytes += qq_put16(raw_data + bytes, encrypted_len);
 	bytes += qq_putdata(raw_data + bytes, encrypted, encrypted_len);
@@ -1366,7 +1366,7 @@ void qq_request_login_2008(PurpleConnection *gc)
 	encrypted_len = qq_encrypt(encrypted, (guint8 *) "", 0, qd->ld.pwd_twice_md5);
 	g_return_if_fail(encrypted_len == 16);
 	bytes += qq_putdata(raw_data + bytes, encrypted, encrypted_len);
-	/* unknow 19 bytes zero filled*/
+	/* unknown 19 bytes zero filled*/
 	memset(raw_data + bytes, 0, 19);
 	bytes += 19;
 	bytes += qq_putdata(raw_data + bytes, login_1_16, sizeof(login_1_16));
@@ -1379,30 +1379,30 @@ void qq_request_login_2008(PurpleConnection *gc)
 	bytes += qq_put8(raw_data + bytes, index);	/* random in QQ 2007*/
 
 	bytes += qq_put8(raw_data + bytes, qd->login_mode);
-	/* unknow 10 bytes zero filled*/
+	/* unknown 10 bytes zero filled*/
 	memset(raw_data + bytes, 0, 10);
 	bytes += 10;
 	/* redirect data, 15 bytes */
 	bytes += qq_putdata(raw_data + bytes, qd->redirect, qd->redirect_len);
-	/* unknow fill */
+	/* unknown fill */
 	bytes += qq_putdata(raw_data + bytes, login_2_16, sizeof(login_2_16));
 	/* captcha token get from qq_process_token_ex */
 	bytes += qq_put8(raw_data + bytes, (guint8)(qd->ld.token_ex_len & 0xff));
 	bytes += qq_putdata(raw_data + bytes, qd->ld.token_ex, qd->ld.token_ex_len);
-	/* unknow fill */
+	/* unknown fill */
 	bytes += qq_putdata(raw_data + bytes, login_3_18, sizeof(login_3_18));
 	bytes += qq_put8(raw_data + bytes , sizeof(login_4_16));
 	bytes += qq_putdata(raw_data + bytes, login_4_16, sizeof(login_4_16));
-	/* unknow 10 bytes zero filled*/
+	/* unknown 10 bytes zero filled*/
 	memset(raw_data + bytes, 0, 10);
 	bytes += 10;
 	/* redirect data, 15 bytes */
 	bytes += qq_putdata(raw_data + bytes, qd->redirect, qd->redirect_len);
-	/* unknow fill */
+	/* unknown fill */
 	bytes += qq_putdata(raw_data + bytes, login_5_6, sizeof(login_5_6));
 	bytes += qq_put8(raw_data + bytes , sizeof(login_6_16));
 	bytes += qq_putdata(raw_data + bytes, login_6_16, sizeof(login_6_16));
-	/* unknow 249 bytes zero filled*/
+	/* unknown 249 bytes zero filled*/
 	memset(raw_data + bytes, 0, 249);
 	bytes += 249;
 
@@ -1412,7 +1412,7 @@ void qq_request_login_2008(PurpleConnection *gc)
 	buf = g_newa(guint8, MAX_PACKET_SIZE);
 	memset(buf, 0, MAX_PACKET_SIZE);
 	bytes = 0;
-	/* logint token get from qq_process_check_pwd_2007 */
+	/* login token get from qq_process_check_pwd_2007 */
 	bytes += qq_put16(buf + bytes, qd->ld.login_token_len);
 	bytes += qq_putdata(buf + bytes, qd->ld.login_token, qd->ld.login_token_len);
 	bytes += qq_putdata(buf + bytes, encrypted, encrypted_len);

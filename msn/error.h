@@ -47,7 +47,7 @@ void msn_error_handle(MsnSession *session, unsigned int type);
 /**
  * Show the sync issue in a dialog using request api
  *
- * @param sesion 		MsnSession associated to this error.
+ * @param session 		MsnSession associated to this error.
  * @param passport 		The passport associated with the error.
  * @param group_name 	The group in the buddy is suppoused to be
  */

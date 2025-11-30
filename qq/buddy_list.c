@@ -61,7 +61,7 @@ void qq_request_get_buddies_online(PurpleConnection *gc, guint8 position, UPDCLS
 	raw_data = g_newa(guint8, 5);
 
 	/* 000-000 get online friends cmd
-	 * only 0x02 and 0x03 returns info from server, other valuse all return 0xff
+	 * only 0x02 and 0x03 returns info from server, other values all return 0xff
 	 * I can also only send the first byte (0x02, or 0x03)
 	 * and the result is the same */
 	bytes += qq_put8(raw_data + bytes, QQ_GET_ONLINE_BUDDY_02);
@@ -387,7 +387,7 @@ guint32 qq_process_get_buddies_and_rooms(guint8 *data, gint data_len, PurpleConn
 		bytes += qq_get32(&uid, data + bytes);
 		/* 04: type 0x1:buddy 0x4:Qun */
 		bytes += qq_get8(&type, data + bytes);
-		/* 05: skip unknow 0x00 */
+		/* 05: skip unknown 0x00 */
 		bytes += 1;
 		if (uid == 0 || (type != 0x1 && type != 0x4)) {
 			purple_debug_info("QQ", "Buddy entry, uid=%u, type=%d\n", uid, type);
@@ -544,7 +544,7 @@ void qq_process_buddy_change_status(guint8 *data, gint data_len, PurpleConnectio
 	bytes = 0;
 	/* 000-030: qq_buddy_status */
 	bytes += get_buddy_status(&bs, data + bytes);
-	/* 031-034:  Unknow, maybe my uid */
+	/* 031-034:  Unknown, maybe my uid */
 	/* This has a value of 0 when we've changed our status to
 	 * QQ_BUDDY_ONLINE_INVISIBLE */
 	bytes += qq_get32(&my_uid, data + bytes);

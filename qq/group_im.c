@@ -359,7 +359,7 @@ static void request_room_send_im_ex(PurpleConnection *gc, guint32 room_id,
 	bytes += qq_put8(raw_data + bytes, frag_count);
 	bytes += qq_put8(raw_data + bytes, frag_index);
 	bytes += qq_put16(raw_data + bytes, msg_id);
-	bytes += qq_put32(raw_data + bytes, 0);			/* unknow 4 bytes */
+	bytes += qq_put32(raw_data + bytes, 0);			/* unknown 4 bytes */
 	bytes += qq_putdata(raw_data + bytes, (guint8 *)msg, strlen(msg));
 	if (frag_count == frag_index + 1) {
 		bytes += qq_put8(raw_data + bytes, 0x20);	/* add extra SPACE */

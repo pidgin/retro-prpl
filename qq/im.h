@@ -56,7 +56,7 @@ typedef struct {
 	guint8 attr;
 	guint8 rgb[3];
 	guint16 charset;
-	gchar *font;		/* Attension: font may NULL. font name is in QQ charset */
+	gchar *font;		/* Attention: font may NULL. font name is in QQ charset */
 	guint8 font_len;
 } qq_im_format;
 

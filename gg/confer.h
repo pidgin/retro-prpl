@@ -63,7 +63,7 @@ ggp_confer_participants_add(PurpleConnection *gc, const gchar *chat_name,
  * Finds a conversation in which all the specified recipients participate.
  *
  * TODO: This function should be rewritten to better handle situations when
- * somebody adds more people to the converation.
+ * somebody adds more people to the conversation.
  *
  * @param gc         PurpleConnection.
  * @param recipients List of the people in the conversation.

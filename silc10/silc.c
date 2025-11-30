@@ -816,7 +816,7 @@ silcpurple_create_keypair_cb(PurpleConnection *gc, PurpleRequestFields *fields)
 {
 	SilcPurple sg = gc->proto_data;
 	PurpleRequestField *f;
-	const char *val, *pkfile = NULL, *prfile = NULL;
+	const char *val, *pkfile = NULL, *prfile = NULL; /* codespell:ignore */
 	const char *pass1 = NULL, *pass2 = NULL, *un = NULL, *hn = NULL;
 	const char *rn = NULL, *e = NULL, *o = NULL, *c = NULL;
 	char *identifier;
@@ -859,9 +859,9 @@ silcpurple_create_keypair_cb(PurpleConnection *gc, PurpleRequestFields *fields)
 	f = purple_request_fields_get_field(fields, "pkfile");
 	if (f)
 		pkfile = purple_request_field_string_get_value(f);
-	f = purple_request_fields_get_field(fields, "prfile");
+	f = purple_request_fields_get_field(fields, "prfile"); /* codespell:ignore */
 	if (f)
-		prfile = purple_request_field_string_get_value(f);
+		prfile = purple_request_field_string_get_value(f); /* codespell:ignore */
 
 	f = purple_request_fields_get_field(fields, "un");
 	if (f)
@@ -886,7 +886,7 @@ silcpurple_create_keypair_cb(PurpleConnection *gc, PurpleRequestFields *fields)
 						 (char *)rn, (char *)e, (char *)o, (char *)c);
 
 	/* Create the key pair */
-	if (!silc_create_key_pair(SILCPURPLE_DEF_PKCS, keylen, pkfile, prfile,
+	if (!silc_create_key_pair(SILCPURPLE_DEF_PKCS, keylen, pkfile, prfile, /* codespell:ignore */
 				  identifier, pass1, NULL, &public_key, NULL,
 				  FALSE)) {
 		purple_notify_error(
@@ -933,7 +933,7 @@ silcpurple_create_keypair(PurplePluginAction *action)
 	purple_request_field_group_add_field(g, f);
 	f = purple_request_field_string_new("pkfile", _("Public key file"), pkd, FALSE);
 	purple_request_field_group_add_field(g, f);
-	f = purple_request_field_string_new("prfile", _("Private key file"), prd, FALSE);
+	f = purple_request_field_string_new("prfile", _("Private key file"), prd, FALSE); /* codespell:ignore */
 	purple_request_field_group_add_field(g, f);
 	purple_request_fields_add_group(fields, g);
 

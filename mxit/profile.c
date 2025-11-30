@@ -124,7 +124,7 @@ gboolean validateDate( const char* bday )
 
 	/* validate year */
 	if ( ( year < ( cur_year - 100 ) ) || ( year >= cur_year ) ) {
-		/* you are either tooo old or tooo young to join mxit... sorry */
+		/* you are either too old or too young to join mxit... sorry */
 		return FALSE;
 	}
 

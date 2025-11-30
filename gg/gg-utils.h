@@ -59,7 +59,7 @@ unsigned int
 ggp_array_size(char **array);
 
 /**
- * Convert enconding of a given string.
+ * Convert encoding of a given string.
  *
  * @param locstr Input string.
  * @param encsrc Current encoding of the string.

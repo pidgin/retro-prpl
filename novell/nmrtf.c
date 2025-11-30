@@ -197,7 +197,7 @@ NMRtfSymbol rtf_symbols[] = {
     {"header",   0,     FALSE,     NMRTF_KWD_DEST,  NMRTF_DEST_SKIP},
     {"headerf",  0,     FALSE,     NMRTF_KWD_DEST,  NMRTF_DEST_SKIP},
     {"headerl",  0,     FALSE,     NMRTF_KWD_DEST,  NMRTF_DEST_SKIP},
-    {"headerr",  0,     FALSE,     NMRTF_KWD_DEST,  NMRTF_DEST_SKIP},
+    {"headerr",  0,     FALSE,     NMRTF_KWD_DEST,  NMRTF_DEST_SKIP}, /* codespell:ignore headerr */
     {"info",     0,     FALSE,     NMRTF_KWD_DEST,  NMRTF_DEST_SKIP},
     {"keywords", 0,     FALSE,     NMRTF_KWD_DEST,  NMRTF_DEST_SKIP},
     {"operator", 0,     FALSE,     NMRTF_KWD_DEST,  NMRTF_DEST_SKIP},

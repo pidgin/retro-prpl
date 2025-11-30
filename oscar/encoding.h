@@ -28,7 +28,7 @@ gchar * oscar_encoding_to_utf8(const char *encoding, const char *text, int textl
 gchar * oscar_utf8_try_convert(PurpleAccount *account, OscarData *od, const gchar *msg);
 
 /**
- * This attemps to decode an incoming IM into a UTF8 string.
+ * This attempts to decode an incoming IM into a UTF8 string.
  *
  * We try decoding using two different character sets.  The charset
  * specified in the IM determines the order in which we attempt to

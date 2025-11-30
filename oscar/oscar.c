@@ -1917,7 +1917,7 @@ incomingim_chan4(OscarData *od, FlapConnection *conn, aim_userinfo_t *userinfo, 
 		(guint16)args->type);
 
 	/*
-	 * Split up the message at the delimeter character, then convert each
+	 * Split up the message at the delimiter character, then convert each
 	 * string to UTF-8.  Unless, of course, this is a type 1 message.  If
 	 * this is a type 1 message, then the delimiter 0xfe could be a valid
 	 * character in whatever encoding the message was sent in.  Type 1
@@ -2807,7 +2807,7 @@ static int purple_connerr(OscarData *od, FlapConnection *conn, FlapFrame *fr, ..
 			if (conv != NULL)
 			{
 				/*
-				 * TOOD: Have flap_connection_destroy_cb() send us the
+				 * TODO: Have flap_connection_destroy_cb() send us the
 				 *       error message stored in 'tmp', which should be
 				 *       human-friendly, and print that to the chat room.
 				 */

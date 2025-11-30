@@ -21,7 +21,7 @@
 /*
  * Family 0x0007 - Account Administration.
  *
- * Used for stuff like changing the formating of your username, changing your
+ * Used for stuff like changing the formatting of your username, changing your
  * email address, requesting an account confirmation email, getting account info,
  */
 

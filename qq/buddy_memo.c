@@ -196,7 +196,7 @@ static void memo_modify_ok_cb(modify_memo_request *memo_request, PurpleRequestFi
 		}
 		else {
 			value = utf8_to_qq(utf8_str, QQ_CHARSET_DEFAULT);
-			/* Warnning: value will be string "(NULL)" instead of NULL */
+			/* Warning: value will be string "(NULL)" instead of NULL */
 			if (!qq_strcmp("(NULL)", value)) {
 				value = g_strdup("");
 			}
@@ -335,7 +335,7 @@ void qq_process_get_buddy_memo(PurpleConnection *gc, guint8* data, gint data_len
 						_("Memo Modify"), _("Server says:"),
 						_("Your request was accepted."),
 						NULL, NULL);
-				purple_debug_info("QQ", "memo change succeessfully!\n");
+				purple_debug_info("QQ", "memo change successfully!\n");
 			}
 			else {
 				purple_notify_message(gc, PURPLE_NOTIFY_MSG_INFO,

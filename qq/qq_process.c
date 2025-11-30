@@ -71,7 +71,7 @@ static void process_unknow_cmd(PurpleConnection *gc,const gchar *title, guint8 *
 			">>> [%d] %s -> [default] decrypt and dump",
 			seq, qq_get_cmd_desc(cmd));
 
-	msg = g_strdup_printf("Unknow command 0x%02X, %s", cmd, qq_get_cmd_desc(cmd));
+	msg = g_strdup_printf("Unknown command 0x%02X, %s", cmd, qq_get_cmd_desc(cmd));
 	purple_notify_info(gc, _("QQ Error"), title, msg);
 	g_free(msg);
 }
@@ -278,7 +278,7 @@ static void process_private_msg(guint8 *data, gint data_len, guint16 seq, Purple
 
 	/* check len first */
 	if (data_len < 20) {	/* length of im_header */
-		purple_debug_error("QQ", "Invald MSG header, len %d < 20\n", data_len);
+		purple_debug_error("QQ", "Invalid MSG header, len %d < 20\n", data_len);
 		return;
 	}
 
@@ -750,14 +750,14 @@ void qq_proc_room_cmds(PurpleConnection *gc, guint16 seq,
 
 	if (room_id <= 0) {
 		purple_debug_warning("QQ",
-			"Invaild room id, [%05d], 0x%02X %s for %d, len %d\n",
+			"Invalid room id, [%05d], 0x%02X %s for %d, len %d\n",
 			seq, room_cmd, qq_get_room_cmd_desc(room_cmd), room_id, rcved_len);
 		/* Some room cmd has no room id, like QQ_ROOM_CMD_SEARCH */
 	}
 
 	if (data_len <= 2) {
 		purple_debug_warning("QQ",
-			"Invaild len of room cmd decrypted, [%05d], 0x%02X %s for %d, len %d\n",
+			"Invalid len of room cmd decrypted, [%05d], 0x%02X %s for %d, len %d\n",
 			seq, room_cmd, qq_get_room_cmd_desc(room_cmd), room_id, rcved_len);
 		return;
 	}
@@ -841,7 +841,7 @@ void qq_proc_room_cmds(PurpleConnection *gc, guint16 seq,
 		qq_process_room_cmd_get_buddies(data + bytes, data_len - bytes, gc);
 		break;
 	default:
-		purple_debug_warning("QQ", "Unknow room cmd 0x%02X %s\n",
+		purple_debug_warning("QQ", "Unknown room cmd 0x%02X %s\n",
 			   reply_cmd, qq_get_room_cmd_desc(reply_cmd));
 	}
 

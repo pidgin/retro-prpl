@@ -334,7 +334,7 @@ version 2.14.0 (10/06/2020):
 version 2.13.0 (03/08/2018):
 	libpurple:
 	* Unified string comparison. (PR #186) (Arkadiy Illarionov)
-	* Properlly shell escape URI's when opening them. (PR #271 Daniel Kamil Kozar)
+	* Properly shell escape URI's when opening them. (PR #271 Daniel Kamil Kozar)
 	* Fix a one byte buffer overread in function purple_markup_linkify
 	* Fix an issue were utf8 was incorrectly truncated which could lead to
 	  crashes as we were potentially feeding garbage into glib/gtk.
@@ -1201,7 +1201,7 @@ version 2.7.11 (03/10/2011):
 	  to 32 packets.
 
 	XMPP:
-	* Fix building on platforms with an older glib (inadvertantly broken in
+	* Fix building on platforms with an older glib (inadvertently broken in
 	  2.7.10).  (#13329)
 	* Don't treat the on-join status storms as 'new arrivals'.  (Thijs
 	  Alkemade) (#a14527)
@@ -1409,7 +1409,7 @@ version 2.7.5 (10/31/2010):
 	  Information dialog.
 
 	AIM and/or ICQ:
-	* Display the "Authorize buddy?" minidialog when the requestor has an
+	* Display the "Authorize buddy?" minidialog when the requester has an
 	  empty nickname. (#12810)
 	* New ICQ accounts default to proper ICQ servers.  Old accounts using one
 	  of the old default servers will be silently migrated to use the proper
@@ -1895,7 +1895,7 @@ version 2.6.6 (02/18/2010):
 	* Fix CVE-2010-0423, a denial of service attack due to the parsing
 	  of large numbers of smileys.  (Discovered by Antti Hayrynen)
 	* Correctly size conversation and status box entries when the
-	  interior-focus style property is diabled. (Gabriel Schulhof)
+	  interior-focus style property is disabled. (Gabriel Schulhof)
 	* Correctly handle a multiline text field being required in a
 	  request form.  (Thanks to Florian Zeitz for finding this problem)
 	* Search friends by email-addresses in the buddy list. (Luoh Ren-Shan)
@@ -2366,7 +2366,7 @@ version 2.5.8 (06/27/2009):
 	  the pain of transition to the new login method.
 
 	XMPP:
-	* Fix an incompatibility betweeen Prosody and libpurple clients.
+	* Fix an incompatibility between Prosody and libpurple clients.
 
 version 2.5.7 (06/20/2009):
 	* Yahoo Protocol 16 support, including new HTTPS login method; this should
@@ -2654,7 +2654,7 @@ version 2.5.2 (10/19/2008):
 	  help with discoverability.  CTRL+S is no longer bound to mute.
 	* Added ability to change the color of visited links (using the theme
 	  control plugin, or setting the color in ~/.gtkrc-2.0)
-	* Fix a crash occuring when a custom smiley is deleted and re-added and
+	* Fix a crash occurring when a custom smiley is deleted and re-added and
 	  used in an open conversation after being re-added.
 
 	Finch:
@@ -2930,7 +2930,7 @@ version 2.4.0 (02/29/2008):
 	  request dialog. M-d will properly delete-forward-word, and M-f has been
 	  fixed to imitate readline's behavior.
 	* New bindings alt+tab and alt+shift+tab to help navigating between the
-	  higlighted windows (details on the man page).
+	  highlighted windows (details on the man page).
 	* Recently signed on (or off) buddies blink in the buddy list.
 	* New action 'Room List' in the action list can be used to get the list of
 	  available chat rooms for an online account.
@@ -3382,7 +3382,7 @@ version 2.0.0 (5/3/2007):
 	* Perl plugin loader has been rewritten (John Kelm, Google Summer
 	  of Code)
 	* New music messaging plugin (Christian Muise, Google Summer of Code)
-	* gaim-remote has been superceded by new DBUS bindings within libpurple
+	* gaim-remote has been superseded by new DBUS bindings within libpurple
 	  (Piotr Zielinski, Google Summer of Code)
 	* The purple-url-handler program has been added to provide a way to
 	  automatically launch IM links via Pidgin or Finch.
@@ -3901,7 +3901,7 @@ version 0.79 (06/24/2004):
 	  the account was modified. Now they're only removed when the protocol
 	  type changes, as it should be.
 	* Zephyr bug fixes and memory leak plugs (Arun A Tharuvai)
-	* Rewrite of MSN buddylist support, which fixed a known syncronization
+	* Rewrite of MSN buddylist support, which fixed a known synchronization
 	  bug and some others (Felipe Contreras)
 
 version 0.78 (05/30/2004):
@@ -4396,7 +4396,7 @@ version 0.60 (04/04/2003):
 
 	IRC:
 	* Added more IRC slash commands -- /W, /VERSION, /MODE, /CTCP stuff,
-	  -- and other cool IRC enhancments. (Thanks, Jonas Birmé)
+	  -- and other cool IRC enhancements. (Thanks, Jonas Birmé)
 	* IRC's /topic with no argument displays the current topic (Thanks,
 	  Mark Doliner)
 	* DCC File Receive support for IRC.
@@ -4432,7 +4432,7 @@ version 0.60 (04/04/2003):
 	* Add / Remove buddy menu item added to the chat users list
 	  (Thanks, Jonas Birmé)
 	* View log button in conversation toolbar (Thanks, Etan Reisner)
-	* Option to log IMs and Chats seperately. (Thanks, Etan
+	* Option to log IMs and Chats separately. (Thanks, Etan
 	  Reisner)
 	* Removed Ctrl-C binding for color
 	* Fix first message in tab not displaying bug (Thanks, Etan Reisner)
@@ -4451,7 +4451,7 @@ version 0.60 (04/04/2003):
 	  Ka-Hing Cheung)
 	* Word-wrapping on mail notification text (Thanks, Andrew Molloy)
 	* Generic File Transfer PRPL interface (Thanks, Christian Hammond)
-	* Better supression of auto-responses (Thanks, Joshua Blanton)
+	* Better suppression of auto-responses (Thanks, Joshua Blanton)
 	* Drag-and-drop tabs in conversations, and multiple windows with tabs
 	  in each (Thanks, Christian Hammond)
 
@@ -4568,7 +4568,7 @@ version 0.59 (06/24/2002):
 	* Perl scripts can play Gaim sounds (thanks Andrew Rodland)
 	* Internal sounds can be played by commands (thanks Lex Spoon)
 	* Auto-login item in applet menu (thanks Chris Boyle)
-	* Fixed MSN "Unkown Error Code", "Already there", and
+	* Fixed MSN "Unknown Error Code", "Already there", and
 	  "Already in opposite list" errors
 	* Changed "Play sound" button to "Mute" button
 	* You can now have "reserved" chars in IM and proxy passwords
@@ -4645,10 +4645,10 @@ version 0.56 (04/11/2002):
 	* Buddylist looks a little better
 	* Fixed MSN privacy settings
 	* Group deletion fix (Thanks Mark Doliner)
-	* Alias/Group syncronization for Jabber (Thanks JSeymour)
+	* Alias/Group synchronization for Jabber (Thanks JSeymour)
 	* Fixed broken signal handling in gdm-started GNOME sessions
 	  (Thanks Jim Seymour, Vann, Robert McQueen)
-	* Oscar group syncronization (Thanks, Mark Doliner)
+	* Oscar group synchronization (Thanks, Mark Doliner)
 	* ICQ Authorization via Oscar (Thanks, Mark Doliner)
 
 version 0.55 (03/29/2002):
@@ -4662,7 +4662,7 @@ version 0.55 (03/29/2002):
 	  devices (Thanks Mark Doliner)
 	* Fixed bug in MSN smilies that crashed PPC (and other?) platforms
 	* HTTP Proxy settings now HTTP compliant (Thanks Robert McQueen)
-	* Speling corections (Thanks Tero Kuusela)
+	* Spelling corrections (Thanks Tero Kuusela)
 	* Oscar list icon fixes (Thanks Mark Doliner)
 	* Oscar idle times work again (Thanks Mark Doliner)
 	* Protocol icons on Edit Buddies tab (Thanks Christian Hammond)
@@ -5007,7 +5007,7 @@ version 0.11.0-pre3 (12/15/2000):
 	* Away messages arranged alphabetically (Thanks Justin)
 	* More GUI adjustments
 	* Can optionally run command to play sound files
-	* Icons for ICQ plugin (blatently stolen from GnomeICU)
+	* Icons for ICQ plugin (blatantly stolen from GnomeICU)
 	* Icons for Yahoo plugin (not-so-blatently stolen from GTKYahoo)
 	* Optionally display warning level next to name in buddy list
 	* Optionally ignore fonts on incoming messages
@@ -5049,7 +5049,7 @@ version 0.10.3 (10/09/2000):
 version 0.10.2 (10/07/2000):
 	* A few fixes to the URL parser.
 	* Better placement of smiley dialog
-	* Improved log file readibility
+	* Improved log file readability
 	* Code cleanups (thanks kylev)
 	* Fixed problem when closing away message box (thanks bmiller)
 	* sprintf() problem on some systems
@@ -5180,7 +5180,7 @@ version 0.9.13 (03/27/2000):
 	* GNOME compile error fixed
 	* Away Message Problem Fixed
 	* Fixed URL Right Click Menus
-	* Conversation Loggin now shows Full Date and Time
+	* Conversation Logging now shows Full Date and Time
 	* Internal Change to Buddy List
 
 version 0.9.12 (03/25/2000):
@@ -5258,7 +5258,7 @@ version 0.9.7  (08/08/1999):
 version 0.9.6  (08/01/1999):
 	* Fixed 'log all conversation' segfault
 	* Added NAS support
-	* Removed Xmu dependancies.
+	* Removed Xmu dependencies.
 	* Restructured network code
 	* ESD detection more robust.
 	* Sound fallbacks are MUCH more robust!

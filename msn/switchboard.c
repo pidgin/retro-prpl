@@ -554,7 +554,7 @@ msg_error_helper(MsnCmdProc *cmdproc, MsnMessage *msg, MsnMsgErrorType error)
 		g_free(body_str);
 	}
 
-	/* If a timeout occures we will want the msg around just in case we
+	/* If a timeout occurs we will want the msg around just in case we
 	 * receive the ACK after the timeout. */
 	if (msg->ack_ref && error != MSN_MSG_ERROR_TIMEOUT)
 	{
@@ -874,7 +874,7 @@ connect_cb(MsnServConn *servconn)
 	{
 		swboard->empty = FALSE;
 
-		trans = msn_transaction_new(cmdproc, "ANS", "%s %s %s",
+		trans = msn_transaction_new(cmdproc, "ANS", "%s %s %s",  /* codespell:ignore */
 									username,
 									swboard->auth_key, swboard->session_id);
 	}
@@ -1147,8 +1147,8 @@ msn_switchboard_init(void)
 {
 	cbs_table = msn_table_new();
 
-	msn_table_add_cmd(cbs_table, "ANS", "ANS", ans_cmd);
-	msn_table_add_cmd(cbs_table, "ANS", "IRO", iro_cmd);
+	msn_table_add_cmd(cbs_table, "ANS", "ANS", ans_cmd); /* codespell:ignore */
+	msn_table_add_cmd(cbs_table, "ANS", "IRO", iro_cmd); /* codespell:ignore */
 
 	msn_table_add_cmd(cbs_table, "MSG", "ACK", ack_cmd);
 	msn_table_add_cmd(cbs_table, "MSG", "NAK", nak_cmd);

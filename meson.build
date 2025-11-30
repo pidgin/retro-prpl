@@ -36,6 +36,13 @@ else
   locale_dir = get_option('prefix') / get_option('localedir')
 endif
 
+codespell = find_program('codespell', required: false)
+if codespell.found()
+  test('codespell',
+    codespell,
+    workdir : meson.project_source_root())
+endif
+
 add_project_arguments(f'-DLOCALEDIR="@locale_dir@"', language : 'c')
 
 GETTEXT_PACKAGE = 'retro-prpl'
@@ -76,3 +83,8 @@ subdir('yahoo')
 subdir('zephyr')
 
 configure_file(output: 'config.h', configuration: cfg)
+
+if meson.backend() == 'ninja'
+  run_target('turtles',
+    command : ['ninja', '-C', '@BUILD_ROOT@', 'retro-prpl-pot', 'all', 'test'])
+endif

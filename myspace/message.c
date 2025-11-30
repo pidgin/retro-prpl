@@ -239,7 +239,7 @@ msim_msg_new(gchar *first_key, ...)
 }
 
 /**
- * Pack a string using the given GFunc and seperator.
+ * Pack a string using the given GFunc and separator.
  * Used by msim_msg_dump() and msim_msg_pack().
  */
 static gchar *
@@ -783,7 +783,7 @@ msim_msg_pack_element(gpointer data, gpointer user_data)
 }
 
 /**
- * Pack an element into its protcol representation inside a dictionary.
+ * Pack an element into its protocol representation inside a dictionary.
  *
  * See msim_msg_pack_element().
  */

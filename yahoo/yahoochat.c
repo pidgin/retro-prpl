@@ -166,7 +166,7 @@ void yahoo_process_conference_invite(PurpleConnection *gc, struct yahoo_packet *
 						"got non-UTF-8 string for key %d\n", pair->key);
 			}
 			break;
-		case 51: /* This user is being invited to the conference. Comes with status = 11, so we wont reach here */
+		case 51: /* This user is being invited to the conference. Comes with status = 11, so we won't reach here */
 			break;
 		case 52: /* Invited users. Assuming us invited, since we got this packet */
 			break; /* break needed, or else we add the users to the conference before they accept the invitation */
@@ -461,7 +461,7 @@ void yahoo_process_chat_online(PurpleConnection *gc, struct yahoo_packet *pkt)
 	}
 }
 
-/* this is basicly the opposite of chat_online */
+/* this is basically the opposite of chat_online */
 void yahoo_process_chat_logout(PurpleConnection *gc, struct yahoo_packet *pkt)
 {
 	YahooData *yd = (YahooData *) gc->proto_data;

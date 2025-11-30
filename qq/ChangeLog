@@ -21,7 +21,7 @@
 	* Fixed a bug of displaying of memo when memo is nothing
 
 2009.02.21 - flos <lonicerae(at)gmail.com>
-	* Added 'qq_strlen' and 'qq_strcmp' funtions in qq.h
+	* Added 'qq_strlen' and 'qq_strcmp' functions in qq.h
 	* Fixed compiling problems with lower version of GTK+
 
 2009.02.21 - flos <lonicerae(at)gmail.com>
@@ -59,7 +59,7 @@
 	* Fixed a bug after propagating
 
 2008.11.18 - ccpaging <ccpaging(at)gmail.com>
-	* Fixed: IM format suuport in IM and QUN IM
+	* Fixed: IM format support in IM and QUN IM
 	* Divide long IM message into segment and sending
 	* Divide long QUN IM message in to segment and sending
 	* Add some new function in im.c to put format when sending
@@ -159,7 +159,7 @@
 	* Add my uid into buddy list
 	* Fixed a minor bug in qq_create_buddy. Not get new buddy's info.
 	* There are 38 fields in protocol 2008, one more than 2005/2007.
-	* The packet of Modifing buddy info is changed. Need sample to fix it.
+	* The packet of Modifying buddy info is changed. Need sample to fix it.
 
 2008.10.04 - ccpaging <ccpagint(at)gmail.com>
 	* Update protocol for 2007
@@ -175,10 +175,10 @@
 
 2008.10.02 - ccpaging <ccpaging(at)gmail.com>
 	* Added 'Captcha Display' function
-	* QQ2007 for openq, programed by Emil Alexiev:
+	* QQ2007 for openq, programmed by Emil Alexiev:
 		1. Most functions from patch written by Emil Alexiev merged into trunk, except 'buddy operations'
 		2. 'online buddy status' and 'qun buddies' still have problems
-	* QQ2008 console client, programed by Shrimp:
+	* QQ2008 console client, programmed by Shrimp:
 		1. 'before login' and 'keep alive' parts merged into trunk
 
 2008.09.30 - ccpaging <ccpaging(at)gmail.com>
@@ -227,7 +227,7 @@
 	* Rename group to room. If you used pidginqq before, this may create a new room with same title, you may delete old one
 	* Replace purple_debug with purple_debug_info, purple_debug_warning, purple_debug_error
 	* Add server notice and server new, and two options to turn on/off
-	* Minor modify for reducing transaction's debug infor
+	* Minor modify for reducing transaction's debug info
 	* Minor modifies for system notice and QQ news.
 	* Add 4 new strings need translate compare with p10.
 	* Tickets:
@@ -293,7 +293,7 @@
 	* Add some new QQ client version identify
 	* Fixed: Identify buddy's client version by IM packet, and not by status
 	* Add some new info in buddy's tooltip text
-	* Add video falg to buddy's emblem. But those flag in buddy status may not prasing correctly
+	* Add video flag to buddy's emblem. But those flag in buddy status may not prasing correctly
 	* Use new timeout function to handle send keep_alive, resend packet, update buddy status
 	* Add new advanced options:
 		The end user may change interval of keep_alive, resend packet, update buddy status to feed their need.
@@ -308,14 +308,14 @@
 	* Add QQ_MSG_SYS_NOTICE = 0x06 in sys_msg.c
 	* Rewrite qq_proc_cmd_reply and qq_proc_cmd_server:
 		In QQ protocol, one packet reply may need a new packet send later.
-		We may call it packet trigger. The triggers always is hided in every qq_process_reply.
+		We may call it packet trigger. The triggers always is hidden in every qq_process_reply.
 		Now we try to extract those triggers and put into a single function,
 		and then every trigger should be obviously and easy to manage.
 
 2008.07.12 - ccpaging <ccpaging(at)gmail.com>
 	* Fixed: Always lost connection. Now send keep alive packet in every 30 seconds
 	* Minor fix for debug information
-	* Filter \r\n and replace with SPCAE in group notive
+	* Filter \r\n and replace with SPACE in group notive
 	* Fixed a memory leak
 	* Tickets:
 	* Fixes #4024.
@@ -359,13 +359,13 @@
 	* Rewrite qq_network
 	* Add srv resolve function when qq_login
 	* Merge function _qq_common_clean in qq_proxy.c to qq_disconnect
-	* Move orignal qq_disconnect to qq_close
+	* Move original qq_disconnect to qq_close
 	* qq_data alloc in qq_open and release in qq_close
 	* Network connect of QQ is created in qq_connect, and release in qq_disconnect
 
 2008.05.05 - ccpaging <ccpaging(at)gmail.com>
 	* Merge function _qq_common_clean in qq_proxy.c to qq_disconnect
-	* Move orignal qq_disconnect to qq_close
+	* Move original qq_disconnect to qq_close
 	* qq_data alloc in qq_open and release in qq_close
 	* Network connect of QQ is created in qq_connect, and release in qq_disconnect
 

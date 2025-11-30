@@ -124,7 +124,7 @@ static const QQ_FIELD_INFO field_infos[] = {
 	{ QQ_FIELD_CONTACT, 	QQ_FIELD_STRING, "email", 	N_("Email"), NULL, 0 },
 	{ QQ_FIELD_UNUSED, 	QQ_FIELD_STRING, "pg_sn",	"Pager Serial Num", NULL, 0 },
 	{ QQ_FIELD_UNUSED, 	QQ_FIELD_STRING, "pg_num",	"Pager Num", NULL, 0 },
-	{ QQ_FIELD_UNUSED, 	QQ_FIELD_STRING, "pg_sp",	"Pager Serivce Provider", NULL, 0 },
+	{ QQ_FIELD_UNUSED, 	QQ_FIELD_STRING, "pg_sp",	"Pager Service Provider", NULL, 0 },
 	{ QQ_FIELD_UNUSED, 	QQ_FIELD_STRING, "pg_sta",	"Pager Station Num", NULL, 0 },
 	{ QQ_FIELD_UNUSED, 	QQ_FIELD_STRING, "pg_type",	"Pager Type", NULL, 0 },
 	{ QQ_FIELD_BASE, 	QQ_FIELD_STRING, "occupation", 	N_("Occupation"), NULL, 0 },

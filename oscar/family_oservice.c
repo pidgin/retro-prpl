@@ -276,7 +276,7 @@ aim_srv_reqrates(OscarData *od, FlapConnection *conn)
  * members as follows...
  *
  *  Rate class 0x0001:
- *	- Everything thats not in any of the other classes
+ *	- Everything that's not in any of the other classes
  *
  *  Rate class 0x0002:
  *	- Buddy list add/remove
@@ -295,7 +295,7 @@ aim_srv_reqrates(OscarData *od, FlapConnection *conn)
  *	- Outgoing chat ICBMs
  *
  * The only other thing of note is that class 5 (chat) has slightly looser
- * limiting properties than class 3 (normal messages).  But thats just a
+ * limiting properties than class 3 (normal messages).  But that's just a
  * small bit of trivia for you.
  *
  * The last thing that needs to be learned about the rate limiting
@@ -925,10 +925,10 @@ aim_srv_set_dc_info(OscarData *od)
  * http://www.aim.aol.com/errors/USER_LOGGED_OFF_NEW_LOGIN.html.
  *
  * Note, however, that numerous inconsistencies can cause the above error,
- * not just sending back a bad hash.  Do not immediatly suspect this code
+ * not just sending back a bad hash.  Do not immediately suspect this code
  * if you get disconnected.  AOL and the open/free software community have
  * played this game for a couple years now, generating the above message
- * on numerous ocassions.
+ * on numerous occasions.
  *
  * Anyway, neener.  We win again.
  *

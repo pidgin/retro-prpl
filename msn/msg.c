@@ -837,7 +837,7 @@ got_wink_cb(MsnSlpCall *slpcall, const guchar *data, gsize size)
 		                     _("%s sent a wink. <a href='msn-wink://%s'>Click here to play it</a>"),
 		                     path);
 	} else {
-		purple_debug_error("msn", "Couldn\'t create temp file to store wink\n");
+		purple_debug_error("msn", "Couldn't create temp file to store wink\n");
 		datacast_inform_user(slpcall->slplink->swboard,
 		                     who,
 		                     _("%s sent a wink, but it could not be saved"),
@@ -863,7 +863,7 @@ got_voiceclip_cb(MsnSlpCall *slpcall, const guchar *data, gsize size)
 		                     _("%s sent a voice clip. <a href='audio://%s'>Click here to play it</a>"),
 		                     path);
 	} else {
-		purple_debug_error("msn", "Couldn\'t create temp file to store sound\n");
+		purple_debug_error("msn", "Couldn't create temp file to store sound\n");
 		datacast_inform_user(slpcall->slplink->swboard,
 		                     who,
 		                     _("%s sent a voice clip, but it could not be saved"),

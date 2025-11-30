@@ -1812,7 +1812,7 @@ msn_add_buddy(PurpleConnection *pc, PurpleBuddy *buddy, PurpleGroup *group, cons
 		msn_user_set_invite_message(user, message);
 		msn_user_set_pending_group(user, gname);
 		msn_user_set_network(user, MSN_NETWORK_UNKNOWN);
-		/* Should probably re-use the msn_add_contact_xml function here */
+		/* Should probably reuse the msn_add_contact_xml function here */
 		tokens = g_strsplit(bname, "@", 2);
 		fqy = g_strdup_printf("<ml><d n=\"%s\"><c n=\"%s\"/></d></ml>",
 		                      tokens[1],

@@ -27,7 +27,7 @@
 
 #include <glib.h>
 
-gint qq_encrypt(guint8* crypted, const guint8* const plain, const gint plain_len, const guint8* const key);
+gint qq_encrypt(guint8* encrypted, const guint8* const plain, const gint plain_len, const guint8* const key);
 
-gint qq_decrypt(guint8 *plain, const guint8* const crypted, const gint crypted_len, const guint8* const key);
+gint qq_decrypt(guint8 *plain, const guint8* const encrypted, const gint encrypted_len, const guint8* const key);
 #endif

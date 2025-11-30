@@ -113,14 +113,14 @@ static qq_emoticon emoticons_std[] = {
 	{0x8f, "/|-)"},     {0x8f, "/kun"},     {0x8f, "/sleepy"},
 	{0x49, "/:z"},      {0x49, "/shui"},    {0x49, "/sleep"},	/* after sleepy */
 	{0x4a, "/:'"},      {0x4a, "/dk"},      {0x4a, "/weep"},
-	{0x4b, "/:-|"},     {0x4b, "/gg"},      {0x4b, "/embarassed"},
+	{0x4b, "/:-|"},     {0x4b, "/gg"},      {0x4b, "/embarassed"}, /* codespell:ignore */
 	{0x4c, "/:@"},      {0x4c, "/fn"},      {0x4c, "/pissed_off"},
 	{0x4d, "/:P"},      {0x4d, "/tp"},      {0x4d, "/act_up"},
 	{0x4e, "/:D"},      {0x4e, "/cy"},      {0x4e, "/toothy_smile"},
 	{0x41, "/:O"},      {0x41, "/jy"},      {0x41, "/surprised"},
 	{0x73, "/:("},      {0x73, "/ng"},      {0x73, "/sad"},
 	{0x74, "/:+"},      {0x74, "/kuk"},     {0x74, "/cool"},
-	{0xa1, "/--b"},     {0xa1, "/lengh"},
+	{0xa1, "/--b"},     {0xa1, "/lengh"}, /* codespell:ignore */
 	{0x76, "/:Q"},      {0x76, "/zk"},      {0x76, "/crazy"},
 	{0x8a, "/;P"},      {0x8a, "/tx"},      {0x8a, "/titter"},
 	{0x8b, "/;-D"},     {0x8b, "/ka"},      {0x8b, "/cute"},
@@ -187,7 +187,7 @@ static qq_emoticon emoticons_std[] = {
 	{0xb9, "/@@"},      {0xb9, "/qt"},
 	{0xba, "/bad"},     {0xba, "/cj"},
 	{0xbb, "/loveu"},   {0xbb, "/aini"},
-	{0xbc, "/no"},      {0xbc, "/bu"},
+	{0xbc, "/no"},      {0xbc, "/bu"}, /* codespell:ignore */
 	{0xbd, "/ok"},      {0xbd, "/hd"},
 	{0x5c, "/love"},    {0x5c, "/aiq"},		/* after loveu */
 	{0x56, "/<L>"},     {0x56, "/fw"},      {0x56, "/blow_kiss"},
@@ -352,7 +352,7 @@ static qq_emoticon emoticons_sym[] = {
 	{0x9e, "/dao"},
 	{0x9f, "/yy"},
 	{0xa0, "/shl"},
-	{0xa1, "/lengh"},
+	{0xa1, "/lengh"}, /* codespell:ignore */
 	{0xa2, "/wipe"},
 	{0xa3, "/kb"},
 	{0xa4, "/gz"},
@@ -379,7 +379,7 @@ static qq_emoticon emoticons_sym[] = {
 	{0xb9, "/qt"},
 	{0xba, "/cj"},
 	{0xbb, "/aini"},
-	{0xbc, "/bu"},
+	{0xbc, "/bu"}, /* codespell:ignore */
 	{0xbd, "/hd"},
 	{0xbe, "/zhq"},
 	{0xbf, "/kt"},
@@ -452,7 +452,7 @@ static gchar *emoticon_get(guint8 symbol)
 	return emoticons_sym[symbol - emoticons_sym[0].symbol].name;
 }
 
-/* convert qq emote icon to purple sytle
+/* convert qq emote icon to purple style
    Notice: text is in qq charset, GB18030 or utf8 */
 gchar *qq_emoticon_to_purple(gchar *text)
 {
@@ -979,7 +979,7 @@ void qq_process_im(PurpleConnection *gc, guint8 *data, gint len)
 			break;
 		default:
 			/* a simple process here, maybe more later */
-			qq_show_packet ("Unknow", data + bytes, len - bytes);
+			qq_show_packet ("Unknown", data + bytes, len - bytes);
 			return;
 	}
 }
@@ -1024,7 +1024,7 @@ void qq_process_extend_im(PurpleConnection *gc, guint8 *data, gint len)
 			break;
 		case QQ_NORMAL_IM_FILE_REQUEST_TCP:
 			/* Check ReceivedFileIM::parseContents in eva*/
-			/* some client use this function for detect invisable buddy*/
+			/* some client use this function for detect invisible buddy*/
 		case QQ_NORMAL_IM_FILE_APPROVE_TCP:
 		case QQ_NORMAL_IM_FILE_REJECT_TCP:
 		case QQ_NORMAL_IM_FILE_PASV:
@@ -1036,7 +1036,7 @@ void qq_process_extend_im(PurpleConnection *gc, guint8 *data, gint len)
 			break;
 		default:
 			/* a simple process here, maybe more later */
-			qq_show_packet ("Unknow", data + bytes, len - bytes);
+			qq_show_packet ("Unknown", data + bytes, len - bytes);
 			break;
 	}
 }

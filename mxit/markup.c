@@ -1045,7 +1045,7 @@ void mxit_parse_markup( struct RXMsgData* mx, char* message, int len, short msgt
  * Insert an inline image command.
  *
  *  @param mx				The message text as processed so far.
- *  @oaram id				The imgstore ID of the inline image.
+ *  @param id				The imgstore ID of the inline image.
  */
 static void inline_image_add( GString* mx, int id )
 {

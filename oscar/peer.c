@@ -552,7 +552,7 @@ peer_connection_common_established_cb(gpointer data, gint source, const gchar *e
 		if ((conn->verified_connect_data == NULL) &&
 			(conn->client_connect_data == NULL))
 		{
-			/* Our parallel connection attemps have both failed. */
+			/* Our parallel connection attempts have both failed. */
 			peer_connection_trynext(conn);
 		}
 		return;

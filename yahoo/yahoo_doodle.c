@@ -249,7 +249,7 @@ static void yahoo_doodle_command_got_draw(PurpleConnection *gc, const char *from
 	if((message[0] != '\"') || (message[strlen(message) - 1] != '\"'))
 		return;
 
-	/* Ignore the inital quotation mark. */
+	/* Ignore the initial quotation mark. */
 	message += 1;
 
 	tokens = g_strsplit(message, ",", 0);

@@ -411,7 +411,7 @@ ubm_cmd(MsnCmdProc *cmdproc, MsnCommand *cmd)
 
 /**************************************************************************
  * Challenges
- *  we use MD5 to caculate the Challenges
+ *  we use MD5 to calculate the Challenges
  **************************************************************************/
 static void
 chl_cmd(MsnCmdProc *cmdproc, MsnCommand *cmd)

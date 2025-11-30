@@ -872,7 +872,7 @@ void mxit_send_extprofile_request( struct MXitSession* session, const char* user
  *  @param session		The MXit session object
  *  @param password		The new password to be used for logging in (optional)
  *	@param nr_attrib	The number of attributes
- *	@param attributes	String containing the attribute-name, attribute-type and value (seperated by '\01')
+ *	@param attributes	String containing the attribute-name, attribute-type and value (separated by '\01')
  */
 void mxit_send_extprofile_update( struct MXitSession* session, const char* password, unsigned int nr_attrib, const char* attributes )
 {
@@ -2026,7 +2026,7 @@ static void mxit_parse_cmd_suggestcontacts( struct MXitSession* session, struct 
 	 * userid \1 contactType \1 value0 \1 value1 ... valueN
 	 */
 
-	/* ensure that record[0] contacts the minumum number of fields */
+	/* ensure that record[0] contacts the minimum number of fields */
 	if ( records[0]->fcount < 4 ) {
 		purple_debug_error( MXIT_PLUGIN_ID, "Insufficient number of fields in suggest contacts response. fields=%i", records[0]->fcount );
 		return;
@@ -2096,7 +2096,7 @@ static void mxit_parse_cmd_suggestcontacts( struct MXitSession* session, struct 
 				/* where am I */
 				g_strlcpy( profile->whereami, fvalue, sizeof( profile->whereami ) );
 			}
-			/* ignore other attibutes */
+			/* ignore other attributes */
 		}
 
 		entries = g_list_append( entries, profile );
@@ -2366,7 +2366,7 @@ static int process_success_response( struct MXitSession* session, struct rx_pack
 	switch ( packet->cmd ) {
 
 		case CP_CMD_REGISTER :
-				/* fall through, when registeration successful, MXit will auto login */
+				/* fall through, when registration successful, MXit will auto login */
 		case CP_CMD_LOGIN :
 				/* login response */
 				if ( !( session->flags & MXIT_FLAG_LOGGEDIN ) ) {

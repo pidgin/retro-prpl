@@ -23,7 +23,7 @@
 Code_t
 ZhmStat(struct in_addr *hostaddr, ZNotice_t *notice)
 {
-    struct servent *sp;
+    struct servent *sp; /* codespell:ignore */
     struct sockaddr_in sin;
     ZNotice_t req;
     Code_t code;

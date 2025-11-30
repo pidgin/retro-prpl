@@ -75,7 +75,7 @@ struct _MsnSwitchBoard
 							  messages of this switchboard, or @c NULL if
 							  this is a helper switchboard. */
 
-	gboolean empty;			/**< A flag that states if the swithcboard has no
+	gboolean empty;			/**< A flag that states if the switchboard has no
 							  users in it. */
 	gboolean invited;		/**< A flag that states if we were invited to the
 							  switchboard. */
@@ -84,7 +84,7 @@ struct _MsnSwitchBoard
 	gboolean closed;		/**< A flag that states if the switchboard has
 							  been closed by the user. */
 	gboolean destroying;	/**< A flag that states if the switchboard is
-							  alredy on the process of destruction. */
+							  already on the process of destruction. */
 
 	int current_users;
 	int total_users;

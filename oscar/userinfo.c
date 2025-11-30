@@ -458,12 +458,12 @@ oscar_user_info_display_icq(OscarData *od, struct aim_icq_info *info)
 	oscar_user_info_convert_and_add(account, od, user_info, _("Additional Information"), info->info);
 	purple_notify_user_info_add_section_break(user_info);
 
-	if ((info->homeaddr && (info->homeaddr[0])) || (info->homecity && info->homecity[0]) || (info->homestate && info->homestate[0]) || (info->homezip && info->homezip[0])) {
+	if ((info->homeaddr && (info->homeaddr[0])) || (info->homecity && info->homecity[0]) || (info->homestate && info->homestate[0]) || (info->homezip && info->homezip[0])) {  /* codespell:ignore */
 		purple_notify_user_info_add_section_header(user_info, _("Home Address"));
 
 		oscar_user_info_convert_and_add(account, od, user_info, _("Address"), info->homeaddr);
 		oscar_user_info_convert_and_add(account, od, user_info, _("City"), info->homecity);
-		oscar_user_info_convert_and_add(account, od, user_info, _("State"), info->homestate);
+		oscar_user_info_convert_and_add(account, od, user_info, _("State"), info->homestate); /* codespell:ignore */
 		oscar_user_info_convert_and_add(account, od, user_info, _("Zip Code"), info->homezip);
 	}
 	if ((info->workaddr && info->workaddr[0]) || (info->workcity && info->workcity[0]) || (info->workstate && info->workstate[0]) || (info->workzip && info->workzip[0])) {

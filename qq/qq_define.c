@@ -32,7 +32,7 @@
 #define QQ_CLIENT_0A1D 0x0a1d	/* GB QQ2003c build 0808 */
 #define QQ_CLIENT_0B07 0x0b07	/* GB QQ2003c build 0925 */
 #define QQ_CLIENT_0B2F 0x0b2f	/* GB QQ2003iii build 0117 */
-#define QQ_CLIENT_0B35 0x0b35	/* GB QQ2003iii build 0304 (offical release) */
+#define QQ_CLIENT_0B35 0x0b35	/* GB QQ2003iii build 0304 (official release) */
 #define QQ_CLIENT_0B37 0x0b37	/* GB QQ2003iii build 0304 (April 05 updates) */
 #define QQ_CLIENT_0E1B 0x0e1b	/* QQ2005 ? */
 #define QQ_CLIENT_0E35 0x0e35	/* EN QQ2005 V05.0.200.020 */

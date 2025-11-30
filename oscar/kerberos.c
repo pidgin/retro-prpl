@@ -43,7 +43,7 @@
 #define MAXAIMPASSLEN 16
 
 /*
- * Incomplete X-SNAC format taken from reverse engineering doen by digsby:
+ * Incomplete X-SNAC format taken from reverse engineering done by digsby:
  * https://github.com/ifwe/digsby/blob/master/digsby/src/oscar/login2.py
  */
 typedef struct {

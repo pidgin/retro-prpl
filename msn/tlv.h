@@ -63,7 +63,7 @@ int msn_tlvlist_add_32(GSList **list, const guint8 type, const guint32 value);
 int msn_tlvlist_add_str(GSList **list, const guint8 type, const char *value);
 int msn_tlvlist_add_tlv(GSList **list, const msn_tlv_t *tlv);
 
-int msn_tlvlist_replace_raw(GSList **list, const guint8 type, const guint8 lenth, const char *value);
+int msn_tlvlist_replace_raw(GSList **list, const guint8 type, const guint8 length, const char *value);
 int msn_tlvlist_replace_str(GSList **list, const guint8 type, const char *str);
 int msn_tlvlist_replace_empty(GSList **list, const guint8 type);
 int msn_tlvlist_replace_8(GSList **list, const guint8 type, const guint8 value);

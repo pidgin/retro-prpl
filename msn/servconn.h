@@ -79,7 +79,7 @@ struct _MsnServConn
 	int inpa; /**< The connection's input handler. */
 
 	char *rx_buf; /**< The receive buffer. */
-	int rx_len; /**< The receive buffer lenght. */
+	int rx_len; /**< The receive buffer length. */
 
 	size_t payload_len; /**< The length of the payload.
 						  It's only set when we've received a command that
@@ -154,7 +154,7 @@ void msn_servconn_set_destroy_cb(MsnServConn *servconn,
 								 void (*destroy_cb)(MsnServConn *));
 
 /**
- * Writes a chunck of data to the servconn.
+ * Writes a chunk of data to the servconn.
  *
  * @param servconn The servconn.
  * @param buf The data to write.
@@ -183,7 +183,7 @@ void msn_servconn_got_error(MsnServConn *servconn, MsnServConnError error,
 MsnServConn *msn_servconn_process_data(MsnServConn *servconn);
 
 /**
- * Set a idle timeout fot this servconn
+ * Set a idle timeout for this servconn
  *
  * @param servconn The servconn
  * @param seconds The idle timeout in seconds

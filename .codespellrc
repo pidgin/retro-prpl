@@ -1,0 +1,4 @@
+[codespell]
+skip = *.dat,*.gir,*.po,./subprojects/*,./*build*/*,./zephyr/Z*,./COPYRIGHT,./gg/lib/*
+ignore-words-list = gir,inout,Stange,Dyas,Hart,Ballance
+check-filenames = true

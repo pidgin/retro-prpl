@@ -77,7 +77,7 @@ MsnSlpMessage *msn_slpmsg_new(MsnSlpLink *slplink, MsnSlpCall *slpcall);
 /**
  * Destroys a slp message
  *
- * @param slpmsg The slp message to destory.
+ * @param slpmsg The slp message to destroy.
  */
 void msn_slpmsg_destroy(MsnSlpMessage *slpmsg);
 
@@ -136,10 +136,10 @@ MsnSlpMessage *msn_slpmsg_dataprep_new(MsnSlpCall *slpcall);
 MsnSlpMessage *msn_slpmsg_file_new(MsnSlpCall *slpcall, size_t size);
 
 /**
- * Serialize the MsnSlpMessage in a way it can be used to be transmited
+ * Serialize the MsnSlpMessage in a way it can be used to be transmitted
  *
  * @param slpmsg 	The MsnSlpMessage.
- * @param ret_size 	The size of the buffer cointaining the message.
+ * @param ret_size 	The size of the buffer containing the message.
  *
  * @return a buffer with the serialized data.
  */

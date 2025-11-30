@@ -260,7 +260,7 @@ silcpurple_buddy_keyagr_request_cb(SilcPurpleKeyAgrAsk a, gint id)
 		goto out;
 	}
 
-	/* If the hostname was provided by the requestor perform the key agreement
+	/* If the hostname was provided by the requester perform the key agreement
 	   now.  Otherwise, we will send him a request to connect to us. */
 	if (a->hostname) {
 		memset(&params, 0, sizeof(params));
@@ -272,7 +272,7 @@ silcpurple_buddy_keyagr_request_cb(SilcPurpleKeyAgrAsk a, gint id)
 						  a->hostname, a->port,
 						  silcpurple_buddy_keyagr_cb, NULL);
 	} else {
-		/* Send request.  Force us as the point of connection since requestor
+		/* Send request.  Force us as the point of connection since requester
 		   did not provide the point of connection. */
 		silcpurple_buddy_keyagr_do(a->client->application,
 					   client_entry->nickname, TRUE);

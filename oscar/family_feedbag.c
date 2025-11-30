@@ -724,7 +724,7 @@ int aim_ssi_cleanlist(OscarData *od)
 	/* Delete any buddies, permits, or denies with empty names. */
 	/* If there are any buddies directly in the master group, add them to a real group. */
 	/* DESTROY any buddies that are directly in the master group. */
-	/* Do the same for buddies that are in a non-existant group. */
+	/* Do the same for buddies that are in a non-existent group. */
 	/* This will kind of mess up if you hit the item limit, but this function isn't too critical */
 	cur = od->ssi.local;
 	while (cur) {
