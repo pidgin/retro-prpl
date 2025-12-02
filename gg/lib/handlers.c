@@ -117,7 +117,7 @@ static int gg_session_handle_welcome_110(struct gg_session *gs, uint32_t seed,
 		return -1;
 	}
 
-	if (gs->client_version != NULL && !isdigit(gs->client_version[0])) {
+	if (gs->client_version != NULL && !isdigit((unsigned char)gs->client_version[0])) {
 		client_name = "";
 		client_target = "";
 	}
@@ -314,7 +314,7 @@ static int gg_session_handle_welcome(struct gg_session *gs, uint32_t type,
 	l80.image_size = gs->image_size;
 	l80.dunno2 = 0x64;
 
-	if (gs->client_version != NULL && !isdigit(gs->client_version[0])) {
+	if (gs->client_version != NULL && !isdigit((unsigned char)gs->client_version[0])) {
 		client_name = "";
 		client_name_len = 0;
 	} else {

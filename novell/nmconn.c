@@ -512,7 +512,7 @@ nm_read_header(NMConn * conn)
 			ptr++;
 
 			i = 0;
-			while (isdigit(*ptr) && (i < 3)) {
+			while (isdigit((unsigned char)*ptr) && (i < 3)) {
 				rtn_buf[i] = *ptr;
 				i++;
 				ptr++;

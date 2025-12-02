@@ -874,7 +874,7 @@ static gg_action_t gg_handle_send_hub(struct gg_session *sess,
 	int proxy;
 	size_t req_len;
 
-	if (sess->client_version != NULL && isdigit(sess->client_version[0]))
+	if (sess->client_version != NULL && isdigit((unsigned char)sess->client_version[0]))
 		client = gg_urlencode(sess->client_version);
 	else if (sess->protocol_version <= GG_PROTOCOL_VERSION_100)
 		client = gg_urlencode(GG_DEFAULT_CLIENT_VERSION_100);
