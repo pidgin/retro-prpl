@@ -5776,27 +5776,27 @@ void oscar_init(PurplePlugin *plugin, gboolean is_icq)
 	PurpleAccountOption *option;
 	static gboolean init = FALSE;
 	static const gchar *encryption_keys[] = {
+		N_("Don't use encryption"),
 		N_("Use encryption if available"),
 		N_("Require encryption"),
-		N_("Don't use encryption"),
 		NULL
 	};
 	static const gchar *encryption_values[] = {
+		OSCAR_NO_ENCRYPTION,
 		OSCAR_OPPORTUNISTIC_ENCRYPTION,
 		OSCAR_REQUIRE_ENCRYPTION,
-		OSCAR_NO_ENCRYPTION,
 		NULL
 	};
 	static const gchar *aim_login_keys[] = {
+		N_("MD5-based"),
 		N_("clientLogin"),
 		N_("Kerberos"),
-		N_("MD5-based"),
 		NULL
 	};
 	static const gchar *aim_login_values[] = {
+		OSCAR_MD5_LOGIN,
 		OSCAR_CLIENT_LOGIN,
 		OSCAR_KERBEROS_LOGIN,
-		OSCAR_MD5_LOGIN,
 		NULL
 	};
 	static const gchar *icq_login_keys[] = {
