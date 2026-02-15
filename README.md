@@ -43,3 +43,34 @@ accountable unless you personally know them. This means you should be very
 careful about what you share on these networks as they can see everything that
 is happening on them including the messages you send.
 
+# Building
+
+This project uses [The Meson Build system](https://mesonbuild.com/).
+
+By default it will attempt into install everything into the expected paths from
+your libpurple install which can be messy if you're using a system package. You
+can change this by passing `-Duse-purple-prefix=false` to `meson setup`.
+
+There are also options to enable or disable any protocol provided. To see the
+full list of these and all other configuration settings by running
+`meson configure` in the root of the source directory.
+
+## Windows
+
+We do not currently have build instructions for Windows. We're working on a
+solution but we have not finished wrapping this up yet.
+
+## Everything Else
+
+The build is just like any other Meson project.
+
+```
+meson setup build
+cd build
+ninja
+ninja install
+```
+
+If you have Pidgin or another libpurple client running, you'll need to restart
+it for the plugins to get loaded.
+
