@@ -74,3 +74,8 @@ ninja install
 If you have Pidgin or another libpurple client running, you'll need to restart
 it for the plugins to get loaded.
 
+# Special Thanks
+
+Special thanks to [Marius Orcsik](https://marius.federated.id/) for putting
+together the [AUR package](https://aur.archlinux.org/packages/retro-prpl-git).
+
