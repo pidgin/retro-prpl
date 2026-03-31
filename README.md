@@ -12,7 +12,7 @@ Most of these protocols have little if any documentation to how they work. By
 preserving them in this repository it is much easier for people to study them.
 
 Also there has been a lot of interest in creating clones of old chat networks.
-Projects like [Retro AIM Server](https://github.com/mk6i/retro-aim-server),
+Projects like [Open OSCAR Server](https://github.com/mk6i/open-oscar-server),
 [escargot](https://escargot.chat/), and [NINA](https://nina.chat/) all do this
 to different extents.
 
