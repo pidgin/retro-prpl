@@ -108,26 +108,6 @@ static const char *get_client_key(OscarData *od)
 }
 
 static void
-aim_encode_password(const char *password, gchar *encoded)
-{
-	guint8 encoding_table[] = {
-		0x76, 0x91, 0xc5, 0xe7,
-		0xd0, 0xd9, 0x95, 0xdd,
-		0x9e, 0x2F, 0xea, 0xd8,
-		0x6B, 0x21, 0xc2, 0xbc,
-
-	};
-	guint i;
-
-	/*
-	 * We truncate AIM passwords to 16 characters since that's what
-	 * the official client does as well.
-	 */
-	for (i = 0; i < strlen(password) && i < MAXAIMPASSLEN; i++)
-		encoded[i] = (password[i] ^ encoding_table[i]);
-}
-
-static void
 aim_xsnac_free(aim_xsnac_t *xsnac)
 {
 	gint i;
@@ -192,7 +172,7 @@ kerberos_login_cb(PurpleUtilFetchUrlData *url_data, gpointer user_data,
 	xsnac.subtype = byte_stream_get16(&bs);
 	byte_stream_getrawbuf(&bs, (guint8 *) xsnac.flags, 8);
 
-	if (xsnac.family == 0x50C && xsnac.subtype == 0x0005) {
+	if (xsnac.family == 0x50C && xsnac.subtype == 0x0004) {
 		purple_connection_error_reason(gc,
 			PURPLE_CONNECTION_ERROR_AUTHENTICATION_FAILED,
 			_("Incorrect password"));
@@ -326,12 +306,12 @@ void send_kerberos_login(OscarData *od, const char *username)
 	GString *request;
 	gchar *url;
 	const gchar *password;
-	gchar password_xored[MAXAIMPASSLEN];
 	const gchar *client_key;
 	gchar *imapp_key;
 	GString *body;
 	guint16 len_be;
 	guint16 reqid;
+	const char *hostname = NULL;
 	const gchar header[] = {
 		0x05, 0x0C, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00,
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -371,7 +351,6 @@ void send_kerberos_login(OscarData *od, const char *username)
 	gc = od->gc;
 
 	password = purple_connection_get_password(gc);
-	aim_encode_password(password, password_xored);
 
 	client_key = get_client_key(od);
 	imapp_key = g_strdup_printf("imApp key=%s", client_key);
@@ -399,7 +378,7 @@ void send_kerberos_login(OscarData *od, const char *username)
 	g_string_append_len(body, (void *)&len_be, sizeof(guint16));
 	len_be = GUINT16_TO_BE(strlen(password));
 	g_string_append_len(body, (void *)&len_be, sizeof(guint16));
-	g_string_append_len(body, password_xored, strlen(password));
+	g_string_append_len(body, password, strlen(password));
 	g_string_append_len(body, post_password, sizeof(post_password));
 
 	len_be = GUINT16_TO_BE(strlen(client_key));
@@ -415,6 +394,11 @@ void send_kerberos_login(OscarData *od, const char *username)
 	request = g_string_new("POST / HTTP/1.1\n"
 			"Connection: close\n"
 			"Accept: application/x-snac\n");
+
+	/* Add the host header. */
+	hostname = purple_account_get_string(purple_connection_get_account(gc),
+	                                     "server", AIM_DEFAULT_KDC_SERVER);
+	g_string_append_printf(request, "Host: %s\n", hostname);
 
 	/* Tack on the body */
 	g_string_append_printf(request, "Content-Type: application/x-snac\n");
