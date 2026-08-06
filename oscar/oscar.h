@@ -340,6 +340,9 @@ struct _OscarData
 	gboolean icq;
 	guint getblisttimer;
 
+	char *client_login_url;
+	char *start_oscar_session_url;
+
 	struct {
 		guint maxwatchers; /* max users who can watch you */
 		guint maxbuddies; /* max users you can watch */
@@ -493,6 +496,7 @@ int aim_send_login(OscarData *od, FlapConnection *conn, const char *bn, const ch
 /**
  * Only used when connecting with clientLogin.
  */
+void build_client_login_urls(OscarData *od, const char *api_server_url);
 void send_client_login(OscarData *od, const char *username);
 
 /**

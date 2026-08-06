@@ -100,6 +100,8 @@ oscar_data_destroy(OscarData *od)
 	aim_cleansnacs(od, -1);
 
 	/* Only used when connecting with clientLogin */
+	g_free(od->client_login_url);
+	g_free(od->start_oscar_session_url);
 	if (od->url_data != NULL)
 		purple_util_fetch_url_cancel(od->url_data);
 
