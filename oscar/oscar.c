@@ -787,7 +787,23 @@ oscar_login(PurpleAccount *account)
 	 * clientLogin is not enabled.
 	 */
 	if (purple_strequal(login_type, OSCAR_CLIENT_LOGIN)) {
+		const char *api_server_url = NULL;
+
 		/* Note: Actual server/port configuration is ignored here */
+
+		api_server_url = purple_account_get_string(account, "api-server-url",
+		                                           NULL);
+
+		if(api_server_url == NULL) {
+			purple_connection_error_reason(
+				gc,
+				PURPLE_CONNECTION_ERROR_INVALID_SETTINGS,
+				_("You required client authentication but did not provide an "
+				  "API Server URL."));
+			return;
+		}
+
+		build_client_login_urls(od, api_server_url);
 		send_client_login(od, purple_account_get_username(account));
 	} else if (purple_strequal(login_type, OSCAR_KERBEROS_LOGIN)) {
 		const char *server;
@@ -5800,13 +5816,13 @@ void oscar_init(PurplePlugin *plugin, gboolean is_icq)
 		NULL
 	};
 	static const gchar *icq_login_keys[] = {
-		N_("clientLogin"),
 		N_("MD5-based"),
+		N_("clientLogin"),
 		NULL
 	};
 	static const gchar *icq_login_values[] = {
-		OSCAR_CLIENT_LOGIN,
 		OSCAR_MD5_LOGIN,
+		OSCAR_CLIENT_LOGIN,
 		NULL
 	};
 	const gchar **login_keys;
@@ -5819,6 +5835,9 @@ void oscar_init(PurplePlugin *plugin, gboolean is_icq)
 	prpl_info->protocol_options = g_list_append(prpl_info->protocol_options, option);
 
 	option = purple_account_option_int_new(_("Port"), "port", OSCAR_DEFAULT_LOGIN_PORT);
+	prpl_info->protocol_options = g_list_append(prpl_info->protocol_options, option);
+
+	option = purple_account_option_string_new(_("API Server URL"), "api-server-url", NULL);
 	prpl_info->protocol_options = g_list_append(prpl_info->protocol_options, option);
 
 	for (i = 0; encryption_keys[i]; i++) {

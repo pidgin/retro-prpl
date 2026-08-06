@@ -44,35 +44,22 @@
 #include "cipher.h"
 #include "core.h"
 
-#define AIM_LOGIN_HOST "api.screenname.aol.com"
-#define ICQ_LOGIN_HOST "api.login.icq.net"
-
-#define AIM_API_HOST "api.oscar.aol.com"
-#define ICQ_API_HOST "api.icq.net"
-
-#define CLIENT_LOGIN_PAGE "/auth/clientLogin"
-#define START_OSCAR_SESSION_PAGE "/aim/startOSCARSession"
-
-#define HTTPS_FORMAT_URL(host, page) "https://" host page
-
-static const gchar *client_login_urls[] = {
-	HTTPS_FORMAT_URL(AIM_LOGIN_HOST, CLIENT_LOGIN_PAGE),
-	HTTPS_FORMAT_URL(ICQ_LOGIN_HOST, CLIENT_LOGIN_PAGE),
-};
-
-static const gchar *start_oscar_session_urls[] = {
-	HTTPS_FORMAT_URL(AIM_API_HOST, START_OSCAR_SESSION_PAGE),
-	HTTPS_FORMAT_URL(ICQ_API_HOST, START_OSCAR_SESSION_PAGE),
-};
+void
+build_client_login_urls(OscarData *od, const char *api_server_url) {
+	od->client_login_url = g_build_path("/", api_server_url,
+	                                    "/auth/clientLogin", NULL);
+	od->start_oscar_session_url = g_build_path("/", api_server_url,
+	                                           "/aim/startOSCARSession", NULL);
+}
 
 static const gchar *get_client_login_url(OscarData *od)
 {
-	return client_login_urls[od->icq ? 1 : 0];
+	return od->client_login_url;
 }
 
 static const gchar *get_start_oscar_session_url(OscarData *od)
 {
-	return start_oscar_session_urls[od->icq ? 1 : 0];
+	return od->start_oscar_session_url;
 }
 
 static const char *get_client_key(OscarData *od)
