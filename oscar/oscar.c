@@ -794,7 +794,7 @@ oscar_login(PurpleAccount *account)
 		api_server_url = purple_account_get_string(account, "api-server-url",
 		                                           NULL);
 
-		if(api_server_url == NULL) {
+		if(api_server_url == NULL || api_server_url[0] == '\0') {
 			purple_connection_error_reason(
 				gc,
 				PURPLE_CONNECTION_ERROR_INVALID_SETTINGS,
