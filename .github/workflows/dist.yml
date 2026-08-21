@@ -1,0 +1,50 @@
+on:
+  push:
+    branches:
+      - main
+
+name: "Create and release source tarball"
+
+jobs:
+  retro-prpl-dist:
+    name: release dist tarball
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Prepare build environment
+        run: |
+          sudo apt-get update -yy
+          sudo apt-get install -yy --no-install-recommends \
+            build-essential \
+            gettext \
+            libpurple-dev \
+            ninja-build \
+            python3-pip
+          pip install --break-system-packages meson
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+
+      - name: Get Version
+        id: version
+        run: echo "VERSION=$(python3 version.py get-version)" >> $GITHUB_OUTPUT
+
+      - name: Setup Meson build
+        run: meson setup build
+
+      - name: Create dist tarball
+        run: meson dist -C build --allow-dirty
+
+      - name: Release
+        if: ${{ !env.ACT }}
+        uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd  # v1.21.0
+        with:
+          artifacts: build/meson-dist/retro-prpl-${{steps.version.outputs.VERSION }}*
+          name: ${{ steps.version.outputs.VERSION }}
+          allowUpdates: true
+
+      - name: Create Attestation
+        if: ${{ !env.ACT }}
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8  # v4.2.2
+        with:
+          subject-path: build/meson-dist/retro-prpl-${{steps.version.outputs.VERSION }}*
