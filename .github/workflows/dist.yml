@@ -10,7 +10,9 @@ jobs:
     name: release dist tarball
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: write
+      attestations: write
 
     steps:
       - name: Prepare build environment
