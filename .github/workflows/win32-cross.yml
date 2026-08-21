@@ -49,8 +49,10 @@ jobs:
           sudo apt install -yy --no-install-recommends \
             codespell \
             gcc-mingw-w64-i686-win32 \
-            meson \
-            pkg-config
+            ninja-build \
+            pkg-config \
+            python3-pip
+          pip3 install --break-system-packages meson
 
       - name: Load Pidgin from cache
         id: pidgin-cache
