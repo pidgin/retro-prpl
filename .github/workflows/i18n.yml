@@ -29,6 +29,13 @@ jobs:
             python3-pip
           pip3 install --break-system-packages meson
 
+      - name: Add en_US.UTF-8 locale for ACT
+        if: ${{ env.ACT }}
+        run: |
+          echo locales locales/default_environment_locale select en_US.UTF-8 | debconf-set-selections
+          echo locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8 | debconf-set-selections
+          sudo apt-get install locales
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
 
       - name: Setup Meson build
