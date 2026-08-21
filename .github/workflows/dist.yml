@@ -41,6 +41,7 @@ jobs:
         with:
           artifacts: build/meson-dist/retro-prpl-${{steps.version.outputs.VERSION }}*
           name: ${{ steps.version.outputs.VERSION }}
+          tag: ${{ steps.version.outputs.VERSION }}
           allowUpdates: true
 
       - name: Create Attestation
