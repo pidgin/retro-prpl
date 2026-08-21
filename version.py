@@ -24,18 +24,17 @@ def run_git(cmd: str) -> str:
 
 
 def get_version() -> str:
-    commit_hash = os.environ.get('GITHUB_SHA', None)
-    dt = None
-    if commit_hash is not None:
-        iso8601 = run_git(f'show --no-patch --format=%cI {commit_hash}')
-        dt = datetime.fromisoformat(iso8601)
-    else:
-        commit_hash = run_git('describe --dirty --always')
-        dt = datetime.now(timezone.utc)
+    utc_dt = datetime.now(timezone.utc)
+    day_dt = datetime(utc_dt.year, utc_dt.month, utc_dt.day, 0, 0, 0)
+    max_age = day_dt.strftime('%s')
+    commit = run_git(f'rev-list --max-age {max_age} --count HEAD')
 
-    utc_dt = dt.astimezone(timezone.utc)
+    dirty = ''
+    describe = run_git('describe --dirty --always')
+    if describe.endswith('-dirty'):
+        dirty = '-dirty'
 
-    print(f'{utc_dt:%Y-%m-%d}-{commit_hash}')
+    print(f'{utc_dt:%Y-%m-%d}_{commit}{dirty}')
 
 
 def set_dist(version):
