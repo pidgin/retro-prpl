@@ -35,7 +35,9 @@ jobs:
             gettext \
             libmeanwhile-dev \
             libpurple-dev \
-            meson
+            ninja-build \
+            python3-pip
+          pip3 install --break-system-packages meson
           meson setup build
           ninja -C build turtles
 

@@ -21,7 +21,9 @@ jobs:
             codespell \
             gettext \
             libpurple-dev \
-            meson
+            ninja-build \
+            python3-pip
+          pip3 install --break-system-packages meson
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
 
       - name: Setup Meson build
@@ -31,6 +33,7 @@ jobs:
         run: ninja -C build retro-prpl-pot
 
       - name: Upload pot file
+        if: ${{ !env.ACT }}
         uses: transifex/cli-action@584fd205cbe598773b5a81ce711fa44842678189  # v2
         with:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
