@@ -23,4 +23,6 @@ myspace_prpl = shared_library('myspace',
   install_dir: plugin_dir,
 )
 
+built_plugins += myspace_prpl
+
 subdir('pixmaps')

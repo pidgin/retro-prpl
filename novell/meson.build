@@ -26,4 +26,6 @@ novell_prpl = shared_library('novell',
   install_dir: plugin_dir,
 )
 
+built_plugins += novell_prpl
+
 subdir('pixmaps')

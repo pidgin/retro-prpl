@@ -49,4 +49,6 @@ msn_prpl = shared_library('msn',
   install_dir: plugin_dir,
 )
 
+built_plugins += msn_prpl
+
 subdir('pixmaps')
