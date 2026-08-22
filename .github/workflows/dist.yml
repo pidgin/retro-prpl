@@ -25,7 +25,10 @@ jobs:
             ninja-build \
             python3-pip
           pip install --break-system-packages meson
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0  # we need the full history to properly build the version
 
       - name: Get Version
         id: version
