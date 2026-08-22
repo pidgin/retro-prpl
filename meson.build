@@ -66,6 +66,8 @@ summary({
   },
   section : 'Install Directories')
 
+built_plugins = []
+
 subdir('gg')
 subdir('msn')
 subdir('mxit')
@@ -81,6 +83,9 @@ subdir('silc10')
 subdir('toc')
 subdir('yahoo')
 subdir('zephyr')
+
+# Packaging needs to be last so that built_plugins is fully populated.
+subdir('packaging')
 
 configure_file(output: 'config.h', configuration: cfg)
 

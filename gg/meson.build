@@ -29,4 +29,6 @@ gg_prpl = shared_library('gg',
   install_dir: plugin_dir,
 )
 
+built_plugins += gg_prpl
+
 subdir('pixmaps')

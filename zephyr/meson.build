@@ -93,4 +93,6 @@ zephyr_prpl = shared_library('zephyr',
   install_dir: plugin_dir,
 )
 
+built_plugins += zephyr_prpl
+
 subdir('pixmaps')

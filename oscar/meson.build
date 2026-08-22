@@ -55,6 +55,8 @@ if feature.allowed()
     install: true,
     install_dir: plugin_dir,
   )
+
+  built_plugins += libaim
 endif
 
 feature = get_option('icq')
@@ -70,6 +72,8 @@ if feature.allowed()
     install: true,
     install_dir: plugin_dir,
   )
+
+  built_plugins += libicq
 endif
 
 subdir('pixmaps')

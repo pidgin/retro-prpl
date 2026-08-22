@@ -28,6 +28,8 @@ if feature.allowed()
     install: true,
     install_dir: plugin_dir,
   )
+
+  built_plugins += yahoo_prpl
 endif
 
 feature = get_option('yahoojp')
@@ -43,6 +45,8 @@ if feature.allowed()
     install: true,
     install_dir: plugin_dir,
   )
+
+  built_plugins += yahoojp_prpl
 endif
 
 subdir('pixmaps')
