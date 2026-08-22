@@ -192,7 +192,7 @@ kerberos_login_cb(PurpleUtilFetchUrlData *url_data, gpointer user_data,
 	xsnac.subtype = byte_stream_get16(&bs);
 	byte_stream_getrawbuf(&bs, (guint8 *) xsnac.flags, 8);
 
-	if (xsnac.family == 0x50C && xsnac.subtype == 0x0005) {
+	if (xsnac.family == 0x50C && xsnac.subtype == 0x0004) {
 		purple_connection_error_reason(gc,
 			PURPLE_CONNECTION_ERROR_AUTHENTICATION_FAILED,
 			_("Incorrect password"));
@@ -332,6 +332,7 @@ void send_kerberos_login(OscarData *od, const char *username)
 	GString *body;
 	guint16 len_be;
 	guint16 reqid;
+	const char *hostname = NULL;
 	const gchar header[] = {
 		0x05, 0x0C, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00,
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -415,6 +416,11 @@ void send_kerberos_login(OscarData *od, const char *username)
 	request = g_string_new("POST / HTTP/1.1\n"
 			"Connection: close\n"
 			"Accept: application/x-snac\n");
+
+	/* Add the host header. */
+	hostname = purple_account_get_string(purple_connection_get_account(gc),
+	                                     "server", AIM_DEFAULT_KDC_SERVER);
+	g_string_append_printf(request, "Host: %s\n", hostname);
 
 	/* Tack on the body */
 	g_string_append_printf(request, "Content-Type: application/x-snac\n");
