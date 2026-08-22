@@ -25,16 +25,15 @@ def run_git(cmd: str) -> str:
 
 def get_version() -> str:
     utc_dt = datetime.now(timezone.utc)
-    day_dt = datetime(utc_dt.year, utc_dt.month, utc_dt.day, 0, 0, 0)
-    max_age = day_dt.strftime('%s')
-    commit = run_git(f'rev-list --max-age {max_age} --count HEAD')
+    day_dt = datetime(utc_dt.year, utc_dt.month, utc_dt.day, 0, 0, 0, 0, timezone.utc)
+    commits = run_git(f'rev-list --since {day_dt.isoformat()} --count HEAD')
 
     dirty = ''
     describe = run_git('describe --dirty --always')
     if describe.endswith('-dirty'):
         dirty = '-dirty'
 
-    print(f'{utc_dt:%Y-%m-%d}_{commit}{dirty}')
+    print(f'{utc_dt:%Y-%m-%d}_{commits}{dirty}')
 
 
 def set_dist(version):
