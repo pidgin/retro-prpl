@@ -1625,13 +1625,14 @@ static void yahoo_buddy_added_us(PurpleConnection *gc, struct yahoo_packet *pkt)
 			return;
 		}
 
-		if (msg)
+		if (msg) {
 			dec_msg = yahoo_string_decode(gc, msg, FALSE);
+		}
 
 		/* DONE! this is almost exactly the same as what MSN does,
 		 * this should probably be moved to the core.
 		 */
-		 purple_account_request_authorization(account, add_req->who, add_req->id,
+		purple_account_request_authorization(account, add_req->who, add_req->id,
 				NULL, dec_msg,
 				purple_find_buddy(account,add_req->who) != NULL,
 						yahoo_buddy_add_authorize_cb,

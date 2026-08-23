@@ -2434,8 +2434,8 @@ msn_got_info(PurpleUtilFetchUrlData *url_data, gpointer data,
 		has_info = TRUE;
 		sect_info = FALSE;
 	}
-    else
-    {
+	else
+	{
 		/* Remove the section header */
 		purple_notify_user_info_remove_last_item(user_info);
 		if (has_tooltip_text)
@@ -2461,8 +2461,8 @@ msn_got_info(PurpleUtilFetchUrlData *url_data, gpointer data,
 		has_info = TRUE;
 		sect_info = FALSE;
 	}
-    else
-    {
+	else
+	{
 		/* Remove the section header */
 		purple_notify_user_info_remove_last_item(user_info);
 		purple_notify_user_info_remove_last_item(user_info);
@@ -2493,8 +2493,8 @@ msn_got_info(PurpleUtilFetchUrlData *url_data, gpointer data,
 		sect_info = FALSE;
 		has_contact_info = TRUE;
 	}
-    else
-    {
+	else
+	{
 		/* Remove the section header */
 		purple_notify_user_info_remove_last_item(user_info);
 	}
@@ -2523,8 +2523,8 @@ msn_got_info(PurpleUtilFetchUrlData *url_data, gpointer data,
 		sect_info = FALSE;
 		has_contact_info = TRUE;
 	}
-    else
-    {
+	else
+	{
 		/* Remove the section header */
 		purple_notify_user_info_remove_last_item(user_info);
 	}

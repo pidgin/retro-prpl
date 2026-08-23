@@ -4212,8 +4212,8 @@ static int purple_ssi_parseack(OscarData *od, FlapConnection *conn, FlapFrame *f
 		purple_debug_misc("oscar",
 				   "ssi: status is 0x%04hx for a 0x%04hx action with name %s\n", retval->ack,  retval->action, retval->item ? (retval->item->name ? retval->item->name : "no name") : "no item");
 
-		if (retval->ack != 0xffff)
-		switch (retval->ack) {
+		if (retval->ack != 0xffff) {
+			switch (retval->ack) {
 			case 0x0000: { /* added successfully */
 			} break;
 
@@ -4239,6 +4239,7 @@ static int purple_ssi_parseack(OscarData *od, FlapConnection *conn, FlapFrame *f
 					purple_notify_error(gc, NULL, _("Unable to Add"), buf);
 				g_free(buf);
 			} break;
+			}
 		}
 
 		retval = retval->next;
