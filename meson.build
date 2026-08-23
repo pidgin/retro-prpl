@@ -54,7 +54,7 @@ else
   ws2_32_dep = []
 endif
 
-plugin_suffix = []
+plugin_suffix = meson.version().version_compare('>=1.12.0') ? default() : []
 if host_machine.system() == 'darwin'
   plugin_suffix = 'so'
 endif
