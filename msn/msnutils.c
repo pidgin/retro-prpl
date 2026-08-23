@@ -49,7 +49,7 @@ rand_guid(void)
 void
 msn_parse_format(const char *mime, char **pre_ret, char **post_ret)
 {
-	char *cur;
+	const char *cur;
 	GString *pre  = g_string_new(NULL);
 	GString *post = g_string_new(NULL);
 	unsigned int colors[3];
@@ -145,21 +145,16 @@ msn_parse_format(const char *mime, char **pre_ret, char **post_ret)
 		}
 	}
 
-	cur = g_strdup(purple_url_decode(pre->str));
+	if (pre_ret != NULL) {
+		*pre_ret = g_strdup(purple_url_decode(pre->str));
+	}
+
+	if (post_ret != NULL) {
+		*post_ret = g_strdup(purple_url_decode(post->str));
+	}
+
 	g_string_free(pre, TRUE);
-
-	if (pre_ret != NULL)
-		*pre_ret = cur;
-	else
-		g_free(cur);
-
-	cur = g_strdup(purple_url_decode(post->str));
 	g_string_free(post, TRUE);
-
-	if (post_ret != NULL)
-		*post_ret = cur;
-	else
-		g_free(cur);
 }
 
 /*encode the str to RFC2047 style

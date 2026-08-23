@@ -728,7 +728,7 @@ static void yahoo_extract_user_info_text(PurpleNotifyUserInfo *user_info, YahooG
 
 static char *yahoo_get_photo_url(const char *url_text, const char *name) {
 	GString *s = g_string_sized_new(strlen(name) + 8);
-	char *p;
+	const char *p;
 	char *it = NULL;
 
 	/*g_string_printf(s, " alt=\"%s\">", name);*/
@@ -742,7 +742,7 @@ static char *yahoo_get_photo_url(const char *url_text, const char *name) {
 			/*if (strncmp(p, "\"http://", 8) == 0) {*/
 			/* Y! newformat*/
 			if (strncmp(p, "=http://", 8) == 0) {
-				char *q;
+				const char *q;
 				p += 1; /* skip only the ' ' */
 				q = strchr(p, ' ');
 				if (q) {
@@ -768,7 +768,7 @@ static void yahoo_got_info(PurpleUtilFetchUrlData *url_data, gpointer user_data,
 {
 	YahooGetInfoData *info_data = (YahooGetInfoData *)user_data;
 	PurpleNotifyUserInfo *user_info;
-	char *p;
+	const char *p;
 #if PHOTO_SUPPORT
 	YahooGetInfoStepTwoData *info2_data;
 	char *photo_url_text = NULL;
@@ -909,8 +909,8 @@ static void yahoo_got_info(PurpleUtilFetchUrlData *url_data, gpointer user_data,
 	*/
 	yahoo_remove_nonbreaking_spaces(url_buffer);
 #if 1
-	while ((p = strstr(url_buffer, "&#183;")) != NULL) {
-		memmove(p, p + 6, strlen(p + 6));
+	while ((tmp = strstr(url_buffer, "&#183;")) != NULL) {
+		memmove(tmp, tmp + 6, strlen(tmp + 6));
 		url_buffer[strlen(url_buffer) - 6] = '\0';
 	}
 #endif

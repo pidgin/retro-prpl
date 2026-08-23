@@ -997,14 +997,14 @@ static gg_action_t gg_handle_reading_hub_proxy(struct gg_session *sess,
 	}
 
 	if (res != 0) {
-		tmp = realloc(sess->recv_buf, sess->recv_done + res + 1);
+		char *new_recv_buf = realloc(sess->recv_buf, sess->recv_done + res + 1);
 
-		if (tmp == NULL) {
+		if (new_recv_buf == NULL) {
 			gg_debug_session(sess, GG_DEBUG_MISC, "// gg_watch_fd() not enough memory for http reply\n");
 			return GG_ACTION_FAIL;
 		}
 
-		sess->recv_buf = tmp;
+		sess->recv_buf = new_recv_buf;
 		memcpy(sess->recv_buf + sess->recv_done, buf, res);
 		sess->recv_done += res;
 		sess->recv_buf[sess->recv_done] = 0;
@@ -1061,13 +1061,13 @@ static gg_action_t gg_handle_reading_hub_proxy(struct gg_session *sess,
 	/* jeśli pierwsza liczba w linii nie jest równa zeru,
 	 * oznacza to, że mamy wiadomość systemową. */
 	if (reply != 0) {
-		tmp = strchr(body, '\n');
+		const char *message = strchr(body, '\n');
 
-		if (tmp != NULL) {
+		if (message != NULL) {
 			e->type = GG_EVENT_MSG;
 			e->event.msg.msgclass = reply;
 			e->event.msg.sender = 0;
-			e->event.msg.message = (unsigned char*) strdup(tmp + 1);
+			e->event.msg.message = (unsigned char*) strdup(message + 1);
 
 			if (e->event.msg.message == NULL) {
 				gg_debug_session(sess, GG_DEBUG_MISC,

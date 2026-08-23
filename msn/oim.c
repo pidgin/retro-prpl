@@ -715,7 +715,7 @@ msn_oim_report_to_user(MsnOimRecvData *rdata, const char *msg_str)
 	}
 
 	if (passport == NULL) {
-		char *start, *end;
+		const char *start, *end;
 
 		from = msn_message_get_header_value(message, "From");
 

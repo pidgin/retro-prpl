@@ -2541,7 +2541,7 @@ static unsigned int zephyr_send_typing(PurpleConnection *gc, const char *who, Pu
 		purple_debug_info("zephyr", "who is null\n");
 		recipient = local_zephyr_normalize(zephyr,"");
 	} else {
-		char *comma = strrchr(who, ',');
+		const char *comma = strrchr(who, ',');
 		/* Don't ping broadcast (chat) recipients */
 		/* The strrchr case finds a realm-stripped broadcast subscription
 		   e.g. comma is the last character in the string */

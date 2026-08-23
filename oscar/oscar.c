@@ -185,7 +185,8 @@ static char *oscar_icqstatus(int state) {
 }
 
 static char *extract_name(const char *name) {
-	char *tmp, *x;
+	char *tmp;
+	const char *x;
 	int i, j;
 
 	if (!name)
@@ -1324,7 +1325,8 @@ purple_handle_redirect(OscarData *od, FlapConnection *conn, FlapFrame *fr, ...)
 {
 	PurpleConnection *gc = od->gc;
 	PurpleAccount *account = purple_connection_get_account(gc);
-	char *host, *separator;
+	char *host;
+	const char *separator;
 	int port;
 	FlapConnection *newconn;
 	va_list ap;

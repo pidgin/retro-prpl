@@ -5025,7 +5025,7 @@ static void ft_outgoing_init(PurpleXfer *xfer) {
   fclose(fp);
 
   {
-    char *tmp = strrchr(filename, G_DIR_SEPARATOR);
+    const char *tmp = strrchr(filename, G_DIR_SEPARATOR);
     if(tmp++) filename = tmp;
   }
 

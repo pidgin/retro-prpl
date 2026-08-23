@@ -80,7 +80,7 @@ MsnObject *
 msn_object_new_from_string(const char *str)
 {
 	MsnObject *obj;
-	char *tag, *c;
+	const char *tag, *c;
 
 	g_return_val_if_fail(str != NULL, NULL);
 

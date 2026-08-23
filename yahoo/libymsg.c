@@ -4393,17 +4393,18 @@ static GList *yahoo_buddy_menu(PurpleBuddy *buddy)
 
 		if (yahoo_friend_get_game(f)) {
 			const char *game = yahoo_friend_get_game(f);
-			char *room;
-			char *t;
+			const char *room;
+			const char *t;
 
 			if ((room = strstr(game, "&follow="))) {/* skip ahead to the url */
 				while (*room && *room != '\t')          /* skip to the tab */
 					room++;
 				t = room++;                             /* room as now at the name */
-				while (*t != '\n')
-					t++;                            /* replace the \n with a space */
-				*t = ' ';
+				while (*t != '\n') {
+					t++;
+				}
 				g_snprintf(buf2, sizeof buf2, "%s", room);
+				buf2[t - room] = ' ';                   /* replace the \n with a space */
 
 				act = purple_menu_action_new(buf2,
 				                           PURPLE_CALLBACK(yahoo_game),

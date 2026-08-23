@@ -79,7 +79,7 @@ encoding_multi_convert_to_utf8(const gchar *text, gssize textlen, const gchar *e
 static gchar *
 encoding_extract(const char *encoding)
 {
-	char *begin, *end;
+	const char *begin, *end;
 
 	if (encoding == NULL) {
 		return NULL;

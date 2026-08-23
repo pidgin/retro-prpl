@@ -2261,7 +2261,7 @@ msn_tooltip_extract_info_text(PurpleNotifyUserInfo *user_info, MsnGetInfoData *i
 static char *
 msn_get_photo_url(const char *url_text)
 {
-	char *p, *q;
+	const char *p, *q;
 
 	if ((p = strstr(url_text, PHOTO_URL)) != NULL)
 	{
@@ -2317,7 +2317,8 @@ msn_got_info(PurpleUtilFetchUrlData *url_data, gpointer data,
 	MsnGetInfoData *info_data = (MsnGetInfoData *)data;
 	MsnSession *session;
 	PurpleNotifyUserInfo *user_info;
-	char *stripped, *p, *q, *tmp;
+	const char *p;
+	char *stripped, *tmp;
 	char *user_url = NULL;
 	gboolean found;
 	gboolean has_tooltip_text = FALSE;
@@ -2360,6 +2361,8 @@ msn_got_info(PurpleUtilFetchUrlData *url_data, gpointer data,
 	if ((p = strstr(url_text,
 			"Take a look at my </font><A class=viewDesc title=\"")) != NULL)
 	{
+		const char *q = NULL;
+
 		p += 50;
 
 		if ((q = strchr(p, '"')) != NULL)
@@ -2370,17 +2373,17 @@ msn_got_info(PurpleUtilFetchUrlData *url_data, gpointer data,
 	 * purple_markup_strip_html() doesn't strip out character entities like &nbsp;
 	 * and &#183;
 	 */
-	while ((p = strstr(url_buffer, "&nbsp;")) != NULL)
+	while ((stripped = strstr(url_buffer, "&nbsp;")) != NULL)
 	{
-		*p = ' '; /* Turn &nbsp;'s into ordinary blanks */
-		p += 1;
-		memmove(p, p + 5, strlen(p + 5));
+		*stripped = ' '; /* Turn &nbsp;'s into ordinary blanks */
+		stripped += 1;
+		memmove(stripped, stripped + 5, strlen(stripped + 5));
 		url_buffer[strlen(url_buffer) - 5] = '\0';
 	}
 
-	while ((p = strstr(url_buffer, "&#183;")) != NULL)
+	while ((stripped = strstr(url_buffer, "&#183;")) != NULL)
 	{
-		memmove(p, p + 6, strlen(p + 6));
+		memmove(stripped, stripped + 6, strlen(stripped + 6));
 		url_buffer[strlen(url_buffer) - 6] = '\0';
 	}
 
@@ -2388,10 +2391,10 @@ msn_got_info(PurpleUtilFetchUrlData *url_data, gpointer data,
 	purple_str_strip_char(url_buffer, '\r');
 
 	/* MSN always puts in &#39; for apostrophes...replace them */
-	while ((p = strstr(url_buffer, "&#39;")) != NULL)
+	while ((stripped = strstr(url_buffer, "&#39;")) != NULL)
 	{
-		*p = '\'';
-		memmove(p + 1, p + 5, strlen(p + 5));
+		*stripped = '\'';
+		memmove(stripped + 1, stripped + 5, strlen(stripped + 5));
 		url_buffer[strlen(url_buffer) - 4] = '\0';
 	}
 

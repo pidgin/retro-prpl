@@ -237,7 +237,7 @@ msn_switchboard_add_user(MsnSwitchBoard *swboard, const char *user)
 	PurpleAccount *account;
 	MsnUserList *userlist;
 	MsnUser *msnuser;
-	char *semicolon;
+	const char *semicolon;
 	char *passport;
 
 	g_return_if_fail(swboard != NULL);

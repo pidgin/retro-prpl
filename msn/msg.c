@@ -188,7 +188,7 @@ msn_message_parse_payload(MsnMessage *msg,
 	elems = g_strsplit(tmp, line_dem, 0);
 	for (cur = elems; *cur != NULL; cur++)
 	{
-		const char *key, *value;
+		char *key, *value;
 
 		/* If this line starts with whitespace, it's been folded from the
 		   previous line and won't have ':'. */

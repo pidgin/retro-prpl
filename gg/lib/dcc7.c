@@ -734,7 +734,7 @@ int gg_dcc7_handle_info(struct gg_session *sess, struct gg_event *e, const void 
 {
 	const struct gg_dcc7_info *p = payload;
 	struct gg_dcc7 *dcc;
-	char *tmp;
+	const char *tmp;
 
 	gg_debug_session(sess, GG_DEBUG_FUNCTION, "** gg_dcc7_handle_info(%p, %p, %p, %d)\n", sess, e, payload, len);
 	gg_debug_session(sess, GG_DEBUG_FUNCTION, "// gg_dcc7_handle_info() "
