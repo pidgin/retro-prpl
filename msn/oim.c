@@ -81,8 +81,11 @@ msn_oim_destroy(MsnOim *oim)
 		msn_oim_free_send_req(request);
 	g_queue_free(oim->send_queue);
 
-	while (oim->oim_list != NULL)
-		msn_oim_recv_data_free((MsnOimRecvData *)oim->oim_list->data);
+	while (oim->oim_list != NULL) {
+		MsnOimRecvData *recv_data = (MsnOimRecvData *)oim->oim_list->data;
+		msn_oim_recv_data_free(recv_data);
+		oim->oim_list = g_list_delete_link(oim->oim_list, oim->oim_list);
+	}
 
 	g_free(oim);
 }
@@ -138,7 +141,6 @@ msn_recv_data_equal(MsnOimRecvData *a, const char *msg_id)
 static void
 msn_oim_recv_data_free(MsnOimRecvData *data)
 {
-	data->oim->oim_list = g_list_remove(data->oim->oim_list, data);
 	g_free(data->msg_id);
 
 	g_free(data);
@@ -507,6 +509,7 @@ msn_oim_delete_read_cb(MsnSoapMessage *request, MsnSoapMessage *response,
 	else
 		purple_debug_info("msn", "Delete OIM failed\n");
 
+	rdata->oim->oim_list = g_list_remove(rdata->oim->oim_list, rdata);
 	msn_oim_recv_data_free(rdata);
 }
 
@@ -656,6 +659,8 @@ msn_oim_report_to_user(MsnOimRecvData *rdata, const char *msg_str)
 		if (decode_msg == NULL) {
 			purple_debug_error("msn", "Couldn't find text/plain OIM message.\n");
 			msn_message_unref(message);
+			rdata->oim->oim_list = g_list_remove(rdata->oim->oim_list, rdata);
+			msn_oim_recv_data_free(rdata);
 			return;
 		}
 	} else {
@@ -775,10 +780,12 @@ msn_oim_get_read_cb(MsnSoapMessage *request, MsnSoapMessage *response,
 			char *str = xmlnode_to_str(response->xml, NULL);
 			purple_debug_info("msn", "Unknown OIM response: %s\n", str);
 			g_free(str);
+			rdata->oim->oim_list = g_list_remove(rdata->oim->oim_list, rdata);
 			msn_oim_recv_data_free(rdata);
 		}
 	} else {
 		purple_debug_info("msn", "Failed to get OIM\n");
+		rdata->oim->oim_list = g_list_remove(rdata->oim->oim_list, rdata);
 		msn_oim_recv_data_free(rdata);
 	}
 

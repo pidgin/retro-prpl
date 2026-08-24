@@ -1085,15 +1085,15 @@ static void yahoo_xfer_dns_connected_15(GSList *hosts, gpointer data, const char
 
 	/* Free the address... */
 	g_free(hosts->data);
-	hosts = g_slist_remove(hosts, hosts->data);
+	hosts = g_slist_remove_link(hosts, hosts);
 	addr = NULL;
 	while (hosts != NULL)
 	{
 		/* Discard the length... */
-		hosts = g_slist_remove(hosts, hosts->data);
+		hosts = g_slist_remove_link(hosts, hosts);
 		/* Free the address... */
 		g_free(hosts->data);
-		hosts = g_slist_remove(hosts, hosts->data);
+		hosts = g_slist_remove_link(hosts, hosts);
 	}
 
 	if (!purple_url_parse(url, &(xd->host), &(xd->port), &(xd->path), NULL, NULL)) {

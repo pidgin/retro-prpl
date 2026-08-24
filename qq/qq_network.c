@@ -877,15 +877,15 @@ static void udp_host_resolved(GSList *hosts, gpointer data, const char *error_me
 	}
 
 	addr_size = GPOINTER_TO_INT(hosts->data);
-	hosts = g_slist_remove(hosts, hosts->data);
+	hosts = g_slist_remove_link(hosts, hosts);
 	memcpy(&server_addr, hosts->data, addr_size);
 	g_free(hosts->data);
 
-	hosts = g_slist_remove(hosts, hosts->data);
+	hosts = g_slist_remove_link(hosts, hosts);
 	while(hosts) {
-		hosts = g_slist_remove(hosts, hosts->data);
+		hosts = g_slist_remove_link(hosts, hosts);
 		g_free(hosts->data);
-		hosts = g_slist_remove(hosts, hosts->data);
+		hosts = g_slist_remove_link(hosts, hosts);
 	}
 
 	fd = socket(PF_INET, SOCK_DGRAM, 0);

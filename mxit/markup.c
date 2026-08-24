@@ -501,7 +501,7 @@ static void emoticon_returned( PurpleUtilFetchUrlData* url_data, gpointer user_d
 	const gchar*		data		= url_text;
 	unsigned int		pos			= 0;
 	int					id;
-	char*				str;
+	char*				str			= NULL;
 	int					em_size		= 0;
 	char*				em_data		= NULL;
 	char*				em_id		= NULL;
