@@ -572,6 +572,7 @@ static void emoticon_returned( PurpleUtilFetchUrlData* url_data, gpointer user_d
 	purple_debug_info( MXIT_PLUGIN_ID, "read the string '%s'\n", str );
 #endif
 	em_id = str;
+	str = NULL;
 
 	/* validate the image data type */
 	if ( len - pos < 1 || data[pos] != '\x82' ) {
@@ -637,6 +638,7 @@ done:
 		 */
 		mxit_show_message( mx );
 	}
+	g_free(str);
 }
 
 

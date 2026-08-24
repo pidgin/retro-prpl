@@ -1123,6 +1123,7 @@ msn_add_contact(MsnSession *session, MsnCallbackState *state, const char *passpo
 	user = msn_userlist_find_user(session->userlist, passport);
 	if (user == NULL) {
 		purple_debug_warning("msn", "Unable to retrieve user %s from the userlist!\n", passport);
+		msn_callback_state_free(state);
 		return; /* guess this never happened! */
 	}
 
@@ -1250,6 +1251,7 @@ msn_add_contact_to_group(MsnSession *session, MsnCallbackState *state,
 			msn_del_contact_from_group(session, passport, state->old_group_name);
 		}
 
+		msn_callback_state_free(state);
 		return;
 	}
 

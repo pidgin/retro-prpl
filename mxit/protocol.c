@@ -1849,6 +1849,10 @@ static void mxit_parse_cmd_extprofile( struct MXitSession* session, struct recor
 	/* ensure the packet has the correct number of fields */
 	if ( records[0]->fcount < ( 2 + ( count * 3 ) ) ) {
 		purple_debug_error( MXIT_PLUGIN_ID, "Insufficient number of fields in extprofile response. fields=%i records=%i", records[0]->fcount, count );
+		if (profile != session->profile) {
+			/* is a buddy's profile */
+			g_free(profile);
+		}
 		return;
 	}
 

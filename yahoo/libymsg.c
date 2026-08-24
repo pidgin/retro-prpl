@@ -960,6 +960,12 @@ static void yahoo_process_sms_message(PurpleConnection *gc, struct yahoo_packet 
 		struct yahoo_pair *pair = l->data;
 		if (pair->key == 4) {
 			if (g_utf8_validate(pair->value, -1, NULL)) {
+				if (sms != NULL) {
+					purple_debug_warning("yahoo",
+					                     "yahoo_process_sms_message got multiple strings for key %d\n",
+					                     pair->key);
+					g_free(sms);
+				}
 				sms = g_new0(struct _yahoo_im, 1);
 				sms->from = g_strdup_printf("+%s", pair->value);
 				sms->time = time(NULL);
@@ -2947,7 +2953,16 @@ void yahoo_send_p2p_pkt(PurpleConnection *gc, const char *who, int val_13)
 		49, "PEERTOPEER");
 	yahoo_packet_send_and_free(pkt, yd);
 
+	g_free(base64_ip);
+
 	f->p2p_packet_sent = 1;	/* set p2p_packet_sent to sent */
+
+	/* FIXME: If the port is already used, purple_network_listener returns NULL and old listener won't be canceled
+	 * in yahoo_close function. */
+	if (yd->listen_data) {
+		purple_debug_warning("yahoo","p2p: Failed to create p2p server - server already exists\n");
+		return;
+	}
 
 	p2p_data = g_new0(struct yahoo_p2p_data, 1);
 
@@ -2958,17 +2973,11 @@ void yahoo_send_p2p_pkt(PurpleConnection *gc, const char *who, int val_13)
 	p2p_data->connection_type = YAHOO_P2P_WE_ARE_SERVER;
 	p2p_data->source = -1;
 
-	/* FIXME: If the port is already used, purple_network_listener returns NULL and old listener won't be canceled
-	 * in yahoo_close function. */
-	if (yd->listen_data)
-		purple_debug_warning("yahoo","p2p: Failed to create p2p server - server already exists\n");
-	else {
-		yd->listen_data = purple_network_listen(YAHOO_PAGER_PORT_P2P, SOCK_STREAM, yahoo_p2p_server_listen_cb, p2p_data);
-		if (yd->listen_data == NULL)
-			purple_debug_warning("yahoo","p2p: Failed to created p2p server\n");
+	yd->listen_data = purple_network_listen(YAHOO_PAGER_PORT_P2P, SOCK_STREAM,
+	                                        yahoo_p2p_server_listen_cb, p2p_data);
+	if (yd->listen_data == NULL) {
+		purple_debug_warning("yahoo", "p2p: Failed to created p2p server\n");
 	}
-
-	g_free(base64_ip);
 }
 
 /* function called when connection to p2p host is setup */
