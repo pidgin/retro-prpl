@@ -32,4 +32,6 @@ silc10_prpl = shared_library('silc10',
   install_dir: plugin_dir,
 )
 
+built_plugins += silc10_prpl
+
 subdir('pixmaps')

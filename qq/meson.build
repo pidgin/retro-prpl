@@ -45,4 +45,6 @@ qq_prpl = shared_library('qq',
   install_dir: plugin_dir,
 )
 
+built_plugins += qq_prpl
+
 subdir('pixmaps')

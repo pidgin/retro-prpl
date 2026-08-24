@@ -30,4 +30,6 @@ mxit_prpl = shared_library('mxit',
   install_dir: plugin_dir,
 )
 
+built_plugins += mxit_prpl
+
 subdir('pixmaps')

@@ -16,4 +16,6 @@ napster_prpl = shared_library('napster',
   install_dir: plugin_dir,
 )
 
+built_plugins += napster_prpl
+
 subdir('pixmaps')

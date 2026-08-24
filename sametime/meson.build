@@ -19,4 +19,6 @@ sametime_prpl = shared_library('sametime',
   install_dir: plugin_dir,
 )
 
+built_plugins += sametime_prpl
+
 subdir('pixmaps')

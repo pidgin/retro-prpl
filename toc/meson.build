@@ -16,4 +16,6 @@ toc_prpl = shared_library('toc',
   install_dir: plugin_dir,
 )
 
+built_plugins += toc_prpl
+
 subdir('pixmaps')
