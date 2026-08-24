@@ -223,7 +223,8 @@ void qq_process_room_im(guint8 *data, gint data_len, guint32 id, PurpleConnectio
 	} im_text;
 	guint32 temp_id;
 	guint16 content_type;
-	guint8 frag_count, frag_index;
+	guint8 frag_count = 0;
+	guint8 frag_index = 0;
 	guint16 msg_id;
 	guint32 use_default_font;
 	qq_im_format *fmt = NULL;

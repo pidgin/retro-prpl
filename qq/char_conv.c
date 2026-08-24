@@ -58,6 +58,9 @@ static gchar *do_convert(const gchar *str, gssize len, guint8 *out_len, const gc
 	qq_show_packet("Dump failed text", (guint8 *) str, (len == -1) ? strlen(str) : len);
 
 	g_error_free(error);
+	if (out_len) {
+		*out_len = strlen(QQ_NULL_MSG);
+	}
 	return g_strdup(QQ_NULL_MSG);
 }
 
