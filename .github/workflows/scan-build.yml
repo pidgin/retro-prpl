@@ -1,0 +1,55 @@
+---
+name: Test building on Linux
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: "Run scan-build"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Prepare build environment
+        run: |
+          sudo apt-get update -yy
+          sudo apt-get install -yy --no-install-recommends \
+            build-essential \
+            clang \
+            clang-tools \
+            gettext \
+            libpurple-dev \
+            ninja-build \
+            python3-pip
+          pip3 install --break-system-packages meson
+
+      - name: create scan-build wrapper
+        run: |
+          cat << EOF | tee /usr/local/bin/scan-build.sh
+          #!/bin/sh
+          scan-build --status-bugs \$@
+          EOF
+          chmod +x /usr/local/bin/scan-build.sh
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+
+      - name: Setup Meson build
+        run: meson setup build
+
+      - name: Ran scan-build
+        run: |
+          SCANBUILD=/usr/local/bin/scan-build.sh ninja -C build scan-build
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
+        if: ${{ !env.ACT && always() }}
+        with:
+          name: "scanbuild report"
+          path: build/meson-logs/scanbuild/
+
