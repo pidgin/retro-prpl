@@ -1683,7 +1683,7 @@ static int receiveauthgrant(OscarData *od, FlapConnection *conn, aim_module_t *m
 		msg = NULL;
 
 	/* Unknown */
-	tmp = byte_stream_get16(bs);
+	byte_stream_get16(bs);
 
 	if ((userfunc = aim_callhandler(od, snac->family, snac->subtype)))
 		ret = userfunc(od, conn, frame, bn, msg);
@@ -1775,7 +1775,7 @@ static int receiveauthrequest(OscarData *od, FlapConnection *conn, aim_module_t 
 		msg = NULL;
 
 	/* Unknown */
-	tmp = byte_stream_get16(bs);
+	byte_stream_get16(bs);
 
 	if ((userfunc = aim_callhandler(od, snac->family, snac->subtype)))
 		ret = userfunc(od, conn, frame, bn, msg);
@@ -1880,7 +1880,7 @@ static int receiveauthreply(OscarData *od, FlapConnection *conn, aim_module_t *m
 		msg = NULL;
 
 	/* Unknown */
-	tmp = byte_stream_get16(bs);
+	byte_stream_get16(bs);
 
 	if ((userfunc = aim_callhandler(od, snac->family, snac->subtype)))
 		ret = userfunc(od, conn, frame, bn, reply, msg);

@@ -74,15 +74,12 @@ static qq_room_data *room_data_new_by_hashtable(PurpleConnection *gc, GHashTable
 /* gracefully free all members in a room */
 static void room_buddies_free(qq_room_data *rmd)
 {
-	gint i;
 	GList *list;
 	qq_buddy_data *bd;
 
 	g_return_if_fail(rmd != NULL);
-	i = 0;
 	while (NULL != (list = rmd->members)) {
 		bd = (qq_buddy_data *) list->data;
-		i++;
 		rmd->members = g_list_remove(rmd->members, bd);
 		qq_buddy_data_free(bd);
 	}

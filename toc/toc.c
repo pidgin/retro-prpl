@@ -132,11 +132,10 @@ static void toc_callback(gpointer, gint, PurpleInputCondition);
 static void toc_login(PurpleAccount *account)
 {
 	PurpleConnection *gc;
-	struct toc_data *tdt;
 	char buf[80];
 
 	gc = purple_account_get_connection(account);
-	gc->proto_data = tdt = g_new0(struct toc_data, 1);
+	gc->proto_data = g_new0(struct toc_data, 1);
 	gc->flags |= PURPLE_CONNECTION_HTML;
 	gc->flags |= PURPLE_CONNECTION_AUTO_RESP;
 
