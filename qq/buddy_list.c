@@ -73,6 +73,9 @@ void qq_request_get_buddies_online(PurpleConnection *gc, guint8 position, UPDCLS
 	bytes += qq_put16(raw_data + bytes, 0x0000);
 
 	qq_send_cmd_mess(gc, QQ_CMD_GET_BUDDIES_ONLINE, raw_data, 5, update_class, 0);
+
+	/* This tells scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 /* position starts with 0x0000,
@@ -496,7 +499,7 @@ void qq_request_change_status(PurpleConnection *gc, UPDCLS update_class)
 void qq_process_change_status(guint8 *data, gint data_len, PurpleConnection *gc)
 {
 	qq_data *qd;
-	gint bytes;
+	gint bytes = 0;
 	guint8 reply;
 	qq_buddy_data *bd;
 
@@ -504,8 +507,7 @@ void qq_process_change_status(guint8 *data, gint data_len, PurpleConnection *gc)
 
 	qd = (qq_data *) gc->proto_data;
 
-	bytes = 0;
-	bytes = qq_get8(&reply, data + bytes);
+	bytes += qq_get8(&reply, data + bytes);
 	if (reply != QQ_CHANGE_ONLINE_STATUS_REPLY_OK) {
 		purple_debug_warning("QQ", "Change status fail 0x%02X\n", reply);
 		return;
@@ -518,6 +520,9 @@ void qq_process_change_status(guint8 *data, gint data_len, PurpleConnection *gc)
 		bd->last_update = time(NULL);
 		qq_update_buddy_status(gc, bd->uid, bd->status, bd->comm_flag);
 	}
+
+	/* Tell scan-build to ignore the dead assignment. */
+	(void)bytes;
 }
 
 /* it is a server message indicating that one of my buddies has changed its status */
@@ -580,6 +585,9 @@ void qq_process_buddy_change_status(guint8 *data, gint data_len, PurpleConnectio
 			qq_request_get_level(gc, bd->uid);
 		}
 	}
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 /*TODO: maybe this should be qq_update_buddy_status() ?*/

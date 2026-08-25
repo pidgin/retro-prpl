@@ -512,6 +512,9 @@ gboolean mxit_chunk_parse_offer( char* chunkdata, size_t datalen, struct offerfi
 	/* flags [4 bytes] */
 	/* not used by libPurple */
 
+	/* This tells scan-build to ignore the dead increment. */
+	(void)pos;
+
 	return TRUE;
 }
 
@@ -704,6 +707,9 @@ gboolean mxit_chunk_parse_sendfile( char* chunkdata, size_t datalen, struct send
 
 	/* status message [UTF-8 string] */
 	pos += get_utf8_string( &chunkdata[pos], datalen - pos, sendfile->statusmsg, sizeof( sendfile->statusmsg ) );
+
+	/* This tells scan-build to ignore the dead increment. */
+	(void)pos;
 
 	return TRUE;
 }

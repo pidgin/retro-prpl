@@ -118,6 +118,9 @@ static void do_server_news(PurpleConnection *gc, guint8 *data, gint data_len)
 	g_free(brief);
 	g_free(url);
 	g_free(content);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 static void do_got_sms(PurpleConnection *gc, guint8 *data, gint data_len)

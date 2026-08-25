@@ -188,13 +188,12 @@ void qq_group_modify_members(PurpleConnection *gc, qq_room_data *rmd, guint32 *n
 
 void qq_group_process_modify_members_reply(guint8 *data, gint len, PurpleConnection *gc)
 {
-	gint bytes;
+	gint bytes = 0;
 	guint32 id;
 	time_t now = time(NULL);
 	qq_room_data *rmd;
 	g_return_if_fail(data != NULL);
 
-	bytes = 0;
 	bytes += qq_get32(&id, data + bytes);
 	g_return_if_fail(id > 0);
 
@@ -205,6 +204,9 @@ void qq_group_process_modify_members_reply(guint8 *data, gint len, PurpleConnect
 	purple_debug_info("QQ", "Succeed in modify members for room %u\n", rmd->ext_id);
 
 	qq_room_got_chat_in(gc, id, 0, _("Successfully changed Qun members"), now);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 void qq_room_change_info(PurpleConnection *gc, qq_room_data *rmd)
@@ -236,19 +238,21 @@ void qq_room_change_info(PurpleConnection *gc, qq_room_data *rmd)
 
 void qq_group_process_modify_info_reply(guint8 *data, gint len, PurpleConnection *gc)
 {
-	gint bytes;
+	gint bytes = 0;
 	guint32 id;
 	time_t now = time(NULL);
 
 	g_return_if_fail(data != NULL);
 
-	bytes = 0;
 	bytes += qq_get32(&id, data + bytes);
 	g_return_if_fail(id > 0);
 
 	purple_debug_info("QQ", "Successfully modified room info of %u\n", id);
 
 	qq_room_got_chat_in(gc, id, 0, _("Successfully changed Qun information"), now);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 /* we create a very simple room first, and then let the user to modify */
@@ -353,16 +357,18 @@ void qq_group_process_create_group_reply(guint8 *data, gint len, PurpleConnectio
 				add_req, 2,
 				_("Setup"), G_CALLBACK(room_create_cb),
 			    _("Cancel"), G_CALLBACK(room_req_cancel_cb));
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 void qq_group_process_activate_group_reply(guint8 *data, gint len, PurpleConnection *gc)
 {
-	gint bytes;
+	gint bytes = 0;
 	guint32 id;
 	qq_room_data *rmd;
 	g_return_if_fail(data != NULL);
 
-	bytes = 0;
 	bytes += qq_get32(&id, data + bytes);
 	g_return_if_fail(id > 0);
 
@@ -371,6 +377,9 @@ void qq_group_process_activate_group_reply(guint8 *data, gint len, PurpleConnect
 	g_return_if_fail(rmd != NULL);
 
 	purple_debug_info("QQ", "Succeed in activate Qun %u\n", rmd->ext_id);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 void qq_group_manage_group(PurpleConnection *gc, GHashTable *data)
@@ -453,6 +462,9 @@ void qq_process_room_buddy_request_join(guint8 *data, gint len, guint32 id, Purp
 	g_free(who);
 	g_free(msg);
 	g_free(reason);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 /* the request to join a group is rejected */
@@ -462,12 +474,11 @@ void qq_process_room_buddy_rejected(guint8 *data, gint len, guint32 id, PurpleCo
 	guint8 type8;
 	gchar *msg, *reason;
 	qq_room_data *rmd;
-	gint bytes;
+	gint bytes = 0;
 
 	g_return_if_fail(data != NULL && len > 0);
 
 	/* FIXME: check length here */
-	bytes = 0;
 	bytes += qq_get32(&ext_id, data + bytes);
 	bytes += qq_get8(&type8, data + bytes);
 	bytes += qq_get32(&admin_uid, data + bytes);
@@ -489,6 +500,9 @@ void qq_process_room_buddy_rejected(guint8 *data, gint len, guint32 id, PurpleCo
 
 	g_free(msg);
 	g_free(reason);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 /* the request to join a group is approved */
@@ -498,13 +512,12 @@ void qq_process_room_buddy_approved(guint8 *data, gint len, guint32 id, PurpleCo
 	guint8 type8;
 	gchar *msg, *reason;
 	qq_room_data *rmd;
-	gint bytes;
+	gint bytes = 0;
 	time_t now;
 
 	g_return_if_fail(data != NULL && len > 0);
 
 	/* FIXME: check length here */
-	bytes = 0;
 	bytes += qq_get32(&ext_id, data + bytes);
 	bytes += qq_get8(&type8, data + bytes);
 	bytes += qq_get32(&admin_uid, data + bytes);
@@ -526,6 +539,9 @@ void qq_process_room_buddy_approved(guint8 *data, gint len, guint32 id, PurpleCo
 
 	g_free(msg);
 	g_free(reason);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 /* process the packet when removed from a group */
@@ -541,7 +557,6 @@ void qq_process_room_buddy_removed(guint8 *data, gint len, guint32 id, PurpleCon
 	g_return_if_fail(data != NULL && len > 0);
 
 	/* FIXME: check length here */
-	bytes = 0;
 	bytes += qq_get32(&ext_id, data + bytes);
 	bytes += qq_get8(&type8, data + bytes);
 	bytes += qq_get32(&uid, data + bytes);
@@ -557,6 +572,9 @@ void qq_process_room_buddy_removed(guint8 *data, gint len, guint32 id, PurpleCon
 	msg = g_strdup_printf(_("<b>Removed buddy %u.</b>"), uid);
 	qq_room_got_chat_in(gc, id, 0, msg, now);
 	g_free(msg);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 /* process the packet when added to a group */
@@ -565,14 +583,13 @@ void qq_process_room_buddy_joined(guint8 *data, gint len, guint32 id, PurpleConn
 	guint32 ext_id, uid;
 	guint8 type8;
 	qq_room_data *rmd;
-	gint bytes;
+	gint bytes = 0;
 	gchar *msg;
 	time_t now = time(NULL);
 
 	g_return_if_fail(data != NULL && len > 0);
 
 	/* FIXME: check length here */
-	bytes = 0;
 	bytes += qq_get32(&ext_id, data + bytes);
 	bytes += qq_get8(&type8, data + bytes);
 	bytes += qq_get32(&uid, data + bytes);
@@ -590,5 +607,8 @@ void qq_process_room_buddy_joined(guint8 *data, gint len, guint32 id, PurpleConn
 	msg = g_strdup_printf(_("<b>New buddy %u joined.</b>"), uid);
 	qq_room_got_chat_in(gc, id, 0, msg, now);
 	g_free(msg);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 

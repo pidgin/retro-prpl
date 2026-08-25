@@ -2732,6 +2732,9 @@ msn_got_info(PurpleUtilFetchUrlData *url_data, gpointer data,
 		/* Finish the Get Info and show the user something */
 		msn_got_photo(NULL, info2_data, NULL, 0, NULL);
 	}
+
+	/* This tells scan-build to ignore the dead store. */
+	(void)sect_info;
 }
 
 static void

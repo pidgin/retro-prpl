@@ -774,7 +774,7 @@ void qq_process_recv_file_request(guint8 *data, gint data_len, UID sender_uid, P
 	ft_info *info;
 	PurpleBuddy *b;
 	qq_buddy_data *bd;
-	gint bytes;
+	gint bytes = 0;
 
 	g_return_if_fail (data != NULL && data_len != 0);
 	qd = (qq_data *) gc->proto_data;
@@ -789,7 +789,6 @@ void qq_process_recv_file_request(guint8 *data, gint data_len, UID sender_uid, P
 		purple_debug_warning("QQ", "Received file request message is empty\n");
 		return;
 	}
-	bytes = 0;
 	bytes += qq_get16(&(info->send_seq), data + bytes);
 
 	bytes += 18 + 12;	/* skip 30 bytes */
@@ -856,6 +855,9 @@ void qq_process_recv_file_request(guint8 *data, gint data_len, UID sender_uid, P
 
 	g_free(sender_name);
 	g_strfreev(fileinfo);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 static void _qq_xfer_send_notify_ip_ack(gpointer data, gint source, PurpleInputCondition cond)
@@ -878,7 +880,7 @@ static void _qq_xfer_send_notify_ip_ack(gpointer data, gint source, PurpleInputC
 void qq_process_recv_file_notify(guint8 *data, gint data_len,
 		UID sender_uid, PurpleConnection *gc)
 {
-	gint bytes;
+	gint bytes = 0;
 	qq_data *qd;
 	ft_info *info;
 	PurpleXfer *xfer;
@@ -893,7 +895,6 @@ void qq_process_recv_file_notify(guint8 *data, gint data_len,
 		return;
 	}
 
-	bytes = 0;
 	bytes += qq_get16(&(info->send_seq), data + bytes);
 
 	bytes += 18 + 12;
@@ -902,6 +903,9 @@ void qq_process_recv_file_notify(guint8 *data, gint data_len,
 	_qq_xfer_init_udp_channel(info);
 
 	xfer->watcher = purple_input_add(info->sender_fd, PURPLE_INPUT_WRITE, _qq_xfer_send_notify_ip_ack, xfer);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 /* temp placeholder until a working function can be implemented */

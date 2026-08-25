@@ -59,7 +59,7 @@ static void get_session_md5(guint8 *session_md5, UID uid, guint8 *session_key)
 static gint8 process_login_ok(PurpleConnection *gc, guint8 *data, gint len)
 {
 	qq_data *qd;
-	gint bytes;
+	gint bytes = 0;
 
 	guint8 ret;
 	UID uid;
@@ -78,7 +78,6 @@ static gint8 process_login_ok(PurpleConnection *gc, guint8 *data, gint len)
 		return QQ_LOGIN_REPLY_ERR;
 	}
 
-	bytes = 0;
 	bytes += qq_get8(&ret, data + bytes);
 	bytes += qq_getdata(qd->session_key, sizeof(qd->session_key), data + bytes);
 	get_session_md5(qd->session_md5, qd->uid, qd->session_key);
@@ -143,6 +142,10 @@ static gint8 process_login_ok(PurpleConnection *gc, guint8 *data, gint len)
 	if (len > 148) {
 		qq_show_packet("Login reply OK, but length > 139", data, len);
 	}
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
+
 	return QQ_LOGIN_REPLY_OK;
 }
 
@@ -523,7 +526,6 @@ gboolean qq_process_keep_alive_2007(guint8 *data, gint data_len, PurpleConnectio
 
 	/* qq_show_packet("Keep alive reply packet", data, len); */
 
-	bytes = 0;
 	bytes += qq_get8(&ret, data + bytes);
 	bytes += qq_get32(&qd->online_total, data + bytes);
 	if(0 == qd->online_total) {
@@ -534,6 +536,10 @@ gboolean qq_process_keep_alive_2007(guint8 *data, gint data_len, PurpleConnectio
 
 	bytes += qq_getIP(&qd->my_ip, data + bytes);
 	bytes += qq_get16(&qd->my_port, data + bytes);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
+
 	return TRUE;
 }
 
@@ -556,7 +562,7 @@ void qq_request_keep_alive_2008(PurpleConnection *gc)
 gboolean qq_process_keep_alive_2008(guint8 *data, gint data_len, PurpleConnection *gc)
 {
 	qq_data *qd;
-	gint bytes= 0;
+	gint bytes = 0;
 	guint8 ret;
 	time_t server_time;
 	struct tm *tm_local;
@@ -567,7 +573,6 @@ gboolean qq_process_keep_alive_2008(guint8 *data, gint data_len, PurpleConnectio
 
 	/* qq_show_packet("Keep alive reply packet", data, len); */
 
-	bytes = 0;
 	bytes += qq_get8(&ret, data + bytes);
 	bytes += qq_get32(&qd->online_total, data + bytes);
 	if(0 == qd->online_total) {
@@ -594,6 +599,9 @@ gboolean qq_process_keep_alive_2008(guint8 *data, gint data_len, PurpleConnectio
 				tm_local->tm_hour, tm_local->tm_min, tm_local->tm_sec);
 	else
 		purple_debug_error("QQ", "Server time could not be parsed\n");
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 
 	return TRUE;
 }
@@ -639,7 +647,7 @@ void qq_request_get_server(PurpleConnection *gc)
 guint16 qq_process_get_server(PurpleConnection *gc, guint8 *data, gint data_len)
 {
 	qq_data *qd;
-	gint bytes;
+	gint bytes = 0;
 	guint16 ret;
 
 	g_return_val_if_fail (gc != NULL && gc->proto_data != NULL, QQ_LOGIN_REPLY_ERR);
@@ -648,7 +656,6 @@ guint16 qq_process_get_server(PurpleConnection *gc, guint8 *data, gint data_len)
 	g_return_val_if_fail (data != NULL, QQ_LOGIN_REPLY_ERR);
 
 	/* qq_show_packet("Get Server", data, data_len); */
-	bytes = 0;
 	bytes += qq_get16(&ret, data + bytes);
 	if (ret == 0) {
 		/* Notice: do not clear redirect_data here. It will be used in login*/
@@ -670,6 +677,10 @@ guint16 qq_process_get_server(PurpleConnection *gc, guint8 *data, gint data_len)
 
 	qq_getIP(&qd->redirect_ip, data + 11);
 	purple_debug_info("QQ", "Get server %s\n", inet_ntoa(qd->redirect_ip));
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
+
 	return QQ_LOGIN_REPLY_REDIRECT;
 }
 
@@ -932,6 +943,9 @@ guint8 qq_process_token_ex(PurpleConnection *gc, guint8 *data, gint data_len)
 	bytes += qq_getdata(qd->captcha.token, qd->captcha.token_len, data + bytes);
 	/* qq_show_packet("Get captcha token", qd->captcha.token, qd->captcha.token_len); */
 
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
+
 	purple_debug_info("QQ", "Request next captcha %d, new %d, total %d\n",
 			qd->captcha.next_index, captcha_len, qd->captcha.data_len);
 	if(qd->captcha.next_index > 0)
@@ -1089,6 +1103,10 @@ guint8 qq_process_check_pwd( PurpleConnection *gc, guint8 *data, gint data_len)
 		/* get login_key */
 		bytes += qq_getdata(qd->ld.login_key, sizeof(qd->ld.login_key), data + bytes);
 		/* qq_show_packet("Get login key", qd->ld.login_key, sizeof(qd->ld.login_key)); */
+
+		/* Tell scan-build to ignore the dead increment. */
+		(void)bytes;
+
 		return QQ_LOGIN_REPLY_OK;
 	}
 
@@ -1233,7 +1251,7 @@ void qq_request_login_2007(PurpleConnection *gc)
 guint8 qq_process_login_2007( PurpleConnection *gc, guint8 *data, gint data_len)
 {
 	qq_data *qd;
-	gint bytes;
+	gint bytes = 0;
 	guint8 ret;
 	UID uid;
 	gchar *error;
@@ -1244,7 +1262,6 @@ guint8 qq_process_login_2007( PurpleConnection *gc, guint8 *data, gint data_len)
 
 	qd = (qq_data *) gc->proto_data;
 
-	bytes = 0;
 	bytes += qq_get8(&ret, data + bytes);
 	if (ret != 0) {
 		msg = g_strndup((gchar *)data + bytes, data_len - bytes);
@@ -1301,6 +1318,10 @@ guint8 qq_process_login_2007( PurpleConnection *gc, guint8 *data, gint data_len)
 	bytes += qq_getime(&qd->last_login_time[0], data + bytes);
 	purple_debug_info("QQ", "Last Login: %s, %s\n",
 			inet_ntoa(qd->last_login_ip), ctime(&qd->last_login_time[0]));
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
+
 	return QQ_LOGIN_REPLY_OK;
 }
 
@@ -1424,7 +1445,7 @@ void qq_request_login_2008(PurpleConnection *gc)
 guint8 qq_process_login_2008( PurpleConnection *gc, guint8 *data, gint data_len)
 {
 	qq_data *qd;
-	gint bytes;
+	gint bytes = 0;
 	guint8 ret;
 	UID uid;
 	gchar *error;
@@ -1435,7 +1456,6 @@ guint8 qq_process_login_2008( PurpleConnection *gc, guint8 *data, gint data_len)
 
 	qd = (qq_data *) gc->proto_data;
 
-	bytes = 0;
 	bytes += qq_get8(&ret, data + bytes);
 	if (ret != 0) {
 		msg = g_strndup((gchar *)data + bytes, data_len - bytes);
@@ -1479,6 +1499,10 @@ guint8 qq_process_login_2008( PurpleConnection *gc, guint8 *data, gint data_len)
 	bytes += qq_getIP(&qd->my_local_ip, data + bytes);
 	bytes += qq_get16(&qd->my_local_port, data + bytes);
 	bytes += qq_getime(&qd->login_time, data + bytes);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
+
 	/* skip 1 byte, always 0x03 */
 	/* skip 1 byte, login mode */
 	bytes = 131;
@@ -1486,5 +1510,9 @@ guint8 qq_process_login_2008( PurpleConnection *gc, guint8 *data, gint data_len)
 	bytes += qq_getime(&qd->last_login_time[0], data + bytes);
 	purple_debug_info("QQ", "Last Login: %s, %s\n",
 			inet_ntoa(qd->last_login_ip), ctime(&qd->last_login_time[0]));
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
+
 	return QQ_LOGIN_REPLY_OK;
 }

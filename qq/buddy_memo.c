@@ -369,6 +369,9 @@ void qq_process_get_buddy_memo(PurpleConnection *gc, guint8* data, gint data_len
 			purple_debug_info("QQ", "received an UNKNOWN memo cmd!!!\n");
 			break;
 	}
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 /* request buddy memo

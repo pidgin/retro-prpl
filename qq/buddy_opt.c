@@ -296,6 +296,9 @@ void qq_process_auth_code(PurpleConnection *gc, guint8 *data, gint data_len, UID
 	}
 	purple_debug_info("QQ", "Got auth info cmd 0x%x, sub 0x%x, reply 0x%x\n",
 			cmd, sub_cmd, reply);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 static void add_buddy_question_cb(qq_buddy_req *add_req, const gchar *text)
@@ -416,6 +419,10 @@ void qq_process_question(PurpleConnection *gc, guint8 *data, gint data_len, UID 
 		purple_debug_info("QQ", "Get buddy adding Q&A:\n%s\n%s\n", question, answer);
 		g_free(question);
 		g_free(answer);
+
+		/* Tell scan-build to ignore the dead increment. */
+		(void)bytes;
+
 		return;
 	}
 	if (cmd == QQ_QUESTION_SET) {
@@ -425,6 +432,10 @@ void qq_process_question(PurpleConnection *gc, guint8 *data, gint data_len, UID 
 		} else {
 			purple_debug_warning("QQ", "Failed setting Q&A, reply %d\n", reply);
 		}
+
+		/* Tell scan-build to ignore the dead increment. */
+		(void)bytes;
+
 		return;
 	}
 
@@ -440,6 +451,10 @@ void qq_process_question(PurpleConnection *gc, guint8 *data, gint data_len, UID 
 		purple_debug_info("QQ", "Get buddy question:\n%s\n", question);
 		add_buddy_question_input(gc, uid, question);
 		g_free(question);
+
+		/* Tell scan-build to ignore the dead increment. */
+		(void)bytes;
+
 		return;
 	}
 
@@ -456,6 +471,10 @@ void qq_process_question(PurpleConnection *gc, guint8 *data, gint data_len, UID 
 		code = g_newa(guint8, code_len);
 		bytes += qq_getdata(code, code_len, data + bytes);
 		request_add_buddy_by_question(gc, uid, code, code_len);
+
+		/* Tell scan-build to ignore the dead increment. */
+		(void)bytes;
+
 		return;
 	}
 
@@ -897,6 +916,10 @@ void qq_process_add_buddy_no_auth_ex(PurpleConnection *gc,
 			g_return_if_reached();
 			break;
 	}
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
+
 	return;
 }
 
@@ -1020,6 +1043,10 @@ void qq_process_buddy_check_code(PurpleConnection *gc, guint8 *data, gint data_l
 	bytes += qq_get16(&flag2, data + bytes);
 	purple_debug_info("QQ", "Check code reply Ok, uid %u, flag 0x%04X-0x%04X\n",
 			uid, flag1, flag2);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
+
 	return;
 }
 

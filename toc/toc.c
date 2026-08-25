@@ -894,6 +894,9 @@ static void toc_callback(gpointer data, gint source, PurpleInputCondition condit
 			purple_prpl_got_user_idle(account, c, TRUE, time_idle);
 		else
 			purple_prpl_got_user_idle(account, c, FALSE, 0);
+
+		/* This tells scan-build to ignore the dead increment. */
+		(void)type;
 	} else if (!g_ascii_strcasecmp(c, "ERROR")) {
 		purple_notify_error(gc, NULL, show_error_message(), NULL);
 	} else if (!g_ascii_strcasecmp(c, "EVILED")) {

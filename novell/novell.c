@@ -1036,16 +1036,13 @@ _user_agent_string(void)
 
 #if !defined(_WIN32)
 
-	const char *sysname = "";
-	const char *release = "";
+	const char *sysname = "Linux";
+	const char *release = "Unknown";
 	struct utsname u;
 
 	if (uname(&u) == 0) {
 		sysname = u.sysname;
 		release = u.release;
-	} else {
-		sysname = "Linux";
-		release = "Unknown";
 	}
 
 	return g_strdup_printf("Purple/%s (%s; %s)", VERSION, sysname, release);

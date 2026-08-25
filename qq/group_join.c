@@ -180,7 +180,7 @@ void qq_send_cmd_group_auth(PurpleConnection *gc, qq_room_data *rmd,
 /* If comes here, cmd is OK already */
 void qq_process_group_cmd_exit_group(guint8 *data, gint len, PurpleConnection *gc)
 {
-	gint bytes;
+	gint bytes = 0;
 	guint32 id;
 
 	g_return_if_fail(data != NULL && len > 0);
@@ -190,16 +190,18 @@ void qq_process_group_cmd_exit_group(guint8 *data, gint len, PurpleConnection *g
 		return;
 	}
 
-	bytes = 0;
 	bytes += qq_get32(&id, data + bytes);
 
 	qq_room_remove(gc, id);
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 /* Process the reply to group_auth subcmd */
 void qq_process_group_cmd_join_group_auth(guint8 *data, gint len, PurpleConnection *gc)
 {
-	gint bytes;
+	gint bytes = 0;
 	guint32 id;
 	qq_room_data *rmd;
 	gchar *msg;
@@ -211,7 +213,6 @@ void qq_process_group_cmd_join_group_auth(guint8 *data, gint len, PurpleConnecti
 			"Invalid join room reply, expect %d bytes, read %d bytes\n", 4, len);
 		return;
 	}
-	bytes = 0;
 	bytes += qq_get32(&id, data + bytes);
 	g_return_if_fail(id > 0);
 
@@ -223,6 +224,9 @@ void qq_process_group_cmd_join_group_auth(guint8 *data, gint len, PurpleConnecti
 	} else {
 		qq_got_message(gc, _("Successfully joined Qun"));
 	}
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 /* process group cmd reply "join group" */
@@ -276,6 +280,9 @@ void qq_process_group_cmd_join_group(guint8 *data, gint len, PurpleConnection *g
 
 		purple_notify_info(gc, _("QQ Qun Operation"), _("Failed:"), _("Join Qun, Unknown Reply"));
 	}
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 /* Attempt to join a group without auth */

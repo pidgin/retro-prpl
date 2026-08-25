@@ -559,6 +559,10 @@ static void _qq_process_recv_file_ctl_packet(PurpleConnection *gc, guint8 *data,
 		default:
 			purple_debug_info("QQ", "unprocess file command %d\n", packet_type);
 	}
+
+	/* Tell scan-build to ignore the dead increments. */
+	(void)bytes;
+	(void)decryped_bytes;
 }
 
 static void _qq_recv_file_progess(PurpleConnection *gc, guint8 *buffer, guint16 len, guint32 index, guint32 offset)
@@ -794,6 +798,9 @@ static void _qq_process_recv_file_data(PurpleConnection *gc, guint8 *data, gint 
 					packet_type);
 			break;
 	}
+
+	/* Tell scan-build to ignore the dead increment. */
+	(void)bytes;
 }
 
 void qq_process_recv_file(PurpleConnection *gc, guint8 *data, gint len)

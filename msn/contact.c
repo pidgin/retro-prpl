@@ -703,7 +703,6 @@ msn_parse_addressbook_contacts(MsnSession *session, xmlnode *node)
 		g_free(mobile_number);
 		g_free(alias);
 		passport = Name = uid = type = mobile_number = alias = NULL;
-		mobile = FALSE;
 
 		if (!(contactId = xmlnode_get_child(contactNode,"contactId"))
 				|| !(contactInfo = xmlnode_get_child(contactNode, "contactInfo"))

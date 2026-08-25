@@ -174,6 +174,9 @@ msn_p2p_header_from_wire(MsnP2PInfo *info, const char *wire, size_t max_len)
 			purple_debug_error("msn", "Invalid P2P Info version: %d\n", info->version);
 	}
 
+	/* This tells scan-build to ignore the dead store. */
+	(void)wire;
+
 	return len;
 }
 
@@ -250,6 +253,9 @@ msn_p2p_header_to_wire(MsnP2PInfo *info, size_t *len)
 		default:
 			purple_debug_error("msn", "Invalid P2P Info version: %d\n", info->version);
 	}
+
+	/* This tells scan-build to ignore the dead store. */
+	(void)tmp;
 
 	return wire;
 }

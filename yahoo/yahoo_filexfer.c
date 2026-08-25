@@ -617,10 +617,9 @@ static void yahoo_p2p_ft_server_send_OK(PurpleXfer *xfer)
 	tx = g_strdup_printf("HTTP/1.1 200 OK\r\nContent-Length: 0\r\nContent-Type: application/octet-stream\r\nConnection: close\r\n\r\n");
 	written = write(xfer->fd, tx, strlen(tx));
 
-	if (written < 0 && errno == EAGAIN)
-		written = 0;
-	else if (written <= 0)
+	if(written <= 0) {
 		purple_debug_info("yahoo", "p2p filetransfer: Unable to write HTTP OK");
+	}
 
 	/* close connection */
 	close(xfer->fd);
