@@ -5217,6 +5217,9 @@ static void st_import_action_cb(PurpleConnection *gc, char *filename) {
   str = g_string_new(NULL);
   while( (len = fread(buf, 1, BUF_LEN, file)) ) {
     g_string_append_len(str, buf, len);
+    if (len != BUF_LEN) {
+      break;
+    }
   }
 
   fclose(file);
