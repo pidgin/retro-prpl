@@ -772,11 +772,16 @@ aim_info_extract(OscarData *od, ByteStream *bs, aim_userinfo_t *outinfo)
 	int curtlv, tlvcnt;
 	guint8 bnlen;
 
-	if (!bs || !outinfo)
+	if (outinfo == NULL) {
 		return -EINVAL;
+	}
 
 	/* Clear out old data first */
 	memset(outinfo, 0x00, sizeof(aim_userinfo_t));
+
+	if (bs == NULL) {
+		return -EINVAL;
+	}
 
 	/*
 	 * Username.  Stored as an unterminated string prepended with a
