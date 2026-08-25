@@ -1,5 +1,5 @@
 ---
-name: Test building on Linux
+name: scan-build on Linux
 
 on:
   push:
