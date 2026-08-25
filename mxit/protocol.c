@@ -435,13 +435,14 @@ static void mxit_send_packet( struct MXitSession* session, struct tx_packet* pac
 
 	if ( !session->http ) {
 		/* socket connection */
-		char		data[packet->datalen + packet->headerlen];
+		char*		data;
 		int			datalen;
 
 		/* create raw data buffer */
+		datalen = packet->headerlen + packet->datalen;
+		data = g_alloca( datalen );
 		memcpy( data, packet->header, packet->headerlen );
 		memcpy( data + packet->headerlen, packet->data, packet->datalen );
-		datalen = packet->headerlen + packet->datalen;
 
 		res = mxit_write_sock_packet( session->fd, data, datalen );
 		if ( res < 0 ) {
