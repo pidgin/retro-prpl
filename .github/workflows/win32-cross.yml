@@ -149,6 +149,7 @@ jobs:
           name: ${{ steps.version.outputs.VERSION }}
           tag: ${{ steps.version.outputs.VERSION }}
           allowUpdates: true
+          makeLatest: true
 
       - name: Create Attestation
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && !env.ACT }}
