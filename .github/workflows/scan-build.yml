@@ -1,5 +1,5 @@
 ---
-name: scan-build on Linux
+name: Run scan-build
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    name: "Run scan-build"
+    name: "Linux"
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -43,7 +43,7 @@ jobs:
       - name: Setup Meson build
         run: meson setup build
 
-      - name: Ran scan-build
+      - name: Run scan-build
         run: |
           SCANBUILD=/usr/local/bin/scan-build.sh ninja -C build scan-build
 
