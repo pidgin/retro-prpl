@@ -2781,6 +2781,12 @@ int mxit_parse_packet( struct MXitSession* session )
 			free_rx_packet( &packet );
 			continue;
 		}
+		if ( packet.records[1]->fcount < 1 ) {
+			/* bad packet */
+			purple_connection_error( session->con, _( "Invalid packet received from MXit." ) );
+			free_rx_packet( &packet );
+			continue;
+		}
 
 		session->rx_dbuf[session->rx_i] = '\0';
 		packet.errcode = atoi( packet.records[1]->fields[0]->data );

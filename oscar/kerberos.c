@@ -137,8 +137,10 @@ aim_xsnac_free(aim_xsnac_t *xsnac)
 	aim_tlvlist_free(xsnac->tlvlist);
 
 	for (i = 0; i < xsnac->num_tokens; i++) {
-		g_free(xsnac->tokens[i].main_tlv->value);
-		g_free(xsnac->tokens[i].main_tlv);
+		if (xsnac->tokens[i].main_tlv) {
+			g_free(xsnac->tokens[i].main_tlv->value);
+			g_free(xsnac->tokens[i].main_tlv);
+		}
 		g_free(xsnac->tokens[i].principal1);
 		g_free(xsnac->tokens[i].service);
 		g_free(xsnac->tokens[i].principal1_again);
