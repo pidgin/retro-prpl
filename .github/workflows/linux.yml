@@ -11,21 +11,22 @@ on:
 
 jobs:
   build:
-    name: "Test with ${{ matrix.dependencies }} dependencies"
+    name: "Test with ${{ matrix.compiler }} and ${{ matrix.dependencies }} dependencies"
     runs-on: ubuntu-latest
     permissions:
       contents: read
 
     strategy:
       matrix:
+        compiler: ['gcc', 'clang']
         dependencies: ['internal', 'external']
 
     steps:
-      - name: Prepare build environment
+      - name: Prepare ${{ matrix.compiler }} build environment
         run: |
           sudo apt-get update -yy
           sudo apt-get install -yy --no-install-recommends \
-            build-essential \
+            ${{ matrix.compiler }} \
             gettext \
             libpurple-dev \
             ninja-build \
@@ -43,7 +44,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
 
       - name: Setup Meson build
-        run: meson setup build
+        run: CC=${{ matrix.compiler }} meson setup build
 
       - name: Build project
         run: ninja -C build turtles
@@ -54,5 +55,5 @@ jobs:
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
         if: ${{ !env.ACT }}
         with:
-          name: "Linux with ${{ matrix.dependencies }} dependencies"
+          name: "Linux ${{ matrix.compiler }} with ${{ matrix.dependencies }} dependencies"
           path: ./dist
