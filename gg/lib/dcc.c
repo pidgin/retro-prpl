@@ -126,6 +126,7 @@ int gg_dcc_fill_file_info(struct gg_dcc *d, const char *filename)
 int gg_dcc_fill_file_info2(struct gg_dcc *d, const char *filename, const char *local_filename)
 {
 	struct stat st;
+	uint32_t tmp_ft[2];
 	const char *name, *ext, *p;
 	unsigned char *q;
 	int i, j;
@@ -164,9 +165,16 @@ int gg_dcc_fill_file_info2(struct gg_dcc *d, const char *filename, const char *l
 	if (!(st.st_mode & S_IWUSR))
 		d->file_info.mode |= gg_fix32(GG_DCC_FILEATTR_READONLY);
 
-	gg_dcc_fill_filetime(st.st_atime, d->file_info.atime);
-	gg_dcc_fill_filetime(st.st_mtime, d->file_info.mtime);
-	gg_dcc_fill_filetime(st.st_ctime, d->file_info.ctime);
+	/* Don't pass d->file_info.[amc]time directly as it's a packed struct and possibly unaligned. */
+	gg_dcc_fill_filetime(st.st_atime, tmp_ft);
+	d->file_info.atime[0] = tmp_ft[0];
+	d->file_info.atime[1] = tmp_ft[1];
+	gg_dcc_fill_filetime(st.st_mtime, tmp_ft);
+	d->file_info.mtime[0] = tmp_ft[0];
+	d->file_info.mtime[1] = tmp_ft[1];
+	gg_dcc_fill_filetime(st.st_ctime, tmp_ft);
+	d->file_info.ctime[0] = tmp_ft[0];
+	d->file_info.ctime[1] = tmp_ft[1];
 
 	d->file_info.size = gg_fix32(st.st_size);
 	d->file_info.mode = gg_fix32(0x20);	/* FILE_ATTRIBUTE_ARCHIVE */
