@@ -56,7 +56,7 @@ have a handful of packages available.
 ## Windows
 
 You can find the latest installer on the [latest
-releases](github.com/pidgin/retro-prpl/releases/latest) page. It is named
+releases](https://github.com/pidgin/retro-prpl/releases/latest) page. It is named
 `retro-prpl-<VERSION>.exe`. Downloading and running this will guide you through
 the installation process. Note you must already have Pidgin installed.
 
@@ -90,7 +90,7 @@ By default everything will be installed into the expected paths from your
 libpurple install which can be messy if you're using a system package. You can
 change this by passing `-Duse-purple-prefix=false` to `meson setup`.
 
-There are also options to enable or disable any protocol provided. To see the
+There are also options to enable or disable any protocol provided. You can see the
 full list of these and all other configuration settings by running
 `meson configure` in the root of the source directory.
 
@@ -109,5 +109,5 @@ it for the plugins to get loaded.
 
 [^1]: retro-prpl carries an internal version of this which will be used if a
 system-wide version is not found.
-[^2]: This is an optional dependencies will just disable the feature if it is
+[^2]: This is an optional dependency that will just disable the feature if it is
 not available.
