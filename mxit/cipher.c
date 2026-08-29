@@ -185,7 +185,7 @@ char* mxit_decrypt_message( struct MXitSession* session, char* message )
 	g_free( raw_message );
 
 	/* check that the decrypted message starts with header: <mxit/> */
-	if ( strncmp( decoded->str, SECRET_HEADER, strlen( SECRET_HEADER ) != 0 ) ) {
+	if ( strncmp( decoded->str, SECRET_HEADER, strlen( SECRET_HEADER ) ) != 0 ) {
 		g_string_free( decoded, TRUE );
 		return NULL;			/* message could not be decrypted */
 	}
