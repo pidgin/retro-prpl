@@ -92,8 +92,7 @@ void qq_request_room_join(PurpleConnection *gc, qq_room_data *rmd)
 	case QQ_ROOM_AUTH_TYPE_NEED_AUTH:
 		break;
 	case QQ_ROOM_AUTH_TYPE_NO_ADD:
-		if (rmd->my_role == QQ_ROOM_ROLE_NO
-				&& rmd->my_role == QQ_ROOM_ROLE_REQUESTING) {
+		if (rmd->my_role == QQ_ROOM_ROLE_REQUESTING) {
 			purple_notify_warning(gc, NULL, _("The Qun does not allow others to join"), NULL);
 			return;
 		}
